@@ -1,0 +1,12 @@
+*.md		text eol=crlf
+*.txt		text eol=crlf
+*.sql	    text eol=crlf
+*.pom	    text eol=crlf
+*.java	    text eol=crlf
+*.xml	    text eol=crlf
+*.jsp	    text eol=crlf
+*.jsf	    text eol=crlf
+*.html	    text eol=crlf
+*.css	    text eol=crlf
+*.js	    text eol=crlf
+*.xhtml	    text eol=crlf

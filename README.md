@@ -1,5 +1,9 @@
 # SWD14 - PSE Project
 
+Build: [![Build Status](https://jenkins.almost-a-blog.net/buildStatus/icon?job=PSE-build)](https://jenkins.almost-a-blog.net/job/PSE-build)
+
+Deployment: [![Build Status](https://jenkins.almost-a-blog.net/buildStatus/icon?job=PSE-deploy)](https://jenkins.almost-a-blog.net/job/PSE-deploy)
+
 ## Project Structure
 
 This project is separated in three modules.

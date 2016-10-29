@@ -28,7 +28,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-ear-plugin</artifactId>
-                <version>2.10.1</version>
+                <version>${maven-ear-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -40,9 +40,9 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <applicationId>${artifactId}</applicationId>
-                    <applicationName>${artifactId}</applicationName>
-                    <displayName>${artifactId}</displayName>
+                    <applicationId>${project.artifactId}</applicationId>
+                    <applicationName>${project.artifactId}</applicationName>
+                    <displayName>${project.artifactId}</displayName>
                     <encoding>UTF-8</encoding>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <modules>

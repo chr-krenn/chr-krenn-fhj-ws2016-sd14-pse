@@ -39,4 +39,11 @@
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/UserServiceImpl!at.fhj.swd14.pse.user.UserService
         </lookup-name>
     </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>ejb/MessageService</ejb-ref-name>
+        <remote>at.fhj.swd14.pse.message.MessageService</remote>
+        <lookup-name>
+            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/MessageServiceImpl!at.fhj.swd14.pse.message.MessageService
+        </lookup-name>
+    </ejb-ref>
 </web-app>

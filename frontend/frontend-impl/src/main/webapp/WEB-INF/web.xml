@@ -33,10 +33,10 @@
     </mime-mapping>
 
     <ejb-ref>
-        <ejb-ref-name>ejb/FooBar</ejb-ref-name>
-        <remote>at.fhj.swd14.pse.FooBar</remote>
+        <ejb-ref-name>ejb/UserService</ejb-ref-name>
+        <remote>at.fhj.swd14.pse.user.UserService</remote>
         <lookup-name>
-            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/FooBarImpl!at.fhj.swd14.pse.FooBar
+            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/UserServiceImpl!at.fhj.swd14.pse.user.UserService
         </lookup-name>
     </ejb-ref>
 </web-app>

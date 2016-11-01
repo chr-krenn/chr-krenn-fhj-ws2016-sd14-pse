@@ -5,6 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jstl/core"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -12,12 +13,13 @@
 <h:body>
     <h1>Hello World</h1>
 
+    <c:when test="#{userBean.user != null}">
+        <h2>User "#{userBean.user.firstname} #{userBean.user.lastname}" created with id #{userBean.user.id}!</h2>
+    </c:when>
+
     <h:form>
-
-        <p:commandButton value="Simple foo() call" actionListener="#{fooBar.callRemoteFoo}"/>
-
-        <p:inputText name="name" placeholder="name" value="#{fooBar.name}"/>
-        <p:commandButton value="Simple" actionListener="#{fooBar.callRemoteBar}"/>
+        <p:inputText name="name" placeholder="name" value="#{userBean.name}"/>
+        <p:commandButton value="Create user" actionListener="#{userBean.save}"/>
     </h:form>
 
 </h:body>

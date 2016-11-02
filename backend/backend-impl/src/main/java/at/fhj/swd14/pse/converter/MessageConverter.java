@@ -3,7 +3,7 @@ package at.fhj.swd14.pse.converter;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import at.fhj.swd14.pse.Message;
+import at.fhj.swd14.pse.message.Message;
 import at.fhj.swd14.pse.message.MessageDto;
 
 public class MessageConverter {

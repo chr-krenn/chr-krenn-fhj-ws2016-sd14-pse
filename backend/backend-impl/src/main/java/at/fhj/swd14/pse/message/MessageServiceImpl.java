@@ -1,4 +1,4 @@
-package at.fhj.swd14.pse;
+package at.fhj.swd14.pse.message;
 
 import java.util.ArrayList;
 import java.util.HashMap;

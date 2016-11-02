@@ -19,8 +19,8 @@ public class MessageConverter {
         }
         
         MessageDto dto = new MessageDto(message.getId());
-        dto.setParentId(message.getParentId());
-        dto.setCreatorUserId(message.getCreatorUserId());
+        dto.setParent(MessageConverter.convert(message.getParent()));
+        dto.setCreator(UserConverter.convert(message.getCreator()));
         dto.setCommunityId(message.getCommunityId());
         dto.setTitle(message.getTitle());
         dto.setContent(message.getContent());
@@ -33,8 +33,8 @@ public class MessageConverter {
             return null;
         }
         Message message = new Message(dto.getId());
-        message.setParentId(dto.getParentId());
-        message.setCreatorUserId(dto.getCreatorUserId());
+        message.setParent(MessageConverter.convert(dto.getParent()));
+        message.setCreator(UserConverter.convert(dto.getCreator()));
         message.setCommunityId(dto.getCommunityId());
         message.setTitle(dto.getTitle());
         message.setContent(dto.getContent());

@@ -11,7 +11,7 @@ services:
   sep-wildfly:
     image: swd14-pse/wildfly
     depends_on:
-      - db
+      - mysqldb
     environment:
       MYSQL_URI: mysqldb:3306
       MYSQL_DATABASE: SEP

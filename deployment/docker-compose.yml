@@ -1,0 +1,21 @@
+version: '2'
+services:
+  - mysqldb:
+      container_name: "mysqldb"
+      image: mysql:latest
+      environment:
+        MYSQL_DATABASE: SEP
+        MYSQL_USER: mysql
+        MYSQL_PASSWORD: mysql
+        MYSQL_ROOT_PASSWORD: supersecret
+  - sep-wildfly:
+      image: swd14-pse/wildfly
+      depends_on:
+        - db
+      environment:
+        - MYSQL_URI: mysqldb:3306
+        - MYSQL_DATABASE: SEP
+        - MYSQL_USER: mysql
+        - MYSQL_PASSWORD: mysql
+      ports:
+        - 8080:8080

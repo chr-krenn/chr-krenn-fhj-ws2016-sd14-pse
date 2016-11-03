@@ -31,7 +31,7 @@ echo "=> MYSQL_PASSWORD: " $MYSQL_PASSWORD
 $JBOSS_CLI -c << EOF
 batch
 
-set CONNECTION_URL=jdbc:mysql://$MYSQL_URI/$MYSQL_DATABASE
+CONNECTION_URL=jdbc:mysql://$MYSQL_URI/$MYSQL_DATABASE
 echo "Connection URL: " $CONNECTION_URL
 
 # Add MySQL module
@@ -54,8 +54,8 @@ else
   $JBOSS_CLI -c "/host=*:shutdown"
 fi
 
-# Move the WARs to autodeploy
-cp /opt/jboss/wildfly/customization/deployments/*.war $JBOSS_HOME/$JBOSS_MODE/deployments/
+echo "=> Moving application artifacts to wildfly autodeploy"
+mv /opt/jboss/wildfly/customization/deployments/*.ear $JBOSS_HOME/$JBOSS_MODE/deployments/
 
 echo "=> Restarting WildFly"
 $JBOSS_HOME/bin/$JBOSS_MODE.sh -b 0.0.0.0 -c $JBOSS_CONFIG

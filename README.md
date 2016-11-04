@@ -47,6 +47,31 @@ mvn clean install
 ```
 This will build all module artifacts with Maven.
 
+### Setting up the database
+
+This is directed at people using the "TeiniVM". First we must create a new database:
+```
+root@localhost # mysql -u root -p 
+Enter password: root66
+MariaDB [(none)]> CREATE DATABASE pse;
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON pse.* TO student@localhost WITH GRANT OPTION;
+```
+
+Then we must perform the configuration that can be found in the project "Wildfly-Configurations" provided by Prof. Teiniker.
+
+And finally we must add the datasource for this project to the standalone.xml of the VMs Wildfly installation:
+
+```
+    <datasource jndi-name="java:jboss/datasources/SEP" pool-name="SEP" enabled="true" use-java-context="true" use-ccm="true">
+        <connection-url>jdbc:mysql://localhost:3306/pse</connection-url>
+        <driver>mysql</driver>
+        <security>
+            <user-name>student</user-name>
+            <password>student</password>
+        </security>
+    </datasource>
+```
+
 ### Deploying the artifacts
 Take the following two artifacts and deploy them to Wildfly by copying them to `<wildfly-directory>/standalone/deployments`.
 - `backend/backend-assembly/target/backend-assembly-<version>.ear`

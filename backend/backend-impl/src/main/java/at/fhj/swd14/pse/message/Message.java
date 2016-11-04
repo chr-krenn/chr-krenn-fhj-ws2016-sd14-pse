@@ -20,11 +20,11 @@ import at.fhj.swd14.pse.User;
 @Entity
 @Table(name = "message")
 @NamedQueries({
-	@NamedQuery(name="Message.findByCreatorId", query="SELECT m FROM Message m WHERE m.creatorUserId = :creatorUserId"),
+	@NamedQuery(name="Message.findByCreatorId", query="SELECT m FROM Message m WHERE m.creator.id = :creatorUserId"),
 	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.communityId = :communityId"),
-	
+
 	//TODO: finish query so that only relevant messages are returned (global, own, joined Community)
-	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message") 
+	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m")
 })
 public class Message implements Serializable {
 

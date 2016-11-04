@@ -22,7 +22,7 @@ public interface MessageService {
 	 * @param creatorUserId
 	 * @return 
 	 */
-	List<MessageDto> findByCreatorId(Long creatorUserId);
+	List<MessageDto> findByAuthorId(Long creatorUserId);
 	
 	/**
 	 * finds and returns all messages which belong to the

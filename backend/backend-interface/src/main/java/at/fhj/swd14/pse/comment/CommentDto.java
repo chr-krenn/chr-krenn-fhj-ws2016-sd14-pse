@@ -13,6 +13,13 @@ public class CommentDto implements Serializable {
     private UserDto author;
     private MessageDto parentMessage;
 
+    public CommentDto(){
+    	
+    }
+    public CommentDto(Long id){
+    	setId(id);
+    }
+    
     public Long getId() {
         return id;
     }
@@ -44,4 +51,13 @@ public class CommentDto implements Serializable {
     public void setParentMessage(MessageDto parentMessage) {
         this.parentMessage = parentMessage;
     }
+    
+    @Override
+	public String toString(){
+		return "CommentDto{" +
+                "id=" + getId() +
+                ", userId='" + getAuthor() + '\'' +
+                ", messageId='" + getParentMessage().getId() + '\'' +
+                '}';
+	}
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.user.UserDto;
 
 public class MessageDto implements Serializable {
@@ -13,9 +14,9 @@ public class MessageDto implements Serializable {
 
 	private Long id;
 	
-	private MessageDto parent;
-	private List<MessageDto> childs;
-	private UserDto creator;
+	private List<CommentDto> childs;
+	private UserDto author;
+	private UserDto recipient;
 	
 	private Long communityId; //TODO: add object-composition as soon as the communityDto is implemented 
 
@@ -39,36 +40,41 @@ public class MessageDto implements Serializable {
 		this.id = id;
 	}
 
-	public MessageDto getParent() {
-		return parent;
+	public UserDto getAuthor() {
+		return author;
 	}
 
-	public void setParent(MessageDto parent) {
-		parent.addChild(this);
-		this.parent = parent;
+	public void setAuthor(UserDto author) {
+		this.author = author;
 	}
-
-	public UserDto getCreator() {
-		return creator;
-	}
-
-	public void setCreator(UserDto creator) {
-		this.creator = creator;
-	}
-
-	public List<MessageDto> getChilds() {
+	
+	public List<CommentDto> getChilds() {
 		return childs;
 	}
-	public void setChilds(List<MessageDto> childs){
+	public void setChilds(List<CommentDto> childs){
 		this.childs = childs;
 	}
 	
-	public void addChild(MessageDto message){
+	public void addChild(CommentDto comment){
 		if(childs == null)
 			childs = new ArrayList<>();
-		childs.add(message);
+		comment.setParentMessage(this);
+		childs.add(comment);
 	}
 
+	/**
+	 * returns the user who is the recipient from this private message.
+	 * If it's not a private message it will return NULL
+	 * @return recipient
+	 */
+	public UserDto getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(UserDto recipient) {
+		this.recipient = recipient;
+	}
+	
 	public Long getCommunityId() {
 		return communityId;
 	}
@@ -105,8 +111,8 @@ public class MessageDto implements Serializable {
 	public String toString(){
 		return "MessageDto{" +
                 "id=" + getId() +
-                "parentId=" + getParent().getId() +
-                ", userId='" + getCreator().getId() + '\'' +
+                "recipientId=" + getRecipient() +
+                ", userId='" + getAuthor().getId() + '\'' +
                 ", communityId='" + getCommunityId() + '\'' +
                 ", title='" + getTitle() + '\'' +
                 '}';

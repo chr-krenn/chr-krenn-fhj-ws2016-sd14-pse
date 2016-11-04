@@ -16,34 +16,33 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import at.fhj.swd14.pse.User;
+import at.fhj.swd14.pse.comment.Comment;
 
 @Entity
 @Table(name = "message")
 @NamedQueries({
-	@NamedQuery(name="Message.findByCreatorId", query="SELECT m FROM Message m WHERE m.creator.id = :creatorUserId"),
-	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.communityId = :communityId"),
+	@NamedQuery(name="Message.findByAuthorId", query="SELECT m FROM Message m WHERE m.author.id = :authorUserId"),
+	
 
 	//TODO: finish query so that only relevant messages are returned (global, own, joined Community)
+	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.communityId = :communityId"),
 	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m")
 })
 public class Message implements Serializable {
-
-    
+	
 	private static final long serialVersionUID = 1L;
 
     @Id
     private Long id;
-
-	// represents the parent of the current message
- 	// if not NULL, then the current message is a comment of the parent
-    @ManyToOne
-    private Message parent;
     
     @OneToMany
-    private List<Message> childs;
+    private List<Comment> childs;
     
     @ManyToOne
-    private User creator;
+    private User author;
+    
+    @ManyToOne
+    private User recipient;
 	
     @Column
 	private Long communityId; //TODO: add community relation as soon as the community-entity is implemented
@@ -69,31 +68,32 @@ public class Message implements Serializable {
 		this.id = id;
 	}
 	
-	public Message getParent() {
-		return parent;
+	public User getAuthor() {
+		return author;
 	}
-	public void setParent(Message parent) {
-		parent.addChild(this);
-		this.parent = parent;
-	}
-	
-	public User getCreator() {
-		return creator;
-	}
-	public void setCreator(User creator) {
-		this.creator = creator;
+	public void setAuthor(User creator) {
+		this.author = creator;
 	}
 	
-	public List<Message> getChilds() {
+	public List<Comment> getChilds() {
 		return childs;
 	}
-	public void setChilds(List<Message> childs){
+	public void setChilds(List<Comment> childs){
 		this.childs = childs;
 	}
-	public void addChild(Message child){
+	public void addChild(Comment child){
 		if(childs == null)
 			childs = new ArrayList<>();
+		child.setParentMessage(this);
 		childs.add(child);
+	}
+	
+	public User getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(User recipient) {
+		this.recipient = recipient;
 	}
 	
 	public Long getCommunityId() {
@@ -125,8 +125,7 @@ public class Message implements Serializable {
 	public String toString(){
 		return "Message{" +
                 "id=" + getId() +
-                "parentId=" + getParent().getId() +
-                ", userId='" + getCreator().getId() + '\'' +
+                ", userId='" + getAuthor() + '\'' +
                 ", communityId='" + getCommunityId() + '\'' +
                 ", title='" + getTitle() + '\'' +
                 '}';

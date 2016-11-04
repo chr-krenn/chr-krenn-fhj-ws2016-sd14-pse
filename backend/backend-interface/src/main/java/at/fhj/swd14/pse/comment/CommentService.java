@@ -28,7 +28,7 @@ public interface CommentService {
      * @param author the author's id
      * @return the comments of the author
      */
-    List<CommentDto> findByCreatorId(long author);
+    List<CommentDto> findByAuthorId(long author);
 
     /**
      * Finds and returns all comments which were created for the given message.

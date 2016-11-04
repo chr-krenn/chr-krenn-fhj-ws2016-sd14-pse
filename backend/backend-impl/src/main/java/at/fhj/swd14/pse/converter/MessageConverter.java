@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.converter;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -19,12 +20,13 @@ public class MessageConverter {
         }
         
         MessageDto dto = new MessageDto(message.getId());
-        dto.setParent(MessageConverter.convert(message.getParent()));
-        dto.setCreator(UserConverter.convert(message.getCreator()));
+        dto.setAuthor(UserConverter.convert(message.getAuthor()));
+        dto.setRecipient(UserConverter.convert(message.getRecipient()));
         dto.setCommunityId(message.getCommunityId());
         dto.setTitle(message.getTitle());
         dto.setContent(message.getContent());
         dto.setCreationDate(message.getCreationDate());
+        dto.setChilds(new ArrayList<>(CommentConverter.convertToDtoList(message.getChilds())));
         return dto;
     }
 
@@ -33,13 +35,13 @@ public class MessageConverter {
             return null;
         }
         Message message = new Message(dto.getId());
-        message.setParent(MessageConverter.convert(dto.getParent()));
-        message.setCreator(UserConverter.convert(dto.getCreator()));
+        message.setAuthor(UserConverter.convert(dto.getAuthor()));
+        message.setRecipient(UserConverter.convert(dto.getRecipient()));
         message.setCommunityId(dto.getCommunityId());
         message.setTitle(dto.getTitle());
         message.setContent(dto.getContent());
         message.setCreationDate(dto.getCreationDate());
-        
+        message.setChilds(new ArrayList<>(CommentConverter.convertToDoList(dto.getChilds())));
         return message;
     }
 

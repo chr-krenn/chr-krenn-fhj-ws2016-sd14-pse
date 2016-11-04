@@ -21,6 +21,9 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Override
 	public long save(MessageDto message) {
+		//TODO: call tag-handling function before saving the message
+		//not necessary at this position, however it has to be done
+		
 		Message messageDo = MessageConverter.convert(message);
 		messageRepository.save(messageDo);
 		return messageDo.getId();
@@ -32,10 +35,10 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<MessageDto> findByCreatorId(Long creatorUserId) {
+	public List<MessageDto> findByAuthorId(Long authorUserId) {
 		Map<String, Object> parameter = new HashMap<>();
-		parameter.put("creatorUserId", creatorUserId);
-		return executeNamedQuery("Message.findByCreatorId", parameter);
+		parameter.put("authorUserId", authorUserId);
+		return executeNamedQuery("Message.findByAuthorId", parameter);
 	}
 
 	@Override

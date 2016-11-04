@@ -46,4 +46,18 @@
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/MessageServiceImpl!at.fhj.swd14.pse.message.MessageService
         </lookup-name>
     </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>ejb/CommentService</ejb-ref-name>
+        <remote>at.fhj.swd14.pse.comment.CommentService</remote>
+        <lookup-name>
+            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/CommentServiceImpl!at.fhj.swd14.pse.comment.CommentService
+        </lookup-name>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>ejb/TagService</ejb-ref-name>
+        <remote>at.fhj.swd14.pse.tag.TagService</remote>
+        <lookup-name>
+            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/TagServiceImpl!at.fhj.swd14.pse.tag.TagService
+        </lookup-name>
+    </ejb-ref>
 </web-app>

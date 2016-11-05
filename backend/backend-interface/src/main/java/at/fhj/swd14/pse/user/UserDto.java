@@ -2,14 +2,19 @@ package at.fhj.swd14.pse.user;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+
 public class UserDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
-    private String lastname;
-    private String firstname;
+    
+    private String mail;    
+    
+    private String password;
+    
+    private String salt;
 
     public UserDto() {
     }
@@ -26,28 +31,35 @@ public class UserDto implements Serializable {
         this.id = id;
     }
 
-    public String getLastname() {
-        return lastname;
-    }
+    public String getMail() {
+  		return mail;
+  	}
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+  	public void setMail(String mail) {
+  		this.mail = mail;
+  	}
 
-    public String getFirstname() {
-        return firstname;
-    }
+  	public String getPassword() {
+  		return password;
+  	}
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
+  	public void setPassword(String password) {
+  		this.password = password;
+  	}
 
-    @Override
-    public String toString() {
-        return "UserDto{" +
-                "id=" + id +
-                ", lastname='" + lastname + '\'' +
-                ", firstname='" + firstname + '\'' +
-                '}';
-    }
+  	public String getSalt() {
+  		return salt;
+  	}
+
+  	public void setSalt(String salt) {
+  		this.salt = salt;
+  	}
+
+  	@Override
+      public String toString() {
+          return "User{" +
+                  "id=" + id +
+                  ", mail='" + mail + '\'' +
+                  '}';
+      }
 }

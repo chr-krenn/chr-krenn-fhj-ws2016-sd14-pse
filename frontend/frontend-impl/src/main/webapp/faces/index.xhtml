@@ -1,26 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+	<title>Welcome</title>
 </h:head>
+
 <h:body>
-    <h1>Hello World</h1>
+	<h:form>
+		<h3>Login</h3>
 
-    <c:when test="#{userBean.user != null}">
-        <h2>User "#{userBean.user.firstname} #{userBean.user.lastname}" created with id #{userBean.user.id}!</h2>
-    </c:when>
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><h:inputText value="#{userBean.user.mail}" /></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><h:inputSecret value="#{userBean.user.password}" /></td>
+			</tr>
+		</table>
 
-    <h:form>
-        <p:inputText name="name" placeholder="name" value="#{userBean.name}"/>
-        <p:commandButton value="Create user" actionListener="#{userBean.save}"/>
-    </h:form>
-
+		<h:commandButton value="Login" action="#{userBean.login()}" />
+	</h:form>
 </h:body>
 </html>

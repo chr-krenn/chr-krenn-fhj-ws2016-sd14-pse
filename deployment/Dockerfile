@@ -9,5 +9,5 @@ RUN chown -R jboss:jboss /opt/jboss/wildfly/customization/
 
 USER jboss
 
-RUN /opt/jboss/wildfly/bin/add-user.sh admin Admin#70365 --silent
+RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
 CMD ["/opt/jboss/wildfly/customization/execute.sh"]

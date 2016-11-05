@@ -26,7 +26,7 @@ public class Department implements Serializable {
 	@Column
 	private String name;
 	
-	@OneToMany
+	@OneToMany(mappedBy="department")
 	private List<Person> members;
 	
 	public String getName() {

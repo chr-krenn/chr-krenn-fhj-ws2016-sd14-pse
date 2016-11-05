@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import at.fhj.swd14.pse.department.Department;
 import at.fhj.swd14.pse.user.User;
 
 /**
@@ -20,6 +22,7 @@ import at.fhj.swd14.pse.user.User;
  *
  */
 @Entity
+@NamedQuery(name="Person.findByUserId", query="SELECT p FROM Person p WHERE p.user.id = :userid")
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -59,7 +62,26 @@ public class Person implements Serializable {
     @ManyToOne(optional=false)
     private Status status;
     
-    public List<Hobby> getHobbies() {
+    @ManyToOne
+    private Department department;
+    
+    public List<Phonenumber> getNumbers() {
+		return numbers;
+	}
+
+	public void setNumbers(List<Phonenumber> numbers) {
+		this.numbers = numbers;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	public List<Hobby> getHobbies() {
 		return hobbies;
 	}
 

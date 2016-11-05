@@ -17,4 +17,10 @@ public class PersonRepository extends AbstractRepository<Person> {
 		super(Person.class);
 	}
 	
+	public Person findByUserId(long id)
+	{
+		return entityManager.createNamedQuery("Person.findByUserId",Person.class)
+				.setParameter("userid", id).getSingleResult();
+	}
+	
 }

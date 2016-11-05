@@ -12,4 +12,20 @@ import javax.persistence.Entity;
 @Entity
 public class Mailaddress extends AbstractPersonInformation implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	public Mailaddress() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Mailaddress(Long id) {
+		super(id);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Mailaddress(String value) {
+		super(value);
+		// TODO Auto-generated constructor stub
+	}
+	
 }

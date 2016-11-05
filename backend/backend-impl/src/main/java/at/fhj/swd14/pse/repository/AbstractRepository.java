@@ -9,7 +9,7 @@ public abstract class AbstractRepository<T> {
     protected final Class<T> entityClass;
 
     @PersistenceContext(unitName = "SEP")
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     protected AbstractRepository(Class<T> entityClass) {
         this.entityClass = entityClass;

@@ -12,4 +12,20 @@ import javax.persistence.Entity;
 @Entity
 public class Knowledge extends AbstractPersonInformation implements Serializable{
 	private static final long serialVersionUID = 1L;
+
+	public Knowledge() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Knowledge(Long id) {
+		super(id);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Knowledge(String value) {
+		super(value);
+		// TODO Auto-generated constructor stub
+	}
+	
 }

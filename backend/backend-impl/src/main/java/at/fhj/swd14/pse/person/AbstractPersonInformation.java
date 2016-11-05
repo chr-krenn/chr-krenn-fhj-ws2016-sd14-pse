@@ -44,6 +44,11 @@ public abstract class AbstractPersonInformation {
 		this.id = id;
 	}
 	
+	public AbstractPersonInformation(String value)
+	{
+		setValue(value);
+	}
+	
 	public AbstractPersonInformation()
 	{
 		

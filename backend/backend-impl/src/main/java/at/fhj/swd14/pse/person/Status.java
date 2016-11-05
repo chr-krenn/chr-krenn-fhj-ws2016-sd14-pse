@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Status entity for Person
@@ -16,6 +17,7 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
+@Table(name="person_status")
 public class Status implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -51,6 +53,11 @@ public class Status implements Serializable {
 	public Status()
 	{
 		
+	}
+	
+	public Status(String name)
+	{
+		setName(name);
 	}
 	
 }

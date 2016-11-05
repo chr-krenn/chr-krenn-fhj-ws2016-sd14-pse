@@ -28,7 +28,7 @@ echo "=> MYSQL_DATABASE: " $MYSQL_DATABASE
 echo "=> MYSQL_USER: " $MYSQL_USER
 echo "=> MYSQL_PASSWORD: " $MYSQL_PASSWORD
 CONNECTION_URL=jdbc:mysql://$MYSQL_URI/$MYSQL_DATABASE
-echo "Connection URL: " $CONNECTION_URL
+echo "=> Connection URL: " $CONNECTION_URL
 
 $JBOSS_CLI -c << EOF
 batch
@@ -40,7 +40,7 @@ module add --name=com.mysql --resources=/opt/jboss/wildfly/customization/mysql-c
 /subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource)
 
 # Add the datasource
-data-source add --name=$MYSQL_DATABASE --driver-name=mysql --jndi-name=java:jboss/datasources/$MYSQL_DATABASE --connection-url=jdbc:mysql://$CONNECTION_URL?useUnicode=true&characterEncoding=UTF-8 --user-name=$MYSQL_USER --password=$MYSQL_PASSWORD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
+data-source add --name=$MYSQL_DATABASE --driver-name=mysql --jndi-name=java:jboss/datasources/$MYSQL_DATABASE --connection-url=$CONNECTION_URL?useUnicode=true&characterEncoding=UTF-8&useSSL=false --user-name=$MYSQL_USER --password=$MYSQL_PASSWORD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
 
 # Execute the batch
 run-batch

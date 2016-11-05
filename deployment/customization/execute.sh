@@ -58,4 +58,4 @@ echo "=> Moving application artifacts to wildfly autodeploy"
 mv /opt/jboss/wildfly/customization/deployments/*.ear $JBOSS_HOME/$JBOSS_MODE/deployments/
 
 echo "=> Restarting WildFly"
-$JBOSS_HOME/bin/$JBOSS_MODE.sh -b 0.0.0.0 -c $JBOSS_CONFIG
+$JBOSS_HOME/bin/$JBOSS_MODE.sh -b 0.0.0.0 -bmanagement 0.0.0.0 -c $JBOSS_CONFIG

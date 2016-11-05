@@ -19,4 +19,4 @@ services:
       MYSQL_PASSWORD: mysql
     ports:
       - 8081:8080
-      - 9993:9993
+      - 9990:9990

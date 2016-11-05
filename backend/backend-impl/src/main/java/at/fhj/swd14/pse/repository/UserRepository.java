@@ -1,6 +1,6 @@
 package at.fhj.swd14.pse.repository;
 
-import at.fhj.swd14.pse.User;
+import at.fhj.swd14.pse.user.User;
 
 import javax.ejb.Stateless;
 

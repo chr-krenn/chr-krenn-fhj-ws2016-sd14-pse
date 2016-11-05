@@ -10,7 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import at.fhj.swd14.pse.User;
+import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.message.Message;
 
 @Entity

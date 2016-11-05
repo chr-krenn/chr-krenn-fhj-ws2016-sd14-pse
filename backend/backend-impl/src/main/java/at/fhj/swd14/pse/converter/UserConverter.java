@@ -1,6 +1,6 @@
 package at.fhj.swd14.pse.converter;
 
-import at.fhj.swd14.pse.User;
+import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserDto;
 
 import java.util.Collection;

@@ -60,4 +60,11 @@
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/TagServiceImpl!at.fhj.swd14.pse.tag.TagService
         </lookup-name>
     </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>ejb/NewsService</ejb-ref-name>
+        <remote>at.fhj.swd14.pse.news.NewsService</remote>
+        <lookup-name>
+            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/NewsServiceImpl!at.fhj.swd14.pse.news.NewsService
+        </lookup-name>
+    </ejb-ref>
 </web-app>

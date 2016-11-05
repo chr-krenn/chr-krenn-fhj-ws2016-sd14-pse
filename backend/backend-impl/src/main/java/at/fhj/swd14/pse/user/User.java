@@ -1,4 +1,4 @@
-package at.fhj.swd14.pse;
+package at.fhj.swd14.pse.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

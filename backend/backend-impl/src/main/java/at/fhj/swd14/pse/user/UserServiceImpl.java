@@ -1,9 +1,7 @@
-package at.fhj.swd14.pse;
+package at.fhj.swd14.pse.user;
 
 import at.fhj.swd14.pse.converter.UserConverter;
 import at.fhj.swd14.pse.repository.UserRepository;
-import at.fhj.swd14.pse.user.UserDto;
-import at.fhj.swd14.pse.user.UserService;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

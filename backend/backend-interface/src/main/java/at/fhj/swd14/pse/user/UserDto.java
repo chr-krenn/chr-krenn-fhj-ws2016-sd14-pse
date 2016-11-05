@@ -2,8 +2,6 @@ package at.fhj.swd14.pse.user;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-
 public class UserDto implements Serializable {
 
     private static final long serialVersionUID = 1L;

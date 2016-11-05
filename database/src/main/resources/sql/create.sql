@@ -1,0 +1,11 @@
+--create user table
+
+CREATE TABLE user 
+(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	mail VARCHAR(32) NOT NULL,
+	password VARCHAR(32) NOT NULL,
+	salt VARCHAR(512) NOT NULL
+)ENGINE = INNODB;
+
+

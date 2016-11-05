@@ -27,12 +27,11 @@ echo "=> MYSQL_URI (docker with networking): " $MYSQL_URI
 echo "=> MYSQL_DATABASE: " $MYSQL_DATABASE
 echo "=> MYSQL_USER: " $MYSQL_USER
 echo "=> MYSQL_PASSWORD: " $MYSQL_PASSWORD
+CONNECTION_URL=jdbc:mysql://$MYSQL_URI/$MYSQL_DATABASE
+echo "Connection URL: " $CONNECTION_URL
 
 $JBOSS_CLI -c << EOF
 batch
-
-CONNECTION_URL=jdbc:mysql://$MYSQL_URI/$MYSQL_DATABASE
-echo "Connection URL: " $CONNECTION_URL
 
 # Add MySQL module
 module add --name=com.mysql --resources=/opt/jboss/wildfly/customization/mysql-connector-java-6.0.5.jar --dependencies=javax.api,javax.transaction.api

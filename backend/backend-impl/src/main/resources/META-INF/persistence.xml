@@ -2,5 +2,12 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
     <persistence-unit name="SEP" transaction-type="JTA">
         <jta-data-source>java:jboss/datasources/SEP</jta-data-source>
+        <properties>
+            <!-- Enable for debug purposes only -->
+            <property name="showSql" value="false"/>
+            <!-- Note: Wildfly uses hibernate connector in the background for the JTA datasource -->
+            <!-- Defining this property manually, might be necessary depending on the Wildfly version -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+        </properties>
     </persistence-unit>
 </persistence>

@@ -1,5 +1,7 @@
 package at.fhj.swd14.pse.repository;
 
+import javax.ejb.Local;
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 
 import at.fhj.swd14.pse.person.Person;
@@ -9,7 +11,8 @@ import at.fhj.swd14.pse.person.Person;
  * @author Kainz Patrick
  *
  */
-@Stateless
+@Local
+@Singleton
 public class PersonRepository extends AbstractRepository<Person> {
 
 	public PersonRepository()

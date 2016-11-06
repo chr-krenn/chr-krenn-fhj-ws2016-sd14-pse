@@ -7,7 +7,7 @@ USER root
 ADD customization /opt/jboss/wildfly/customization/
 
 #Download the mysql driver
-ARG MYSQL_DRIVER_VERSION 5.1.40
+ARG MYSQL_DRIVER_VERSION=5.1.40
 ENV MYSQL_DRIVER_VERSION $MYSQL_DRIVER_VERSION
 
 ADD http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-$MYSQL_DRIVER_VERSION.zip /opt/jboss/wildfly/customization/

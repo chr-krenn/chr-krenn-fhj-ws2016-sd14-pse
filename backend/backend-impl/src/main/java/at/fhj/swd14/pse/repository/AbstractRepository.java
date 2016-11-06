@@ -45,8 +45,8 @@ public abstract class AbstractRepository<T> {
 
     public List<T> executeNamedQuery(String name, Map<String, Object> parameter) {
         TypedQuery<T> query = entityManager.createNamedQuery(name, entityClass);
-        for (String key : parameter.keySet()) {
-            query.setParameter(key, parameter.get(key));
+        for (Map.Entry<String, Object> entry : parameter.entrySet()) {
+            query.setParameter(entry.getKey(), entry.getValue());
         }
         return query.getResultList();
     }

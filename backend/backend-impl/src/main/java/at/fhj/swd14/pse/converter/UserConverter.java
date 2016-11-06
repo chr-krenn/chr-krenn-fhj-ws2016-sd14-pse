@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 public class UserConverter {
 
     private UserConverter() {
-
     }
 
     public static UserDto convert(User user) {
         if (user == null) {
             return null;
         }
-        UserDto dto = new UserDto(user.getId());
+        final UserDto dto = new UserDto();
+        dto.setId(user.getId());
         dto.setMail(user.getMail());
         return dto;
     }
@@ -25,11 +25,12 @@ public class UserConverter {
         if (user == null) {
             return null;
         }
-        User usr = new User(user.getId());
-        usr.setMail(user.getMail());
-        usr.setPassword(user.getPassword());
-        usr.setSalt(user.getSalt());
-        return usr;
+        final User entity = new User();
+        entity.setId(user.getId());
+        entity.setSalt(user.getSalt());
+        entity.setPassword(user.getPassword());
+        entity.setMail(user.getMail());
+        return entity;
     }
 
     public static Collection<UserDto> convertToDtoList(Collection<User> users) {

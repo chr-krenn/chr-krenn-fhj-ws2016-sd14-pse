@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.news;
 
 import javax.ejb.Remote;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public interface NewsService {
      *
      * @param news the news to save; must not be null
      * @return the id of the news
-     * @throws NullPointerException; if {@code news} is null
+     * @throws NullPointerException if {@code news} is null
      */
     long save(NewsDto news);
 
@@ -34,7 +35,7 @@ public interface NewsService {
      *
      * @return the news
      */
-    List<NewsDto> findAll();
+    Collection<NewsDto> findAll();
 
     /**
      * Finds and returns all news since the given date.
@@ -43,7 +44,7 @@ public interface NewsService {
      * @return the fetched news, if none are found, an empty list is returned
      * @throws NullPointerException if the instant is null
      */
-    List<NewsDto> findAllSince(Instant instant);
+    Collection<NewsDto> findAllSince(Instant instant);
 
     /**
      * Finds and returns all news which were created by the given author.
@@ -51,6 +52,6 @@ public interface NewsService {
      * @param author the author's id
      * @return the fetched news, if none are found, an empty list is returned
      */
-    List<NewsDto> findByAuthorId(long author);
+    Collection<NewsDto> findByAuthorId(long author);
 
 }

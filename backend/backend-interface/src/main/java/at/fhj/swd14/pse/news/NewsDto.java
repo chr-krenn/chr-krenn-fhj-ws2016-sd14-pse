@@ -1,8 +1,10 @@
 package at.fhj.swd14.pse.news;
 
+import at.fhj.swd14.pse.person.PersonDto;
 import at.fhj.swd14.pse.user.UserDto;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 public class NewsDto implements Serializable {
 
@@ -11,7 +13,9 @@ public class NewsDto implements Serializable {
     private Long id;
     private String title;
     private String message;
-    private UserDto author;
+    private PersonDto author;
+    private Instant created;
+    private Instant modified;
 
     public Long getId() {
         return id;
@@ -37,11 +41,27 @@ public class NewsDto implements Serializable {
         this.message = message;
     }
 
-    public UserDto getAuthor() {
+    public PersonDto getAuthor() {
         return author;
     }
 
-    public void setAuthor(UserDto author) {
+    public void setAuthor(PersonDto author) {
         this.author = author;
+    }
+
+    public Instant getCreated() {
+        return created;
+    }
+
+    public void setCreated(Instant created) {
+        this.created = created;
+    }
+
+    public Instant getModified() {
+        return modified;
+    }
+
+    public void setModified(Instant modified) {
+        this.modified = modified;
     }
 }

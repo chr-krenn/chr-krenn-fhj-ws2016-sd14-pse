@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.department;
 
+
 import java.io.Serializable;
 
 /**
@@ -7,9 +8,10 @@ import java.io.Serializable;
  * @author Patrick Kainz
  *
  */
-public class DepartmentDto implements Serializable{
+public class DepartmentDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	public DepartmentDto(long id)
 	{
 		setId(id);

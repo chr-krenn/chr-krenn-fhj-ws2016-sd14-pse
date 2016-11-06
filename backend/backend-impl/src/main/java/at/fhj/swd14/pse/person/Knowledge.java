@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="knowledge")
 public class Knowledge extends AbstractPersonInformation implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 
 	public Knowledge() {

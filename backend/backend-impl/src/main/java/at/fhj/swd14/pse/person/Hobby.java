@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="hobby")
 public class Hobby extends AbstractPersonInformation implements Serializable{
-
+	
 	private static final long serialVersionUID = 1L;
 
 	public Hobby() {
@@ -30,7 +30,7 @@ public class Hobby extends AbstractPersonInformation implements Serializable{
 		super(value);
 		// TODO Auto-generated constructor stub
 	}
-	
 
-	
+
+
 }

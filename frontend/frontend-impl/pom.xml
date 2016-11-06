@@ -16,6 +16,7 @@
         <dependency>
             <groupId>at.fhj.swd14.pse</groupId>
             <artifactId>backend-interface</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

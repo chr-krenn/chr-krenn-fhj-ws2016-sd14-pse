@@ -3,6 +3,7 @@ package at.fhj.swd14.pse.person;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Hobby entity
@@ -10,6 +11,7 @@ import javax.persistence.Entity;
  *
  */
 @Entity
+@Table(name="hobby")
 public class Hobby extends AbstractPersonInformation implements Serializable{
 
 	private static final long serialVersionUID = 1L;

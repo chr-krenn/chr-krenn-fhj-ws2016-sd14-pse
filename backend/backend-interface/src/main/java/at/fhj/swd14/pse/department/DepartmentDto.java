@@ -1,13 +1,15 @@
 package at.fhj.swd14.pse.department;
 
+import java.io.Serializable;
 
 /**
  * Dto for Department Entity
  * @author Patrick Kainz
  *
  */
-public class DepartmentDto {
-	
+public class DepartmentDto implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	public DepartmentDto(long id)
 	{
 		setId(id);

@@ -16,14 +16,20 @@ public class UserConverter {
         if (user == null) {
             return null;
         }
-        return new UserDto(user.getId());
+        UserDto dto = new UserDto(user.getId());
+        dto.setMail(user.getMail());
+        return dto;
     }
 
     public static User convert(UserDto user) {
         if (user == null) {
             return null;
         }
-        return new User(user.getId());
+        User usr = new User(user.getId());
+        usr.setMail(user.getMail());
+        usr.setPassword(user.getPassword());
+        usr.setSalt(user.getSalt());
+        return usr;
     }
 
     public static Collection<UserDto> convertToDtoList(Collection<User> users) {

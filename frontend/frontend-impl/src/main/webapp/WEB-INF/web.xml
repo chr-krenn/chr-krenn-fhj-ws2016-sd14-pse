@@ -40,6 +40,13 @@
         </lookup-name>
     </ejb-ref>
     <ejb-ref>
+        <ejb-ref-name>ejb/PersonService</ejb-ref-name>
+        <remote>at.fhj.swd14.pse.person.PersonService</remote>
+        <lookup-name>
+            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/PersonServiceImpl!at.fhj.swd14.pse.person.PersonService
+        </lookup-name>
+    </ejb-ref>
+    <ejb-ref>
         <ejb-ref-name>ejb/MessageService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.message.MessageService</remote>
         <lookup-name>

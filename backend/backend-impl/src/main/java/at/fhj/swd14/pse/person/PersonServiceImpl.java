@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.person;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 import at.fhj.swd14.pse.converter.PersonConverter;
 import at.fhj.swd14.pse.repository.PersonRepository;
@@ -11,6 +12,7 @@ import at.fhj.swd14.pse.user.UserDto;
  * @author Patrick Kainz
  *
  */
+@Stateless
 public class PersonServiceImpl implements PersonService {
 
 	@EJB

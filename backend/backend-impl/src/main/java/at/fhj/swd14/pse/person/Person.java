@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import at.fhj.swd14.pse.department.Department;
 import at.fhj.swd14.pse.user.User;
@@ -22,6 +23,7 @@ import at.fhj.swd14.pse.user.User;
  *
  */
 @Entity
+@Table(name="person")
 @NamedQuery(name="Person.findByUserId", query="SELECT p FROM Person p WHERE p.user.id = :userid")
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;

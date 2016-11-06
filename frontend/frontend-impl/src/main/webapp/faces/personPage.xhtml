@@ -1,0 +1,53 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <section>
+	    <p>
+	    	<c:if test="${not empty personBean.person.imageUrl}">
+	    		<img src="#{personBean.person.imageUrl}" /> 
+	    	</c:if>
+	    	#{personBean.person.firstname} #{personBean.person.lastname}
+	    </p>
+	    <c:if test="${not empty personBean.person.address}">
+	    	<p>Addresse: #{personBean.person.address}</p>
+	    </c:if>
+	    <c:if test="${not empty personBean.person.place}">
+	    	<p>Ort: #{personBean.person.place}</p>
+	    </c:if>
+	    <c:if test="${not empty personBean.person.department}">
+	    	<p>Abteilung: #{personBean.person.department.name}</p>
+	    </c:if>
+	    <c:if test="${not empty personBean.person.status}">
+	    	<p>Status: #{personBean.person.status}</p>
+	    </c:if>
+    	<section>
+    		<h1>Mail Adressen</h1>
+    		<p>#{personBean.person.user.mail}</p>
+    		<c:forEach var="mail" items="#{personBean.person.additionalMails}">
+    			<p>#{mail}</p>
+    		</c:forEach>
+    	</section>
+    	<section>
+    		<h1>Hobbies</h1>
+    		<c:forEach var="hobby" items="#{personBean.person.hobbies}">
+    			<p>#{hobby}</p>
+    		</c:forEach>
+    	</section>
+    	<section>
+    		<h1>Fähigkeiten</h1>
+    		<c:forEach var="knowledge" items="#{personBean.person.knowledges}">
+    			<p>#{knowledge}</p>
+    		</c:forEach>
+    	</section>
+    	<section>
+    		<h1>Telefonnummern</h1>
+    		<c:forEach var="number" items="#{personBean.person.phonenumbers}">
+    			<p>#{number}</p>
+    		</c:forEach>
+    	</section>
+    </section>
+</ui:composition>

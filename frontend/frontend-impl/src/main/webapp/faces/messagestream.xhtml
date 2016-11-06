@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+	</h:head>
+	
+	<h:body>
+		<h:form id="form_newmessage" >
+			<h:inputText id="text_newmessage_title" binding="#{text_newmessage_title}">
+			</h:inputText>
+			<h:inputText id="text_newmessage_content" binding="#{text_newmessage_content}">
+			</h:inputText>
+			<h:commandButton value="Message erstellen" action="#{messageStreamBean.createMessage(text_newmessage_title.value, text_newmessage_content.value)}" process="@form">
+				<f:ajax execute="@form" render="@none" />
+			</h:commandButton>
+		</h:form>
+		<p:selectOneMenu id="select_community" value="#{messageStreamBean.currentCommunity}" style="width:150px" converter="communityConverter">
+			<p:ajax process="select_community" partialSubmit="true" listener="#{messageStreamBean.onCommunityChange}" update=":scroller:scroller_message"/>
+			<f:selectItems value="#{messageStreamBean.availableCommunities}" var="community" itemValue="#{community}" itemLabel="#{community.name}" />
+		</p:selectOneMenu>
+		<h:form id="scroller">
+			<p:dataScroller id="scroller_message" value="#{messageStreamBean.messages.values()}"
+				var="message" chunkSize="10">
+				<p:outputPanel id="messages">
+					<p:outputPanel id="messageitemdata">
+						<p:outputPanel id="author">#{message.author.mail}</p:outputPanel>
+						<p:outputPanel id="messagetitle">#{message.title}</p:outputPanel>
+						<p:outputPanel id="messagecontent">#{message.content}</p:outputPanel>
+						<p:outputPanel id="messageliking">
+							<h:form id="form_like_message">
+							    <h:outputText id="text_like_message" value="message.likecount"/>
+							    <p:commandButton value="Like" action="#{messageStreamBean.likeMessage(message.id)}" process="@form"/>
+							</h:form>
+						</p:outputPanel>
+						<p:dataScroller id="scroller_comment" value="#{messageStreamBean.getComments(message.id)}"
+							var="comment" chunkSize="10">
+					        <f:facet name="loader">
+					            <p:commandButton type="button" value="Weitere Kommentare laden" icon="ui-icon-circle-triangle-s"/>
+					        </f:facet>
+							<p:outputPanel id="commentitemdata">
+								<p:outputPanel id="author">#{comment.author.mail}</p:outputPanel>
+								<p:outputPanel id="text">#{comment.text}</p:outputPanel>
+								<p:outputPanel id="commentliking">
+									<h:form id="form_like_comment">
+									    <h:outputText id="text_like_comment" value="comment.likecount"/>
+									    <p:commandButton value="Like" action="#{messageStreamBean.likeComment(comment.id)}" process="@form"/>
+									</h:form>
+								</p:outputPanel>
+							</p:outputPanel>
+						</p:dataScroller>
+					</p:outputPanel>
+					<h:form id="form_newcomment" >
+						<h:inputText id="text_newcomment_content" binding="#{text_newcomment_content}">
+						</h:inputText>
+						<h:commandButton value="Kommentar erstellen" action="#{messageStreamBean.createComment(message.id, text_newcomment_content.value)}" process="@form">
+							<f:ajax execute="@form" render="@none" />
+						</h:commandButton>
+					</h:form>
+				</p:outputPanel>
+			</p:dataScroller>
+		</h:form>
+	</h:body>
+</html>

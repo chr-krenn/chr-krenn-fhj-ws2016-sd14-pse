@@ -10,7 +10,7 @@ This section defines project-wide coding guidelines.
     - Verify your build (and deployment) on the project's [CI](https://jenkins.almost-a-blog.net)
 - §1.3 This project's language is English and English only!
     - Code in other languages will be punished... or at least it should be
-- $1.4 Use log4j for logging, instead of logging via System.out.x
+- §1.4 Use log4j for logging, instead of logging via System.out.x
     - Add `private static final Logger LOGGER = LogManager.getLogger(YourClass.class);` to your class
     - Log with `LOGGER.warn(...);`, `LOGGER.info(...)`, etc.
         - When logging exceptions, make sure you don't lose the stacktrace!
@@ -18,20 +18,20 @@ This section defines project-wide coding guidelines.
     - Log-Levels rule of thumb... (shamelessly ripped of [this SO question](http://stackoverflow.com/questions/7839565/logging-levels-logback-rule-of-thumb-to-assign-log-levels))
         - **ERROR**: the system is in distress, malfunctioning of huge parts of the system, end-users are directly affected (or will soon be)
             - Apply the "2am rule" - If you're on call, do you want to be woken up at 2AM if this condition happens? If yes, then log it as "ERROR"
-        - **WARN**: an unexpected technical or business event happened, customers may be affected, but probably no immediate human intervention is required.
-            - On call people won't be called immediately, but support personnel will want to review these issues asap to understand what the impact is.
-            - Basically any issue that needs to be tracked but may not require immediate intervention.
-        - **INFO**: things we want to see at high volume in case we need to forensically analyze an issue. 
-            - System lifecycle events (system start, stop) go here. 
-            - "Session" lifecycle events (login, logout, etc.) go here. 
-            - Significant boundary events should be considered as well (e.g. database calls, remote API calls).
-            - Typical business exceptions can go here (e.g. login failed due to bad credentials). 
-            - Any other event you think you'll need to see in production at high volume goes here.
+        - **WARN**: an unexpected technical or business event happened, customers may be affected, but probably no immediate human intervention is required
+            - On call people won't be called immediately, but support personnel will want to review these issues asap to understand what the impact is
+            - Basically any issue that needs to be tracked but may not require immediate intervention
+        - **INFO**: things we want to see at high volume in case we need to forensically analyze an issue 
+            - System lifecycle events (system start, stop) go here
+            - "Session" lifecycle events (login, logout, etc.) go here 
+            - Significant boundary events should be considered as well (e.g. database calls, remote API calls)
+            - Typical business exceptions can go here (e.g. login failed due to bad credentials)
+            - Any other event you think you'll need to see in production at high volume goes here
         - **DEBUG**: just about everything that doesn't make the "info" cut... 
-            - any message that is helpful in tracking the flow through the system and isolating issues, especially during the development and QA phases.
-            - use "debug" level logs for entry/exit of most non-trivial methods and marking interesting events and decision points inside methods.
-        - **TRACE**: don't use this often, this would be for extremely detailed and potentially high volume logs that you don't typically want enabled even during normal development. 
-            - Examples include dumping a full object hierarchy, logging some state during every iteration of a large loop, etc.
+            - any message that is helpful in tracking the flow through the system and isolating issues, especially during the development and QA phases
+            - use "debug" level logs for entry/exit of most non-trivial methods and marking interesting events and decision points inside methods
+        - **TRACE**: don't use this often, this would be for extremely detailed and potentially high volume logs that you don't typically want enabled even during normal development 
+            - Examples include dumping a full object hierarchy, logging some state during every iteration of a large loop, etc
     - You can change the log-level in the component's `log4j2.xml`
         - Locate the logger with name `at.fhj` and change it's level to the desired one
 - §1.5 Write JUnit Tests for your code!
@@ -42,7 +42,7 @@ This section defines project-wide coding guidelines.
     - Feel free to write mocks yourself, but it's definitely not recommended
     - ... and NO, we will not add another mocking framework!
 - §1.7 Use meaning full commit messages
-    - If we see on of [these](http://whatthecommit.com/) commit messages, you shall be hunted to depths of hell
+    - If we see one of [these](http://whatthecommit.com/) commit messages, you shall be hunted to depths of hell
     - No, seriously... do yourself and others a favor and write meaningful commit messages to give other's (and your future self) a glimpse of the commit's changes
     - If you are really into it, you might want to read [this](http://chris.beams.io/posts/git-commit/)
 - §1.337 The architects are always right!
@@ -58,8 +58,8 @@ This section defines project-wide coding guidelines.
 - §3.2 Frontend-Beans must be serializable
     - Add `implements Serializable`
     - Add `private static final long serialVersionUID = 1L;`
-        - It does not directly affect the code, but it's good practice to manually add it to serializable classes.
-        - In theory any long will do, but starting with "1" is a good practice when it comes to versioning.
+        - It does not directly affect the code, but it's good practice to manually add it to serializable classes
+        - In theory any long will do, but starting with "1" is a good practice when it comes to versioning
 
 ## §4 Backend-Interfaces
 - §4.1 POJOs
@@ -67,11 +67,11 @@ This section defines project-wide coding guidelines.
     - Add `implements Serializable`
       - They must be serializable due to potential binary tranfer via CORBA, RMI, etc.
     - Add `private static final long serialVersionUID = 1L;`
-      - It does not directly affect the code, but it's good practice to manually add it.
-      - In theory any long will do, but starting with "1" is also good practice when it comes to versioning.
+      - It does not directly affect the code, but it's good practice to manually add it
+      - In theory any long will do, but starting with "1" is also good practice when it comes to versioning
 - §4.2 Services 
     - Packages are named after the corresponding functionality
-        - e.g. UserDto resides in package `user`
+        - e.g. `UserDto` resides in package `user`
     - Services must only be interfaces
     - Services must be annotated with `@Remote`
     - Services must NOT be serializable
@@ -89,6 +89,7 @@ This section defines project-wide coding guidelines.
 - §5.3 Extend `AbstractRepository` for entity specific repositories
 - §5.4 Use `@EJB` to inject beans
 - §5.5 Create dedicated converter classes in `at.fhj.swd14.pse.converter` for converting between database entities and DTOs
+- §5.6 Use `Long` for numeric primary keys
 
 ## §6 Database (and SQL)
 - §6.1 Use `INNODB` engine for all database entities
@@ -101,6 +102,10 @@ This section defines project-wide coding guidelines.
 `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ```
+- §6.5 Make scripts reexecutable
+    - e.g. by adding `IF NOT EXISTS` to DDL instructions
+- §6.6 Make sure the database type matches the one used in the entities
+    - if the entity defines a `Long` the database type must be `BIGINT`, for `Integer` it is `INT`, and so on
 
 # FAQ
 This section contains common problems and their solution.

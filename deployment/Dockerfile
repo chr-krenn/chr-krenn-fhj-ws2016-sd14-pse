@@ -11,10 +11,10 @@ ARG MYSQL_DRIVER_VERSION=5.1.40
 ENV MYSQL_DRIVER_VERSION $MYSQL_DRIVER_VERSION
 
 ADD http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-$MYSQL_DRIVER_VERSION.zip /opt/jboss/wildfly/customization/
-RUN unzip /opt/jboss/wildfly/customization/mysql-connector-java-$MYSQL_DRIVER_VERSION.zip
-    && mv /opt/jboss/wildfly/customization/mysql-connector-java-$MYSQL_DRIVER_VERSION/mysql-connector-java-$MYSQL_DRIVER_VERSION-bin.jar /opt/jboss/wildfly/customization/
-    && rm -rf /opt/jboss/wildfly/customization/mysql-connector-java-$MYSQL_DRIVER_VERSION
-    && rm -rf /opt/jboss/wildfly/customization/mysql-connector-java-$MYSQL_DRIVER_VERSION.zip
+RUN unzip -qq /opt/jboss/wildfly/customization/mysql-connector-java-$MYSQL_DRIVER_VERSION.zip \
+    && mv mysql-connector-java-${MYSQL_DRIVER_VERSION}/mysql-connector-java-${MYSQL_DRIVER_VERSION}-bin.jar /opt/jboss/wildfly/customization/ \
+    && rm -rf mysql-connector-java-${MYSQL_DRIVER_VERSION} \
+    && rm -rf mysql-connector-java-${MYSQL_DRIVER_VERSION}.zip
 
 RUN chown -R jboss:jboss /opt/jboss/wildfly/customization/
 

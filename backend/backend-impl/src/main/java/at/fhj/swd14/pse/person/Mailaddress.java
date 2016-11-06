@@ -1,7 +1,5 @@
 package at.fhj.swd14.pse.person;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 
 /**
@@ -10,7 +8,7 @@ import javax.persistence.Entity;
  *
  */
 @Entity
-public class Mailaddress extends AbstractPersonInformation implements Serializable {
+public class Mailaddress extends AbstractPersonInformation {
 	private static final long serialVersionUID = 1L;
 
 	public Mailaddress() {

@@ -1,7 +1,5 @@
 package at.fhj.swd14.pse.person;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 
 /**
@@ -10,7 +8,7 @@ import javax.persistence.Entity;
  *
  */
 @Entity
-public class Hobby extends AbstractPersonInformation implements Serializable{
+public class Hobby extends AbstractPersonInformation {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +26,7 @@ public class Hobby extends AbstractPersonInformation implements Serializable{
 		super(value);
 		// TODO Auto-generated constructor stub
 	}
-	
 
-	
+
+
 }

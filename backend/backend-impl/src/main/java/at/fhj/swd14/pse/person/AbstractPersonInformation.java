@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 /**
  * Abstract Super Class for ManyToOne Text Information Entitys for the Person class
@@ -13,7 +14,9 @@ import javax.persistence.MappedSuperclass;
  *
  */
 @MappedSuperclass
-public abstract class AbstractPersonInformation {
+public abstract class AbstractPersonInformation implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;

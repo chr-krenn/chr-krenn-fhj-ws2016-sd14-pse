@@ -27,7 +27,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<NewsDto> findByCreatorId(long author) {
+    public List<NewsDto> findByAuthorId(long author) {
         return null;
     }
 }

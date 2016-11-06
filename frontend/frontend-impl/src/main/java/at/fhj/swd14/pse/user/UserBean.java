@@ -13,8 +13,7 @@ import javax.inject.Named;
 @SessionScoped
 public class UserBean implements Serializable {
 
-	private static final long serialVersionUID = -1461161555359635193L;
-
+	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = LogManager.getLogger(UserBean.class);
 
     @EJB(name = "ejb/UserService")

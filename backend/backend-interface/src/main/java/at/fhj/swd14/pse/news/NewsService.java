@@ -4,14 +4,20 @@ import javax.ejb.Remote;
 import java.time.Instant;
 import java.util.List;
 
+/**
+ * This class is intended to provide management and retrieval methods regarding {@link NewsDto}.
+ *
+ * @author Richard Raumberger
+ */
 @Remote
 public interface NewsService {
 
     /**
      * Saves or updates the given news and returns the news id.
      *
-     * @param news the news to save
+     * @param news the news to save; must not be null
      * @return the id of the news
+     * @throws NullPointerException; if {@code news} is null
      */
     long save(NewsDto news);
 
@@ -33,7 +39,9 @@ public interface NewsService {
     /**
      * Finds and returns all news since the given date.
      *
-     * @return the news
+     * @param instant all news after this instant will be fetched; must not be null
+     * @return the fetched news, if none are found, an empty list is returned
+     * @throws NullPointerException if the instant is null
      */
     List<NewsDto> findAllSince(Instant instant);
 
@@ -41,8 +49,8 @@ public interface NewsService {
      * Finds and returns all news which were created by the given author.
      *
      * @param author the author's id
-     * @return the news of the author
+     * @return the fetched news, if none are found, an empty list is returned
      */
-    List<NewsDto> findByCreatorId(long author);
+    List<NewsDto> findByAuthorId(long author);
 
 }

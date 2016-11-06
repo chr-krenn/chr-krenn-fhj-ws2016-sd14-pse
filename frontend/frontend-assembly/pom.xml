@@ -18,6 +18,10 @@
             <artifactId>frontend-impl</artifactId>
             <type>war</type>
         </dependency>
+        <dependency>
+            <groupId>at.fhj.swd14.pse</groupId>
+            <artifactId>backend-interface</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -46,6 +50,10 @@
                             <artifactId>frontend-impl</artifactId>
                             <contextRoot>/swd14-fe</contextRoot>
                         </webModule>
+                        <jarModule>
+                            <groupId>at.fhj.swd14.pse</groupId>
+                            <artifactId>backend-interface</artifactId>
+                        </jarModule>
                     </modules>
                 </configuration>
             </plugin>

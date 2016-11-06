@@ -10,10 +10,10 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "news")
-@NamedQueries(
+@NamedQueries({
         @NamedQuery(name = "News.findSince", query = "SELECT n FROM News n WHERE n.created >= :sinceDate"),
         @NamedQuery(name = "News.findByAuthorId", query = "SELECT n FROM News n WHERE n.author.id = :sinceDate")
-)
+})
 public class News implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -37,10 +37,9 @@ public class News implements Serializable {
     @Column(insertable = false, updatable = false)
     private Instant modified;
 
-    /*@NotNull
-    @ManyToOne
-    TODO @rraumberger uncomment when person gets introduced
-    */
+    //TODO @rraumberger uncomment when person gets introduced
+    //@NotNull
+    //@ManyToOne
     @Column(nullable = true)
     private Person author;
 

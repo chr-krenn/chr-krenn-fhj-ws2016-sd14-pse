@@ -1,12 +1,11 @@
 package at.fhj.swd14.pse.person;
 
-import java.io.Serializable;
 /**
  * Dto for hobby
  * @author Patrick Kainz
  *
  */
-public class HobbyDto extends AbstractPersonInformationDto implements Serializable{
+public class HobbyDto extends AbstractPersonInformationDto {
 	
 	private static final long serialVersionUID = 1L;
 

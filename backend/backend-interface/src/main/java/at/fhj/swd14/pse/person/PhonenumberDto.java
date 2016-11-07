@@ -1,13 +1,12 @@
 package at.fhj.swd14.pse.person;
 
-import java.io.Serializable;
 
 /**
  * Dto for phone number
  * @author Patrick Kainz
  *
  */
-public class PhonenumberDto extends AbstractPersonInformationDto implements Serializable{
+public class PhonenumberDto extends AbstractPersonInformationDto {
 
 	private static final long serialVersionUID = 1L;
 

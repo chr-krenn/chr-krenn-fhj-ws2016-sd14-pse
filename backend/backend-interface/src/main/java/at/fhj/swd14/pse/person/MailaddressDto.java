@@ -1,13 +1,11 @@
 package at.fhj.swd14.pse.person;
 
-import java.io.Serializable;
-
 /**
  * Dto for Mailaddress
  * @author Patrick Kainz
  *
  */
-public class MailaddressDto extends AbstractPersonInformationDto implements Serializable {
+public class MailaddressDto extends AbstractPersonInformationDto {
 
 	private static final long serialVersionUID = 1L;
 

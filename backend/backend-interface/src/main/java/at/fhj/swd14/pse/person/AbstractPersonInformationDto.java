@@ -1,12 +1,16 @@
 package at.fhj.swd14.pse.person;
 
 
+import java.io.Serializable;
+
 /**
  * Dto for classes of type AbstractPersonInformation
  * @author Patrick Kainz
  *
  */
-public class AbstractPersonInformationDto {
+public class AbstractPersonInformationDto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String value;

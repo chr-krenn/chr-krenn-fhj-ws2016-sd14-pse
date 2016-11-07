@@ -26,15 +26,15 @@ public class PersonDto implements Serializable {
 
     private String imageUrl;
 
-    private String status;
+    private StatusDto status;
 
-    private List<String> hobbies = new LinkedList<>();
+    private List<HobbyDto> hobbies = new LinkedList<>();
 
-    private List<String> knowledges = new LinkedList<>();
+    private List<KnowledgeDto> knowledges = new LinkedList<>();
 
-    private List<String> additionalMails = new LinkedList<>();
+    private List<MailaddressDto> additionalMails = new LinkedList<>();
 
-    private List<String> phonenumbers = new LinkedList<>();
+    private List<PhonenumberDto> phonenumbers = new LinkedList<>();
 
     private DepartmentDto department;
 
@@ -42,11 +42,11 @@ public class PersonDto implements Serializable {
 
     private long id;
 
-    public String getStatus() {
+    public StatusDto getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusDto status) {
         this.status = status;
     }
 
@@ -106,35 +106,35 @@ public class PersonDto implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public List<String> getHobbies() {
+    public List<HobbyDto> getHobbies() {
         return hobbies;
     }
 
-    public void setHobbies(List<String> hobbies) {
+    public void setHobbies(List<HobbyDto> hobbies) {
         this.hobbies = hobbies;
     }
 
-    public List<String> getKnowledges() {
+    public List<KnowledgeDto> getKnowledges() {
         return knowledges;
     }
 
-    public void setKnowledges(List<String> knowledges) {
+    public void setKnowledges(List<KnowledgeDto> knowledges) {
         this.knowledges = knowledges;
     }
 
-    public List<String> getAdditionalMails() {
+    public List<MailaddressDto> getAdditionalMails() {
         return additionalMails;
     }
 
-    public void setAdditionalMails(List<String> additionalMails) {
+    public void setAdditionalMails(List<MailaddressDto> additionalMails) {
         this.additionalMails = additionalMails;
     }
 
-    public List<String> getPhonenumbers() {
+    public List<PhonenumberDto> getPhonenumbers() {
         return phonenumbers;
     }
 
-    public void setPhonenumbers(List<String> phonenumbers) {
+    public void setPhonenumbers(List<PhonenumberDto> phonenumbers) {
         this.phonenumbers = phonenumbers;
     }
 

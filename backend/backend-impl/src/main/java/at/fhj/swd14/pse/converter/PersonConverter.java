@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.converter;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,33 +23,17 @@ public class PersonConverter {
         dto.setLastname(person.getLastname());
         dto.setImageUrl(person.getImageUrl());
         dto.setPlace(person.getPlace());
-        dto.setStatus(person.getStatus().getName());
+        dto.setStatus(StatusConverter.convert(person.getStatus()));
         dto.setDepartment(DepartmentConverter.convert(person.getDepartment()));
         dto.setUser(UserConverter.convert(person.getUser()));
-
-        if (person.getAdditionalMails() != null) {
-            for (Mailaddress address : person.getAdditionalMails()) {
-                dto.getAdditionalMails().add(address.getValue());
-            }
-        }
-
-        if (person.getHobbies() != null) {
-            for (Hobby hobby : person.getHobbies()) {
-                dto.getHobbies().add(hobby.getValue());
-            }
-        }
-
-        if (person.getKnowledges() != null) {
-            for (Knowledge knowledge : person.getKnowledges()) {
-                dto.getKnowledges().add(knowledge.getValue());
-            }
-        }
-
-        if (person.getNumbers() != null) {
-            for (Phonenumber number : person.getNumbers()) {
-                dto.getPhonenumbers().add(number.getValue());
-            }
-        }
+        dto.getHobbies().clear();
+        dto.getHobbies().addAll(HobbyConverter.convertToDtoList(person.getHobbies(),dto));
+        dto.getKnowledges().clear();
+        dto.getKnowledges().addAll(KnowledgeConverter.convertToDtoList(person.getKnowledges(),dto));
+        dto.getAdditionalMails().clear();
+        dto.getAdditionalMails().addAll(MailaddressConverter.convertToDtoList(person.getAdditionalMails(), dto));
+        dto.getPhonenumbers().clear();
+        dto.getPhonenumbers().addAll(PhonenumberConverter.convertToDtoList(person.getNumbers(), dto));
 
         return dto;
     }
@@ -65,39 +50,15 @@ public class PersonConverter {
         person.setImageUrl(dto.getImageUrl());
         person.setLastname(dto.getLastname());
         person.setPlace(dto.getPlace());
-        person.setStatus(new Status(dto.getStatus()));
-
-        //@pkainz why converting these additional infos manually? why no separate converter?
-        //Because they are only used in the context of persons, so why create another class for them
-        //if noone except this class is going to use it.
-        person.setAdditionalMails(new LinkedList<>());
-        for (String mail : dto.getAdditionalMails()) {
-            Mailaddress address = new Mailaddress();
-            address.setValue(mail);
-            person.getAdditionalMails().add(address);
-        }
-
-        person.setHobbies(new LinkedList<>());
-        for (String hobby : dto.getHobbies()) {
-            Hobby newhobby = new Hobby();
-            newhobby.setValue(hobby);
-            person.getHobbies().add(newhobby);
-        }
-
-        person.setKnowledges(new LinkedList<>());
-        for (String knowledge : dto.getKnowledges()) {
-            Knowledge newknowledge = new Knowledge();
-            newknowledge.setValue(knowledge);
-            person.getKnowledges().add(newknowledge);
-        }
-
-        person.setNumbers(new LinkedList<>());
-        for (String number : dto.getPhonenumbers()) {
-            Phonenumber newnumber = new Phonenumber();
-            newnumber.setValue(number);
-            person.getNumbers().add(newnumber);
-        }
-
+        person.setStatus(StatusConverter.convert(dto.getStatus()));
+        person.getAdditionalMails().clear();
+        person.getAdditionalMails().addAll(MailaddressConverter.convertToDoList(dto.getAdditionalMails(), person));
+        person.getHobbies().clear();
+        person.getHobbies().addAll(HobbyConverter.convertToDoList(dto.getHobbies(), person));
+        person.getKnowledges().clear();
+        person.getKnowledges().addAll(KnowledgeConverter.convertToDoList(dto.getKnowledges(), person));
+        person.getNumbers().clear();
+        person.getNumbers().addAll(PhonenumberConverter.convertToDoList(dto.getPhonenumbers(), person));
         return person;
     }
 

@@ -21,10 +21,8 @@ import javax.persistence.Table;
 public class Status implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
 
-	@Column
+	@Id
 	private String name;
 	
 	@OneToMany
@@ -38,26 +36,13 @@ public class Status implements Serializable {
 		this.name = name;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Status(Long id) {
-		this.id = id;
+	public Status(String name) {
+		setName(name);
 	}
 	
 	public Status()
 	{
 		
-	}
-	
-	public Status(String name)
-	{
-		setName(name);
 	}
 	
 }

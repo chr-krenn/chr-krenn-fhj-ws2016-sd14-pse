@@ -21,32 +21,32 @@
 	    <c:if test="${not empty personBean.person.department}">
 	    	<p>Abteilung: #{personBean.person.department.name}</p>
 	    </c:if>
-	    <c:if test="${not empty personBean.person.status}">
-	    	<p>Status: #{personBean.person.status}</p>
+	    <c:if test="${not empty personBean.person.status.name}">
+	    	<p>Status: #{personBean.person.status.name}</p>
 	    </c:if>
     	<section>
     		<h1>Mail Adressen</h1>
     		<p>#{personBean.person.user.mail}</p>
     		<c:forEach var="mail" items="#{personBean.person.additionalMails}">
-    			<p>#{mail}</p>
+    			<p>#{mail.value}</p>
     		</c:forEach>
     	</section>
     	<section>
     		<h1>Hobbies</h1>
     		<c:forEach var="hobby" items="#{personBean.person.hobbies}">
-    			<p>#{hobby}</p>
+    			<p>#{hobby.value}</p>
     		</c:forEach>
     	</section>
     	<section>
     		<h1>Fähigkeiten</h1>
     		<c:forEach var="knowledge" items="#{personBean.person.knowledges}">
-    			<p>#{knowledge}</p>
+    			<p>#{knowledge.value}</p>
     		</c:forEach>
     	</section>
     	<section>
     		<h1>Telefonnummern</h1>
     		<c:forEach var="number" items="#{personBean.person.phonenumbers}">
-    			<p>#{number}</p>
+    			<p>#{number.value}</p>
     		</c:forEach>
     	</section>
     </section>

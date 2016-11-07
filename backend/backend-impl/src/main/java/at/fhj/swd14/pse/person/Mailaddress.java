@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.person;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Mailaddress entity
@@ -8,17 +9,16 @@ import javax.persistence.Entity;
  *
  */
 @Entity
+@Table(name="mailaddress")
 public class Mailaddress extends AbstractPersonInformation {
 	private static final long serialVersionUID = 1L;
 
 	public Mailaddress() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Mailaddress(Long id) {
 		super(id);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Mailaddress(String value) {

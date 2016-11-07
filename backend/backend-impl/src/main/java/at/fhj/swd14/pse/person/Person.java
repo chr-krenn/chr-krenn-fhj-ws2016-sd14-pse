@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.person;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -46,20 +47,20 @@ public class Person implements Serializable {
     @Column
     private String place;
     
-    @Column
+    @Column(name="imageurl")
     private String imageUrl;
     
     @OneToMany(mappedBy="person")
-    private List<Hobby> hobbies;
+    private List<Hobby> hobbies=new LinkedList<>();
     
     @OneToMany(mappedBy="person")
-    private List<Knowledge> knowledges;
+    private List<Knowledge> knowledges=new LinkedList<>();
     
     @OneToMany(mappedBy="person")
-    private List<Mailaddress> additionalMails;
+    private List<Mailaddress> additionalMails=new LinkedList<>();
     
     @OneToMany(mappedBy="person")
-    private List<Phonenumber> numbers;
+    private List<Phonenumber> numbers=new LinkedList<>();
     
     @ManyToOne(optional=false)
     private Status status;

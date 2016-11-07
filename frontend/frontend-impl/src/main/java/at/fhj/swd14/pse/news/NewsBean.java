@@ -1,6 +1,5 @@
 package at.fhj.swd14.pse.news;
 
-import at.fhj.swd14.pse.user.UserBean;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +13,7 @@ import java.io.Serializable;
 public class NewsBean implements Serializable {
 
     private NewsDto news;
-    private static final Logger LOGGER = LogManager.getLogger(UserBean.class);
+    private static final Logger LOGGER = LogManager.getLogger(NewsBean.class);
 
     @EJB(name = "ejb/NewsService")
     private NewsService newsService;
@@ -23,7 +22,7 @@ public class NewsBean implements Serializable {
      *  Constructor
      */
     public NewsBean() {
-        LOGGER.debug("Create: " + UserBean.class.getSimpleName());
+        LOGGER.debug("Create: " + NewsBean.class.getSimpleName());
         this.news = new NewsDto();
     }
 
@@ -37,7 +36,12 @@ public class NewsBean implements Serializable {
 
     public void addNews()
     {
-
+        if(news.getTitle() != null && news.getMessage() != null) {
+            newsService.save(news);
+        }
     }
 
+    public void editNews()
+    {
+    }
 }

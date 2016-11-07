@@ -1,8 +1,8 @@
 package at.fhj.swd14.pse.message;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import at.fhj.swd14.pse.comment.CommentDto;
@@ -22,7 +22,8 @@ public class MessageDto implements Serializable {
 
 	private String title;
 	private String content;
-	private Date creationDate;
+    private Instant created;
+    private Instant modified;
 	
 	public MessageDto() {
 		childs = new ArrayList<>();
@@ -99,12 +100,29 @@ public class MessageDto implements Serializable {
 		this.content = content;
 	}
 	
-	public Date getCreationDate() {
-		return creationDate;
+	public Instant getCreated() {
+        return created;
+    }
+	
+	/**
+	 * do not use this setter on frontend site. It will be automatically set as
+	 * soon as it gets saved to the DB
+	 * @param created
+	 */
+	public void setCreated(Instant created){
+		this.created = created;
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+    public Instant getModified() {
+        return modified;
+    }
+    /**
+     * do not use this setter on frontend site. It will be automatically set as
+	 * soon as it gets updated in the DB
+     * @param modified
+     */
+    public void setModified(Instant modified) {
+		this.modified = modified;
 	}
 	
 	@Override

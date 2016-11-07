@@ -25,7 +25,8 @@ public class MessageConverter {
         dto.setCommunityId(message.getCommunityId());
         dto.setTitle(message.getTitle());
         dto.setContent(message.getContent());
-        dto.setCreationDate(message.getCreationDate());
+        dto.setCreated(message.getCreated());
+        dto.setModified(message.getModified());
         dto.setChilds(new ArrayList<>(CommentConverter.convertToDtoList(message.getChilds())));
         return dto;
     }
@@ -40,8 +41,8 @@ public class MessageConverter {
         message.setCommunityId(dto.getCommunityId());
         message.setTitle(dto.getTitle());
         message.setContent(dto.getContent());
-        message.setCreationDate(dto.getCreationDate());
         message.setChilds(new ArrayList<>(CommentConverter.convertToDoList(dto.getChilds())));
+        //no need to set creation or updating timestamp --> automatically set on DB-interaction
         return message;
     }
 

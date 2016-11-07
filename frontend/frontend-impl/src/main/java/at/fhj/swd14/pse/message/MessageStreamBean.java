@@ -160,7 +160,6 @@ public class MessageStreamBean implements Serializable {
 			message.setAuthor(author);
 			message.setCommunityId(1L);
 			message.setContent("Content_" + message.getId());
-			message.setCreationDate(new Date());
 			if (currentCommunity != null) {
 				LOGGER.debug("GetAllMessages:: Community Not Null");
 				message.setTitle(currentCommunity.getId() + "Title_" + message.getId());
@@ -210,7 +209,7 @@ public class MessageStreamBean implements Serializable {
 		}
 		// TODO: add author and community/recipient - check which of those applies
 
-		this.message.setCreationDate(new Date());    
+		//this.message.setCreationDate(new Date()); not needed because it will be set as soon it gets saved    
 		final long generatedId = messageService.save(new MessageDto());
 		LOGGER.info("Created new message with ID {}", generatedId);
 

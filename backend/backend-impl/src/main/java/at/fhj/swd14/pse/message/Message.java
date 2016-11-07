@@ -22,11 +22,18 @@ import at.fhj.swd14.pse.comment.Comment;
 @Table(name = "message")
 @NamedQueries({
 	@NamedQuery(name="Message.findByAuthorId", query="SELECT m FROM Message m WHERE m.author.id = :authorUserId"),
+	@NamedQuery(name="Message.findUsersPrivateMessages",query="SELECT m FROM Message m WHERE m.recipient != NULL "
+			+ "AND m.recipient.id = :userId"),
 	
 
 	//TODO: finish query so that only relevant messages are returned (global, own, joined Community)
+	// especially: change to community entity as soon as it's implemented!!
 	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.communityId = :communityId"),
-	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m")
+	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m"),
+	@NamedQuery(name="Message.findGlobalMessages", query="SELECT m FROM Message m WHERE m.communityId = NULL AND "
+			+ "m.recipient = NULL")
+	
+	
 })
 public class Message implements Serializable {
 	

@@ -1,5 +1,7 @@
 package at.fhj.swd14.pse.community;
 
+import at.fhj.swd14.pse.user.UserDto;
+
 public class CommunityDto {
 
 	private Long id;
@@ -21,5 +23,22 @@ public class CommunityDto {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	private UserDto author;
+	public UserDto getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(UserDto author) {
+        this.author = author;
+    }
+	
+	@Override
+	public String toString(){
+		return "CommunityDto{" +
+                "id=" + getId() +
+                ", userId='" + getAuthor() + '\'' +               
+                '}';
 	}
 }

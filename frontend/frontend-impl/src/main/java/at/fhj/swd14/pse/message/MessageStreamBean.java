@@ -13,8 +13,6 @@ import org.apache.logging.log4j.Logger;
 
 import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.community.CommunityDtoStub;
-import at.fhj.swd14.pse.message.MessageDto;
-import at.fhj.swd14.pse.message.MessageService;
 import at.fhj.swd14.pse.user.UserDto;
 
 @Named
@@ -31,6 +29,19 @@ public class MessageStreamBean implements Serializable {
 
 	@EJB(name = "ejb/MessageService")
 	private MessageService messageService;
+	
+	/**
+	 * MessageDto for new messages
+	 */
+	private MessageDto message;
+	
+	public MessageDto getMessage() {
+		return this.message;
+	}
+	
+	public void setMessage(MessageDto message) {
+		this.message = message;
+	}
 
 	/**
 	 * The CommunityDto to use
@@ -105,6 +116,15 @@ public class MessageStreamBean implements Serializable {
 	}
 
 	// ---------- Constructor  ------------
+	
+	/*
+	 *
+	*/
+	public MessageStreamBean() {
+    	LOGGER.debug("Create: " + MessageStreamBean.class.getSimpleName());
+    	this.message = new MessageDto();
+    	}
+	
 	/**
 	 * Initialises the bean for the view
 	 */
@@ -175,16 +195,26 @@ public class MessageStreamBean implements Serializable {
 	}
 
 	/**
-	 * Creates a new Messages (called by Server)
+	 * Creates a new Message via MessageService
 	 *
 	 * @param title
 	 *            The Messages title
 	 * @param content
 	 *            The Messages content
 	 */
-	public void createMessage(String title, String content) {
-		LOGGER.debug("createMessage: " + title + " - " + content);
-		// TODO: Implement
+	public void createMessage() {
+    		LOGGER.info("Creating message");
+    	
+		if(currentCommunity != null) {
+			this.message.setCommunityId(currentCommunity.getId());
+		}
+		// TODO: add author and community/recipient - check which of those applies
+
+		this.message.setCreationDate(new Date());    
+		final long generatedId = messageService.save(new MessageDto());
+		LOGGER.info("Created new message with ID {}", generatedId);
+
+		this.message = messageService.find(generatedId);
 	}
 
 	/**

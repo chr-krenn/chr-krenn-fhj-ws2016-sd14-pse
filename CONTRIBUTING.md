@@ -111,4 +111,8 @@ This section defines project-wide coding guidelines.
 This section contains common problems and their solution.
 Feel free to update this section.
 
+## Parent DTOs and Serializable
+
+If you encounter the problem, that some values of your DTOs are null, specifically those inherited from a parent class, it may be possible, that only the child classes are Serializable and the parent class is not. This causes the child class to be serialized, but all attributes of the parent are set to null. If the parent class implements Serializable the child class however does not have to.
+
 - TBD

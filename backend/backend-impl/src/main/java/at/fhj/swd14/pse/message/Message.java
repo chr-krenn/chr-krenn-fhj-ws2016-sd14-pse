@@ -26,7 +26,7 @@ import at.fhj.swd14.pse.user.User;
 @Table(name = "message")
 @NamedQueries({
 	@NamedQuery(name="Message.findByAuthorId", query="SELECT m FROM Message m WHERE m.author.id = :authorUserId"),
-	@NamedQuery(name="Message.findUsersPrivateMessages",query="SELECT m FROM Message m WHERE m.recipient != NULL "
+	@NamedQuery(name="Message.findUsersPrivateMessages",query="SELECT m FROM Message m WHERE m.recipient IS NOT NULL "
 			+ "AND m.recipient.id = :userId"),
 	
 
@@ -34,8 +34,8 @@ import at.fhj.swd14.pse.user.User;
 	// especially: change to community entity as soon as it's implemented!!
 	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.communityId = :communityId"),
 	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m"),
-	@NamedQuery(name="Message.findGlobalMessages", query="SELECT m FROM Message m WHERE m.communityId = NULL AND "
-			+ "m.recipient = NULL")
+	@NamedQuery(name="Message.findGlobalMessages", query="SELECT m FROM Message m WHERE m.communityId IS NULL AND "
+			+ "m.recipient IS NULL")
 	
 	
 })

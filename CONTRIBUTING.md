@@ -116,3 +116,6 @@ Feel free to update this section.
 If you encounter the problem, that some values of your DTOs are null, specifically those inherited from a parent class, it may be possible, that only the child classes are Serializable and the parent class is not. This causes the child class to be serialized, but all attributes of the parent are set to null. If the parent class implements Serializable the child class however does not have to.
 
 - TBD
+
+## DB CRUD-Function tests
+The jenkins server is not configured to support tests which require a db-connection. Therefore it is not possible/necessary to implement any DB dependent Unit-tests.

@@ -71,6 +71,20 @@ And finally we must add the datasource for this project to the standalone.xml of
         </security>
     </datasource>
 ```
+```
+    <security-domain name="sep-policy" cache-type="default">
+        <authentication>
+            <login-module code="Database" flag="required">
+                <module-option name="dsJndiName" value="java:jboss/datasources/SEP"/>
+                <module-option name="principalsQuery" value="SELECT password FROM user WHERE username=?"/>
+                <module-option name="rolesQuery" value="SELECT role, 'Roles' FROM user_roles WHERE username=?"/>
+                <module-option name="hashAlgorithm" value="SHA-256"/>
+                <module-option name="hashEncoding" value="base64"/>
+                <module-option name="unauthenticatedIdentity" value="guest"/>
+            </login-module>
+        </authentication>
+    </security-domain>
+```
 
 ### Deploying the artifacts
 Take the following two artifacts and deploy them to Wildfly by copying them to `<wildfly-directory>/standalone/deployments`.

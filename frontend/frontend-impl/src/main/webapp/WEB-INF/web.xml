@@ -9,11 +9,8 @@
         <param-value>Development</param-value>
     </context-param>
 
-    <!-- Welcome page -->
-    <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
-    </welcome-file-list>
-
+    
+    <!-- SERVLETS -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -26,11 +23,46 @@
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
+    
+    <!-- Welcome page -->
+    <welcome-file-list>
+        <welcome-file>faces/login.xhtml</welcome-file>
+    </welcome-file-list>
+    
+<!--     SECURITY -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>secure</web-resource-name>
+			<url-pattern>/faces/users/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>user</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/faces/login.xhtml</form-login-page>
+			<form-error-page>/faces/error.xhtml</form-error-page>
+		</form-login-config> 
+	</login-config>
+	
+	<security-role>
+		<role-name>user</role-name>
+	</security-role>       
+    
+    <!-- MAPPING -->
 
     <mime-mapping>
         <extension>xhtml</extension>
         <mime-type>application/xml</mime-type>
     </mime-mapping>
+    
+    <!-- EJB REFS -->
 
     <ejb-ref>
         <ejb-ref-name>ejb/UserService</ejb-ref-name>
@@ -74,4 +106,6 @@
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/NewsServiceImpl!at.fhj.swd14.pse.news.NewsService
         </lookup-name>
     </ejb-ref>
+         
+    
 </web-app>

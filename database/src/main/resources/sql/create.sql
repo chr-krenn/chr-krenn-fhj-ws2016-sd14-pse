@@ -3,15 +3,24 @@
 CREATE TABLE IF NOT EXISTS user
 (
   id         BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  mail       VARCHAR(32)  NOT NULL,
-  password   VARCHAR(32)  NOT NULL,
+  username   VARCHAR(32)  NOT NULL,
+  password   VARCHAR(128)  NOT NULL,
   salt       VARCHAR(512) NOT NULL,
   `created`  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )
   ENGINE = INNODB;
+  
+INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`) VALUES (NULL, 'student', 'jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=', 'null', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
+CREATE TABLE user_roles( 
+	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+	username VARCHAR(255) NOT NULL REFERENCES user(username), 
+	role VARCHAR(32))
+ENGINE = INNODB;
 
+INSERT INTO `user_roles` (`username`, `role`) VALUES ('student', 'user');  
+INSERT INTO `user_roles` (`username`, `role`) VALUES ('student', 'admin');  
   
 #create table department
 CREATE TABLE IF NOT EXISTS department (

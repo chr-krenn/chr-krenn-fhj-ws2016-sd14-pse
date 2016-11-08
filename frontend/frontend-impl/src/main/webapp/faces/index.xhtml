@@ -25,7 +25,9 @@
 		<p:commandButton value="Login" action="#{userBean.login()}" />
 		<h:commandLink action="#{personBean.showPersonByUserId}" value="PersonTest">
 	      	<f:param name="userId" value="1" />
-		</h:commandLink>
+		</h:commandLink><br/>
+		<p:link outcome="personShowAllTest" value="ShowAllPersons">
+		</p:link>
 	</h:form>
 </h:body>
 </html>

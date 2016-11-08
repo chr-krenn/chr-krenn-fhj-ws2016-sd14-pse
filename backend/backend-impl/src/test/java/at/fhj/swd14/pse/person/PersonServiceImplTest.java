@@ -1,6 +1,10 @@
 package at.fhj.swd14.pse.person;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
+
 import javax.naming.NamingException;
 
 import org.junit.Before;
@@ -18,6 +22,7 @@ public class PersonServiceImplTest {
 	private PersonServiceImpl service;
 	private User user;
 	private Person person;
+	private List<Person> persons;
 	
 	@Before
 	public void setup() throws NamingException
@@ -50,6 +55,8 @@ public class PersonServiceImplTest {
         person.setPlace("testplace");
         person.setStatus(new Status("Online"));
         
+        persons = new ArrayList<Person>();
+        persons.add(person);
         
         
 	}
@@ -70,6 +77,15 @@ public class PersonServiceImplTest {
 		PersonDtoTester.assertEquals(PersonConverter.convert(person), foundPerson);
 	}
 	
-	
+	@Test
+	public void testFindAllUser()
+	{
+		Mockito.when(service.repository.findAll()).thenReturn(persons);
+		Collection<PersonDto> persons = service.findAllUser();
+		for(PersonDto person : persons)
+		{
+			PersonDtoTester.assertEquals(person, person);
+		}
+	}
 	
 }

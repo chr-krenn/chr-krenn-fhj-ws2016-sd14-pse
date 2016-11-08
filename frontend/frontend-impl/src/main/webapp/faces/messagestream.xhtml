@@ -12,12 +12,11 @@
 	
 	<h:body>
 		<h:form id="form_newmessage" >
-			<h:inputText id="text_newmessage_title" binding="#{text_newmessage_title}">
+			<h:inputText id="text_newmessage_title" value="#{messageStreamBean.message.title}">
 			</h:inputText>
-			<h:inputText id="text_newmessage_content" binding="#{text_newmessage_content}">
+			<h:inputText id="text_newmessage_content" value="#{messageStreamBean.message.content}">
 			</h:inputText>
-			<h:commandButton value="Message erstellen" action="#{messageStreamBean.createMessage(text_newmessage_title.value, text_newmessage_content.value)}" process="@form">
-				<f:ajax execute="@form" render="@none" />
+			<h:commandButton value="Post Message" action="#{messageStreamBean.createMessage()}">
 			</h:commandButton>
 		</h:form>
 		<p:selectOneMenu id="select_community" value="#{messageStreamBean.currentCommunity}" style="width:150px" converter="communityConverter">

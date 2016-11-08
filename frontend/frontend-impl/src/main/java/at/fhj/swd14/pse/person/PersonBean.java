@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.person;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Map;
 
 import javax.ejb.EJB;
@@ -68,6 +69,20 @@ public class PersonBean implements Serializable{
 		}
 		
 		return "personTest";
+	}
+	
+	public Collection<PersonDto> showAllPersons(){
+		Collection<PersonDto> allPersons = personService.findAllUser();
+		if(allPersons.size()==0){
+			LOGGER.debug("Found no user in db");
+		}
+		else{
+			LOGGER.debug("Found " + allPersons.size() +" person(s) in db");
+			for(PersonDto p : allPersons){
+				LOGGER.debug("Person: "+p.getFirstname() +" "+p.getLastname()+"\n");
+			}
+		}
+		return allPersons;	
 	}
 	
 }

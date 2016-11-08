@@ -56,9 +56,24 @@ public class MessageServiceImpl implements MessageService {
 		//TODO: query isn't implemented yet
 		return executeNamedQuery("Message.findUserRelated", parameter);
 	}
-	
+
+	@Override
+	public List<MessageDto> findGlobalMesssages() {
+		return executeNamedQuery("Message.findGlobalMessages");
+	}
+
+	@Override
+	public List<MessageDto> findUsersPrivateMessages(Long userId) {
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("userId", userId);
+		return executeNamedQuery("Message.findUsersPrivateMessage", parameter);
+	}
+
 	private List<MessageDto> executeNamedQuery(String name, Map<String, Object> parameter){
 		return new ArrayList<>(MessageConverter.convertToDtoList(messageRepository.executeNamedQuery(name, parameter)));
 	}
 
+	private List<MessageDto> executeNamedQuery(String name){
+		return new ArrayList<>(MessageConverter.convertToDtoList(messageRepository.executeNamedQuery(name)));
+	}
 }

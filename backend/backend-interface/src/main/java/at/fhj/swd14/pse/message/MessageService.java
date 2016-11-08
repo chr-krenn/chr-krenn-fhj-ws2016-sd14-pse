@@ -39,4 +39,17 @@ public interface MessageService {
 	 * @return List of relevant messages
 	 */
 	List<MessageDto> findUserRelated(Long userId);
+	
+	/**
+	 * returns all global messages
+	 * @return
+	 */
+	List<MessageDto> findGlobalMesssages();
+	
+	/**
+	 * returns all private messages which are directed to the given UserId
+	 * @param userId Id of the recipient
+	 * @return private messages
+	 */
+	List<MessageDto> findUsersPrivateMessages(Long userId);
 }

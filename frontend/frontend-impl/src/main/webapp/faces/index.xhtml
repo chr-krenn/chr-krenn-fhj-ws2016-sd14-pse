@@ -1,31 +1,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<title>Welcome</title>
-</h:head>
-
-<h:body>
-	<h:form>
-		<h3>Login</h3>
-
-		<table>
-			<tr>
-				<td>Name:</td>
-				<td><h:inputText value="#{userBean.user.mail}" /></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><h:inputSecret value="#{userBean.user.password}" /></td>
-			</tr>
-		</table>
-
-		<p:commandButton value="Login" action="#{userBean.login()}" />
-		<h:commandLink action="#{personBean.showPersonByUserId}" value="PersonTest">
-	      	<f:param name="userId" value="1" />
-		</h:commandLink>
-	</h:form>
-</h:body>
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui">
+   <h:head>
+      <title>Welcome</title>
+   </h:head>
+   <h:body>
+      <h:form>
+         <h3>Login</h3>
+         <table>
+            <tr>
+               <td>
+                  <p:outputLabel for="usernameInput">
+                     Mail:
+                  </p:outputLabel>
+               </td>
+               <td>
+                  <p:inputText id="usernameInput"
+                     value="#{userBean.user.mail}" required="true" />
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <p:outputLabel for="passwordInput">
+                     Password:
+                  </p:outputLabel>
+               </td>
+               <td>
+                  <p:password id="passwordInput"
+                     value="#{userBean.user.password}" required="true" />
+               </td>
+            </tr>
+         </table>
+         <br />
+         <p:commandButton value="Login" action="#{userBean.login()}" />
+         <br />
+         <h:commandLink action="#{personBean.showPersonByUserId}"
+            value="PersonTest">
+            <f:param name="userId" value="1" />
+         <br />
+         </h:commandLink>
+         <br />
+         <p:link outcome="personShowAllTest" value="ShowAllPersons">
+         </p:link>
+      </h:form>
+   </h:body>
 </html>

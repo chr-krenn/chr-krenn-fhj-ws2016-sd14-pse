@@ -1,12 +1,12 @@
 package at.fhj.swd14.pse.converter;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import at.fhj.swd14.pse.person.*;
+import at.fhj.swd14.pse.person.Person;
+import at.fhj.swd14.pse.person.PersonDto;
 
 public class PersonConverter {
 

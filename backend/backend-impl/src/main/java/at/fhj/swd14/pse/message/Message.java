@@ -2,40 +2,52 @@ package at.fhj.swd14.pse.message;
 
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.comment.Comment;
+import at.fhj.swd14.pse.user.User;
 
 @Entity
 @Table(name = "message")
 @NamedQueries({
 	@NamedQuery(name="Message.findByAuthorId", query="SELECT m FROM Message m WHERE m.author.id = :authorUserId"),
+	@NamedQuery(name="Message.findUsersPrivateMessages",query="SELECT m FROM Message m WHERE m.recipient IS NOT NULL "
+			+ "AND m.recipient.id = :userId"),
 	
 
 	//TODO: finish query so that only relevant messages are returned (global, own, joined Community)
+	// especially: change to community entity as soon as it's implemented!!
 	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.communityId = :communityId"),
-	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m")
+	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m"),
+	@NamedQuery(name="Message.findGlobalMessages", query="SELECT m FROM Message m WHERE m.communityId IS NULL AND "
+			+ "m.recipient IS NULL")
+	
+	
 })
 public class Message implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToMany
+    @OneToMany(mappedBy="parentMessage")
     private List<Comment> childs;
     
     @ManyToOne
@@ -47,12 +59,21 @@ public class Message implements Serializable {
     @Column
 	private Long communityId; //TODO: add community relation as soon as the community-entity is implemented
 
+    @Size(max = 256)
+    @NotNull
     @Column
 	private String title;
+    
+    @Size(max = 1024)
+    @NotNull
     @Column
 	private String content;
-    @Column
-	private Date creationDate;
+    
+    @Column(insertable = false, updatable = false)
+    private Instant created;
+
+    @Column(insertable = false, updatable = false)
+    private Instant modified;
     
     public Message(){
     	
@@ -114,12 +135,13 @@ public class Message implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getCreationDate() {
-		return creationDate;
-	}
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public Instant getCreated() {
+        return created;
+    }
+
+    public Instant getModified() {
+        return modified;
+    }
 	
 	@Override
 	public String toString(){

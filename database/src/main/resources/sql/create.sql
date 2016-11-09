@@ -16,11 +16,12 @@ INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`)
 CREATE TABLE user_roles( 
 	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 	username VARCHAR(255) NOT NULL REFERENCES user(username), 
-	role VARCHAR(32))
+	role VARCHAR(32) NOT NULL,
+	roleGroup VARCHAR(32) NOT NULL DEFAULT 'Roles')
 ENGINE = INNODB;
 
-INSERT INTO `user_roles` (`username`, `role`) VALUES ('student', 'user');  
-INSERT INTO `user_roles` (`username`, `role`) VALUES ('student', 'admin');  
+INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'user', 'Roles');  
+INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'admin', 'Roles');  
   
 #create table department
 CREATE TABLE IF NOT EXISTS department (

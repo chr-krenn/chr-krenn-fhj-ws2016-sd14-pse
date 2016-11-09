@@ -86,6 +86,9 @@ And finally we must add the datasource for this project to the standalone.xml of
     </security-domain>
 ```
 
+Also execute create.sql to setup database (testdata).
+User credentials: student/admin
+
 ### Deploying the artifacts
 Take the following two artifacts and deploy them to Wildfly by copying them to `<wildfly-directory>/standalone/deployments`.
 - `backend/backend-assembly/target/backend-assembly-<version>.ear`

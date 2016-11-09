@@ -46,7 +46,7 @@ data-source add --name=$MYSQL_DATABASE --driver-name=mysql --jndi-name=java:jbos
 # Add the security policy
 /subsystem=security/security-domain=sep-policy:add(cache-type=default)
 /subsystem=security/security-domain=sep-policy/authentication=classic:add()
-/subsystem=security/security-domain=sep-policy/authentication=classic/login-module=Database:add(code=Database, flag=required, module-options={"dsJndiName"=>"java:jboss/datasources/SEP","principalsQuery"=>"SELECT password FROM user WHERE username=?","rolesQuery"=>"SELECT role, 'Roles' FROM user_roles WHERE username=?","hashAlgorithm"=>"SHA-256","hashEncoding"=>"base64","unauthenticatedIdentity"=>"guest"})
+/subsystem=security/security-domain=sep-policy/authentication=classic/login-module=Database:add(code=Database, flag=required, module-options={"dsJndiName"=>"java:jboss/datasources/SEP","principalsQuery"=>"SELECT Password FROM User WHERE Username=?","rolesQuery"=>"select Role, RoleGroup from User_Roles where Username=?","hashAlgorithm"=>"SHA-256","hashEncoding"=>"base64","unauthenticatedIdentity"=>"guest"})
 
 # Execute the batch
 run-batch

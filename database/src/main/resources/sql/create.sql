@@ -11,7 +11,12 @@ CREATE TABLE IF NOT EXISTS user
 )
   ENGINE = INNODB;
 
-
+  
+#create table community
+CREATE TABLE IF NOT EXISTS department (
+  id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name varchar(255) DEFAULT NULL
+) ENGINE=InnoDB;
   
 #create table department
 CREATE TABLE IF NOT EXISTS department (

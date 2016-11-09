@@ -13,8 +13,6 @@ import javax.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-
 @Named
 @Stateful
 @ViewScoped
@@ -30,7 +28,7 @@ public class CommunityBean implements Serializable{
 	 */
 	private static final Logger LOGGER = LogManager.getLogger(CommunityBean.class);
 
-	@EJB(name = "ejb/MessageService")
-	private MessageService messageService;
+	@EJB(name = "ejb/CommunityService")
+	private CommunityService communityService;
 
 }

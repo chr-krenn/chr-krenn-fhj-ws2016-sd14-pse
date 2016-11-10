@@ -9,29 +9,109 @@
         <param-value>Development</param-value>
     </context-param>
 
-    <!-- Welcome page -->
-    <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
-    </welcome-file-list>
-
+    <!-- SERVLETS -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+    
+     <!-- SERVLETS MAPPING -->
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
+    
+    <!-- Welcome page -->
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+    
+    <!--SECURITY -->
+	<security-constraint>
+	  <web-resource-collection>
+	    <web-resource-name>Public</web-resource-name>
+	    <url-pattern>*.css</url-pattern>
+	    <url-pattern>*.jpg</url-pattern>
+	    <url-pattern>*.gif</url-pattern>
+	    <url-pattern>/javax.faces.resource/*</url-pattern>
+	  </web-resource-collection>
+	</security-constraint>    
+    
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>secure</web-resource-name>
+			<url-pattern>/protected/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>user</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<security-role>
+		<role-name>user</role-name>
+	</security-role>  	
+	
+    <security-constraint>
+        <display-name>Pub</display-name>
+        <web-resource-collection>
+            <web-resource-name>Public</web-resource-name>
+            <description/>
+            <url-pattern>*.css</url-pattern>
+            <url-pattern>*.jpg</url-pattern>
+            <url-pattern>*.gif</url-pattern>
+            <url-pattern>/error.xhtml</url-pattern>
+            <url-pattern>/login.xhtml</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>	
+	
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.xhtml</form-login-page>
+			<form-error-page>/error.xhtml</form-error-page>
+		</form-login-config> 
+	</login-config>
+	
+     
+    
+    <!-- MAPPING -->
 
     <mime-mapping>
         <extension>xhtml</extension>
         <mime-type>application/xml</mime-type>
     </mime-mapping>
+<<<<<<< HEAD
 	
+=======
+    
+    <!-- EJB REFS -->
+
+    <ejb-ref>
+        <ejb-ref-name>ejb/UserService</ejb-ref-name>
+        <remote>at.fhj.swd14.pse.user.UserService</remote>
+        <lookup-name>
+            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/UserServiceImpl!at.fhj.swd14.pse.user.UserService
+        </lookup-name>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>ejb/PersonService</ejb-ref-name>
+        <remote>at.fhj.swd14.pse.person.PersonService</remote>
+        <lookup-name>
+            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/PersonServiceImpl!at.fhj.swd14.pse.person.PersonService
+        </lookup-name>
+    </ejb-ref>
+>>>>>>> branch 'master' of https://github.com/chr-krenn/chr-krenn-fhj-ws2016-sd14-pse
     <ejb-ref>
         <ejb-ref-name>ejb/MessageService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.message.MessageService</remote>
@@ -67,4 +147,6 @@
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/TagServiceImpl!at.fhj.swd14.pse.tag.TagService
         </lookup-name>
     </ejb-ref>
+         
+    
 </web-app>

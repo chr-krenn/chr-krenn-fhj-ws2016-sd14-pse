@@ -20,7 +20,7 @@ public class PersonStatusRepository extends AbstractRepository<Status> {
 	
 	public Status findByName(String name)
 	{
-		return entityManager.createNamedQuery("PersonStatus.findByName",Status.class).getSingleResult();
+		return entityManager.createNamedQuery("PersonStatus.findByName",Status.class).setParameter("status_name", name).getSingleResult();
 	}
 	
 }

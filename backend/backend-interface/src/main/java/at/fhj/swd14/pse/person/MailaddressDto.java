@@ -15,6 +15,10 @@ public class MailaddressDto extends AbstractPersonInformationDto {
 	public MailaddressDto(Long id) {
 		super(id);
 	}
+
+	public MailaddressDto(Long id, String value) {
+		super(id, value);
+	}
 	
 	
 

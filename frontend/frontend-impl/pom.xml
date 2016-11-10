@@ -43,12 +43,9 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+        	<groupId>at.fhj.swd14.pse</groupId>
+            <artifactId>testing-commons</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

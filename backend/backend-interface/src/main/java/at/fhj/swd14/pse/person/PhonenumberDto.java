@@ -16,6 +16,11 @@ public class PhonenumberDto extends AbstractPersonInformationDto {
 	public PhonenumberDto(Long id) {
 		super(id);
 	}
+
+	public PhonenumberDto(Long id, String value) {
+		super(id, value);
+	}
+	
 	
 	
 

@@ -43,6 +43,11 @@ module add --name=com.mysql --resources=/opt/jboss/wildfly/customization/mysql-c
 # Add the datasource
 data-source add --name=$MYSQL_DATABASE --driver-name=mysql --jndi-name=java:jboss/datasources/$MYSQL_DATABASE --connection-url=$CONNECTION_URL?useUnicode=true&characterEncoding=UTF-8&useSSL=false --user-name=$MYSQL_USER --password=$MYSQL_PASSWORD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
 
+# Add the security policy
+/subsystem=security/security-domain=sep-policy:add(cache-type=default)
+/subsystem=security/security-domain=sep-policy/authentication=classic:add()
+/subsystem=security/security-domain=sep-policy/authentication=classic/login-module=Database:add(code=Database, flag=required, module-options={"dsJndiName"=>"java:jboss/datasources/SEP","principalsQuery"=>"SELECT Password FROM User WHERE Username=?","rolesQuery"=>"select Role, RoleGroup from User_Roles where Username=?","hashAlgorithm"=>"SHA-256","hashEncoding"=>"base64","unauthenticatedIdentity"=>"guest"})
+
 # Execute the batch
 run-batch
 EOF

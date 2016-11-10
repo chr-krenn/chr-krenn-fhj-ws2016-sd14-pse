@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,6 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="person_status")
+@NamedQuery(name="PersonStatus.findByName", query="SELECT s FROM Status s WHERE s.name = :status_name")
 public class Status implements Serializable {
 
 	private static final long serialVersionUID = 1L;

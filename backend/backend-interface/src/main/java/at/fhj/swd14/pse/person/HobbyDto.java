@@ -18,4 +18,9 @@ public class HobbyDto extends AbstractPersonInformationDto {
 		
 	}
 
+	public HobbyDto(Long id, String value) {
+		super(id, value);
+	}
+	
+
 }

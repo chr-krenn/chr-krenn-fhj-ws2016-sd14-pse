@@ -18,7 +18,7 @@ public class User implements Serializable {
     private Long id;
     
     @Column
-    private String mail;    
+    private String username;    
     
     @Column
     private String password;
@@ -42,11 +42,11 @@ public class User implements Serializable {
     }
 
     public String getMail() {
-		return mail;
+		return username;
 	}
 
 	public void setMail(String mail) {
-		this.mail = mail;
+		this.username = mail;
 	}
 
 	public String getPassword() {
@@ -69,7 +69,7 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", mail='" + mail + '\'' +
+                ", mail='" + username + '\'' +
                 '}';
     }
 }

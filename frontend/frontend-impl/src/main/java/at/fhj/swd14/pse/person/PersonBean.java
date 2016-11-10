@@ -68,7 +68,25 @@ public class PersonBean implements Serializable{
 			LOGGER.debug("Found no person for id: "+userId);
 		}
 		
-		return "personTest";
+		return "/protected/personTest";
+	}
+	
+	public String showLoggedInPerson()
+	{
+		person = personService.getLoggedInPerson();
+		if(person==null)
+			person = new PersonDto();
+		return "/protected/loggedInPersonTest";
+	}
+	
+	public String createLoggedInPerson()
+	{
+		Long loggedInUserId = 1L;//TODO: FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getId();
+		UserDto loggedInUser = userService.find(loggedInUserId);
+		person.setUser(loggedInUser);
+		person.setStatus(new StatusDto("online"));
+		personService.saveLoggedInPerson(person);
+		return showLoggedInPerson();
 	}
 	
 	public Collection<PersonDto> showAllPersons(){

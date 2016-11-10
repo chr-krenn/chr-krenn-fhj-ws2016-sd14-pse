@@ -1,59 +1,58 @@
 package at.fhj.swd14.pse.person;
 
+import static org.mockito.Mockito.times;
+
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.naming.NamingException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.converter.PersonConverter;
 import at.fhj.swd14.pse.converter.UserConverter;
-import at.fhj.swd14.pse.department.Department;
+import at.fhj.swd14.pse.general.ContextMocker;
 import at.fhj.swd14.pse.repository.PersonRepository;
 import at.fhj.swd14.pse.user.User;
+import at.fhj.swd14.pse.user.UserService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class PersonServiceImplTest {
 
+	@InjectMocks
 	private PersonServiceImpl service;
+	
+	@Mock
+	private PersonRepository personRepo;
+	
+	@Mock
+	private UserService userService;
+	
+	@Mock
+	private PersonVerifier verifier;
+	
 	private User user;
 	private Person person;
 	private List<Person> persons;
+	
+	
 	
 	@Before
 	public void setup() throws NamingException
 	{
 		
-        service = new PersonServiceImpl();
-        service.repository = Mockito.mock(PersonRepository.class);
-        
-        user = new User(1L);
-        user.setMail("test@test.de");
-        user.setPassword("testpassword");
-        
-        Department department = new Department(1L);
-        department.setName("testdepartment");
-        
-        person = new Person(1L,user);
-        person.setAdditionalMails(new LinkedList<Mailaddress>());
-        person.getAdditionalMails().add(new Mailaddress("test2@test.de"));
-        person.setAddress("testaddress");
-        person.setDepartment(department);
-        person.setFirstname("firstname");
-        person.setHobbies(new LinkedList<Hobby>());
-        person.getHobbies().add(new Hobby("testhobby"));
-        person.setImageUrl("http://testimg.org");
-        person.setKnowledges(new LinkedList<Knowledge>());
-        person.getKnowledges().add(new Knowledge("testknowledge"));
-        person.setLastname("lastname");
-        person.setNumbers(new LinkedList<Phonenumber>());
-        person.getNumbers().add(new Phonenumber("0664664664"));
-        person.setPlace("testplace");
-        person.setStatus(new Status("Online"));
+        person = PersonTestTools.getDummyPerson();
+        user = person.getUser();
         
         persons = new ArrayList<Person>();
         persons.add(person);
@@ -64,7 +63,7 @@ public class PersonServiceImplTest {
 	@Test
 	public void testFind()
 	{
-		Mockito.when(service.repository.find(Mockito.anyLong())).thenReturn(person);
+		Mockito.when(personRepo.find(1L)).thenReturn(person);
 		PersonDto foundPerson = service.find(person.getId());
 		PersonDtoTester.assertEquals(PersonConverter.convert(person), foundPerson);
 	}
@@ -72,20 +71,49 @@ public class PersonServiceImplTest {
 	@Test
 	public void testFindByUser()
 	{
-		Mockito.when(service.repository.findByUserId(Mockito.anyLong())).thenReturn(person);
+		Mockito.when(personRepo.findByUserId(1L)).thenReturn(person);
 		PersonDto foundPerson = service.findByUser(UserConverter.convert(user));
+		PersonDtoTester.assertEquals(PersonConverter.convert(person), foundPerson);
+	}
+	
+	@Test
+	public void testGetLoggedInPerson()
+	{
+		FacesContext context = ContextMocker.mockFacesContext();
+		ExternalContext extContext = Mockito.mock(ExternalContext.class);
+		Mockito.when(context.getExternalContext()).thenReturn(extContext);
+		Principal principal = Mockito.mock(Principal.class);
+		Mockito.when(extContext.getUserPrincipal()).thenReturn(principal);
+		//TODO: Mockito.when(principal.getId()).thenReturn(1L);
+		Mockito.when(userService.find(1L)).thenReturn(UserConverter.convert(user));
+		Mockito.when(personRepo.findByUserId(1L)).thenReturn(person);
+		PersonDto foundPerson = service.getLoggedInPerson();
 		PersonDtoTester.assertEquals(PersonConverter.convert(person), foundPerson);
 	}
 	
 	@Test
 	public void testFindAllUser()
 	{
-		Mockito.when(service.repository.findAll()).thenReturn(persons);
+		Mockito.when(personRepo.findAll()).thenReturn(persons);
 		Collection<PersonDto> persons = service.findAllUser();
 		for(PersonDto person : persons)
 		{
 			PersonDtoTester.assertEquals(person, person);
 		}
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testSaveNull()
+	{
+		service.saveLoggedInPerson(null);
+	}
+	
+	@Test
+	public void testSave()
+	{
+		service.saveLoggedInPerson(PersonConverter.convert(person));
+		
+		Mockito.verify(personRepo, times(1)).save(Mockito.any(Person.class));
 	}
 	
 }

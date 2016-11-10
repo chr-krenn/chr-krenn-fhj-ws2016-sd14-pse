@@ -1,13 +1,16 @@
 package at.fhj.swd14.pse.user;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Named
 @SessionScoped
@@ -46,20 +49,9 @@ public class UserBean implements Serializable {
         this.user = user;
     }
     
-	/*
-	 * Actions
-	 */
-	
-	public String login()
-	{
-		LOGGER.debug("login()");
-		if(true)
-		{
-			return "welcome";			
-		}
-		else
-		{
-			return "loginFailed";
-		}
-	}    
+    public void logout() throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.invalidateSession();
+        externalContext.redirect(externalContext.getRequestContextPath() + "/index.xhtml");
+    } 
 }

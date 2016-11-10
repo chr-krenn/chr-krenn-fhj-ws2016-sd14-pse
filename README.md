@@ -71,8 +71,36 @@ And finally we must add the datasource for this project to the standalone.xml of
         </security>
     </datasource>
 ```
+```
+    <security-domain name="sep-policy" cache-type="default">
+        <authentication>
+            <login-module code="Database" flag="required">
+                <module-option name="dsJndiName" value="java:jboss/datasources/SEP"/>
+                <module-option name="principalsQuery" value="SELECT password FROM user WHERE username=?"/>
+                <module-option name="rolesQuery" value="SELECT role, 'Roles' FROM user_roles WHERE username=?"/>
+                <module-option name="hashAlgorithm" value="SHA-256"/>
+                <module-option name="hashEncoding" value="base64"/>
+                <module-option name="unauthenticatedIdentity" value="guest"/>
+            </login-module>
+        </authentication>
+    </security-domain>
+```
 
+Also execute create.sql to setup database (testdata).
+User credentials: student/admin
+
+In order to use the provided authentication config, mysql/mariadb has to be configured to use case-insensitve queries, for this purpose added 
+```
+lower_case_table_names=1
+```
+to the client-server section of your my.cnf.
 ### Deploying the artifacts
 Take the following two artifacts and deploy them to Wildfly by copying them to `<wildfly-directory>/standalone/deployments`.
 - `backend/backend-assembly/target/backend-assembly-<version>.ear`
 - `frontend/frontend-assembly/target/frontend-assembly-<version>.ear`
+
+### URL's
+
+- localhost:8080/swd14-fe/ --> Welcome page (/index.xhtml)
+- localhost:8080/swd14-fe/protected/xxx --> User protected area (automatically forwarded to login if not logged in. after successfull login system redirects you to requested ressource)
+- User credentials: student/admin

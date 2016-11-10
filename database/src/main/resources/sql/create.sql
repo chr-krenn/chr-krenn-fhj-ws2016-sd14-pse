@@ -3,20 +3,34 @@
 CREATE TABLE IF NOT EXISTS user
 (
   id         BIGINT       NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  mail       VARCHAR(32)  NOT NULL,
-  password   VARCHAR(32)  NOT NULL,
+  username   VARCHAR(32)  NOT NULL,
+  password   VARCHAR(128)  NOT NULL,
   salt       VARCHAR(512) NOT NULL,
   `created`  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )
   ENGINE = INNODB;
+  
+INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`) VALUES (NULL, 'student', 'jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=', 'null', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
+<<<<<<< HEAD
   
 #create table community
 CREATE TABLE IF NOT EXISTS department (
   id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB;
+=======
+CREATE TABLE user_roles( 
+	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+	username VARCHAR(255) NOT NULL REFERENCES user(username), 
+	role VARCHAR(32) NOT NULL,
+	roleGroup VARCHAR(32) NOT NULL DEFAULT 'Roles')
+ENGINE = INNODB;
+
+INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'user', 'Roles');  
+INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'admin', 'Roles');  
+>>>>>>> branch 'master' of https://github.com/chr-krenn/chr-krenn-fhj-ws2016-sd14-pse
   
 #create table department
 CREATE TABLE IF NOT EXISTS department (
@@ -28,6 +42,8 @@ CREATE TABLE IF NOT EXISTS department (
 CREATE TABLE IF NOT EXISTS person_status (
   name varchar(255) NOT NULL PRIMARY KEY
 ) ENGINE=InnoDB;
+
+INSERT INTO person_status VALUES('online');
 
 #create table person
 CREATE TABLE IF NOT EXISTS person (
@@ -94,5 +110,17 @@ CREATE TABLE IF NOT EXISTS message
     content    VARCHAR(1024) NOT NULL,
     `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `modified` TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
+  ENGINE = INNODB;
+
+#create comment table
+CREATE TABLE IF NOT EXISTS comment
+(
+  id                BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  author_id         BIGINT NOT NULL REFERENCES `user` (id),
+  parentmessage_id  BIGINT NOT NULL REFERENCES `message` (id),
+  text              VARCHAR(1024) NOT NULL,
+  `created`         TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified`        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )
   ENGINE = INNODB;

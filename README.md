@@ -93,3 +93,9 @@ User credentials: student/admin
 Take the following two artifacts and deploy them to Wildfly by copying them to `<wildfly-directory>/standalone/deployments`.
 - `backend/backend-assembly/target/backend-assembly-<version>.ear`
 - `frontend/frontend-assembly/target/frontend-assembly-<version>.ear`
+
+### URL's
+
+- localhost:8080/swd14-fe/ --> Welcome page (/index.xhtml)
+- localhost:8080/swd14-fe/protected/xxx --> User protected area (automatically forwarded to login if not logged in. after successfull login system redirects you to requested ressource)
+- User credentials: student/admin

@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://java.sun.com/xml/ns/javaee"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         id="frontend" version="3.0">
-    <display-name>swd14-fe</display-name>
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="frontend" version="3.0">
+	<display-name>swd14-fe</display-name>
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
 
-    <!-- SERVLETS -->
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    
-     <!-- SERVLETS MAPPING -->
+	<!-- SERVLETS -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- SERVLETS MAPPING -->
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-    <listener>
-        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-    </listener>
-    
-    <!-- Welcome page -->
-    <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
-    </welcome-file-list>
-    
-    <!--SECURITY -->
+	<listener>
+		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
+
+	<!-- Welcome page -->
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+
+	<!--SECURITY -->
 	<security-constraint>
-	  <web-resource-collection>
-	    <web-resource-name>Public</web-resource-name>
-	    <url-pattern>*.css</url-pattern>
-	    <url-pattern>*.jpg</url-pattern>
-	    <url-pattern>*.gif</url-pattern>
-	    <url-pattern>/javax.faces.resource/*</url-pattern>
-	  </web-resource-collection>
-	</security-constraint>    
-    
+		<web-resource-collection>
+			<web-resource-name>Public</web-resource-name>
+			<url-pattern>*.css</url-pattern>
+			<url-pattern>*.jpg</url-pattern>
+			<url-pattern>*.gif</url-pattern>
+			<url-pattern>/javax.faces.resource/*</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>secure</web-resource-name>
@@ -53,89 +53,95 @@
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
-	
+
 	<security-role>
 		<role-name>user</role-name>
-	</security-role>  	
-	
-    <security-constraint>
-        <display-name>Pub</display-name>
-        <web-resource-collection>
-            <web-resource-name>Public</web-resource-name>
-            <description/>
-            <url-pattern>*.css</url-pattern>
-            <url-pattern>*.jpg</url-pattern>
-            <url-pattern>*.gif</url-pattern>
-            <url-pattern>/error.xhtml</url-pattern>
-            <url-pattern>/login.xhtml</url-pattern>
-        </web-resource-collection>
-        <user-data-constraint>
-            <description/>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>	
-	
+	</security-role>
+
+	<security-constraint>
+		<display-name>Pub</display-name>
+		<web-resource-collection>
+			<web-resource-name>Public</web-resource-name>
+			<description />
+			<url-pattern>*.css</url-pattern>
+			<url-pattern>*.jpg</url-pattern>
+			<url-pattern>*.gif</url-pattern>
+			<url-pattern>/error.xhtml</url-pattern>
+			<url-pattern>/login_failed.xhtml</url-pattern>
+			<url-pattern>/error/*.html</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<description />
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
 			<form-login-page>/login.xhtml</form-login-page>
-			<form-error-page>/error.xhtml</form-error-page>
-		</form-login-config> 
+			<form-error-page>/login_failed.xhtml</form-error-page>
+		</form-login-config>
 	</login-config>
-	
-     
-    
-    <!-- MAPPING -->
 
-    <mime-mapping>
-        <extension>xhtml</extension>
-        <mime-type>application/xml</mime-type>
-    </mime-mapping>
-    
-    <!-- EJB REFS -->
+	<!-- ERROR Pages -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/404.html</location>
+	</error-page>
 
-    <ejb-ref>
-        <ejb-ref-name>ejb/UserService</ejb-ref-name>
-        <remote>at.fhj.swd14.pse.user.UserService</remote>
-        <lookup-name>
+
+	<!-- MAPPING -->
+
+	<mime-mapping>
+		<extension>xhtml</extension>
+		<mime-type>application/xml</mime-type>
+	</mime-mapping>
+
+	<!-- EJB REFS -->
+
+	<ejb-ref>
+		<ejb-ref-name>ejb/UserService</ejb-ref-name>
+		<remote>at.fhj.swd14.pse.user.UserService</remote>
+		<lookup-name>
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/UserServiceImpl!at.fhj.swd14.pse.user.UserService
         </lookup-name>
-    </ejb-ref>
-    <ejb-ref>
-        <ejb-ref-name>ejb/PersonService</ejb-ref-name>
-        <remote>at.fhj.swd14.pse.person.PersonService</remote>
-        <lookup-name>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>ejb/PersonService</ejb-ref-name>
+		<remote>at.fhj.swd14.pse.person.PersonService</remote>
+		<lookup-name>
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/PersonServiceImpl!at.fhj.swd14.pse.person.PersonService
         </lookup-name>
-    </ejb-ref>
-    <ejb-ref>
-        <ejb-ref-name>ejb/MessageService</ejb-ref-name>
-        <remote>at.fhj.swd14.pse.message.MessageService</remote>
-        <lookup-name>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>ejb/MessageService</ejb-ref-name>
+		<remote>at.fhj.swd14.pse.message.MessageService</remote>
+		<lookup-name>
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/MessageServiceImpl!at.fhj.swd14.pse.message.MessageService
         </lookup-name>
-    </ejb-ref>
-    <ejb-ref>
-        <ejb-ref-name>ejb/CommentService</ejb-ref-name>
-        <remote>at.fhj.swd14.pse.comment.CommentService</remote>
-        <lookup-name>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>ejb/CommentService</ejb-ref-name>
+		<remote>at.fhj.swd14.pse.comment.CommentService</remote>
+		<lookup-name>
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/CommentServiceImpl!at.fhj.swd14.pse.comment.CommentService
         </lookup-name>
-    </ejb-ref>
-    <ejb-ref>
-        <ejb-ref-name>ejb/TagService</ejb-ref-name>
-        <remote>at.fhj.swd14.pse.tag.TagService</remote>
-        <lookup-name>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>ejb/TagService</ejb-ref-name>
+		<remote>at.fhj.swd14.pse.tag.TagService</remote>
+		<lookup-name>
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/TagServiceImpl!at.fhj.swd14.pse.tag.TagService
         </lookup-name>
-    </ejb-ref>
-    <ejb-ref>
-        <ejb-ref-name>ejb/NewsService</ejb-ref-name>
-        <remote>at.fhj.swd14.pse.news.NewsService</remote>
-        <lookup-name>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>ejb/NewsService</ejb-ref-name>
+		<remote>at.fhj.swd14.pse.news.NewsService</remote>
+		<lookup-name>
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/NewsServiceImpl!at.fhj.swd14.pse.news.NewsService
         </lookup-name>
-    </ejb-ref>
-         
-    
+	</ejb-ref>
+
+
 </web-app>

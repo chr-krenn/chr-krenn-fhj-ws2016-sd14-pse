@@ -339,12 +339,11 @@
             <security-domains>
                 <security-domain name="sep-policy" cache-type="default">
                     <authentication>
-                        <login-module code="Database" flag="required">
+                        <login-module code="at.fhj.swd14.pse.security.SecureDatabaseServerLoginModule" flag="required">
                             <module-option name="dsJndiName" value="java:jboss/datasources/SEP"/>
-                            <module-option name="principalsQuery" value="SELECT Password FROM User WHERE Username=?"/>
+                            <module-option name="principalsQuery" value="SELECT Id, Password, Salt FROM User WHERE Username=?"/>
                             <module-option name="rolesQuery" value="select Role, RoleGroup from User_Roles where Username=?"/>
-                            <module-option name="hashAlgorithm" value="SHA-256"/>
-                            <module-option name="hashEncoding" value="base64"/>
+                            <module-option name="principalClass" value="at.fhj.swd14.pse.security.DatabasePrincipal"/>
                             <module-option name="unauthenticatedIdentity" value="guest"/>
                         </login-module>
                     </authentication>

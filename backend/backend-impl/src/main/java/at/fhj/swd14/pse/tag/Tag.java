@@ -10,7 +10,12 @@ import java.io.Serializable;
 @Table(name = "tag")
 public class Tag implements Serializable{
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5190605103970326377L;
+
+	@Id
     private Long id;
 
     @Column

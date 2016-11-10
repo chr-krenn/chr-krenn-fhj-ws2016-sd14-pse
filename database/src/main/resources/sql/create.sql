@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS person_status (
   name varchar(255) NOT NULL PRIMARY KEY
 ) ENGINE=InnoDB;
 
+INSERT INTO person_status VALUES('online');
+
 #create table person
 CREATE TABLE IF NOT EXISTS person (
   id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,

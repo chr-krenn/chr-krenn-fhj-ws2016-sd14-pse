@@ -50,16 +50,16 @@ public class Person implements Serializable {
     @Column(name="imageurl")
     private String imageUrl;
     
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy="person",orphanRemoval=true)
     private List<Hobby> hobbies=new LinkedList<>();
     
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy="person",orphanRemoval=true)
     private List<Knowledge> knowledges=new LinkedList<>();
     
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy="person",orphanRemoval=true)
     private List<Mailaddress> additionalMails=new LinkedList<>();
     
-    @OneToMany(mappedBy="person")
+    @OneToMany(mappedBy="person",orphanRemoval=true)
     private List<Phonenumber> numbers=new LinkedList<>();
     
     @ManyToOne(optional=false)

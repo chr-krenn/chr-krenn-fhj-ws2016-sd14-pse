@@ -9,10 +9,12 @@
 	<h3>Welcome to PSE</h3>
 	<h:form>
     <p:commandButton type="submit" immediate="true"  action="#{userBean.logout}" value="Logout" icon="ui-icon-extlink" />
-    <h:commandLink action="#{personBean.showPersonByUserId}"
+    <p><h:commandLink action="#{personBean.showPersonByUserId}"
         value="PersonTest">
         <f:param name="userId" value="1" />
-    </h:commandLink>
+    </h:commandLink></p>
+    <p><h:commandLink action="#{personBean.showLoggedInPerson}"
+        value="LoggedInPersonTest"></h:commandLink></p>
     </h:form>
    </h:body>
 </html>

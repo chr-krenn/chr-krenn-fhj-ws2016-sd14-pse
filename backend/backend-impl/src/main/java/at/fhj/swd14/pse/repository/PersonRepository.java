@@ -1,5 +1,7 @@
 package at.fhj.swd14.pse.repository;
 
+import java.util.List;
+
 import javax.ejb.Local;
 import javax.ejb.Singleton;
 
@@ -21,8 +23,12 @@ public class PersonRepository extends AbstractRepository<Person> {
 	
 	public Person findByUserId(long id)
 	{
-		return entityManager.createNamedQuery("Person.findByUserId",Person.class)
-				.setParameter("userid", id).getSingleResult();
+		List<Person> results =  entityManager.createNamedQuery("Person.findByUserId",Person.class)
+				.setParameter("userid", id).getResultList();
+		if(results.size()==0)
+			return null;
+		else
+			return results.get(0);
 	}
 	
 }

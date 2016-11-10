@@ -71,6 +71,12 @@ public class PersonBean implements Serializable{
 		return "/protected/personTest";
 	}
 	
+	public String showLoggedInPerson()
+	{
+		person = personService.getLoggedInPerson();
+		return "/protected/loggedInPersonTest";
+	}
+	
 	public Collection<PersonDto> showAllPersons(){
 		Collection<PersonDto> allPersons = personService.findAllUser();
 		if(allPersons.size()==0){

@@ -84,4 +84,15 @@ public class PersonBeanTest {
 
     }
     
+    @Test
+    public void testLoggedInPerson()
+    {
+    	PersonDto person = getDummyPerson();
+    	when(personService.getLoggedInPerson()).thenReturn(person);
+    	String path = unitUnderTest.showLoggedInPerson();
+    	Assert.assertEquals("/protected/loggedInPersonTest", path);
+    	Assert.assertNotNull(unitUnderTest.getPerson());
+    	PersonDtoTester.assertEquals(person, unitUnderTest.getPerson());
+    }
+    
 }

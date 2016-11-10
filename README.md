@@ -89,6 +89,11 @@ And finally we must add the datasource for this project to the standalone.xml of
 Also execute create.sql to setup database (testdata).
 User credentials: student/admin
 
+In order to use the provided authentication config, mysql/mariadb has to be configured to use case-insensitve queries, for this purpose added 
+```
+lower_case_table_names=1
+```
+to the client-server section of your my.cnf.
 ### Deploying the artifacts
 Take the following two artifacts and deploy them to Wildfly by copying them to `<wildfly-directory>/standalone/deployments`.
 - `backend/backend-assembly/target/backend-assembly-<version>.ear`

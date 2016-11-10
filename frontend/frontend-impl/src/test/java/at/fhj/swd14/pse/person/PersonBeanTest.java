@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.person;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.department.DepartmentDto;
@@ -93,6 +95,22 @@ public class PersonBeanTest {
     	Assert.assertEquals("/protected/loggedInPersonTest", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
     	PersonDtoTester.assertEquals(person, unitUnderTest.getPerson());
+    }
+    
+    @Test
+    public void testCreate()
+    {
+    	PersonDto person = getDummyPerson();
+    	unitUnderTest.setPerson(person);
+    	FacesContext context = ContextMocker.mockFacesContext();
+		ExternalContext extContext = Mockito.mock(ExternalContext.class);
+		Mockito.when(context.getExternalContext()).thenReturn(extContext);
+		Principal principal = Mockito.mock(Principal.class);
+		Mockito.when(extContext.getUserPrincipal()).thenReturn(principal);
+		//TODO: Mockito.when(principal.getId()).thenReturn(1L);
+		Mockito.when(userService.find(1L)).thenReturn(person.getUser());
+		unitUnderTest.createLoggedInPerson();
+		Mockito.verify(personService,Mockito.times(1)).saveLoggedInPerson(Mockito.any(PersonDto.class));
     }
     
 }

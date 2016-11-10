@@ -4,6 +4,7 @@ import static org.mockito.Mockito.times;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -17,10 +18,13 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.converter.PersonConverter;
+import at.fhj.swd14.pse.converter.StatusConverter;
 import at.fhj.swd14.pse.converter.UserConverter;
 import at.fhj.swd14.pse.repository.PersonRepository;
+import at.fhj.swd14.pse.repository.PersonStatusRepository;
 import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserService;
+import org.junit.Assert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersonServiceImplTest {
@@ -33,6 +37,9 @@ public class PersonServiceImplTest {
 	
 	@Mock
 	private UserService userService;
+	
+	@Mock
+	private PersonStatusRepository statusRepo;
 	
 	@Mock
 	private PersonVerifier verifier;
@@ -96,6 +103,17 @@ public class PersonServiceImplTest {
 		service.saveLoggedInPerson(PersonConverter.convert(person));
 		
 		Mockito.verify(personRepo, times(1)).update(Mockito.any(Person.class));
+	}
+	
+	@Test
+	public void testFindAllStati()
+	{
+		List<Status> stati = new LinkedList<Status>();
+		stati.add(new Status("online"));
+		Mockito.when(statusRepo.findAll()).thenReturn(stati);
+		Collection<StatusDto> result = service.findAllStati();
+		Assert.assertEquals(1, result.size());
+		StatusDtoTester.assertEquals(StatusConverter.convert(stati.get(0)), ((List<StatusDto>)result).get(0));
 	}
 	
 }

@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.person;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.ExternalContext;
@@ -15,6 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.department.DepartmentDto;
+import at.fhj.swd14.pse.department.DepartmentService;
 import at.fhj.swd14.pse.general.ContextMocker;
 import at.fhj.swd14.pse.security.DatabasePrincipal;
 import at.fhj.swd14.pse.user.UserDto;
@@ -32,6 +34,9 @@ public class PersonBeanTest {
 
     @Mock
     private PersonService personService;
+    
+    @Mock
+    private DepartmentService departmentService;
 
     @Mock
     private UserService userService;
@@ -98,10 +103,24 @@ public class PersonBeanTest {
 		Mockito.when(principal.getUserId()).thenReturn(person.getUser().getId());
     	when(personService.findByUser(person.getUser())).thenReturn(person);
     	when(userService.find(person.getUser().getId())).thenReturn(person.getUser());
+    	
+    	List<StatusDto> stati = new LinkedList<StatusDto>();
+    	stati.add(new StatusDto("online"));
+    	List<DepartmentDto> deps = new LinkedList<DepartmentDto>();
+    	DepartmentDto dep = new DepartmentDto(1L);
+    	dep.setName("test");
+    	deps.add(dep);
+    	when(personService.findAllStati()).thenReturn(stati);
+    	when(departmentService.findAll()).thenReturn(deps);
+    	
     	String path = unitUnderTest.showLoggedInPerson();
     	Assert.assertEquals("/protected/loggedInPersonTest", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
     	PersonDtoTester.assertEquals(person, unitUnderTest.getPerson());
+    	Assert.assertEquals(1, unitUnderTest.getStati().size());
+    	StatusDtoTester.assertEquals(stati.get(0), unitUnderTest.getStati().get(0));
+    	Assert.assertEquals(1, unitUnderTest.getDepartments().size());
+    	DepartmentDtoTester.assertEquals(deps.get(0), unitUnderTest.getDepartments().get(0));
     }
     
     @Test
@@ -121,4 +140,12 @@ public class PersonBeanTest {
 		Mockito.verify(personService,Mockito.times(1)).saveLoggedInPerson(Mockito.any(PersonDto.class));
     }
     
+    @Test
+    public void testSave()
+    {
+    	PersonDto person = getDummyPerson();
+    	unitUnderTest.setPerson(person);
+    	unitUnderTest.savePerson();
+    	Mockito.verify(personService,Mockito.times(1)).saveLoggedInPerson(Mockito.any(PersonDto.class));
+    }
 }

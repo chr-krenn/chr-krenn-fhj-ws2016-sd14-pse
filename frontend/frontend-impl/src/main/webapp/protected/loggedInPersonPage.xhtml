@@ -23,22 +23,36 @@
 			    	<p>
 			    		<label>Firstname: <p:inputText value="#{personBean.person.firstname}" /></label>
 			    	  	<label>Lastname: <p:inputText value="#{personBean.person.lastname}" /></label>
-			    	  	<p:commandButton value="Change" action="#{personBean.saveData}"></p:commandButton>
 			    	</p>
 			    </p>
-			    <c:if test="${not empty personBean.person.address}">
-			    	<p>Addresse: #{personBean.person.address}</p>
-			    </c:if>
-			    <c:if test="${not empty personBean.person.place}">
-			    	<p>Ort: #{personBean.person.place}</p>
-			    </c:if>
-			    <c:if test="${not empty personBean.person.department}">
-			    	<p>Abteilung: #{personBean.person.department.name}</p>
-			    </c:if>
-			    <c:if test="${not empty personBean.person.status.name}">
-			    	<p>Status: #{personBean.person.status.name}</p>
-			    </c:if>
-		    	<section>
+			    <p>
+			    	<label>Addresse: <p:inputText value="#{personBean.person.address}" /></label>
+			    </p>
+			    <p>
+			    	<label>Ort: <p:inputText value="#{personBean.person.place}"/></label>
+			    </p>
+			    
+		    	<p>
+		    		<label> Abteilung: 
+		    			<h:selectOneMenu value="#{personBean.person.department}">
+		    				<c:forEach var="department" items="#{personBean.departments}">
+		    					<f:selectItem itemValue="#{department}" itemLabel="#{department.name}" />
+		    				</c:forEach>
+		    				<f:converter converterId="DepartmentConverter" />
+		    			</h:selectOneMenu>
+		    			<p:commandButton value="Change" action="#{personBean.saveData}" ajax="false"></p:commandButton>
+		    		</label>
+		    	</p>
+		    	<p>
+		    		<label> Status: 
+		    		<h:selectOneMenu value="#{personBean.person.status.name}">
+		    			<c:forEach var="currentStatus" items="#{personBean.stati}">
+					   		<f:selectItem itemValue="#{currentStatus.name}" itemLabel="#{currentStatus.name}" />
+					   	</c:forEach>
+					</h:selectOneMenu>
+		    		</label>
+		    	</p>
+			    <section>
 		    		<h1>Mail Adressen</h1>
 		    		<p>#{personBean.person.user.mail}</p>
 		    		<c:forEach var="mail" items="#{personBean.person.additionalMails}">

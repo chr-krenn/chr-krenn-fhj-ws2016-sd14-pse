@@ -6,7 +6,9 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import at.fhj.swd14.pse.converter.PersonConverter;
+import at.fhj.swd14.pse.converter.StatusConverter;
 import at.fhj.swd14.pse.repository.PersonRepository;
+import at.fhj.swd14.pse.repository.PersonStatusRepository;
 import at.fhj.swd14.pse.repository.UserRepository;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
@@ -25,6 +27,8 @@ public class PersonServiceImpl implements PersonService {
 	@EJB
 	private UserRepository userRepo;
 	
+	@EJB
+	private PersonStatusRepository statusRepo;
 	
 	@EJB
 	private UserService userService;
@@ -72,6 +76,11 @@ public class PersonServiceImpl implements PersonService {
 		Person personEntity = PersonConverter.convert(person);
 		//step 7 save
 		repository.update(personEntity);
+	}
+
+	@Override
+	public Collection<StatusDto> findAllStati() {
+		return StatusConverter.convertToDtoList(statusRepo.findAll());
 	}
 
 }

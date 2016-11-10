@@ -142,6 +142,13 @@
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/NewsServiceImpl!at.fhj.swd14.pse.news.NewsService
         </lookup-name>
 	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>ejb/DepartmentService</ejb-ref-name>
+		<remote>at.fhj.swd14.pse.department.DepartmentService</remote>
+		<lookup-name>
+            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/DepartmentServiceImpl!at.fhj.swd14.pse.department.DepartmentService
+        </lookup-name>
+	</ejb-ref>
 
 
 </web-app>

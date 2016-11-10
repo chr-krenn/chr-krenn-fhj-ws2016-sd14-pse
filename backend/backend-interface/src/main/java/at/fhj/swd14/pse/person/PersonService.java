@@ -18,4 +18,5 @@ public interface PersonService {
 	PersonDto findByUser(UserDto user);
 	void saveLoggedInPerson(PersonDto person);
 	Collection<PersonDto> findAllUser();
+	Collection<StatusDto> findAllStati();
 }

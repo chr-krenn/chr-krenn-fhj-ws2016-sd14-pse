@@ -37,12 +37,16 @@ CREATE TABLE IF NOT EXISTS department (
   name varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB;
 
+INSERT INTO department VALUES(NULL,"IT");
+INSERT INTO department VALUES(NULL,"Accounting");
+
 #create table person_status
 CREATE TABLE IF NOT EXISTS person_status (
   name varchar(255) NOT NULL PRIMARY KEY
 ) ENGINE=InnoDB;
 
 INSERT INTO person_status VALUES('online');
+INSERT INTO person_status VALUES('offline');
 
 #create table person
 CREATE TABLE IF NOT EXISTS person (

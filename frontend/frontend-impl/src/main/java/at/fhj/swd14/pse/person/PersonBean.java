@@ -1,7 +1,9 @@
 package at.fhj.swd14.pse.person;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
@@ -12,6 +14,9 @@ import javax.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import at.fhj.swd14.pse.department.DepartmentConverter;
+import at.fhj.swd14.pse.department.DepartmentDto;
+import at.fhj.swd14.pse.department.DepartmentService;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 
@@ -30,10 +35,30 @@ public class PersonBean implements Serializable{
 	@EJB(name = "ejb/UserService")
     private UserService userService;
 	
+	@EJB(name = "ejb/DepartmentService")
+    private DepartmentService departmentService;
+	
 	
 	private PersonDto person;
+	private List<StatusDto> stati;
+	private List<DepartmentDto> departments;
 	
-	private boolean uncommitted=false;
+	public List<DepartmentDto> getDepartments() {
+		return departments;
+	}
+
+	public void setDepartments(List<DepartmentDto> departments) {
+		this.departments = departments;
+	}
+
+	public List<StatusDto> getStati() {
+		return stati;
+	}
+
+	public void setStati(List<StatusDto> stati) {
+		this.stati = stati;
+	}
+
 	
 	public PersonDto getPerson() {
 		return person;
@@ -73,16 +98,29 @@ public class PersonBean implements Serializable{
 		return "/protected/personTest";
 	}
 	
+	private void loadStati()
+	{
+		stati = new ArrayList<StatusDto>(personService.findAllStati());
+	}
+	
+	private void loadDepartments()
+	{
+		departments=new ArrayList<DepartmentDto>(departmentService.findAll());
+		DepartmentConverter.setDepartments(departments);
+	}
+	
 	public String showLoggedInPerson()
 	{
-		if(!uncommitted)
+		Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
+		if(person==null||person.getUser()==null||person.getUser().getId()==null||person.getUser().getId()!=loggedInUserId)
 		{
-			Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
 			UserDto loggedInUser = userService.find(loggedInUserId);
 			person = personService.findByUser(loggedInUser);
 			if(person==null)
 				person = new PersonDto();
 		}
+		loadStati();
+		loadDepartments();
 		return "/protected/loggedInPersonTest";
 	}
 	
@@ -113,7 +151,6 @@ public class PersonBean implements Serializable{
 	public void saveData()
 	{
 		//we actually need to do nothing here, as long as the value is synchronized to the server
-		uncommitted = true;
 	}
 	
 	public void clearImgUrl()
@@ -125,7 +162,7 @@ public class PersonBean implements Serializable{
 	public String savePerson()
 	{
 		personService.saveLoggedInPerson(person);
-		uncommitted = false;
 		return showLoggedInPerson();
 	}
+
 }

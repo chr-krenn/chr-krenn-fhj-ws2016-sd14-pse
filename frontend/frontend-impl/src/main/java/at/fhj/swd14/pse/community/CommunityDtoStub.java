@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class CommunityDtoStub implements Serializable {
 
-	private int varTest;
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

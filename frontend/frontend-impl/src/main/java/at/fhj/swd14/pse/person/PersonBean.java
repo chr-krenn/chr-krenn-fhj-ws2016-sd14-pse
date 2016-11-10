@@ -33,6 +33,8 @@ public class PersonBean implements Serializable{
 	
 	private PersonDto person;
 	
+	private boolean uncommitted=false;
+	
 	public PersonDto getPerson() {
 		return person;
 	}
@@ -73,15 +75,20 @@ public class PersonBean implements Serializable{
 	
 	public String showLoggedInPerson()
 	{
-		person = personService.getLoggedInPerson();
-		if(person==null)
-			person = new PersonDto();
+		if(!uncommitted)
+		{
+			Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
+			UserDto loggedInUser = userService.find(loggedInUserId);
+			person = personService.findByUser(loggedInUser);
+			if(person==null)
+				person = new PersonDto();
+		}
 		return "/protected/loggedInPersonTest";
 	}
 	
 	public String createLoggedInPerson()
 	{
-		Long loggedInUserId = 1L;//TODO: FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getId();
+		Long loggedInUserId =  ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
 		UserDto loggedInUser = userService.find(loggedInUserId);
 		person.setUser(loggedInUser);
 		person.setStatus(new StatusDto("online"));
@@ -103,4 +110,22 @@ public class PersonBean implements Serializable{
 		return allPersons;	
 	}
 	
+	public void saveData()
+	{
+		//we actually need to do nothing here, as long as the value is synchronized to the server
+		uncommitted = true;
+	}
+	
+	public void clearImgUrl()
+	{
+		person.setImageUrl(null);
+		saveData();
+	}
+	
+	public String savePerson()
+	{
+		personService.saveLoggedInPerson(person);
+		uncommitted = false;
+		return showLoggedInPerson();
+	}
 }

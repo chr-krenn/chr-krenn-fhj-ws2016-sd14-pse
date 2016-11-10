@@ -19,8 +19,13 @@ public abstract class AbstractRepository<T> {
         return entityManager.find(entityClass, id);
     }
 
+    public void update(T t)
+    {
+    	entityManager.merge(t);
+    }
+    
     public void save(T t) {
-        entityManager.persist(t);
+    	entityManager.persist(t);
     }
 
     public List<T> findAll() {

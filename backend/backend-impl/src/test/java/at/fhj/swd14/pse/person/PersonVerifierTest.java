@@ -1,9 +1,5 @@
 package at.fhj.swd14.pse.person;
 
-import java.security.Principal;
-
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +10,6 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.converter.PersonConverter;
-import at.fhj.swd14.pse.general.ContextMocker;
 import at.fhj.swd14.pse.repository.DepartmentRepository;
 import at.fhj.swd14.pse.repository.HobbyRepository;
 import at.fhj.swd14.pse.repository.KnowledgeRepository;
@@ -60,12 +55,6 @@ public class PersonVerifierTest {
 		dummyPerson = PersonTestTools.getDummyPerson();
 		dummyPersonDto = PersonConverter.convert(dummyPerson);
 		Mockito.when(userRepo.find(1L)).thenReturn(dummyPerson.getUser());
-		FacesContext context = ContextMocker.mockFacesContext();
-		ExternalContext extContext = Mockito.mock(ExternalContext.class);
-		Mockito.when(context.getExternalContext()).thenReturn(extContext);
-		Principal principal = Mockito.mock(Principal.class);
-		Mockito.when(extContext.getUserPrincipal()).thenReturn(principal);
-		//TODO: Mockito.when(principal.getId()).thenReturn(1L);
 		Mockito.when(statusRepo.findByName("online")).thenReturn(dummyPerson.getStatus());
 		Mockito.when(departmentRepo.find(1L)).thenReturn(dummyPerson.getDepartment());
 	}
@@ -91,14 +80,6 @@ public class PersonVerifierTest {
 		verifier.verifyUser(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
-	public void testUserNotLoggedIn()
-	{
-		dummyPersonDto.getUser().setId(2L);
-		dummyPerson.getUser().setId(2L);
-		Mockito.when(userRepo.find(2L)).thenReturn(dummyPerson.getUser());
-		verifier.verifyUser(dummyPersonDto);
-	}
 	
 	@Test
 	public void testUser()

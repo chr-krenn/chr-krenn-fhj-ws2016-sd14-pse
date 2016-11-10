@@ -1,6 +1,5 @@
 package at.fhj.swd14.pse.person;
 
-import java.security.Principal;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -17,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.department.DepartmentDto;
 import at.fhj.swd14.pse.general.ContextMocker;
+import at.fhj.swd14.pse.security.DatabasePrincipal;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 import org.junit.Assert;
@@ -90,7 +90,14 @@ public class PersonBeanTest {
     public void testLoggedInPerson()
     {
     	PersonDto person = getDummyPerson();
-    	when(personService.getLoggedInPerson()).thenReturn(person);
+    	FacesContext context = ContextMocker.mockFacesContext();
+		ExternalContext extContext = Mockito.mock(ExternalContext.class);
+		Mockito.when(context.getExternalContext()).thenReturn(extContext);
+		DatabasePrincipal principal = Mockito.mock(DatabasePrincipal.class);
+		Mockito.when(extContext.getUserPrincipal()).thenReturn(principal);
+		Mockito.when(principal.getUserId()).thenReturn(person.getUser().getId());
+    	when(personService.findByUser(person.getUser())).thenReturn(person);
+    	when(userService.find(person.getUser().getId())).thenReturn(person.getUser());
     	String path = unitUnderTest.showLoggedInPerson();
     	Assert.assertEquals("/protected/loggedInPersonTest", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
@@ -105,10 +112,11 @@ public class PersonBeanTest {
     	FacesContext context = ContextMocker.mockFacesContext();
 		ExternalContext extContext = Mockito.mock(ExternalContext.class);
 		Mockito.when(context.getExternalContext()).thenReturn(extContext);
-		Principal principal = Mockito.mock(Principal.class);
+		DatabasePrincipal principal = Mockito.mock(DatabasePrincipal.class);
 		Mockito.when(extContext.getUserPrincipal()).thenReturn(principal);
-		//TODO: Mockito.when(principal.getId()).thenReturn(1L);
+		Mockito.when(principal.getUserId()).thenReturn(1L);
 		Mockito.when(userService.find(1L)).thenReturn(person.getUser());
+    	when(userService.find(person.getUser().getId())).thenReturn(person.getUser());
 		unitUnderTest.createLoggedInPerson();
 		Mockito.verify(personService,Mockito.times(1)).saveLoggedInPerson(Mockito.any(PersonDto.class));
     }

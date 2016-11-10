@@ -47,13 +47,6 @@ public class PersonServiceImpl implements PersonService {
 		return PersonConverter.convertToDtoList(repository.findAll());
 	}
 
-	@Override
-	public PersonDto getLoggedInPerson() {
-		Long loggedInUser = 1L; //TODO: FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getId();
-		UserDto user = userService.find(loggedInUser);
-		return findByUser(user);
-	}
-
 	
 	
 	@Override
@@ -78,7 +71,7 @@ public class PersonServiceImpl implements PersonService {
 		//step 6 convert the person
 		Person personEntity = PersonConverter.convert(person);
 		//step 7 save
-		repository.save(personEntity);
+		repository.update(personEntity);
 	}
 
 }

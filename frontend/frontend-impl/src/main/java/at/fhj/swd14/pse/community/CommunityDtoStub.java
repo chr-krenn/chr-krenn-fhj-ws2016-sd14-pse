@@ -2,8 +2,12 @@ package at.fhj.swd14.pse.community;
 
 import java.io.Serializable;
 
+
+
 public class CommunityDtoStub implements Serializable {
-    @Override
+
+	
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

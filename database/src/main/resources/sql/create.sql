@@ -37,12 +37,16 @@ CREATE TABLE IF NOT EXISTS department (
   name varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB;
 
+INSERT INTO `pse`.`department` (`id`, `name`) VALUES ('1', 'Sales'), ('2', 'HR');
+
+
 #create table person_status
 CREATE TABLE IF NOT EXISTS person_status (
   name varchar(255) NOT NULL PRIMARY KEY
 ) ENGINE=InnoDB;
 
 INSERT INTO person_status VALUES('online');
+INSERT INTO `pse`.`person_status` (`name`) VALUES ('Abwesend'), ('');
 
 #create table person
 CREATE TABLE IF NOT EXISTS person (
@@ -56,6 +60,9 @@ CREATE TABLE IF NOT EXISTS person (
   status_name varchar(255) NOT NULL REFERENCES person_status(name),
   user_id bigint(20) NOT NULL REFERENCES user(id)
 ) ENGINE=InnoDB;
+
+INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 1', 'Typ', 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRxOXdV15ruEqhPAJJ5cMxWFBIqLexBFQIMLYWQ8aTjxFFjxnGBKuUOwCU', 'Test', 'Graz', '1', 'Online', '1');
+INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 2', 'Max', 'https://i.ytimg.com/vi/S4UG_l-CHF4/maxresdefault.jpg', 'Mustermann', 'Wien', '2', 'Abwesend', '2');
 
 #create table hobby
 CREATE TABLE IF NOT EXISTS hobby (

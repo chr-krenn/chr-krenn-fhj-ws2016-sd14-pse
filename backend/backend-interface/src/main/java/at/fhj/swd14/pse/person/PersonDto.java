@@ -40,7 +40,7 @@ public class PersonDto implements Serializable {
 
     private UserDto user;
 
-    private long id;
+    private Long id;
 
     public StatusDto getStatus() {
         return status;
@@ -66,11 +66,11 @@ public class PersonDto implements Serializable {
         this.department = department;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -151,6 +151,9 @@ public class PersonDto implements Serializable {
     public PersonDto(long id) {
         setId(id);
     }
+
+	public PersonDto() {
+	}
 
 
 }

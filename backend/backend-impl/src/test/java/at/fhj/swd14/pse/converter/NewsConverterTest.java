@@ -114,7 +114,7 @@ public class NewsConverterTest {
         assertEquals(dto.getMessage(), entity.getMessage());
         assertEquals(dto.getTitle(), entity.getTitle());
         assertNotNull(entity.getAuthor());
-        assertEquals(dto.getAuthor().getId(), (long) entity.getAuthor().getId());
+        assertEquals(dto.getAuthor().getId(), entity.getAuthor().getId());
         assertEquals(dto.getId(), entity.getId());
         assertNull(entity.getCreated());
         assertNull(entity.getModified());
@@ -124,7 +124,7 @@ public class NewsConverterTest {
         assertEquals(entity.getMessage(), dto.getMessage());
         assertEquals(entity.getTitle(), dto.getTitle());
         assertNotNull(dto.getAuthor());
-        assertEquals((long) entity.getAuthor().getId(), dto.getAuthor().getId());
+        assertEquals(entity.getAuthor().getId(), dto.getAuthor().getId());
         assertEquals(entity.getId(), dto.getId());
         assertEquals(entity.getCreated(), dto.getCreated());
         assertEquals(entity.getModified(), dto.getModified());

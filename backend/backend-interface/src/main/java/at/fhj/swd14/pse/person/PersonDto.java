@@ -152,5 +152,8 @@ public class PersonDto implements Serializable {
         setId(id);
     }
 
+	public PersonDto() {
+	}
+
 
 }

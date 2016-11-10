@@ -6,7 +6,7 @@
     xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <section>
-    	<c:if test="${not empty personBean.person}">
+    	<c:if test="${not empty personBean.person.firstname}">
 		    <p>
 		    	<c:if test="${not empty personBean.person.imageUrl}">
 		    		<img src="#{personBean.person.imageUrl}" /> 
@@ -51,12 +51,12 @@
 	    		</c:forEach>
 	    	</section>
 	    </c:if>
-	    <c:if test="${empty personBean.person}">
+	    <c:if test="${empty personBean.person.firstname}">
 	    	<h1>You have not told us your name yet!</h1>
 	    	<h:form>
 	    		<p><label>Firstname: <p:inputText value="#{personBean.person.firstname}"></p:inputText></label></p>
 	    		<p><label>Lastname: <p:inputText value="#{personBean.person.lastname}"></p:inputText></label></p>
-	            <p:commandButton value="Speichern" action="#{personBean.createLoggedInPerson}"/>
+	            <p:commandButton value="Save" action="#{personBean.createLoggedInPerson}" ajax='false'/>
 	        </h:form>
 	    </c:if>
     </section>

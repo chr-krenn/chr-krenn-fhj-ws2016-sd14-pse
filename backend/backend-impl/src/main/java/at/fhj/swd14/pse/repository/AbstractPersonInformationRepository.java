@@ -20,6 +20,8 @@ public abstract class AbstractPersonInformationRepository<T extends AbstractPers
 	{
 		List<T> infos =
 				entityManager.createNamedQuery(entityClass.getSimpleName()+".findByValue",this.entityClass)
+				.setParameter("personid", personid)
+				.setParameter("value", value)
 				.getResultList();
 		if(infos.size()==0)
 			return null;

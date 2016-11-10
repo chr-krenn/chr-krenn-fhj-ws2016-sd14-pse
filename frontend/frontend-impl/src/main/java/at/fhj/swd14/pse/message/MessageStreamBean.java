@@ -4,6 +4,7 @@ package at.fhj.swd14.pse.message;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -115,6 +116,29 @@ public class MessageStreamBean implements Serializable {
 		this.messages = messages;
 	}
 
+	/**
+	 * The Id of the currently logged-in User
+	 */
+	private long currentUserId;
+
+	/**
+	 * Gets the Id of the currently logged-in User
+	 *
+	 * @return
+	 */
+	public long getCurrentUserId() {
+		return this.currentUserId;
+	}
+
+	/**
+	 * Sets the Id of the currently logged-in User
+	 *
+	 * @param id
+	 *            the Id of the currently logged-in User
+	 */
+	public void setCurrentUserId(long id) {
+		this.currentUserId = id;
+	}
 	// ---------- Constructor  ------------
 	
 	/*
@@ -123,7 +147,7 @@ public class MessageStreamBean implements Serializable {
 	public MessageStreamBean() {
     	LOGGER.debug("Create: " + MessageStreamBean.class.getSimpleName());
     	this.message = new MessageDto();
-    	}
+	}
 	
 	/**
 	 * Initialises the bean for the view
@@ -132,7 +156,11 @@ public class MessageStreamBean implements Serializable {
 	public void init() {
 		LOGGER.debug("Initialising the MessageStreamBean");
 		this.initAvailableCommunities();
-		this.messages = getAllMessages();
+		
+//		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+//	    int userId = Integer.parseInt(params.get("userId"));
+//		setCurrentUserId(userId);
+	    this.setCurrentUserId(1L);
 	}
 
 	// ---------- Public Methods ------------
@@ -144,37 +172,7 @@ public class MessageStreamBean implements Serializable {
 	 */
 	public Map<Long, MessageDto> getAllMessages() {
 		LOGGER.debug("Getting all Messages");
-		// TODO: Implement method in MessageService with correct return type
-		// return this.messageService.findUserRelated(#);
-		Map<Long, MessageDto> allMessages = new HashMap<Long, MessageDto>();
-
-		for (int i = 1; i < 100; i++) {
-			UserDto author = new UserDto();
-			author.setId((long) i);
-			author.setMail("user_" + author.getId() + "@userdto.com");
-			author.setPassword("pw_" + author.getId());
-			author.setSalt("salt_" + author.getId());
-
-			MessageDto message = new MessageDto();
-			message.setId((long) i);
-			message.setAuthor(author);
-			message.setCommunityId(1L);
-			message.setContent("Content_" + message.getId());
-			if (currentCommunity != null) {
-				LOGGER.debug("GetAllMessages:: Community Not Null");
-				message.setTitle(currentCommunity.getId() + "Title_" + message.getId());
-			} else {
-				message.setTitle("Title_" + message.getId());
-			}
-
-			CommentDto comment = new CommentDto();
-			comment.setAuthor(author);
-			comment.setId((long) i);
-			comment.setText("Comment_" + comment.getId());
-			message.addChild(comment);
-			allMessages.put(message.getId(), message);
-		}
-		return allMessages;
+		return mapMessages(this.messageService.findUserRelated(this.getCurrentUserId()));
 	}
 
 	/**
@@ -202,16 +200,15 @@ public class MessageStreamBean implements Serializable {
 	 *            The Messages content
 	 */
 	public void createMessage() {
-    		LOGGER.info("Creating message");
+		LOGGER.debug("Creating message");
     	
 		if(currentCommunity != null) {
 			this.message.setCommunityId(currentCommunity.getId());
 		}
 		// TODO: add author and community/recipient - check which of those applies
-
-		//this.message.setCreationDate(new Date()); not needed because it will be set as soon it gets saved    
+ 
 		final long generatedId = messageService.save(new MessageDto());
-		LOGGER.info("Created new message with ID {}", generatedId);
+		LOGGER.debug("Created new message with ID {}", generatedId);
 
 		this.message = messageService.find(generatedId);
 	}
@@ -264,10 +261,11 @@ public class MessageStreamBean implements Serializable {
 			this.messages = this.getGlobalMessages();
 		} else if (this.currentCommunity.getId() == 0) { // All Messages
 			this.messages = this.getAllMessages();
-		} else { // Specific Community Message
+		} else if (this.currentCommunity.getId() > 0){ // Specific Community Message
 			this.messages = this.getCommunityMessages(this.currentCommunity.getId());
+		} else {
+			this.messages = this.getAllMessages(); // Default -> here should be some ErrorHandling
 		}
-		messages = getAllMessages();
 	}
 
 	// ---------- Private Methods ------------
@@ -286,12 +284,32 @@ public class MessageStreamBean implements Serializable {
 		// ID -1 => Name "Globale"
 		// this.availableCommunities = communityService.findAllUserRelated
 		this.availableCommunities = new ArrayList<CommunityDtoStub>();
-		for (int i = 0; i < 4; i++) {
+		
+		CommunityDtoStub all = new CommunityDtoStub();
+		all.setId(-3L);
+		all.setName("ALLE");
+		this.availableCommunities.add(all);
+		
+		CommunityDtoStub privateC = new CommunityDtoStub();
+		privateC.setId(-2L);
+		privateC.setName("Private");
+		this.availableCommunities.add(privateC);
+		
+		CommunityDtoStub global = new CommunityDtoStub();
+		global.setId(-1L);
+		global.setName("Globale");
+		this.availableCommunities.add(global);
+		
+		for (int i = 1; i < 4; i++) {
 			CommunityDtoStub c = new CommunityDtoStub();
 			c.setId((long) i);
 			c.setName("Community_" + c.getId());
 			this.availableCommunities.add(c);
 		}
+		
+		this.setCurrentCommunity(availableCommunities.get(0));
+		
+		onCommunityChange();
 	}
 
 	/**
@@ -302,10 +320,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return A map of Messages
 	 */
 	private Map<Long, MessageDto> getCommunityMessages(Long id) {
-		// TODO: Implement method in MessageService with correct return type
-		// and remove "return this.getAllMessages();"!
-		// return return this.messageService.findByCommunityId(id);
-		return this.getAllMessages();
+		return mapMessages(this.messageService.findByCommunityId(id));
 	}
 
 	/**
@@ -314,11 +329,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return A map of Messages
 	 */
 	private Map<Long, MessageDto> getGlobalMessages() {
-		// TODO: Implement method in MessageService with correct return type
-		// and remove "return
-		// this.getAllMessages();"!
-		// return this.messageService.findGlobalMessages();
-		return this.getAllMessages();
+		return mapMessages(this.messageService.findGlobalMesssages());
 	}
 
 	/**
@@ -327,10 +338,24 @@ public class MessageStreamBean implements Serializable {
 	 * @return A map of Messages
 	 */
 	private Map<Long, MessageDto> getPrivateMessages() {
-		// TODO: Implement method in MessageService with correct return type
-		// and remove "return
-		// this.getAllMessages();"!
-		// return this.messageService.findUsersPrivateMessages();
-		return this.getAllMessages();
+		return mapMessages(this.messageService.findUsersPrivateMessages(this.getCurrentUserId()));
+	}
+	
+	/**
+	 * Maps a List of Messages
+	 * Key: Id of Message
+	 * Value: Message
+	 * 
+	 * @param messageList
+	 * 				List of messages which should be mapped
+	 * 
+	 * @return A map of Messages
+	 */
+	private Map<Long, MessageDto> mapMessages(List<MessageDto> messageList){
+		Map<Long, MessageDto> mappedMessages = new HashMap<Long, MessageDto>();
+		for (MessageDto message : messageList) {
+			mappedMessages.put(message.getId(), message);
+		}
+		return mappedMessages;
 	}
 }

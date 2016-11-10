@@ -2,13 +2,10 @@ package at.fhj.swd14.pse.person;
 
 import static org.mockito.Mockito.times;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.naming.NamingException;
 
 import org.junit.Before;
@@ -21,7 +18,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.converter.PersonConverter;
 import at.fhj.swd14.pse.converter.UserConverter;
-import at.fhj.swd14.pse.general.ContextMocker;
 import at.fhj.swd14.pse.repository.PersonRepository;
 import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserService;
@@ -76,20 +72,6 @@ public class PersonServiceImplTest {
 		PersonDtoTester.assertEquals(PersonConverter.convert(person), foundPerson);
 	}
 	
-	@Test
-	public void testGetLoggedInPerson()
-	{
-		FacesContext context = ContextMocker.mockFacesContext();
-		ExternalContext extContext = Mockito.mock(ExternalContext.class);
-		Mockito.when(context.getExternalContext()).thenReturn(extContext);
-		Principal principal = Mockito.mock(Principal.class);
-		Mockito.when(extContext.getUserPrincipal()).thenReturn(principal);
-		//TODO: Mockito.when(principal.getId()).thenReturn(1L);
-		Mockito.when(userService.find(1L)).thenReturn(UserConverter.convert(user));
-		Mockito.when(personRepo.findByUserId(1L)).thenReturn(person);
-		PersonDto foundPerson = service.getLoggedInPerson();
-		PersonDtoTester.assertEquals(PersonConverter.convert(person), foundPerson);
-	}
 	
 	@Test
 	public void testFindAllUser()
@@ -113,7 +95,7 @@ public class PersonServiceImplTest {
 	{
 		service.saveLoggedInPerson(PersonConverter.convert(person));
 		
-		Mockito.verify(personRepo, times(1)).save(Mockito.any(Person.class));
+		Mockito.verify(personRepo, times(1)).update(Mockito.any(Person.class));
 	}
 	
 }

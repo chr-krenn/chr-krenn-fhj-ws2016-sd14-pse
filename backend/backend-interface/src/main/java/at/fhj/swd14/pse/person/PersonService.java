@@ -16,7 +16,6 @@ import at.fhj.swd14.pse.user.UserDto;
 public interface PersonService {
 	PersonDto find(long id);
 	PersonDto findByUser(UserDto user);
-	PersonDto getLoggedInPerson();
 	void saveLoggedInPerson(PersonDto person);
 	Collection<PersonDto> findAllUser();
 }

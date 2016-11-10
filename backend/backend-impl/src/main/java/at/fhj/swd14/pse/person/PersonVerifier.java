@@ -51,10 +51,6 @@ public class PersonVerifier {
 		User user = userRepo.find(person.getUser().getId());
 		if(user==null)
 			throw new IllegalArgumentException("Given user not found in the database");
-		//we may only change data for the logged in user
-		Long loggedInUser = 1L; //TODO: FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getId();
-		if(user.getId()!=loggedInUser)
-			throw new IllegalArgumentException("Cannot change person for another user");
 	}
 	
 	public void verifyStatus(PersonDto person)

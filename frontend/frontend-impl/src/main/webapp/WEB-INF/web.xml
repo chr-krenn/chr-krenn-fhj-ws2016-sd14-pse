@@ -91,19 +91,10 @@
         <extension>xhtml</extension>
         <mime-type>application/xml</mime-type>
     </mime-mapping>
-<<<<<<< HEAD
-	
-=======
-    
+
     <!-- EJB REFS -->
 
-    <ejb-ref>
-        <ejb-ref-name>ejb/UserService</ejb-ref-name>
-        <remote>at.fhj.swd14.pse.user.UserService</remote>
-        <lookup-name>
-            java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/UserServiceImpl!at.fhj.swd14.pse.user.UserService
-        </lookup-name>
-    </ejb-ref>
+    
     <ejb-ref>
         <ejb-ref-name>ejb/PersonService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.person.PersonService</remote>
@@ -111,7 +102,7 @@
             java:global/backend-assembly-1.0-SNAPSHOT/backend-impl-1.0-SNAPSHOT/PersonServiceImpl!at.fhj.swd14.pse.person.PersonService
         </lookup-name>
     </ejb-ref>
->>>>>>> branch 'master' of https://github.com/chr-krenn/chr-krenn-fhj-ws2016-sd14-pse
+
     <ejb-ref>
         <ejb-ref-name>ejb/MessageService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.message.MessageService</remote>

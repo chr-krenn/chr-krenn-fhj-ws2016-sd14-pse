@@ -13,14 +13,13 @@ CREATE TABLE IF NOT EXISTS user
   
 INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`) VALUES (NULL, 'student', 'jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=', 'null', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-<<<<<<< HEAD
   
 #create table community
 CREATE TABLE IF NOT EXISTS department (
   id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB;
-=======
+
 CREATE TABLE user_roles( 
 	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 	username VARCHAR(255) NOT NULL REFERENCES user(username), 
@@ -29,8 +28,7 @@ CREATE TABLE user_roles(
 ENGINE = INNODB;
 
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'user', 'Roles');  
-INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'admin', 'Roles');  
->>>>>>> branch 'master' of https://github.com/chr-krenn/chr-krenn-fhj-ws2016-sd14-pse
+INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'admin', 'Roles'); 
   
 #create table department
 CREATE TABLE IF NOT EXISTS department (

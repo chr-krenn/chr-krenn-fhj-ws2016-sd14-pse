@@ -41,20 +41,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-        <dependency>
-        	<groupId>at.fhj.swd14.pse</groupId>
-            <artifactId>testing-commons</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-
-
-
-
-
-
-
 
     <build>
         <plugins>

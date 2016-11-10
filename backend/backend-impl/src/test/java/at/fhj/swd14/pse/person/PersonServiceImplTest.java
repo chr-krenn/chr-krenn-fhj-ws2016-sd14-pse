@@ -1,5 +1,7 @@
 package at.fhj.swd14.pse.person;
 
+import static org.mockito.Mockito.times;
+
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,6 +37,9 @@ public class PersonServiceImplTest {
 	
 	@Mock
 	private UserService userService;
+	
+	@Mock
+	private PersonVerifier verifier;
 	
 	private User user;
 	private Person person;
@@ -95,6 +100,20 @@ public class PersonServiceImplTest {
 		{
 			PersonDtoTester.assertEquals(person, person);
 		}
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testSaveNull()
+	{
+		service.saveLoggedInPerson(null);
+	}
+	
+	@Test
+	public void testSave()
+	{
+		service.saveLoggedInPerson(PersonConverter.convert(person));
+		
+		Mockito.verify(personRepo, times(1)).save(Mockito.any(Person.class));
 	}
 	
 }

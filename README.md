@@ -102,6 +102,11 @@ Take the following two artifacts and deploy them to Wildfly by copying them to `
 - `backend/backend-assembly/target/backend-assembly-<version>.ear`
 - `frontend/frontend-assembly/target/frontend-assembly-<version>.ear`
 
+### Get logged in user
+
+((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId()
+
+
 ### URL's
 
 - localhost:8080/swd14-fe/ --> Welcome page (/index.xhtml)

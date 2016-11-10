@@ -14,10 +14,6 @@
 	        <p:outputLabel for="j_password" value="Password" />
 	        <p:password id="j_password" maxlength="40" size="20" required="true" />
 	        <p:commandButton id="submit" value="Login" ajax="false"/>
-	        <h:commandLink action="#{personBean.showPersonByUserId}"
-	            value="PersonTest">
-	            <f:param name="userId" value="1" />
-	        </h:commandLink>
 	        <p:link outcome="personShowAllTest" value="ShowAllPersons"> </p:link>
    		</h:panelGrid>
 		</h:form> 

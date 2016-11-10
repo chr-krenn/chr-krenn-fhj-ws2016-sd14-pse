@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.person;
 
 import org.junit.Assert;
 
+import at.fhj.swd14.pse.person.PersonDto;
 import at.fhj.swd14.pse.user.UserDtoTester;
 
 public class PersonDtoTester {

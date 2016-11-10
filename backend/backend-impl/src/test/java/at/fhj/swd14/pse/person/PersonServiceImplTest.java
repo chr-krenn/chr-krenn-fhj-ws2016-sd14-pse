@@ -24,6 +24,34 @@ public class PersonServiceImplTest {
 	private Person person;
 	private List<Person> persons;
 	
+	public Person getDummyPerson()
+	{
+		User myuser = new User(1L);
+        myuser.setMail("test@test.de");
+        myuser.setPassword("testpassword");
+        
+        Department department = new Department(1L);
+        department.setName("testdepartment");
+        
+        Person myperson = new Person(1L,myuser);
+        myperson.setAdditionalMails(new LinkedList<Mailaddress>());
+        myperson.getAdditionalMails().add(new Mailaddress("test2@test.de"));
+        myperson.setAddress("testaddress");
+        myperson.setDepartment(department);
+        myperson.setFirstname("firstname");
+        myperson.setHobbies(new LinkedList<Hobby>());
+        myperson.getHobbies().add(new Hobby("testhobby"));
+        myperson.setImageUrl("http://testimg.org");
+        myperson.setKnowledges(new LinkedList<Knowledge>());
+        myperson.getKnowledges().add(new Knowledge("testknowledge"));
+        myperson.setLastname("lastname");
+        myperson.setNumbers(new LinkedList<Phonenumber>());
+        myperson.getNumbers().add(new Phonenumber("0664664664"));
+        myperson.setPlace("testplace");
+        myperson.setStatus(new Status("Online"));
+        return myperson;
+	}
+	
 	@Before
 	public void setup() throws NamingException
 	{
@@ -31,29 +59,8 @@ public class PersonServiceImplTest {
         service = new PersonServiceImpl();
         service.repository = Mockito.mock(PersonRepository.class);
         
-        user = new User(1L);
-        user.setMail("test@test.de");
-        user.setPassword("testpassword");
-        
-        Department department = new Department(1L);
-        department.setName("testdepartment");
-        
-        person = new Person(1L,user);
-        person.setAdditionalMails(new LinkedList<Mailaddress>());
-        person.getAdditionalMails().add(new Mailaddress("test2@test.de"));
-        person.setAddress("testaddress");
-        person.setDepartment(department);
-        person.setFirstname("firstname");
-        person.setHobbies(new LinkedList<Hobby>());
-        person.getHobbies().add(new Hobby("testhobby"));
-        person.setImageUrl("http://testimg.org");
-        person.setKnowledges(new LinkedList<Knowledge>());
-        person.getKnowledges().add(new Knowledge("testknowledge"));
-        person.setLastname("lastname");
-        person.setNumbers(new LinkedList<Phonenumber>());
-        person.getNumbers().add(new Phonenumber("0664664664"));
-        person.setPlace("testplace");
-        person.setStatus(new Status("Online"));
+        person = getDummyPerson();
+        user = person.getUser();
         
         persons = new ArrayList<Person>();
         persons.add(person);

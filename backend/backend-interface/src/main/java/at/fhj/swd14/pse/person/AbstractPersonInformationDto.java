@@ -41,4 +41,9 @@ public class AbstractPersonInformationDto implements Serializable {
 	{
 		
 	}
+	public AbstractPersonInformationDto(Long id, String value)
+	{
+		this(id);
+		setValue(value);
+	}
 }

@@ -20,6 +20,7 @@
         <module>database</module>
         <module>backend</module>
         <module>frontend</module>
+        <module>testing-commons</module>
     </modules>
 
     <properties>
@@ -77,6 +78,11 @@
             <dependency>
                 <groupId>at.fhj.swd14.pse</groupId>
                 <artifactId>frontend-assembly</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>at.fhj.swd14.pse</groupId>
+                <artifactId>testing-commons</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

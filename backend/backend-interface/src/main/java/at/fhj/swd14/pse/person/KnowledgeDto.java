@@ -17,4 +17,8 @@ public class KnowledgeDto extends AbstractPersonInformationDto {
 		super(id);
 	}
 
+	public KnowledgeDto(Long id, String value) {
+		super(id, value);
+	}
+
 }

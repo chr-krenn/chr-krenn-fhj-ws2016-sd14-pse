@@ -3,6 +3,8 @@ package at.fhj.swd14.pse.person;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Local;
+import javax.ejb.Singleton;
 
 import at.fhj.swd14.pse.department.Department;
 import at.fhj.swd14.pse.repository.AbstractPersonInformationRepository;
@@ -21,6 +23,8 @@ import at.fhj.swd14.pse.user.User;
  * @author Patrick Kainz
  *
  */
+@Local
+@Singleton
 public class PersonVerifier {
 
 	@EJB
@@ -130,18 +134,9 @@ public class PersonVerifier {
 		(person, person.getHobbies(), hobbyRepo);
 	}
 
-	public PersonVerifier(PersonRepository repository, UserRepository userRepo, PersonStatusRepository statusRepo,
-			DepartmentRepository departmentRepo, PhonenumberRepository phonenumberRepo,
-			MailaddressRepository mailaddressRepo, HobbyRepository hobbyRepo, KnowledgeRepository knowledgeRepo) {
-		this.repository = repository;
-		this.userRepo = userRepo;
-		this.statusRepo = statusRepo;
-		this.departmentRepo = departmentRepo;
-		this.phonenumberRepo = phonenumberRepo;
-		this.mailaddressRepo = mailaddressRepo;
-		this.hobbyRepo = hobbyRepo;
-		this.knowledgeRepo = knowledgeRepo;
+	public PersonVerifier()
+	{
+		
 	}
-	
 	
 }

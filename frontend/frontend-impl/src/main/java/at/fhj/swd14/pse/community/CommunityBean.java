@@ -31,4 +31,5 @@ public class CommunityBean implements Serializable{
 	@EJB(name = "ejb/CommunityService")
 	private CommunityService communityService;
 
+	private int test;
 }

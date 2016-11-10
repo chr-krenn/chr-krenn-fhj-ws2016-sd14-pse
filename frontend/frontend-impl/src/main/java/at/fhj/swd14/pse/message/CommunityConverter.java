@@ -27,7 +27,7 @@ public class CommunityConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		CommunityConverter.LOGGER.debug("getAsObject for Value: "+value);
 		//TODO: Change to use real communityService and real CommunityDto
-		if (value == null || Long.parseLong(value) <= 0) {
+		if (value == null) {
 			return null;
 		}
 		Long id = Long.parseLong(value);

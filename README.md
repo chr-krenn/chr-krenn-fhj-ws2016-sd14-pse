@@ -32,7 +32,7 @@ The packaging module assembling the frontend EAR artifact.
 Contains all SQL files needed to setup the database.
 
 ## Requirements
-- [Wildfly](http://www.wildfly.org/) 
+- [Wildfly 10.1!](http://www.wildfly.org/) 
 - [Maven](https://maven.apache.org/)
 - Database (TBD)
 
@@ -74,20 +74,23 @@ And finally we must add the datasource for this project to the standalone.xml of
 ```
     <security-domain name="sep-policy" cache-type="default">
         <authentication>
-            <login-module code="Database" flag="required">
+            <login-module code="at.fhj.swd14.pse.security.SecureDatabaseServerLoginModule" flag="required">
                 <module-option name="dsJndiName" value="java:jboss/datasources/SEP"/>
-                <module-option name="principalsQuery" value="SELECT password FROM user WHERE username=?"/>
-                <module-option name="rolesQuery" value="SELECT role, 'Roles' FROM user_roles WHERE username=?"/>
-                <module-option name="hashAlgorithm" value="SHA-256"/>
-                <module-option name="hashEncoding" value="base64"/>
+                <module-option name="principalsQuery" value="SELECT Id, Password, Salt FROM User WHERE Username=?"/>
+                <module-option name="rolesQuery" value="select Role, RoleGroup from User_Roles where Username=?"/>
+                <module-option name="principalClass" value="at.fhj.swd14.pse.security.DatabasePrincipal"/>
                 <module-option name="unauthenticatedIdentity" value="guest"/>
             </login-module>
         </authentication>
-    </security-domain>
+    </security-domain>  
 ```
 
 Also execute create.sql to setup database (testdata).
-User credentials: student/admin
+User credentials: student1 / x
+User credentials: student2 / x
+User credentials: student3 / x
+User credentials: student4 / x
+User credentials: student5 / x
 
 In order to use the provided authentication config, mysql/mariadb has to be configured to use case-insensitve queries, for this purpose added 
 ```
@@ -103,4 +106,3 @@ Take the following two artifacts and deploy them to Wildfly by copying them to `
 
 - localhost:8080/swd14-fe/ --> Welcome page (/index.xhtml)
 - localhost:8080/swd14-fe/protected/xxx --> User protected area (automatically forwarded to login if not logged in. after successfull login system redirects you to requested ressource)
-- User credentials: student/admin

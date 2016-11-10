@@ -12,7 +12,11 @@ import java.io.Serializable;
 @SessionScoped
 public class NewsBean implements Serializable {
 
-    private NewsDto news;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4507541276214551604L;
+	private NewsDto news;
     private static final Logger LOGGER = LogManager.getLogger(NewsBean.class);
 
     @EJB(name = "ejb/NewsService")

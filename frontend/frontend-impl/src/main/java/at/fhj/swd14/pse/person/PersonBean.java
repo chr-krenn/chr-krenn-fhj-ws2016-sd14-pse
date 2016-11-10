@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -68,6 +69,14 @@ public class PersonBean implements Serializable{
 		this.person = person;
 	}
 
+	@PostConstruct
+	public void init()
+	{
+		//we will have to init with the logged in user if possible, because right after login the render method 
+		//is not called for some reason
+		showLoggedInPerson();
+	}
+	
 	public String showPersonByUserId()
 	{
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();

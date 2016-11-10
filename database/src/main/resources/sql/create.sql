@@ -18,6 +18,13 @@ INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`)
 INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`) VALUES (NULL, 'student5', '59de5ccb6b7f9865794ad60d25e1858e77abf565c0fb58dea64b041fda7aeaedaeb6cd314691902a257b00d149537c754effaa97ac17ed30a488db22444c8f2e', 'HszDgIvOkTCeBT1W', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 
+  
+#create table community
+CREATE TABLE IF NOT EXISTS department (
+  id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name varchar(255) DEFAULT NULL
+) ENGINE=InnoDB;
+
 CREATE TABLE user_roles( 
 	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 	username VARCHAR(255) NOT NULL REFERENCES user(username), 
@@ -25,11 +32,16 @@ CREATE TABLE user_roles(
 	roleGroup VARCHAR(32) NOT NULL DEFAULT 'Roles')
 ENGINE = INNODB;
 
+
+INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'user', 'Roles');  
+INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'admin', 'Roles'); 
+
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student1', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student2', 'user', 'Roles');  
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student3', 'user', 'Roles');  
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student4', 'user', 'Roles');  
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student5', 'user', 'Roles');   
+
   
 #create table department
 CREATE TABLE IF NOT EXISTS department (

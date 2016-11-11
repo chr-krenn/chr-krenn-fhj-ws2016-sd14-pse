@@ -11,6 +11,33 @@
 	</h:head>
 	
 	<h:body>
-		
+		<h:form>     
+    <p:growl id="messages" showDetail="true" />
+ 
+    <p:toolbar>
+        <f:facet name="left">
+            <p:commandButton type="button" value="New" icon="ui-icon-document" />
+ 
+            <span class="ui-separator">
+                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+            </span>
+ 
+            <p:commandButton id="saveCommunity" type="button" title="Save" icon="ui-icon-disk" />
+            <p:tooltip id="toolTipSave" for="saveCommunity" showEvent="focus" hideEvent="blur" />
+            <p:commandButton type="button" title="Delete" icon="ui-icon-trash" />
+            <p:commandButton type="button" title="Print" icon="ui-icon-print" />
+        </f:facet>
+ 
+        <f:facet name="right">
+            <p:menuButton value="Options">
+                <p:menuitem value="Save" actionListener="#{toolbarView.save}" update="messages" icon="ui-icon-disk" />
+                
+                <p:menuitem value="Delete" actionListener="#{toolbarView.delete}" ajax="false" icon="ui-icon-close" />
+                
+            </p:menuButton>
+        </f:facet>
+ 
+    </p:toolbar>
+</h:form>
 	</h:body>
 </html>

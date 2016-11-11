@@ -43,6 +43,10 @@ public class CommunityDto {
     	return createTime;
     }
     
+    public void setCreateTime(Date createDate){
+    	this.createTime = createDate;
+    }
+    
     private List<UserDto> allowedUsers = new ArrayList<UserDto>();
     
     public List<UserDto> getAllowedUsers(){

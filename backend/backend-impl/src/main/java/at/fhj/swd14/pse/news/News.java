@@ -38,8 +38,7 @@ public class News implements Serializable {
     private Instant modified;
 
     @NotNull
-    @ManyToOne
-    //TODO: Shall we enter @Column(nullable = false)
+    @ManyToOne(optional = false)
     private Person author;
 
     public Long getId() {

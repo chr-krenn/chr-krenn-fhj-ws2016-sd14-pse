@@ -21,6 +21,14 @@ public class CommunityDto {
         this.id = id;
     }
     
+    private boolean publicState = false;
+    public boolean getPublicState(){
+    	return this.publicState;
+    }    
+    public void setPublicState(boolean publicState){
+    	this.publicState = publicState;
+    }
+    
     private String name;
 	public String getName() {
 		return name;
@@ -65,7 +73,25 @@ public class CommunityDto {
     public void deleteUser(Long userId){
     	this.allowedUsers.removeIf(user -> user.getId() == userId);
     }
+    
+    private List<UserDto> pendingUsers = new ArrayList<UserDto>();
 	
+	public List<UserDto> getPendingUsers() {
+		return pendingUsers;
+	}
+
+	public void setPendingUsers(List<UserDto> pendingUsers) {
+		this.pendingUsers = pendingUsers;
+	}
+	
+	public void addPendingUser(UserDto user){    	
+    	this.pendingUsers.add(user);
+    }
+    
+    public void deletePendingUser(Long userId){
+    	this.pendingUsers.removeIf(user -> user.getId() == userId);
+    }
+
 	@Override
 	public String toString(){
 		return "CommunityDto{" +

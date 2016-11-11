@@ -20,12 +20,11 @@ CREATE TABLE IF NOT EXISTS department (
 
 CREATE TABLE IF NOT EXISTS user_roles(
 	id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-	username VARCHAR(255) NOT NULL REFERENCES user(username), 
+	username VARCHAR(32) NOT NULL REFERENCES user(username), 
 	role VARCHAR(32) NOT NULL,
-	roleGroup VARCHAR(32) NOT NULL DEFAULT 'Roles')
+	rolegroup VARCHAR(32) NOT NULL DEFAULT 'Roles')
 ENGINE = INNODB;
 
-  
 #create table department
 CREATE TABLE IF NOT EXISTS department (
   id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,

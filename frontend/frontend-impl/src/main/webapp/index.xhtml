@@ -1,15 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-
-<h:head>
-	<title>Welcome</title>
-</h:head>
-
-<h:body>
-	<h3>Welcome to PSE!</h3>
-</h:body>
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:p="http://primefaces.org/ui">
+   <h:head>
+      <title>Welcome</title>
+   </h:head>
+   <h:body>
+	<h3>Welcome to PSE</h3>
+	<h:form>
+    <p:commandButton type="submit" immediate="true"  action="#{userBean.logout}" value="Logout" icon="ui-icon-extlink" />
+    <p><h:commandLink action="#{personBean.showPersonByUserId}"
+        value="PersonTest">
+        <f:param name="userId" value="1" />
+    </h:commandLink></p>
+    <p><h:commandLink action="#{personBean.showLoggedInPerson}"
+        value="LoggedInPersonTest"></h:commandLink></p>       
+    </h:form>
+   </h:body>
 </html>

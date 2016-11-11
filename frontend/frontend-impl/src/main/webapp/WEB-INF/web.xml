@@ -44,7 +44,7 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>secure</web-resource-name>
-			<url-pattern>/protected/*</url-pattern>
+			<url-pattern>/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>user</role-name>
@@ -66,6 +66,8 @@
 			<url-pattern>*.css</url-pattern>
 			<url-pattern>*.jpg</url-pattern>
 			<url-pattern>*.gif</url-pattern>
+			<url-pattern>*.png</url-pattern>
+			<url-pattern>*.jpg</url-pattern>
 			<url-pattern>/error.xhtml</url-pattern>
 			<url-pattern>/login_failed.xhtml</url-pattern>
 			<url-pattern>/error/*.html</url-pattern>

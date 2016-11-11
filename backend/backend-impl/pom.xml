@@ -37,7 +37,7 @@
         </dependency>
         <dependency>
         	<groupId>at.fhj.swd14.pse</groupId>
-            <artifactId>testing-commons</artifactId>
+            <artifactId>backend-testing-commons</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -52,7 +52,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ejb-plugin</artifactId>
                 <configuration>
-                    <ejbVersion>3.1</ejbVersion>
+                    <ejbVersion>${ejb.version}</ejbVersion>
                 </configuration>
             </plugin>
         </plugins>

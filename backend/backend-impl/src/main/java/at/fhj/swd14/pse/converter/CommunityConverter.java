@@ -12,6 +12,9 @@ public class CommunityConverter {
 			return null;
 		}
 		CommunityDto dto = new CommunityDto(community.getId());
+		dto.setAllowedUsers(community.getAllowedUsers());
+		dto.setCreateTime(community.getCreateTime());		
+		dto.setName(community.getName());
 		dto.setAuthor(UserConverter.convert(community.getAuthor()));
 		
 		return dto;
@@ -22,6 +25,11 @@ public class CommunityConverter {
 			return null;
 		}
 		Community comment = new Community();
+		comment.setId(dto.getId());
+		comment.setAllowedUsers(dto.getAllowedUsers());
+		comment.setCreateTime(dto.getCreateTime());
+		comment.setName(dto.getName());
+		comment.setAuthor(UserConverter.convert(dto.getAuthor()));
 		
 		return comment;
 	}

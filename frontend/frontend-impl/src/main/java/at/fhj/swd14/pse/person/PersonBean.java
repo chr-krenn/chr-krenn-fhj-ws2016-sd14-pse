@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
@@ -186,7 +187,8 @@ public class PersonBean implements Serializable{
 	}
 	
 	public Collection<PersonDto> showAllPersons(){
-		List<PersonDto> allPersons = new ArrayList<PersonDto>(personService.findAllUser()); 
+		Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
+		List<PersonDto> allPersons = new ArrayList<PersonDto>(personService.findAllUser(loggedInUserId));
 		Collections.sort(allPersons,new PersonComparator());
 		if(allPersons.size()==0){
 			LOGGER.debug("Found no user in db");
@@ -284,7 +286,12 @@ public class PersonBean implements Serializable{
 		person.getPhonenumbers().add(number);
 		newNumber=null;
 	}
-	
+
+	public void changeFriendState(long personID){
+		Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
+		personService.changeFriendState(loggedInUserId, personID);
+	}
+
 	public void removeMail()
 	{
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();

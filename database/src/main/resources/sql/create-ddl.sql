@@ -1,3 +1,6 @@
+# select correct database
+USE pse;
+
 #create user table
 
 CREATE TABLE IF NOT EXISTS user
@@ -128,7 +131,7 @@ CREATE TABLE IF NOT EXISTS news
   id         BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
   title      VARCHAR(256)  NOT NULL,
   message    VARCHAR(1024) NOT NULL,
-  author     BIGINT        NOT NULL REFERENCES person (id),
+  author_id     BIGINT        NOT NULL REFERENCES person (id),
   `created`  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )

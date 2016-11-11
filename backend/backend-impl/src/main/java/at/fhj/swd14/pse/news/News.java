@@ -37,10 +37,9 @@ public class News implements Serializable {
     @Column(insertable = false, updatable = false)
     private Instant modified;
 
-    //TODO @rraumberger uncomment when person gets introduced
-    //@NotNull
-    //@ManyToOne
-    @Column(nullable = true)
+    @NotNull
+    @ManyToOne
+    //TODO: Shall we enter @Column(nullable = false)
     private Person author;
 
     public Long getId() {

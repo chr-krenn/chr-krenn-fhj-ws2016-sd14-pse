@@ -3,6 +3,7 @@ package at.fhj.swd14.pse.message;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import at.fhj.swd14.pse.comment.CommentDto;
@@ -14,7 +15,7 @@ public class MessageDto implements Serializable {
 
 	private Long id;
 	
-	private List<CommentDto> childs;
+	private List<CommentDto> childs = new LinkedList<>();
 	private UserDto author;
 	private UserDto recipient;
 	
@@ -26,10 +27,10 @@ public class MessageDto implements Serializable {
     private Instant modified;
 	
 	public MessageDto() {
-		childs = new ArrayList<>();
 	}
 
 	public MessageDto(Long id) {
+		this();
 		setId(id);
 	}
 
@@ -106,7 +107,7 @@ public class MessageDto implements Serializable {
 	
 	/**
 	 * do not use this setter on frontend site. It will be automatically set as
-	 * soon as it gets saved to the DB
+	 * soon as it gets saved to the DB. It's only need to convert an entity to a DTO
 	 * @param created
 	 */
 	public void setCreated(Instant created){
@@ -118,7 +119,7 @@ public class MessageDto implements Serializable {
     }
     /**
      * do not use this setter on frontend site. It will be automatically set as
-	 * soon as it gets updated in the DB
+	 * soon as it gets updated in the DB. It's only need to convert an entity to a DTO
      * @param modified
      */
     public void setModified(Instant modified) {

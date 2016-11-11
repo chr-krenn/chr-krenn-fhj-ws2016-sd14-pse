@@ -4,6 +4,7 @@ package at.fhj.swd14.pse.message;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -48,7 +49,7 @@ public class Message implements Serializable {
     private Long id;
     
     @OneToMany(mappedBy="parentMessage")
-    private List<Comment> childs;
+    private List<Comment> childs = new LinkedList<>();
     
     @ManyToOne
     private User author;
@@ -76,7 +77,6 @@ public class Message implements Serializable {
     private Instant modified;
     
     public Message(){
-    	
     }
     public Message(Long id){
     	setId(id);

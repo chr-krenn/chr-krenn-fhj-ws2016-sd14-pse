@@ -114,3 +114,6 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+Thumbs.db
+thumbs.db

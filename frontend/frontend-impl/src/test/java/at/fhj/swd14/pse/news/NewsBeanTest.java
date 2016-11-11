@@ -3,6 +3,7 @@ package at.fhj.swd14.pse.news;
 import at.fhj.swd14.pse.person.PersonBeanTest;
 import at.fhj.swd14.pse.person.PersonDto;
 import at.fhj.swd14.pse.person.PersonService;
+import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,6 +50,8 @@ public class NewsBeanTest {
     public void testAddNews()
     {
         unitUnderTest.setNews(getDummyNews());
+        UserDto user = unitUnderTest.getNews().getAuthor().getUser();
+        unitUnderTest.setCurrentUser(user);
         unitUnderTest.addNews();
         Mockito.verify(newsService,Mockito.times(1)).save(Mockito.any(NewsDto.class));
     }

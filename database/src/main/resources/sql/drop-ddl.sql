@@ -1,3 +1,6 @@
+# select correct database
+USE pse;
+
 DROP TABLE IF EXISTS hobby;
 DROP TABLE IF EXISTS knowledge;
 DROP TABLE IF EXISTS mailaddress;

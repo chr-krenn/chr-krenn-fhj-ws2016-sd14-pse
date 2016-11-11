@@ -1,3 +1,6 @@
+# select correct database
+USE pse;
+
 #create user table
 
 CREATE TABLE IF NOT EXISTS user

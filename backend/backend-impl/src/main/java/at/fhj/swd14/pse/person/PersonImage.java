@@ -65,6 +65,10 @@ public class PersonImage implements Serializable{
 	public PersonImage() {
 		super();
 	}
+
+	public PersonImage(Long id) {
+		setId(id);
+	}
 	
 	
 }

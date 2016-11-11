@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.person;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,8 +10,10 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -326,7 +329,15 @@ public class PersonBean implements Serializable{
 	
 	public void handleFileUpload(FileUploadEvent event) {
 		personService.savePersonImage(person, event.getFile().getContents(), event.getFile().getContentType());
-		person.setImageUrl("personImage?id="+person.getId());
+		person.setImageUrl("/swd14-fe/personImage?id="+person.getId());
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		try{
+			ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+		}
+		catch(IOException ex)
+		{
+			throw new IllegalArgumentException("Error during page refresh",ex);
+		}
     }
 
 }

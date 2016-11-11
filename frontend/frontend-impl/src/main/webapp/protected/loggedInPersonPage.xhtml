@@ -20,7 +20,8 @@
 				    	<p:commandButton value="Change" action="#{personBean.saveData}" ajax="false"></p:commandButton>
 				    	<p:commandButton value="Delete" action="#{personBean.clearImgUrl}" ajax="false"></p:commandButton>
 			    		<p:fileUpload fileUploadListener="#{personBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
-           					update="@form" sizeLimit="1000000" fileLimit="2" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+           					sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+           					 />
 			    	</p>
 			    	<p>
 			    		<label>Firstname: <p:inputText value="#{personBean.person.firstname}" /></label>

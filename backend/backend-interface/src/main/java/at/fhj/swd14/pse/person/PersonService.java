@@ -20,4 +20,5 @@ public interface PersonService {
 	Collection<PersonDto> findAllUser();
 	Collection<StatusDto> findAllStati();
 	void savePersonImage(PersonDto person, byte[] imageData, String contentType);
+	PersonImageDto getPersonImage(Long personid);
 }

@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import at.fhj.swd14.pse.converter.PersonConverter;
+import at.fhj.swd14.pse.converter.PersonImageConverter;
 import at.fhj.swd14.pse.converter.StatusConverter;
 import at.fhj.swd14.pse.repository.PersonImageRepository;
 import at.fhj.swd14.pse.repository.PersonRepository;
@@ -103,6 +104,12 @@ public class PersonServiceImpl implements PersonService {
 		img.setPerson(personEntity);
 		
 		imgRepo.save(img);
+	}
+
+	@Override
+	public PersonImageDto getPersonImage(Long personid) {
+		PersonImage img = imgRepo.getByPersonId(personid);
+		return PersonImageConverter.convert(img);
 	}
 
 }

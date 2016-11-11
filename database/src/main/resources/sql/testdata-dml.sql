@@ -1,3 +1,6 @@
+# select correct database
+USE pse;
+
 #user
 INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`) VALUES (NULL, 'student1', 'edfd3e005a2da55ee99bb4b49afa33c6fa1bc945d93db54f5cba483355462acefdfd77ce1602449c9365d4eafb342e210ed0d33df4ceed40b92fa515bab5f89d', 'CRzTaAbyUxxEUs56', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`) VALUES (NULL, 'student2', '6378ce16c796bee6b162f7370914e290cc8debac1548d29d1939934ad76177b37f4bb6b54bd8bcf6855ad7c36f35025a8b158e39d3e284c0c72f17765200e974', 'TJIaMD0HUR1uUiLx', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

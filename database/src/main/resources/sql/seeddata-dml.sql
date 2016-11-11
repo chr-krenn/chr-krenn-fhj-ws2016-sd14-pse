@@ -1,3 +1,6 @@
+# select correct database
+USE pse;
+
 #department
 INSERT INTO department (name) VALUES ("IT");
 INSERT INTO department (name) VALUES ("Accounting");

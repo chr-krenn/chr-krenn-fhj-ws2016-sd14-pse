@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.tag;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,10 @@ public class TagServiceImpl implements TagService {
             return null;
     }
 
+	public List<TagDto> findAll() {
+		return (List<TagDto>) TagConverter.convertToDtoList(tagRepository.findAll());
+	}
+    
     private List<TagDto> executeNamedQuery(String name, Map<String, Object> parameter) {
         return new ArrayList<>(TagConverter.convertToDtoList(tagRepository.executeNamedQuery(name, parameter)));
     }

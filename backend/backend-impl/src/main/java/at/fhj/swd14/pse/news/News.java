@@ -12,7 +12,10 @@ import java.time.Instant;
 @Table(name = "news")
 @NamedQueries({
         @NamedQuery(name = "News.findSince", query = "SELECT n FROM News n WHERE n.created >= :sinceDate"),
-        @NamedQuery(name = "News.findByAuthorId", query = "SELECT n FROM News n WHERE n.author.id = :sinceDate")
+        @NamedQuery(name = "News.findByAuthorId", query = "SELECT n FROM News n WHERE n.author.id = :sinceDate"),
+        @NamedQuery(name = "News.findAllOnline", query = "SELECT n FROM News n WHERE :onlineDate >= n.activation" +
+                " AND (n.termination IS NULL OR :onlineDate < n.termination)" +
+                " ORDER BY n.created DESC")
 })
 public class News implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -36,6 +39,12 @@ public class News implements Serializable {
 
     @Column(insertable = false, updatable = false)
     private Instant modified;
+
+    @Column
+    private Instant activation;
+
+    @Column
+    private Instant termination;
 
     @NotNull
     @ManyToOne(optional = false)
@@ -79,5 +88,21 @@ public class News implements Serializable {
 
     public Instant getModified() {
         return modified;
+    }
+
+    public Instant getActivation() {
+        return activation;
+    }
+
+    public void setActivation(Instant activation) {
+        this.activation = activation;
+    }
+
+    public Instant getTermination() {
+        return termination;
+    }
+
+    public void setTermination(Instant termination) {
+        this.termination = termination;
     }
 }

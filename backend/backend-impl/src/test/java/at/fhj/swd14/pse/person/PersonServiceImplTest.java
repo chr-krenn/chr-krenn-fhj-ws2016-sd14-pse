@@ -18,8 +18,10 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.converter.PersonConverter;
+import at.fhj.swd14.pse.converter.PersonImageConverter;
 import at.fhj.swd14.pse.converter.StatusConverter;
 import at.fhj.swd14.pse.converter.UserConverter;
+import at.fhj.swd14.pse.repository.PersonImageRepository;
 import at.fhj.swd14.pse.repository.PersonRepository;
 import at.fhj.swd14.pse.repository.PersonStatusRepository;
 import at.fhj.swd14.pse.user.User;
@@ -34,6 +36,9 @@ public class PersonServiceImplTest {
 	
 	@Mock
 	private PersonRepository personRepo;
+	
+	@Mock
+	private PersonImageRepository imgRepo;
 	
 	@Mock
 	private UserService userService;
@@ -114,6 +119,33 @@ public class PersonServiceImplTest {
 		Collection<StatusDto> result = service.findAllStati();
 		Assert.assertEquals(1, result.size());
 		StatusDtoTester.assertEquals(StatusConverter.convert(stati.get(0)), ((List<StatusDto>)result).get(0));
+	}
+	
+	@Test
+	public void testSavePersonImage()
+	{
+		PersonDto dummyDto = PersonConverter.convert(person);
+		byte[] imgData = new byte[1];
+		imgData[0]=1;
+		String contentType = "image/png";
+		
+		Mockito.when(personRepo.find(dummyDto.getId())).thenReturn(person);
+		
+		service.savePersonImage(dummyDto, imgData, contentType);
+		
+		Mockito.verify(imgRepo,Mockito.times(1)).save(Mockito.any(PersonImage.class));
+	}
+	
+	@Test
+	public void testGetPersonImage()
+	{
+		PersonImage img = new PersonImage(1L);
+		img.setContentType("image/png");
+		img.setData(new byte[1]);
+		img.setPerson(person);
+		Mockito.when(imgRepo.getByPersonId(1L)).thenReturn(img);
+		PersonImageDto dto = service.getPersonImage(1L);
+		PersonImageDtoTester.assertEquals(PersonImageConverter.convert(img),dto);
 	}
 	
 }

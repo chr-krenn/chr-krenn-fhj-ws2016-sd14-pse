@@ -196,4 +196,66 @@ public class PersonBeanTest {
     	Assert.assertEquals(1, unitUnderTest.getPerson().getPhonenumbers().size());
     	Assert.assertEquals("0664664664", unitUnderTest.getPerson().getPhonenumbers().get(0).getValue());
     }
+    
+    @Test
+    public void testRemoveMail()
+    {
+    	PersonDto person = getDummyPerson();
+    	unitUnderTest.setPerson(person);
+    	FacesContext context = ContextMocker.mockFacesContext();
+    	ExternalContext extContext = mock(ExternalContext.class);
+    	when(context.getExternalContext()).thenReturn(extContext);
+    	Map<String,String> paramMap = new HashMap<String,String>();
+    	paramMap.put("value","test2@test.de");
+    	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
+    	unitUnderTest.removeMail();
+    	Assert.assertEquals(0, unitUnderTest.getPerson().getAdditionalMails().size());
+    }
+    
+    @Test
+    public void testRemoveKnowledge()
+    {
+    	PersonDto person = getDummyPerson();
+    	unitUnderTest.setPerson(person);
+    	FacesContext context = ContextMocker.mockFacesContext();
+    	ExternalContext extContext = mock(ExternalContext.class);
+    	when(context.getExternalContext()).thenReturn(extContext);
+    	Map<String,String> paramMap = new HashMap<String,String>();
+    	paramMap.put("value","testknowledge");
+    	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
+    	unitUnderTest.removeKnowledge();
+    	Assert.assertEquals(0, unitUnderTest.getPerson().getKnowledges().size());
+    }
+    
+    @Test
+    public void testRemoveHobby()
+    {
+    	PersonDto person = getDummyPerson();
+    	unitUnderTest.setPerson(person);
+    	FacesContext context = ContextMocker.mockFacesContext();
+    	ExternalContext extContext = mock(ExternalContext.class);
+    	when(context.getExternalContext()).thenReturn(extContext);
+    	Map<String,String> paramMap = new HashMap<String,String>();
+    	paramMap.put("value","testhobby");
+    	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
+    	unitUnderTest.removeHobby();
+    	Assert.assertEquals(0, unitUnderTest.getPerson().getHobbies().size());
+    }
+    
+    @Test
+    public void testRemoveNumber()
+    {
+    	PersonDto person = getDummyPerson();
+    	unitUnderTest.setPerson(person);
+    	FacesContext context = ContextMocker.mockFacesContext();
+    	ExternalContext extContext = mock(ExternalContext.class);
+    	when(context.getExternalContext()).thenReturn(extContext);
+    	Map<String,String> paramMap = new HashMap<String,String>();
+    	paramMap.put("value","0664664664");
+    	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
+    	unitUnderTest.removeNumber();
+    	Assert.assertEquals(0, unitUnderTest.getPerson().getPhonenumbers().size());
+    }
 }
+
+

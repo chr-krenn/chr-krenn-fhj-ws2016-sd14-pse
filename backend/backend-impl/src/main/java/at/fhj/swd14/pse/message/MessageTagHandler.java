@@ -12,59 +12,59 @@ import at.fhj.swd14.pse.converter.MessageConverter;
 import at.fhj.swd14.pse.converter.TagConverter;
 import at.fhj.swd14.pse.tag.Tag;
 import at.fhj.swd14.pse.tag.TagDto;
-import at.fhj.swd14.pse.tag.TagServiceImpl;
+import at.fhj.swd14.pse.tag.TagService;
 
 public class MessageTagHandler {
 
-	@EJB
-	private TagServiceImpl tagService;
-	
-	public void handleTags(MessageDto dto){
-		if (dto != null) {
-			
-			Message message = MessageConverter.convert(dto);
-			
-			Set<String> tagSet = new HashSet<String>();
-			
-			// search for tags in title
-			tagSet.addAll(findTags(message.getTitle()));
-			// search for tags in context
-			tagSet.addAll(findTags(message.getContent()));
-			
-			TagDto tagDto;
-			
-			for (String tag : tagSet) {
-				
-				tagDto = tagService.findByName(tag);
-				
-				if (tagDto == null) {
-					Tag t = new Tag();
-					t.setName(tag);
-					tagDto = TagConverter.convert(t);
-					tagService.save(tagDto);
-				}
-				// add Tag to Message
-				//message.addTag(tagDto);
-			}
-			dto = MessageConverter.convert(message);
+    @EJB
+    private TagService tagService;
 
-		}
-		
-	}
-	
-	private Set<String> findTags(String text) {
-		Set<String> tagSet = new HashSet<String>();
-		
-		Pattern p = Pattern.compile("(\\s|\\A)#(\\w+)");
+    public void handleTags(MessageDto dto) {
+        if (dto != null) {
 
-		Matcher matcher = p.matcher(text);
+            Message message = MessageConverter.convert(dto);
 
-		if (matcher.find()) {
-			for (int i = 0; i < matcher.groupCount(); i++) {
-				tagSet.add(matcher.group(i).toLowerCase());
-			}
-		}
-		
-		return tagSet;
-	}
+            Set<String> tagSet = new HashSet<>();
+
+            // search for tags in title
+            tagSet.addAll(findTags(message.getTitle()));
+            // search for tags in context
+            tagSet.addAll(findTags(message.getContent()));
+
+            TagDto tagDto;
+
+            for (String tag : tagSet) {
+
+                tagDto = tagService.findByName(tag);
+
+                if (tagDto == null) {
+                    Tag t = new Tag();
+                    t.setName(tag);
+                    tagDto = TagConverter.convert(t);
+                    tagService.save(tagDto);
+                }
+                // add Tag to Message
+                //message.addTag(tagDto);
+            }
+            dto = MessageConverter.convert(message);
+
+        }
+
+    }
+
+    private Set<String> findTags(String text) {
+        Set<String> tagSet = new HashSet<>();
+
+        Pattern p = Pattern.compile("(\\s|\\A)#(\\w+)");
+
+        Matcher matcher = p.matcher(text);
+
+        if (matcher.find()) {
+            for (int i = 0; i < matcher.groupCount(); i++) {
+                tagSet.add(matcher.group(i).toLowerCase());
+            }
+        }
+
+        return tagSet;
+    }
 }

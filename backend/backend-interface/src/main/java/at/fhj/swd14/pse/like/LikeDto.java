@@ -93,4 +93,14 @@ public class LikeDto implements Serializable {
     public void setLikedMessage(MessageDto message) {
     	this.likedMessage = message;
     }
+    @Override
+    public String toString() {
+    	StringBuffer sb = new StringBuffer();
+    	sb.append("LikeDto");
+    	sb.append("   Id: " + id);
+    	sb.append("   Time created: " + created.toString());
+    	sb.append("   Time modified: " + modified.toString());
+    	
+    	return sb.toString();
+    }
 }

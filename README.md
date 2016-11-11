@@ -50,8 +50,20 @@ This will build all module artifacts with Maven.
 ### Setting up the database
 
 This is directed at people using the "TeiniVM". First we must create a new database:
+
+Creation / manipulation scripts are available at /database/src/main/resources/sql:
+- create-db.sql
+- create-ddl.sql
+- drop-ddl.sql
+- seeddata-dml.sql
+- testdata-dml.sql
 ```
-root@localhost # mysql -u root -p 
+$ root@localhost # mysql -u root -p < create-db.sql
+```
+Or manually:
+
+```
+$ root@localhost # mysql -u root -p 
 Enter password: root66
 MariaDB [(none)]> CREATE DATABASE pse;
 MariaDB [(none)]> GRANT ALL PRIVILEGES ON pse.* TO student@localhost WITH GRANT OPTION;

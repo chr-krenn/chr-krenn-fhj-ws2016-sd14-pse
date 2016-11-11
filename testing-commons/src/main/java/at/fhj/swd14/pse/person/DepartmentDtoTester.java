@@ -5,9 +5,9 @@ import org.junit.Assert;
 
 public class DepartmentDtoTester {
 
-	public static void assertEquals(DepartmentDto expected, DepartmentDto actual) {
-		Assert.assertEquals(expected.getId(), actual.getId());
-		Assert.assertEquals(expected.getName(), actual.getName());
-	}
+    public static void assertEquals(DepartmentDto expected, DepartmentDto actual) {
+        Assert.assertEquals(expected.getId(), actual.getId());
+        Assert.assertEquals(expected.getName(), actual.getName());
+    }
 
 }

@@ -6,7 +6,7 @@ public class CommunityTestHelper {
 	{
 		Community community = new Community();
 		
-		return Community;
+		return community;
 	}
 	
 }

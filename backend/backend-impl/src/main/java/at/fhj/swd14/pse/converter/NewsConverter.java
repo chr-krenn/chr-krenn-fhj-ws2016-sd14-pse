@@ -22,6 +22,8 @@ public class NewsConverter {
         dto.setTitle(news.getTitle());
         dto.setCreated(news.getCreated());
         dto.setModified(news.getModified());
+        dto.setActivation(news.getActivation());
+        dto.setTermination(news.getTermination());
 
         return dto;
     }
@@ -36,6 +38,8 @@ public class NewsConverter {
         entity.setMessage(news.getMessage());
         entity.setTitle(news.getTitle());
         entity.setAuthor(PersonConverter.convert(news.getAuthor()));
+        entity.setActivation(news.getActivation());
+        entity.setTermination(news.getTermination());
         return entity;
     }
 

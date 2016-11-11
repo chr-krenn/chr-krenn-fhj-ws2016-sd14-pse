@@ -64,9 +64,9 @@ public class Community implements Serializable {
 
 //    private List<UserDto> allowedUsers = new ArrayList<UserDto>();
 
-    public List<UserDto> getAllowedUsers() {
-        return null;
+    public List<UserDto> getAllowedUsers() {        
 //    	return this.allowedUsers;
+    	return null;
     }
 
     public void setAllowedUsers(List<UserDto> allowedUsers) {

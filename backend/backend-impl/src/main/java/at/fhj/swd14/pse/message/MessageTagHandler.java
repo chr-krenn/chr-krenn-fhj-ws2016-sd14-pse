@@ -55,14 +55,12 @@ public class MessageTagHandler {
     private Set<String> findTags(String text) {
         Set<String> tagSet = new HashSet<>();
 
-        Pattern p = Pattern.compile("(\\s|\\A)#(\\w+)");
+        Pattern p = Pattern.compile("#(\\w+)");
 
         Matcher matcher = p.matcher(text);
 
-        if (matcher.find()) {
-            for (int i = 0; i < matcher.groupCount(); i++) {
-                tagSet.add(matcher.group(i).toLowerCase());
-            }
+        while (matcher.find()) {
+        	tagSet.add(matcher.group(0).substring(1).toLowerCase());
         }
 
         return tagSet;

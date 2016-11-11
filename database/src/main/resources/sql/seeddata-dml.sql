@@ -9,3 +9,5 @@ INSERT INTO department (name) VALUES ("Accounting");
 INSERT INTO person_status (name) VALUES ('online');
 INSERT INTO person_status (name) VALUES ('offline');
 INSERT INTO person_status (name) VALUES ('abwesend');
+
+COMMIT;

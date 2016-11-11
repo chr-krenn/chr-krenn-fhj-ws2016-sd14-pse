@@ -18,3 +18,5 @@ INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student2', '
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student3', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student4', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student5', 'user', 'Roles');
+
+COMMIT;

@@ -32,6 +32,11 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    public Collection<NewsDto> findAllOnline() {
+        return findAll();
+    }
+
+    @Override
     public Collection<NewsDto> findAllSince(Instant instant) {
         final Map<String, Object> parameters = new HashMap<>();
         parameters.put("dateSince", Objects.requireNonNull(instant));

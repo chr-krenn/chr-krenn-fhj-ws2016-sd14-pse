@@ -38,6 +38,13 @@ public interface NewsService {
     Collection<NewsDto> findAll();
 
     /**
+     * Finds and returns all online news.
+     *
+     * @return the news
+     */
+    Collection<NewsDto> findAllOnline();
+
+    /**
      * Finds and returns all news since the given date.
      *
      * @param instant all news after this instant will be fetched; must not be null

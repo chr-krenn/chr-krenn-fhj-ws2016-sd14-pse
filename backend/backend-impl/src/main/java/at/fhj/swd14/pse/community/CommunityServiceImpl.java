@@ -5,6 +5,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import at.fhj.swd14.pse.comment.Comment;
+import at.fhj.swd14.pse.converter.CommentConverter;
+import at.fhj.swd14.pse.converter.CommunityConverter;
 import at.fhj.swd14.pse.repository.CommunityRepository;
 
 @Stateless
@@ -15,14 +18,15 @@ public class CommunityServiceImpl implements CommunityService{
 	
 	@Override
 	public long save(CommunityDto community) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		Community dtoComm = CommunityConverter.convert(community);
+		communityRepository.save(dtoComm);
+        return dtoComm.getId();
 	}
 
 	@Override
 	public CommunityDto find(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return CommunityConverter.convert(communityRepository.find(id));
 	}
 
 	@Override

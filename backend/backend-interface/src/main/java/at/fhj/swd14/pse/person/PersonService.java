@@ -19,4 +19,5 @@ public interface PersonService {
 	void saveLoggedInPerson(PersonDto person);
 	Collection<PersonDto> findAllUser();
 	Collection<StatusDto> findAllStati();
+	void savePersonImage(PersonDto person, byte[] imageData, String contentType);
 }

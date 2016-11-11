@@ -14,6 +14,7 @@ import javax.inject.Named;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.primefaces.event.FileUploadEvent;
 
 import at.fhj.swd14.pse.department.DepartmentConverter;
 import at.fhj.swd14.pse.department.DepartmentDto;
@@ -278,5 +279,54 @@ public class PersonBean implements Serializable{
 		person.getPhonenumbers().add(number);
 		newNumber=null;
 	}
+	
+	public void removeMail()
+	{
+		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+	    String value = params.get("value");
+	    for(MailaddressDto address : person.getAdditionalMails())
+	    {
+	    	if(value.equals(address.getValue()))
+	    		person.getAdditionalMails().remove(address);
+	    }
+	}
+	
+	public void removeKnowledge()
+	{
+		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+	    String value = params.get("value");
+	    for(KnowledgeDto knowledge : person.getKnowledges())
+	    {
+	    	if(value.equals(knowledge.getValue()))
+	    		person.getKnowledges().remove(knowledge);
+	    }
+	}
+	
+	public void removeHobby()
+	{
+		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+	    String value = params.get("value");
+	    for(HobbyDto hobby : person.getHobbies())
+	    {
+	    	if(value.equals(hobby.getValue()))
+	    		person.getHobbies().remove(hobby);
+	    }
+	}
+	
+	public void removeNumber()
+	{
+		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+	    String value = params.get("value");
+	    for(PhonenumberDto number : person.getPhonenumbers())
+	    {
+	    	if(value.equals(number.getValue()))
+	    		person.getPhonenumbers().remove(number);
+	    }
+	}
+	
+	public void handleFileUpload(FileUploadEvent event) {
+		personService.savePersonImage(person, event.getFile().getContents(), event.getFile().getContentType());
+		person.setImageUrl("personImage?id="+person.getId());
+    }
 
 }

@@ -19,6 +19,8 @@
 				    	<label>Image URL: <p:inputText value="#{personBean.person.imageUrl}"/></label>
 				    	<p:commandButton value="Change" action="#{personBean.saveData}" ajax="false"></p:commandButton>
 				    	<p:commandButton value="Delete" action="#{personBean.clearImgUrl}" ajax="false"></p:commandButton>
+			    		<p:fileUpload fileUploadListener="#{personBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
+           					update="@form" sizeLimit="1000000" fileLimit="2" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 			    	</p>
 			    	<p>
 			    		<label>Firstname: <p:inputText value="#{personBean.person.firstname}" /></label>
@@ -56,7 +58,12 @@
 		    		<h1>Mail Adressen</h1>
 		    		<p>#{personBean.person.user.mail}</p>
 		    		<c:forEach var="mail" items="#{personBean.person.additionalMails}">
-		    			<p><p:inputText value="#{mail.value}"/></p>
+		    			<p>
+		    				<p:inputText value="#{mail.value}"/>
+		    				<p:commandButton value="Remove" action="#{personBean.removeMail}" ajax="false">
+		    					<f:param name="value" value="#{mail.value}" />
+		    				</p:commandButton>
+		    			</p>
 		    		</c:forEach>
 		    		<p>
 		    			<label>New: <p:inputText value="#{personBean.newMail}"/>
@@ -67,7 +74,12 @@
 		    	<section>
 		    		<h1>Hobbies</h1>
 		    		<c:forEach var="hobby" items="#{personBean.person.hobbies}">
-		    			<p><p:inputText value="#{hobby.value}" /></p>
+		    			<p>
+		    				<p:inputText value="#{hobby.value}" />
+		    				<p:commandButton value="Remove" action="#{personBean.removeHobby}" ajax="false">
+		    					<f:param name="value" value="#{hobby.value}" />
+		    				</p:commandButton>
+		    			</p>
 		    		</c:forEach>
 		    		<p>
 			    		<label>New: <p:inputText value="#{personBean.newHobby}"/>
@@ -78,7 +90,12 @@
 		    	<section>
 		    		<h1>Fähigkeiten</h1>
 		    		<c:forEach var="knowledge" items="#{personBean.person.knowledges}">
-		    			<p><p:inputText value="#{knowledge.value}"/></p>
+		    			<p>
+		    				<p:inputText value="#{knowledge.value}"/>
+		    				<p:commandButton value="Remove" action="#{personBean.removeKnowledge}" ajax="false">
+		    					<f:param name="value" value="#{knowledge.value}" />
+		    				</p:commandButton>
+		    			</p>
 		    		</c:forEach>
 		    		<p>
 			    		<label>New: <p:inputText value="#{personBean.newKnowledge}"/>
@@ -89,7 +106,12 @@
 		    	<section>
 		    		<h1>Telefonnummern</h1>
 		    		<c:forEach var="number" items="#{personBean.person.phonenumbers}">
-		    			<p><p:inputText value="#{number.value}" /></p>
+		    			<p>
+		    				<p:inputText value="#{number.value}" />
+		    				<p:commandButton value="Remove" action="#{personBean.removeNumber}" ajax="false">
+		    					<f:param name="value" value="#{number.value}" />
+		    				</p:commandButton>
+		    			</p>
 		    		</c:forEach>
 		    		<p>
 			    		<label>New: <p:inputText value="#{personBean.newNumber}"/>

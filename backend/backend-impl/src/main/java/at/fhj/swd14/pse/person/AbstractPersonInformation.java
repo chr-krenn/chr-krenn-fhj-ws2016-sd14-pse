@@ -26,7 +26,7 @@ public abstract class AbstractPersonInformation implements Serializable {
 	@Column
 	private String value;
 	
-	@ManyToOne(optional=false,cascade = CascadeType.ALL)
+	@ManyToOne(optional=false)
 	private Person person;
 	
 	public Person getPerson() {

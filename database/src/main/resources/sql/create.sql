@@ -51,6 +51,13 @@ CREATE TABLE IF NOT EXISTS person (
   user_id bigint(20) NOT NULL REFERENCES user(id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS person_image (
+  id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  data longblob NOT NULL,
+  person_id bigint(20) NOT NULL UNIQUE REFERENCES person(id),
+  content_type text NOT NULL
+) ENGINE=InnoDB;
+
 #create contact
 CREATE TABLE IF NOT EXISTS contact (
   person1_id bigint(20) NOT NULL REFERENCES person(id),

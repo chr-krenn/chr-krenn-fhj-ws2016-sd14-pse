@@ -92,7 +92,10 @@ public class PersonServiceImpl implements PersonService {
 	public void savePersonImage(PersonDto person, byte[] imageData, String contentType) {
 		PersonImage existing = imgRepo.getByPersonId(person.getId());
 		if(existing!=null)
+		{
 			imgRepo.remove(existing);
+			imgRepo.flush();
+		}
 		PersonImage img = new PersonImage();
 		img.setData(imageData);
 		img.setContentType(contentType);

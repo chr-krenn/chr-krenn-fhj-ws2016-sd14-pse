@@ -145,7 +145,7 @@ public class PersonBean implements Serializable{
 			LOGGER.debug("Found no person for id: "+userId);
 		}
 		
-		return "/protected/personTest";
+		return "/person/personTest";
 	}
 	
 	private void loadStati()
@@ -171,7 +171,7 @@ public class PersonBean implements Serializable{
 		}
 		loadStati();
 		loadDepartments();
-		return "/protected/loggedInPersonTest";
+		return "/person/loggedInPersonTest";
 	}
 	
 	public String createLoggedInPerson()

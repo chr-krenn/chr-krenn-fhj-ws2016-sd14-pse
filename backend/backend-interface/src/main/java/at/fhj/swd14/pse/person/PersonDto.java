@@ -7,6 +7,8 @@ import java.util.List;
 import at.fhj.swd14.pse.department.DepartmentDto;
 import at.fhj.swd14.pse.user.UserDto;
 
+import javax.faces.event.ActionEvent;
+
 /**
  * Data transfer object for person
  *
@@ -41,6 +43,8 @@ public class PersonDto implements Serializable {
     private UserDto user;
 
     private Long id;
+
+    private String friendState;
 
     public StatusDto getStatus() {
         return status;
@@ -155,5 +159,11 @@ public class PersonDto implements Serializable {
 	public PersonDto() {
 	}
 
+    public String getFriendState() {
+        return friendState;
+    }
 
+    public void setFriendState(String friendState) {
+        this.friendState = friendState;
+    }
 }

@@ -89,7 +89,7 @@ public class PersonServiceImplTest {
 	public void testFindAllUser()
 	{
 		Mockito.when(personRepo.findAll()).thenReturn(persons);
-		Collection<PersonDto> persons = service.findAllUser(0);
+		Collection<PersonDto> persons = service.findAllUser(1);
 		for(PersonDto person : persons)
 		{
 			PersonDtoTester.assertEquals(person, person);

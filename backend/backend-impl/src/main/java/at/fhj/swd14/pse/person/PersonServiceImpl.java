@@ -1,6 +1,8 @@
 package at.fhj.swd14.pse.person;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.ejb.EJB;
@@ -61,7 +63,10 @@ public class PersonServiceImpl implements PersonService {
 		Collection<PersonDto> resultList=PersonConverter.convertToDtoList(repository.findAll());
 
 		Person loggedInPerson=repository.findByUserId(loggedInUserID);
-		Collection<Contact> contacts=contactRepository.findByPersonId(loggedInPerson.getId());
+		Collection<Contact> contacts=new ArrayList<Contact>();
+		if(loggedInPerson!=null){
+			contacts=contactRepository.findByPersonId(loggedInPerson.getId());
+		}
 
 		resultList.forEach(p->p.setFriendState("Freund hinzufügen"));
 		//change friend state for already added friends

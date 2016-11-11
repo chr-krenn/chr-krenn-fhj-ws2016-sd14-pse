@@ -93,6 +93,8 @@ public class NewsConverterTest {
         news.setId(RANDOM.nextLong());
         news.setTitle("title");
         news.setMessage("message");
+        news.setActivation(Instant.now());
+        news.setTermination(Instant.now());
 
         return news;
     }
@@ -107,6 +109,8 @@ public class NewsConverterTest {
         dto.setAuthor(author);
         dto.setTitle("title");
         dto.setId(RANDOM.nextLong());
+        dto.setActivation(Instant.now());
+        dto.setTermination(Instant.now());
         return dto;
     }
 
@@ -116,6 +120,8 @@ public class NewsConverterTest {
         assertNotNull(entity.getAuthor());
         assertEquals(dto.getAuthor().getId(), entity.getAuthor().getId());
         assertEquals(dto.getId(), entity.getId());
+        assertEquals(dto.getActivation(), entity.getActivation());
+        assertEquals(dto.getTermination(), entity.getTermination());
         assertNull(entity.getCreated());
         assertNull(entity.getModified());
     }
@@ -126,6 +132,8 @@ public class NewsConverterTest {
         assertNotNull(dto.getAuthor());
         assertEquals(entity.getAuthor().getId(), dto.getAuthor().getId());
         assertEquals(entity.getId(), dto.getId());
+        assertEquals(entity.getActivation(), dto.getActivation());
+        assertEquals(entity.getTermination(), dto.getTermination());
         assertEquals(entity.getCreated(), dto.getCreated());
         assertEquals(entity.getModified(), dto.getModified());
     }

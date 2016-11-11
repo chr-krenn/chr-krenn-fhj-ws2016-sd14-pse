@@ -62,14 +62,15 @@ public class Community implements Serializable {
         this.isPublic = publicState;
     }
 
-    private List<UserDto> allowedUsers = new ArrayList<UserDto>();
+//    private List<UserDto> allowedUsers = new ArrayList<UserDto>();
 
     public List<UserDto> getAllowedUsers() {        
-    	return this.allowedUsers;
+//    	return this.allowedUsers;
+    	return null;
     }
 
     public void setAllowedUsers(List<UserDto> allowedUsers) {
-        this.allowedUsers = allowedUsers;
+//        this.allowedUsers = allowedUsers;
     }
 
     @Column

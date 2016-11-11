@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -185,7 +186,8 @@ public class PersonBean implements Serializable{
 	}
 	
 	public Collection<PersonDto> showAllPersons(){
-		Collection<PersonDto> allPersons = personService.findAllUser();
+		List<PersonDto> allPersons = new ArrayList<PersonDto>(personService.findAllUser()); 
+		Collections.sort(allPersons,new PersonComparator());
 		if(allPersons.size()==0){
 			LOGGER.debug("Found no user in db");
 		}

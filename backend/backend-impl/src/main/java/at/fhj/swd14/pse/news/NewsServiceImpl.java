@@ -6,6 +6,7 @@ import at.fhj.swd14.pse.repository.NewsRepository;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 @Stateless
@@ -33,7 +34,10 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public Collection<NewsDto> findAllOnline() {
-        return findAll();
+        final Map<String, Object> parameters = new HashMap<>();
+        parameters.put("onlineDate", ZonedDateTime.now().toInstant());
+        return NewsConverter.convertToDtoList(newsRepository.executeNamedQuery("News.findAllOnline", parameters));
+
     }
 
     @Override

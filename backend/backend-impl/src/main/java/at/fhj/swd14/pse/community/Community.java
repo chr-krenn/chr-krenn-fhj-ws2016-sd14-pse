@@ -16,69 +16,72 @@ import at.fhj.swd14.pse.user.UserDto;
 @Entity
 @Table(name = "community")
 public class Community implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	
-	@Id
-	private Long id;
-	
-	public Long getId()
-	{
-		return this.id;
-	}
-	
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
-	
-	@Column
-	private String name;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+    private static final long serialVersionUID = 1L;
 
-	private User author;
-	public User getAuthor() {
-		return this.author;
-	}
-	
-	public void setAuthor(User author){
-		this.author = author;
-	}
-	
-	@Column
-	private boolean isPublic = false;
-    public boolean getPublicState(){
-    	return this.isPublic;
-    }
-    
-    public void setPublicState(boolean publicState){
-    	this.isPublic = publicState;
+
+    @Id
+    private Long id;
+
+    public Long getId() {
+        return this.id;
     }
 
-    private List<UserDto> allowedUsers = new ArrayList<UserDto>();
-    
-    public List<UserDto> getAllowedUsers(){
-    	
-    	return this.allowedUsers;
+    public void setId(Long id) {
+        this.id = id;
     }
-    
-    public void setAllowedUsers(List<UserDto> allowedUsers){
-    	this.allowedUsers = allowedUsers;
-    }
-	
+
     @Column
-    private Date createTime= new Date(0);
-    public Date getCreateTime(){
-    	return createTime;
+    private String name;
+
+    public String getName() {
+        return name;
     }
-    
-    public void setCreateTime(Date createDate){
-    	this.createTime = createDate;
+
+    public void setName(String name) {
+        this.name = name;
     }
-	
+
+    //	private User author;
+    public User getAuthor() {
+        return null;
+//        return this.author;
+    }
+
+    public void setAuthor(User author) {
+//		this.author = author;
+    }
+
+    @Column
+    private boolean isPublic = false;
+
+    public boolean getPublicState() {
+        return this.isPublic;
+    }
+
+    public void setPublicState(boolean publicState) {
+        this.isPublic = publicState;
+    }
+
+//    private List<UserDto> allowedUsers = new ArrayList<UserDto>();
+
+    public List<UserDto> getAllowedUsers() {
+        return null;
+//    	return this.allowedUsers;
+    }
+
+    public void setAllowedUsers(List<UserDto> allowedUsers) {
+//        this.allowedUsers = allowedUsers;
+    }
+
+    @Column
+    private Date createTime = new Date(0);
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createDate) {
+        this.createTime = createDate;
+    }
+
 }

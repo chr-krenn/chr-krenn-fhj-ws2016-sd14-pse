@@ -43,7 +43,44 @@ public class PersonBean implements Serializable{
 	private PersonDto person;
 	private List<StatusDto> stati;
 	private List<DepartmentDto> departments;
+	private String newMail=null;
+	private String newKnowledge=null;
+	private String newHobby=null;
+	private String newNumber=null;
 	
+	
+	public String getNewKnowledge() {
+		return newKnowledge;
+	}
+
+	public void setNewKnowledge(String newKnowledge) {
+		this.newKnowledge = newKnowledge;
+	}
+
+	public String getNewHobby() {
+		return newHobby;
+	}
+
+	public void setNewHobby(String newHobby) {
+		this.newHobby = newHobby;
+	}
+
+	public String getNewNumber() {
+		return newNumber;
+	}
+
+	public void setNewNumber(String newNumber) {
+		this.newNumber = newNumber;
+	}
+
+	public String getNewMail() {
+		return newMail;
+	}
+
+	public void setNewMail(String newMail) {
+		this.newMail = newMail;
+	}
+
 	public List<DepartmentDto> getDepartments() {
 		return departments;
 	}
@@ -172,6 +209,74 @@ public class PersonBean implements Serializable{
 	{
 		personService.saveLoggedInPerson(person);
 		return showLoggedInPerson();
+	}
+	
+	public void addMail()
+	{
+		for(MailaddressDto existing : person.getAdditionalMails())
+		{
+			if(existing.getValue().equals(newMail))
+			{
+				newMail = null;
+				throw new IllegalArgumentException("Mail already exists");
+			}
+		}
+		MailaddressDto mail = new MailaddressDto();
+		mail.setValue(newMail);
+		mail.setPerson(person);
+		person.getAdditionalMails().add(mail);
+		newMail=null;
+	}
+	
+	public void addKnowledge()
+	{
+		for(KnowledgeDto existing : person.getKnowledges())
+		{
+			if(existing.getValue().equals(newKnowledge))
+			{
+				newKnowledge = null;
+				throw new IllegalArgumentException("Knowledge already exists");
+			}
+		}
+		KnowledgeDto knowledge = new KnowledgeDto();
+		knowledge.setValue(newKnowledge);
+		knowledge.setPerson(person);
+		person.getKnowledges().add(knowledge);
+		newKnowledge=null;
+	}
+	
+	public void addHobby()
+	{
+		for(HobbyDto existing : person.getHobbies())
+		{
+			if(existing.getValue().equals(newHobby))
+			{
+				newHobby = null;
+				throw new IllegalArgumentException("Hobby already exists");
+			}
+		}
+		HobbyDto hobby = new HobbyDto();
+		hobby.setValue(newHobby);
+		hobby.setPerson(person);
+		person.getHobbies().add(hobby);
+		newHobby=null;
+	}
+	
+	public void addNumber()
+	{
+		for(PhonenumberDto existing : person.getPhonenumbers())
+		{
+			if(existing.getValue().equals(newNumber))
+			{
+				newNumber = null;
+				throw new IllegalArgumentException("Number already exists");
+			}
+		}
+		PhonenumberDto number = new PhonenumberDto();
+		number.setValue(newNumber);
+		number.setPerson(person);
+		person.getPhonenumbers().add(number);
+		newNumber=null;
 	}
 
 }

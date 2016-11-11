@@ -148,4 +148,52 @@ public class PersonBeanTest {
     	unitUnderTest.savePerson();
     	Mockito.verify(personService,Mockito.times(1)).saveLoggedInPerson(Mockito.any(PersonDto.class));
     }
+    
+    @Test
+    public void testAddMail()
+    {
+    	PersonDto person = getDummyPerson();
+    	person.getAdditionalMails().clear();
+    	unitUnderTest.setPerson(person);
+    	unitUnderTest.setNewMail("test@test.de");
+    	unitUnderTest.addMail();
+    	Assert.assertEquals(1, unitUnderTest.getPerson().getAdditionalMails().size());
+    	Assert.assertEquals("test@test.de", unitUnderTest.getPerson().getAdditionalMails().get(0).getValue());
+    }
+    
+    @Test
+    public void testAddKnowledge()
+    {
+    	PersonDto person = getDummyPerson();
+    	person.getKnowledges().clear();
+    	unitUnderTest.setPerson(person);
+    	unitUnderTest.setNewKnowledge("test");
+    	unitUnderTest.addKnowledge();
+    	Assert.assertEquals(1, unitUnderTest.getPerson().getKnowledges().size());
+    	Assert.assertEquals("test", unitUnderTest.getPerson().getKnowledges().get(0).getValue());
+    }
+    
+    @Test
+    public void testAddHobby()
+    {
+    	PersonDto person = getDummyPerson();
+    	person.getHobbies().clear();
+    	unitUnderTest.setPerson(person);
+    	unitUnderTest.setNewHobby("test");
+    	unitUnderTest.addHobby();
+    	Assert.assertEquals(1, unitUnderTest.getPerson().getHobbies().size());
+    	Assert.assertEquals("test", unitUnderTest.getPerson().getHobbies().get(0).getValue());
+    }
+    
+    @Test
+    public void testAddNumber()
+    {
+    	PersonDto person = getDummyPerson();
+    	person.getPhonenumbers().clear();
+    	unitUnderTest.setPerson(person);
+    	unitUnderTest.setNewNumber("0664664664");
+    	unitUnderTest.addNumber();
+    	Assert.assertEquals(1, unitUnderTest.getPerson().getPhonenumbers().size());
+    	Assert.assertEquals("0664664664", unitUnderTest.getPerson().getPhonenumbers().get(0).getValue());
+    }
 }

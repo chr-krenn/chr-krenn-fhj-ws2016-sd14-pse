@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,16 +51,16 @@ public class Person implements Serializable {
     @Column(name="imageurl")
     private String imageUrl;
     
-    @OneToMany(mappedBy="person",orphanRemoval=true)
+    @OneToMany(mappedBy="person",orphanRemoval=true,cascade=CascadeType.ALL)
     private List<Hobby> hobbies=new LinkedList<>();
     
-    @OneToMany(mappedBy="person",orphanRemoval=true)
+    @OneToMany(mappedBy="person",orphanRemoval=true,cascade=CascadeType.ALL)
     private List<Knowledge> knowledges=new LinkedList<>();
     
-    @OneToMany(mappedBy="person",orphanRemoval=true)
+    @OneToMany(mappedBy="person",orphanRemoval=true,cascade=CascadeType.ALL)
     private List<Mailaddress> additionalMails=new LinkedList<>();
     
-    @OneToMany(mappedBy="person",orphanRemoval=true)
+    @OneToMany(mappedBy="person",orphanRemoval=true,cascade=CascadeType.ALL)
     private List<Phonenumber> numbers=new LinkedList<>();
     
     @ManyToOne(optional=false)

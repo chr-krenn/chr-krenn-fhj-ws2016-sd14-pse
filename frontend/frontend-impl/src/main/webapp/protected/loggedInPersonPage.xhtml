@@ -56,26 +56,46 @@
 		    		<h1>Mail Adressen</h1>
 		    		<p>#{personBean.person.user.mail}</p>
 		    		<c:forEach var="mail" items="#{personBean.person.additionalMails}">
-		    			<p>#{mail.value}</p>
+		    			<p><p:inputText value="#{mail.value}"/></p>
 		    		</c:forEach>
+		    		<p>
+		    			<label>New: <p:inputText value="#{personBean.newMail}"/>
+		    				<p:commandButton value="Add" action="#{personBean.addMail}" ajax="false"></p:commandButton>
+		    			</label>
+		    		</p>
 		    	</section>
 		    	<section>
 		    		<h1>Hobbies</h1>
 		    		<c:forEach var="hobby" items="#{personBean.person.hobbies}">
-		    			<p>#{hobby.value}</p>
+		    			<p><p:inputText value="#{hobby.value}" /></p>
 		    		</c:forEach>
+		    		<p>
+			    		<label>New: <p:inputText value="#{personBean.newHobby}"/>
+		    				<p:commandButton value="Add" action="#{personBean.addHobby}" ajax="false"></p:commandButton>
+		    			</label>
+	    			</p>
 		    	</section>
 		    	<section>
 		    		<h1>Fähigkeiten</h1>
 		    		<c:forEach var="knowledge" items="#{personBean.person.knowledges}">
-		    			<p>#{knowledge.value}</p>
+		    			<p><p:inputText value="#{knowledge.value}"/></p>
 		    		</c:forEach>
+		    		<p>
+			    		<label>New: <p:inputText value="#{personBean.newKnowledge}"/>
+		    				<p:commandButton value="Add" action="#{personBean.addKnowledge}" ajax="false"></p:commandButton>
+		    			</label>
+	    			</p>
 		    	</section>
 		    	<section>
 		    		<h1>Telefonnummern</h1>
 		    		<c:forEach var="number" items="#{personBean.person.phonenumbers}">
-		    			<p>#{number.value}</p>
+		    			<p><p:inputText value="#{number.value}" /></p>
 		    		</c:forEach>
+		    		<p>
+			    		<label>New: <p:inputText value="#{personBean.newNumber}"/>
+		    				<p:commandButton value="Add" action="#{personBean.addNumber}" ajax="false"></p:commandButton>
+		    			</label>
+	    			</p>
 		    	</section>
 		    	<p><p:commandButton value="Save Changes" action="#{personBean.savePerson}" ajax='false'></p:commandButton></p>
 	    	</h:form>

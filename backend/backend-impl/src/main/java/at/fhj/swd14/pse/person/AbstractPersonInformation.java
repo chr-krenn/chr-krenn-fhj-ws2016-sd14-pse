@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.person;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,7 @@ public abstract class AbstractPersonInformation implements Serializable {
 	@Column
 	private String value;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=false,cascade = CascadeType.ALL)
 	private Person person;
 	
 	public Person getPerson() {

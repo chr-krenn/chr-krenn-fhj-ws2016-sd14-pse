@@ -40,4 +40,135 @@
     </p:toolbar>
 </h:form>
 	</h:body>
+	<h:form name="createCommunity">
+		<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
+	        <h:outputLabel for="topic" value="Community Name:" />
+			<p:inputText> #{communityBean.newName}</p:inputText> 
+			<h:outputLabel for="description" value="Description:" />
+			<p:inputTextarea rows="5" cols="30" counter="display" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" > #{communityBean.newDescription}</p:inputTextarea>p:inputTextarea ></p:inputTextarea>
+    		<h:outputText id="display" />
+	        <h:outputText value="Public: " />
+	        <p:selectBooleanCheckbox> #{communityBean.newPublicState}</p:selectBooleanCheckbox>
+   		 </h:panelGrid>
+		<p:commandButton value="Submit"  icon="ui-icon-check" action="#{communityBean.createCommunity()}" />
+	</h:form>
+	
+	<p:dataTable var="community" value="#{communityBean.createdCommunities}">
+		<p:growl id="growl" life="2000" />
+		<f:facet name="myCommunites">
+        List of my created Communities
+    	</f:facet>
+	    <p:column headerText="Author">
+	        <h:outputText value="#{community.author.mail}" />
+	    </p:column>
+	 
+	    <p:column headerText="Date">
+	        <h:outputText value="#{community.createTime}" />
+	    </p:column>
+	 
+	    <p:column headerText="Community Name">
+	        <h:outputText value="#{community.name}" />
+	    </p:column>
+	 
+	    <p:column headerText="Description">
+	        <h:outputText value="#{community.description}" />
+	    </p:column>
+	    <p:column headerText="Public">
+	        <h:outputText value="#{community.publicState}" />
+	    </p:column>
+	    <p:column headerText="Status">
+	    	<p:commandButton value="delete" update="growl" action="" />
+	    </p:column>
+	</p:dataTable>
+	
+	
+	
+	<p:dataTable var="community" value="#{communityBean.joinedCommunities}">
+		<p:growl id="growl" life="2000" />
+		<f:facet name="myCommunites">
+        List of my joined Communities
+    	</f:facet>
+	    <p:column headerText="Author">
+	        <h:outputText value="#{community.author.mail}" />
+	    </p:column>
+	 
+	    <p:column headerText="Date">
+	        <h:outputText value="#{community.createTime}" />
+	    </p:column>
+	 
+	    <p:column headerText="Community Name">
+	        <h:outputText value="#{community.name}" />
+	    </p:column>
+	 
+	    <p:column headerText="Description">
+	        <h:outputText value="#{community.description}" />
+	    </p:column>
+	    <p:column headerText="Public">
+	        <h:outputText value="#{community.publicState}" />
+	    </p:column>
+	    <p:column headerText="Status">
+	        <p:commandButton value="leave" update="growl" action="" />
+	    </p:column>
+	</p:dataTable>
+	
+	
+	
+	<p:dataTable var="community" value="#{communityBean.publicCommunities}">
+		<p:growl id="growl" life="2000" />
+		<f:facet name="myCommunites">
+        List of public Communities
+    	</f:facet>
+	    <p:column headerText="Author">
+	        <h:outputText value="#{community.author.mail}" />
+	    </p:column>
+	 
+	    <p:column headerText="Date">
+	        <h:outputText value="#{community.createTime}" />
+	    </p:column>
+	 
+	    <p:column headerText="Community Name">
+	        <h:outputText value="#{community.name}" />
+	    </p:column>
+	 
+	    <p:column headerText="Description">
+	        <h:outputText value="#{community.description}" />
+	    </p:column>
+	    <p:column headerText="Status">
+	        <p:commandButton value="join" update="growl" action="" />
+	    </p:column>
+	</p:dataTable>
+	
+	
+	
+<!-- 		<p:dataTable var="community" value="#{communityBean.publicCommunities}"> -->
+<!-- 		<p:growl id="growl" life="2000" /> -->
+<!-- 		<f:facet name="myCommunites"> -->
+<!--         List of public Communities -->
+<!--     	</f:facet> -->
+<!-- 	    <p:column headerText="Author"> -->
+<!-- 	        <h:outputText value="#{community.author.mail}" /> -->
+<!-- 	    </p:column> -->
+	 
+<!-- 	    <p:column headerText="Date"> -->
+<!-- 	        <h:outputText value="#{community.createTime}" /> -->
+<!-- 	    </p:column> -->
+	 
+<!-- 	    <p:column headerText="Community Name"> -->
+<!-- 	        <h:outputText value="#{community.name}" /> -->
+<!-- 	    </p:column> -->
+	 
+<!-- 	    <p:column headerText="Description"> -->
+<!-- 	        <h:outputText value="#{community.description}" /> -->
+<!-- 	    </p:column> -->
+<!-- 	    <p:column headerText="Status"> -->
+<!-- 	        <p:commandButton value="join" update="growl" action="" /> -->
+<!-- 	    </p:column> -->
+<!-- 	</p:dataTable> -->
+	
+<!-- 		<p:column headerText="Status"> -->
+<!-- 	    	<p:commandButton value="join" update="growl" id="disabled" disabled="false" action="" /> -->
+<!-- 	        <p:commandButton value="leave" update="growl" id="disabled" disabled="true" action="" /> -->
+<!-- 	    </p:column> -->
 </html>
+
+

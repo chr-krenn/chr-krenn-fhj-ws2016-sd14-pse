@@ -1,17 +1,19 @@
 package at.fhj.swd14.pse.person;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
+import javax.swing.text.html.Option;
 
+import at.fhj.swd14.pse.contact.Contact;
+import at.fhj.swd14.pse.contact.ContactPK;
 import at.fhj.swd14.pse.converter.PersonConverter;
 import at.fhj.swd14.pse.converter.PersonImageConverter;
 import at.fhj.swd14.pse.converter.StatusConverter;
-import at.fhj.swd14.pse.repository.PersonImageRepository;
-import at.fhj.swd14.pse.repository.PersonRepository;
-import at.fhj.swd14.pse.repository.PersonStatusRepository;
-import at.fhj.swd14.pse.repository.UserRepository;
+import at.fhj.swd14.pse.repository.*;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 
@@ -25,6 +27,9 @@ public class PersonServiceImpl implements PersonService {
 
 	@EJB
 	private PersonRepository repository;
+
+	@EJB
+	private ContactRepository contactRepository;
 	
 	@EJB
 	private UserRepository userRepo;
@@ -52,10 +57,46 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public Collection<PersonDto> findAllUser() {
-		return PersonConverter.convertToDtoList(repository.findAll());
+	public Collection<PersonDto> findAllUser(long loggedInUserID) {
+		Collection<PersonDto> resultList=PersonConverter.convertToDtoList(repository.findAll());
+
+		Person loggedInPerson=repository.findByUserId(loggedInUserID);
+		Collection<Contact> contacts=contactRepository.findByPersonId(loggedInPerson.getId());
+
+		resultList.forEach(p->p.setFriendState("Freund hinzufügen"));
+		//change friend state for already added friends
+		for(Contact contact : contacts){
+			long otherPersonID=contact.getContactPK().getPerson1Id();
+			if(otherPersonID==loggedInPerson.getId()){
+				otherPersonID=contact.getContactPK().getPerson2Id();
+			}
+			final long fOtherPersonID=otherPersonID;
+			resultList.stream().filter(p->p.getId()==fOtherPersonID).findFirst().get().setFriendState("Entfernen");
+		}
+
+		return resultList;
 	}
 
+
+	/**
+	 * Toggles the friend state of the loggedInUser with the other person
+	 * */
+	@Override
+	public void changeFriendState(long loggedInUserID, long otherPersonID) {
+		Collection<PersonDto> resultList=PersonConverter.convertToDtoList(repository.findAll());
+
+		Person loggedInPerson=repository.findByUserId(loggedInUserID);
+
+		Collection<Contact> existingContacts=contactRepository.findByPersonId(loggedInPerson.getId());
+		Optional<Contact> contactOptional=existingContacts.stream().filter(c->c.getContactPK().getPerson1Id()==otherPersonID || c.getContactPK().getPerson2Id()==otherPersonID).findFirst();
+		if(contactOptional.isPresent()){
+			//contact exists -> remove
+			contactRepository.remove(contactOptional.get());
+		}else{
+			//add new contact
+			contactRepository.save(new Contact(loggedInPerson.getId(), otherPersonID));
+		}
+	}
 	
 	
 	@Override

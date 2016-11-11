@@ -17,8 +17,9 @@ public interface PersonService {
 	PersonDto find(long id);
 	PersonDto findByUser(UserDto user);
 	void saveLoggedInPerson(PersonDto person);
-	Collection<PersonDto> findAllUser();
+	Collection<PersonDto> findAllUser(long loggedInUserId);
 	Collection<StatusDto> findAllStati();
 	void savePersonImage(PersonDto person, byte[] imageData, String contentType);
 	PersonImageDto getPersonImage(Long personid);
+	void changeFriendState(long loggedInUserID, long otherPersonID);
 }

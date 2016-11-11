@@ -43,6 +43,11 @@ public abstract class AbstractRepository<T> {
         entityManager.remove(t);
     }
 
+    public void flush()
+    {
+    	entityManager.flush();
+    }
+    
     public List<T> executeNamedQuery(String name) {
         TypedQuery<T> query = entityManager.createNamedQuery(name, entityClass);
         return query.getResultList();

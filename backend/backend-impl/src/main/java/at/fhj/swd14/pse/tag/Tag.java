@@ -1,13 +1,13 @@
 package at.fhj.swd14.pse.tag;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "tag")
+@NamedQueries({
+	@NamedQuery(name="Tag.findByName", query="SELECT t FROM Tag t WHERE t.name = LOWER(:name)"),
+})
 public class Tag implements Serializable{
 
     /**
@@ -16,6 +16,7 @@ public class Tag implements Serializable{
 	private static final long serialVersionUID = 5190605103970326377L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column

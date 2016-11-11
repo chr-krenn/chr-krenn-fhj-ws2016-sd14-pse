@@ -74,13 +74,13 @@ And finally we must add the datasource for this project to the standalone.xml of
 ```
     <security-domain name="sep-policy" cache-type="default">
         <authentication>
-            <login-module code="at.fhj.swd14.pse.security.SecureDatabaseServerLoginModule" flag="required">
-                <module-option name="dsJndiName" value="java:jboss/datasources/SEP"/>
-                <module-option name="principalsQuery" value="SELECT Id, Password, Salt FROM User WHERE Username=?"/>
-                <module-option name="rolesQuery" value="select Role, RoleGroup from User_Roles where Username=?"/>
-                <module-option name="principalClass" value="at.fhj.swd14.pse.security.DatabasePrincipal"/>
-                <module-option name="unauthenticatedIdentity" value="guest"/>
-            </login-module>
+                <login-module code="at.fhj.swd14.pse.security.SecureDatabaseServerLoginModule" flag="required">
+                    <module-option name="dsJndiName" value="java:jboss/datasources/SEP"/>
+                    <module-option name="principalsQuery" value="SELECT id, password, salt FROM user WHERE username=?"/>
+                    <module-option name="rolesQuery" value="select role, rolegroup from user_roles where username=?"/>
+                    <module-option name="principalClass" value="at.fhj.swd14.pse.security.DatabasePrincipal"/>
+                    <module-option name="unauthenticatedIdentity" value="guest"/>
+                </login-module>
         </authentication>
     </security-domain>  
 ```
@@ -110,4 +110,4 @@ Take the following two artifacts and deploy them to Wildfly by copying them to `
 ### URL's
 
 - localhost:8080/swd14-fe/ --> Welcome page (/index.xhtml)
-- localhost:8080/swd14-fe/protected/xxx --> User protected area (automatically forwarded to login if not logged in. after successfull login system redirects you to requested ressource)
+- localhost:8080/swd14-fe/ --> User protected area (automatically forwarded to login if not logged in. after successfull login system redirects you to requested ressource)

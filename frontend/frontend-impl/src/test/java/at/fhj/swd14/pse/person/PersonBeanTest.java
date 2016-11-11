@@ -85,7 +85,7 @@ public class PersonBeanTest {
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
     	
     	String path = unitUnderTest.showPersonByUserId();
-    	Assert.assertEquals("/protected/personTest", path);
+    	Assert.assertEquals("/person/personTest", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
     	PersonDtoTester.assertEquals(person, unitUnderTest.getPerson());
 
@@ -114,7 +114,7 @@ public class PersonBeanTest {
     	when(departmentService.findAll()).thenReturn(deps);
     	
     	String path = unitUnderTest.showLoggedInPerson();
-    	Assert.assertEquals("/protected/loggedInPersonTest", path);
+    	Assert.assertEquals("/person/loggedInPersonTest", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
     	PersonDtoTester.assertEquals(person, unitUnderTest.getPerson());
     	Assert.assertEquals(1, unitUnderTest.getStati().size());

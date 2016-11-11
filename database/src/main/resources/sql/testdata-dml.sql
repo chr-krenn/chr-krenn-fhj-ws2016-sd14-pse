@@ -10,21 +10,8 @@ INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`
 INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 2', 'Max', 'https://i.ytimg.com/vi/S4UG_l-CHF4/maxresdefault.jpg', 'Mustermann', 'Wien', '2', 'Abwesend', '2');
 
 #user_roles
-INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'user', 'Roles');
-INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student', 'admin', 'Roles');
-
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student1', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student2', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student3', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student4', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student5', 'user', 'Roles');
-
-#department
-INSERT INTO department VALUES(NULL,"IT");
-INSERT INTO department VALUES(NULL,"Accounting");
-
-#person_status
-INSERT INTO person_status VALUES('online');
-INSERT INTO person_status VALUES('offline');
-INSERT INTO person_status VALUES('abwesend');
-

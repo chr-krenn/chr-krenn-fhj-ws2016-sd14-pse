@@ -3,22 +3,19 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:p="http://primefaces.org/ui"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <section>
-        <h:form>
-            <table>
-                <tr>
-                    <td>Title:</td>
-                    <td><h:inputText value="#{newsBean.news.title}"/></td>
-                </tr>
-                <tr>
-                    <td>Message:</td>
-                    <td><h:inputText value="#{newsBean.news.message}"/></td>
-                </tr>
-            </table>
+       <h:form rendered="#{facesContext.externalContext.isUserInRole('user')}">
+           <table>
+               <tr>
+                   <td>Title:</td>
+                   <td><h:inputText value="#{newsBean.news.title}"/></td>
+               </tr>
+               <tr>
+                   <td>Message:</td>
+                   <td><h:inputText value="#{newsBean.news.message}"/></td>
+               </tr>
+           </table>
 
-            <p:commandButton value="News hinzufügen" action="#{newsBean.addNews()}"/>
-            <p:commandButton value="News hinzufügen" action="#{newsBean.editNews()}"/>
-        </h:form>
-    </section>
-
+           <p:commandButton value="News hinzufügen" action="#{newsBean.addNews()}"/>
+           <p:commandButton value="News editieren" action="#{newsBean.editNews()}"/>
+       </h:form>
 </ui:composition>

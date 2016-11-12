@@ -21,7 +21,16 @@ public class CommunityDto {
         this.id = id;
     }
     
-    private boolean publicState = false;
+    private String description;
+    public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	private boolean publicState = false;
     public boolean getPublicState(){
     	return this.publicState;
     }    

@@ -12,6 +12,6 @@
         <c:if test="#{facesContext.externalContext.isUserInRole('admin')}">
             <li><p:link outcome="administration" value="Administration"/></li>
         </c:if>
-        <li><p:link outcome="login" value="Logout" immediate="true" action="#{userBean.logout}"/></li>
+        <li><p:commandLink outcome="login" value="Logout" immediate="true" action="#{userBean.logout}"/></li>
     </ul>
 </ui:composition>

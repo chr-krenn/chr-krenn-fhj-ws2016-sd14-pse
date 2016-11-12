@@ -98,11 +98,17 @@ And finally we must add the datasource for this project to the standalone.xml of
 ```
 
 Also execute create.sql to setup database (testdata).
-User credentials: student1 / x
-User credentials: student2 / x
-User credentials: student3 / x
-User credentials: student4 / x
-User credentials: student5 / x
+
+### Credentials
+
+| Username        | Password   | Role  |
+| ------------- |:-------------:| -----:|
+| student1      | x    | user |
+| student2      | x    | user |
+| student3      | x    | user |
+| student4      | x    | user |
+| student5      | x    | user |
+| admin1        | x    | admin |
 
 In order to use the provided authentication config, mysql/mariadb has to be configured to use case-insensitve queries, for this purpose added 
 ```

@@ -1,15 +1,11 @@
 package at.fhj.swd14.pse.comment;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import at.fhj.swd14.pse.tag.Tag;
 import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.message.Message;
 
@@ -32,6 +28,9 @@ public class Comment implements Serializable {
 
 	@ManyToOne
 	private Message parentMessage;
+
+	@ManyToMany
+    private List<Tag> tags;
 
 	public Comment() {
 

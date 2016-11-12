@@ -191,11 +191,3 @@ CREATE TABLE IF NOT EXISTS message_tag
   tags_id          BIGINT        NOT NULL
 )
   ENGINE = INNODB;
-
-#create tag-comment relation
-CREATE TABLE IF NOT EXISTS comment_tag
-(
-  comment_id       BIGINT        NOT NULL,
-  tags_id          BIGINT        NOT NULL
-)
-  ENGINE = INNODB;

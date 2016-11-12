@@ -43,8 +43,8 @@ public class MessageTagHandler {
                     tagDto = TagConverter.convert(t);
                     tagService.save(tagDto);
                 }
-                // add Tag to Message
-                //message.addTag(tagDto);
+
+                message.addTag(TagConverter.convert(tagDto));
             }
             dto = MessageConverter.convert(message);
 

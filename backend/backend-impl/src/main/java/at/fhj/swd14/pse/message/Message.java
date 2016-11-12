@@ -64,7 +64,7 @@ public class Message implements Serializable {
     @ManyToOne(optional = true)
     private Community community;
 
-	@ManyToMany
+    @ManyToMany
 	private List<Tag> tags;
 
     @Size(max = 256)
@@ -115,6 +115,14 @@ public class Message implements Serializable {
 		child.setParentMessage(this);
 		childs.add(child);
 	}
+
+    public List<Tag> getTags() { return tags; }
+    public void setTags(List<Tag> tags) { this.tags = tags; }
+    public void addTag(Tag tag){
+        if(tags == null)
+            tags = new ArrayList<Tag>();
+        tags.add(tag);
+    }
 	
 	public User getRecipient() {
 		return recipient;

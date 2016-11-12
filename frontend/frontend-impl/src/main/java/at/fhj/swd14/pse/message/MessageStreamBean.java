@@ -17,8 +17,8 @@ import at.fhj.swd14.pse.community.CommunityDtoStub;
 import at.fhj.swd14.pse.user.UserDto;
 
 @Named
-@Stateful
-@ViewScoped
+//@Stateful
+//@ViewScoped
 public class MessageStreamBean implements Serializable {
 	// ---------- Member including Get/Set ------------
 	private static final long serialVersionUID = 1L;

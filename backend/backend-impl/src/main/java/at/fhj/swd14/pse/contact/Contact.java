@@ -13,8 +13,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "contact")
-//@NamedQueries({
-//        @NamedQuery(name = "Contact.findByPersonID", query = "SELECT c FROM Contact c WHERE person1_id=:personID OR person2_id=:personID")})
+@NamedQueries({
+        @NamedQuery(name = "Contact.findByPersonID", query = "SELECT c FROM Contact c WHERE person1_id=:personID OR person2_id=:personID")})
 public class Contact implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId

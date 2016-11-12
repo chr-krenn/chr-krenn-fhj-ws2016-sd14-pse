@@ -1,13 +1,16 @@
 package at.fhj.swd14.pse.community;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import at.fhj.swd14.pse.user.UserDto;
 
-public class CommunityDto {
+public class CommunityDto implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	public CommunityDto(Long id){
     	setId(id);

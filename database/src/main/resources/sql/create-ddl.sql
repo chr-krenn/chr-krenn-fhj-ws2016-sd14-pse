@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS user
 CREATE TABLE IF NOT EXISTS community (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '0',
-  `public` bit(1) NOT NULL,
-  `active` bit(1) NOT NULL,
+  `ispublic` bit(1) NOT NULL,
+  `isactive` bit(1) NOT NULL,
   `author_id` bigint(20) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

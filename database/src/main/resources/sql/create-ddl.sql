@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS community (
   `isactive` bit(1) NOT NULL,
   `author_id` bigint(20) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB;
 

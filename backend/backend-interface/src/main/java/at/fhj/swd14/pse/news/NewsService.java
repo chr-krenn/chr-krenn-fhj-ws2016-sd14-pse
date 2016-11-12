@@ -14,13 +14,23 @@ import javax.ejb.Remote;
 public interface NewsService {
 
     /**
-     * Saves or updates the given news and returns the news id.
+     * Saves the given news and returns the news id.
      *
      * @param news the news to save; must not be null
      * @return the id of the news
      * @throws NullPointerException if {@code news} is null
      */
     long save(NewsDto news);
+
+
+    /**
+     * Saves the given news and returns the news id.
+     *
+     * @param news the news to save; must not be null
+     * @return the id of the news
+     * @throws NullPointerException if {@code news} is null
+     */
+    long update(NewsDto news);
 
     /**
      * Returns the news for the given id.

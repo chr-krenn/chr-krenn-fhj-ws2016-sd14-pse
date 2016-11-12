@@ -48,9 +48,9 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
         1, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 2 DAY), DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 3 DAY));
 
 #test communities
-INSERT INTO `community` (`id`, `name`, `public`, `author_id`, `created`, `modified`) VALUES ('1', 'test1', true, 'student1', NULL, NULL);
-INSERT INTO `community` (`id`, `name`, `public`, `author_id`, `created`, `modified`) VALUES ('2', 'test2', true, 'student2', NULL, NULL);
-INSERT INTO `community` (`id`, `name`, `public`, `author_id`, `created`, `modified`) VALUES ('3', 'test3', true, 'student3', NULL, NULL);
-INSERT INTO `community` (`id`, `name`, `public`, `author_id`, `created`, `modified`) VALUES ('4', 'test4', true, 'student4', NULL, NULL);
+INSERT INTO `community` (`id`, `name`, `ispublic`, `author_id`, `created`, `modified`) VALUES ('1', 'test1', true, 'student1', NULL, NULL);
+INSERT INTO `community` (`id`, `name`, `ispublic`, `author_id`, `created`, `modified`) VALUES ('2', 'test2', true, 'student2', NULL, NULL);
+INSERT INTO `community` (`id`, `name`, `ispublic`, `author_id`, `created`, `modified`) VALUES ('3', 'test3', true, 'student3', NULL, NULL);
+INSERT INTO `community` (`id`, `name`, `ispublic`, `author_id`, `created`, `modified`) VALUES ('4', 'test4', true, 'student4', NULL, NULL);
 
 COMMIT;

@@ -46,7 +46,7 @@ public class CommunityTestHelper {
 		community.setId(1L);
 		community.setAuthor(author);
 		community.setName("Test Community");
-		community.setCreateTime(today);
+//		community.setCreateTime(today);
 		community.setPublicState(true);
 		community.setAllowedUsers(users);;
 		

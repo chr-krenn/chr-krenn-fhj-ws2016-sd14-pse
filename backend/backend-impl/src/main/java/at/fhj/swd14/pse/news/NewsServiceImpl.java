@@ -23,6 +23,13 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    public long update(NewsDto news) {
+        final News converted = NewsConverter.convert(Objects.requireNonNull(news));
+        newsRepository.update(converted);
+        return converted.getId();
+    }
+
+    @Override
     public NewsDto find(long id) {
         return NewsConverter.convert(newsRepository.find(id));
     }

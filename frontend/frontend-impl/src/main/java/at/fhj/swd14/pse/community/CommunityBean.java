@@ -106,11 +106,15 @@ public class CommunityBean implements Serializable{
 		
 		UserDto testUser = userService.find(currentUserId);
 		
-		this.createdCommunities = communityService.findByAuthorId(currentUserId);
-		this.joinedCommunities = communityService.findUserRelated(currentUserId);
-		this.publicCommunities = communityService.findUserRelated(currentUserId);
+		this.createdCommunities = new ArrayList<CommunityDto>();
+		this.joinedCommunities = new ArrayList<CommunityDto>();
+		this.publicCommunities = new ArrayList<CommunityDto>();
 		
-		// Just for testing...
+//		this.createdCommunities = communityService.findByAuthorId(currentUserId);
+//		this.joinedCommunities = communityService.findUserRelated(currentUserId);
+//		this.publicCommunities = communityService.findUserRelated(currentUserId);
+		
+//		// Just for testing...
 		CommunityDto test1 = new CommunityDto(currentUserId);
 		test1.setName("test1");
 		test1.setAuthor(testUser);
@@ -124,9 +128,6 @@ public class CommunityBean implements Serializable{
 		test3.setName("test3");
 		test3.setAuthor(testUser);
 		
-		this.createdCommunities = new ArrayList<CommunityDto>();
-		this.joinedCommunities = new ArrayList<CommunityDto>();
-		this.publicCommunities = new ArrayList<CommunityDto>();
 		
 		this.createdCommunities.add(test1);
 		this.createdCommunities.add(test2);

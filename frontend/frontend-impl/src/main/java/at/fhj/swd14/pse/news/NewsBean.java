@@ -7,12 +7,14 @@ import at.fhj.swd14.pse.user.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Date;
 
 @Named
@@ -26,6 +28,7 @@ public class NewsBean implements Serializable {
 	private NewsDto news;
     private static final Logger LOGGER = LogManager.getLogger(NewsBean.class);
 
+    private Collection<NewsDto> allNews;
     private Date activationDate;
     private Date terminationDate;
 
@@ -50,6 +53,12 @@ public class NewsBean implements Serializable {
 
         setActivationDate(Date.from(news.getActivation()));
         setTerminationDate(Date.from(news.getTermination()));
+    }
+
+    @PostConstruct
+    public void init()
+    {
+        this.allNews = newsService.findAll();
     }
 
     public NewsDto getNews() {
@@ -109,5 +118,13 @@ public class NewsBean implements Serializable {
 
     public void setActivationDate(Date activationDate) {
         this.activationDate = activationDate;
+    }
+
+    public Collection<NewsDto> getAllNews() {
+        return allNews;
+    }
+
+    public void setAllNews(Collection<NewsDto> allNews) {
+        this.allNews = allNews;
     }
 }

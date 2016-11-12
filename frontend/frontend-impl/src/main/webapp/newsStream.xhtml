@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+        
+    </h:head>
+	<h:body>
+		<h:form  id="scroller" style="width:50%">
+			 <p:dataScroller id="scroller_news" value="#{newsBean.allNews}"
+							 var="news" chunkSize="10" mode="inline" scrollHeight="500">
+				
+				<f:facet name="header">
+            		Scroll Down to Load More News
+        		</f:facet>
+				        <f:facet name="loader">
+            				<p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
+        		</f:facet>	
+				
+				 <h:panelGrid columns="2" style="width:50%" columnClasses="logo,detail">
+           			<p:outputPanel>
+                		<h:panelGrid columns="2" cellpadding="5">
+                    		<h:outputText value="Titel:" />
+                    		<h:outputText value="#{news.title}" style="font-weight: bold"/>
+ 
+                    		<h:outputText value="Gültig bis:" />
+                    		<h:outputText value="#{news.termination}" style="font-weight: bold"/>
+ 
+                    		<h:outputText value="Text:" />
+                    		<h:outputText value="#{news.message}" style="font-weight: bold"/>
+                		</h:panelGrid>
+            		</p:outputPanel>
+        		</h:panelGrid>
+			</p:dataScroller>
+		</h:form>
+		</h:body>
+</f:view>
+</html>

@@ -9,7 +9,7 @@
                <h:inputText value="#{newsBean.news.title}"/>
 
                <h:outputText value="Inhalt:" />
-               <h:inputText value="#{newsBean.news.message}"/>
+               <h:inputTextarea value="#{newsBean.news.message}"/>
 
                <h:outputText value="Gültig von:" />
                <p:calendar id="activation" value="#{newsBean.activationDate}" mindate="#{now}" />

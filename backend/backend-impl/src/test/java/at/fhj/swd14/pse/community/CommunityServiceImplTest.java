@@ -60,6 +60,8 @@ public class CommunityServiceImplTest {
 		Mockito.when(communityRepo.find(1L)).thenReturn(community);
 		CommunityDto expectedCommunity = service.find(1L);
 		
+		
+		
 	}
 	
 	@Test
@@ -69,6 +71,14 @@ public class CommunityServiceImplTest {
 		service.save(dummyCommDto);
 		
 		Mockito.verify(communityRepo,Mockito.times(1)).save(Mockito.any(Community.class));
+	}
+	
+	
+	@Test
+	public void testFindByAuthorId()
+	{	
+		Mockito.when(service.findByAuthorId(1L)).thenReturn(new ArrayList<CommunityDto>() );
+		service.findByAuthorId(1L);
 	}
 	
 	

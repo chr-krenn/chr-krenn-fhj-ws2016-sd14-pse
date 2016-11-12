@@ -15,15 +15,16 @@ CREATE TABLE IF NOT EXISTS user
   ENGINE = INNODB;
 
 #create table community
-CREATE TABLE IF NOT EXISTS `communities` (
+CREATE TABLE IF NOT EXISTS communities (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '0',
   `public` bit(1) NOT NULL,
+  `active` bit(1) NOT NULL,
   `author_id` bigint(20) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=INNODB;
 
 
 CREATE TABLE IF NOT EXISTS user_roles (

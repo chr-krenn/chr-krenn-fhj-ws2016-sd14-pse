@@ -21,6 +21,7 @@ INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student3', '
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student4', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student5', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('admin1'  , 'admin', 'Roles');
+INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('admin1'  , 'user', 'Roles');
 
 #news
 INSERT INTO news (title, message, author_id, activation, termination)

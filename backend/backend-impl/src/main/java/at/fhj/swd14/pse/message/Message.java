@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,6 +25,7 @@ import javax.validation.constraints.Size;
 import at.fhj.swd14.pse.comment.Comment;
 import at.fhj.swd14.pse.community.Community;
 import at.fhj.swd14.pse.user.User;
+import at.fhj.swd14.pse.tag.Tag;
 
 @Entity
 @Table(name = "message")
@@ -61,6 +63,9 @@ public class Message implements Serializable {
 
     @ManyToOne(optional = true)
     private Community community;
+
+	@ManyToMany
+	private List<Tag> tags;
 
     @Size(max = 256)
     @NotNull

@@ -1,7 +1,11 @@
 package at.fhj.swd14.pse.tag;
 
+import at.fhj.swd14.pse.comment.Comment;
+import at.fhj.swd14.pse.message.Message;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "tag")
@@ -21,6 +25,12 @@ public class Tag implements Serializable{
 
     @Column
     private String name;
+
+    @ManyToMany(mappedBy = "tags")
+    private List<Message> messages;
+
+    @ManyToMany(mappedBy = "tags")
+    private List<Comment> comments;
 
     public Tag(){}
 

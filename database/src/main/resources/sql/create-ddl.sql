@@ -173,3 +173,29 @@ CREATE TABLE IF NOT EXISTS comment
   `modified`       TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )
 ENGINE = INNODB;
+
+#create tag table
+CREATE TABLE IF NOT EXISTS tag
+(
+  id               BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name             VARCHAR(1024) NOT NULL,
+  `created`        TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified`       TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
+  ENGINE = INNODB;
+
+#create tag-message relation
+CREATE TABLE IF NOT EXISTS message_tag
+(
+  messages_id      BIGINT        NOT NULL,
+  tags_id          BIGINT        NOT NULL
+)
+  ENGINE = INNODB;
+
+#create tag-comment relation
+CREATE TABLE IF NOT EXISTS comment_tag
+(
+  comment_id       BIGINT        NOT NULL,
+  tags_id          BIGINT        NOT NULL
+)
+  ENGINE = INNODB;

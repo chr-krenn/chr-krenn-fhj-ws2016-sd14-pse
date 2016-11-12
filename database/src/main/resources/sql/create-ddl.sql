@@ -128,12 +128,14 @@ CREATE TABLE IF NOT EXISTS phonenumber (
 #create news table
 CREATE TABLE IF NOT EXISTS news
 (
-  id         BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  title      VARCHAR(256)  NOT NULL,
-  message    VARCHAR(1024) NOT NULL,
+  id            BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title         VARCHAR(256)  NOT NULL,
+  message       VARCHAR(1024) NOT NULL,
   author_id     BIGINT        NOT NULL REFERENCES person (id),
-  `created`  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created`     TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified`    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `activation`  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `termination` TIMESTAMP     NULL     DEFAULT NULL
 )
   ENGINE = INNODB;
 
@@ -143,7 +145,7 @@ CREATE TABLE IF NOT EXISTS message
   id           BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
   author_id    BIGINT        NOT NULL REFERENCES `user` (id),
   recipient_id BIGINT        NOT NULL REFERENCES `user` (id),
-  #community_id     BIGINT  NOT NULL REFERENCES `user` (id), TODO: uncomment as soon as the community table exists
+  community_id     BIGINT  NOT NULL REFERENCES `community` (id), #TODO: uncomment as soon as the community table exists
   title        VARCHAR(256)  NOT NULL,
   content      VARCHAR(1024) NOT NULL,
   `created`    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,

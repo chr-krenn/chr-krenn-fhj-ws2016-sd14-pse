@@ -15,6 +15,8 @@ public class NewsDto implements Serializable {
     private PersonDto author;
     private Instant created;
     private Instant modified;
+    private Instant activation;
+    private Instant termination;
 
     public Long getId() {
         return id;
@@ -62,5 +64,21 @@ public class NewsDto implements Serializable {
 
     public void setModified(Instant modified) {
         this.modified = modified;
+    }
+
+    public Instant getActivation() {
+        return activation;
+    }
+
+    public void setActivation(Instant activation) {
+        this.activation = activation;
+    }
+
+    public Instant getTermination() {
+        return termination;
+    }
+
+    public void setTermination(Instant termination) {
+        this.termination = termination;
     }
 }

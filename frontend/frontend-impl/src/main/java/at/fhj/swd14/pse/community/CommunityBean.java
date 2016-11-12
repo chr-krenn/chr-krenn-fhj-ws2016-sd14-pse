@@ -4,7 +4,9 @@
 package at.fhj.swd14.pse.community;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.faces.view.ViewScoped;
@@ -17,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 @Stateful
 @ViewScoped
 /**
- * @author schoeneg14
+ * @author schoeneg14, purkart
  *
  */
 public class CommunityBean implements Serializable{
@@ -30,6 +32,91 @@ public class CommunityBean implements Serializable{
 
 	@EJB(name = "ejb/CommunityService")
 	private CommunityService communityService;
+	
+	
+	private CommunityDto communityDto;
+	private String newName;
+	private String newDescription;
+	private boolean newPublicState;
+	public String getNewName() {
+		return newName;
+	}
 
-	private int test;
+	public void setNewName(String newName) {
+		this.newName = newName;
+	}
+
+	public String getNewDescription() {
+		return newDescription;
+	}
+
+	public void setNewDescription(String newDescription) {
+		this.newDescription = newDescription;
+	}
+
+	public boolean isNewPublicState() {
+		return newPublicState;
+	}
+
+	public void setNewPublicState(boolean newPublicState) {
+		this.newPublicState = newPublicState;
+	}
+
+	public List<CommunityDto> getCreatedCommunities() {
+		return createdCommunities;
+	}
+
+	public void setCreatedCommunities(List<CommunityDto> createdCommunities) {
+		this.createdCommunities = createdCommunities;
+	}
+
+	public List<CommunityDto> getJoinedCommunities() {
+		return joinedCommunities;
+	}
+
+	public void setJoinedCommunities(List<CommunityDto> joinedCommunities) {
+		this.joinedCommunities = joinedCommunities;
+	}
+
+	public List<CommunityDto> getPublicCommunities() {
+		return publicCommunities;
+	}
+
+	public void setPublicCommunities(List<CommunityDto> publicCommunities) {
+		this.publicCommunities = publicCommunities;
+	}
+
+	private List<CommunityDto> createdCommunities;
+	private List<CommunityDto> joinedCommunities;
+	private List<CommunityDto> publicCommunities;
+	
+	/**
+	 * Initializes the bean for the view
+	 */
+	@PostConstruct
+	public void init() {
+		LOGGER.debug("Initialising the CommunityBean");
+		long id = 1234;
+		this.createdCommunities = communityService.findByAuthorId(id);
+		this.joinedCommunities = communityService.findUserRelated(id);
+		this.publicCommunities = communityService.findUserRelated(id);
+	}
+
+	/**
+	 * Creates a new Community
+	 *
+	 */
+	public void createCommunity() {
+		LOGGER.debug("Creating new Community...");
+    	
+		// TODO Get UserDto for logged in user...
+		if(this.newName != null) {
+			/* TODO
+			CommunityDto newCommunity = this.communityDto.createCommunity(this.newName);
+			LOGGER.debug("Created new community with ID {}", newCommunity.getId());
+			*/
+		} else {
+			LOGGER.warn("Name is empty, can't create comunity");
+		}
+	}
 }

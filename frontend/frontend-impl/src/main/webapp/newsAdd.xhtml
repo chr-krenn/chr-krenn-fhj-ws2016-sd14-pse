@@ -4,16 +4,19 @@
         xmlns:p="http://primefaces.org/ui"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
        <h:form rendered="#{facesContext.externalContext.isUserInRole('user')}">
-           <table>
-               <tr>
-                   <td>Title:</td>
-                   <td><h:inputText value="#{newsBean.news.title}"/></td>
-               </tr>
-               <tr>
-                   <td>Message:</td>
-                   <td><h:inputText value="#{newsBean.news.message}"/></td>
-               </tr>
-           </table>
+           <p:panelGrid columns="2">
+               <h:outputText value="Titel:" />
+               <h:inputText value="#{newsBean.news.title}"/>
+
+               <h:outputText value="Inhalt:" />
+               <h:inputText value="#{newsBean.news.message}"/>
+
+               <h:outputText value="Gültig von:" />
+               <p:calendar id="activation" value="#{newsBean.activationDate}" mindate="#{now}" />
+
+               <h:outputText value="Gültig bis:" />
+               <p:calendar  id="termination" value="#{newsBean.terminationDate}" mindate="#{newsBean.activationDate}" />
+           </p:panelGrid>
 
            <p:commandButton value="News hinzufügen" action="#{newsBean.addNews()}"/>
            <p:commandButton value="News editieren" action="#{newsBean.editNews()}"/>

@@ -11,14 +11,6 @@
 	</h:head>
 	
 	<h:body>
-		<h:form id="form_newmessage" >
-			<h:inputText id="text_newmessage_title" value="#{messageStreamBean.message.title}">
-			</h:inputText>
-			<h:inputText id="text_newmessage_content" value="#{messageStreamBean.message.content}">
-			</h:inputText>
-			<h:commandButton value="Post Message" action="#{messageStreamBean.createMessage()}">
-			</h:commandButton>
-		</h:form>
 		<p:selectOneMenu id="select_community" value="#{messageStreamBean.currentCommunity}" style="width:150px" converter="communityConverter">
 			<p:ajax process="select_community" partialSubmit="true" listener="#{messageStreamBean.onCommunityChange}" update=":scroller:scroller_message"/>
 			<f:selectItems value="#{messageStreamBean.availableCommunities}" var="community" itemValue="#{community}" itemLabel="#{community.name}" />

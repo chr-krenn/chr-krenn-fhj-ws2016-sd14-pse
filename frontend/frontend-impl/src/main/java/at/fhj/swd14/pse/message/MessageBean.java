@@ -75,7 +75,7 @@ public class MessageBean implements Serializable {
     			message.setRecipient(recipient);
     	    	final long generatedId = messageService.save(message);
     	    	LOGGER.info("Created new message with ID {}", generatedId);
-    	    	//this.message = messageService.find(generatedId);
+    	    	this.message = messageService.find(generatedId);
     		}
     	
     	} else {

@@ -18,7 +18,6 @@ import at.fhj.swd14.pse.user.UserDto;
 public class Community implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
     @Id
     private Long id;
 

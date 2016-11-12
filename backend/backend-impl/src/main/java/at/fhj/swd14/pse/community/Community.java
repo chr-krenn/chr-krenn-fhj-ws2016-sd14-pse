@@ -50,7 +50,7 @@ public class Community implements Serializable {
 //		this.author = author;
     }
 
-    @Column
+    //@Column
     private boolean isPublic = false;
 
     public boolean getPublicState() {
@@ -72,7 +72,7 @@ public class Community implements Serializable {
 //        this.allowedUsers = allowedUsers;
     }
 
-    @Column
+    //@Column
     private Date createTime = new Date(0);
 
     public Date getCreateTime() {

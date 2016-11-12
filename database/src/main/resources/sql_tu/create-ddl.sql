@@ -1,5 +1,5 @@
 # select correct database
-USE pse;
+USE pse_tu;
 
 #create user table
 
@@ -18,19 +18,14 @@ CREATE TABLE IF NOT EXISTS user
 CREATE TABLE IF NOT EXISTS community (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '0',
-  `ispublic` bit(1) NOT NULL,
-  `isactive` bit(1) NOT NULL,
+  `public` bit(1) NOT NULL,
+  `active` bit(1) NOT NULL,
   `author_id` bigint(20) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS `community_user` (
-  `community_id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`community_id`,`user_id`)
-) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS user_roles (
   id         BIGINT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -153,8 +148,8 @@ CREATE TABLE IF NOT EXISTS message
 (
   id           BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
   author_id    BIGINT        NOT NULL REFERENCES `user` (id),
-  recipient_id BIGINT        NULL REFERENCES `user` (id),
-  community_id     BIGINT  NULL REFERENCES `community` (id), 
+  recipient_id BIGINT        NOT NULL REFERENCES `user` (id),
+  community_id     BIGINT  NOT NULL REFERENCES `community` (id), #TODO: uncomment as soon as the community table exists
   title        VARCHAR(256)  NOT NULL,
   content      VARCHAR(1024) NOT NULL,
   `created`    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,

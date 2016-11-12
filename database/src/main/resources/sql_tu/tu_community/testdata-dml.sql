@@ -1,5 +1,5 @@
 # select correct database
-USE pse;
+USE pse_tu;
 
 #user
 INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`) VALUES (NULL, 'student1', 'edfd3e005a2da55ee99bb4b49afa33c6fa1bc945d93db54f5cba483355462acefdfd77ce1602449c9365d4eafb342e210ed0d33df4ceed40b92fa515bab5f89d', 'CRzTaAbyUxxEUs56', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
@@ -11,8 +11,8 @@ INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`)
 
 
 #person
-INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 1', 'Typ', 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRxOXdV15ruEqhPAJJ5cMxWFBIqLexBFQIMLYWQ8aTjxFFjxnGBKuUOwCU', 'Test', 'Graz', '1', 'Online', '1');
-INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 2', 'Max', 'https://i.ytimg.com/vi/S4UG_l-CHF4/maxresdefault.jpg', 'Mustermann', 'Wien', '2', 'Abwesend', '2');
+INSERT INTO `pse_tu`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 1', 'Typ', 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRxOXdV15ruEqhPAJJ5cMxWFBIqLexBFQIMLYWQ8aTjxFFjxnGBKuUOwCU', 'Test', 'Graz', '1', 'Online', '1');
+INSERT INTO `pse_tu`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 2', 'Max', 'https://i.ytimg.com/vi/S4UG_l-CHF4/maxresdefault.jpg', 'Mustermann', 'Wien', '2', 'Abwesend', '2');
 
 #user_roles
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student1', 'user', 'Roles');
@@ -21,15 +21,6 @@ INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student3', '
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student4', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student5', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('admin1'  , 'admin', 'Roles');
-INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('admin1'  , 'user', 'Roles');
-
-#messages
-INSERT INTO `message` (author_id, recipient_id, community_id, title, content)
-	VALUES (1, NULL, NULL, 'First global Msg', 'Hey there guys, I just delivered the first global message!');
-INSERT INTO `message` (author_id, recipient_id, community_id, title, content)
-	VALUES (2, NULL, 2, 'First community message', 'This is my first message in this community. Be nice to it!');
-INSERT INTO `message` (author_id, recipient_id, community_id, title, content)
-	VALUES (2, 3, NULL, 'Important private message', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy...');
 
 #news
 INSERT INTO news (title, message, author_id, activation, termination)
@@ -47,10 +38,10 @@ VALUES ('News 4', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed 
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis a',
         1, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 2 DAY), DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 3 DAY));
 
-#test communities
+#test community
 INSERT INTO `community` (`id`, `name`, `public`, `author_id`, `created`, `modified`) VALUES ('1', 'test1', true, 'student1', NULL, NULL);
 INSERT INTO `community` (`id`, `name`, `public`, `author_id`, `created`, `modified`) VALUES ('2', 'test2', true, 'student2', NULL, NULL);
 INSERT INTO `community` (`id`, `name`, `public`, `author_id`, `created`, `modified`) VALUES ('3', 'test3', true, 'student3', NULL, NULL);
 INSERT INTO `community` (`id`, `name`, `public`, `author_id`, `created`, `modified`) VALUES ('4', 'test4', true, 'student4', NULL, NULL);
-
+        
 COMMIT;

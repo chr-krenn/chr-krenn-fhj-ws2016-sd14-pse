@@ -60,6 +60,8 @@ public class CommunityServiceImplTest {
 		Mockito.when(communityRepo.find(1L)).thenReturn(community);
 		CommunityDto expectedCommunity = service.find(1L);
 		
+		
+		
 	}
 	
 	@Test
@@ -70,6 +72,31 @@ public class CommunityServiceImplTest {
 		
 		Mockito.verify(communityRepo,Mockito.times(1)).save(Mockito.any(Community.class));
 	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testSaveCommunityFails() {
+		
+		CommunityDto dummyCommDto = CommunityConverter.convert(community);
+		service.save(dummyCommDto);
+		
+	}
+	
+	
+	@Test
+	public void testFindByAuthorId()
+	{		
+		//TODO anpassen bei der Implementierung, da sonnst error
+		Assert.assertNull(service.findByAuthorId(1L));
+	}
+	
+	@Test
+	public void testFindUserRelated(){
+		//TODO anpassen bei der Implementierung, da sonnst error
+		Assert.assertNull(service.findUserRelated(1L));
+		
+	}
+	
+	
 	
 	
 	

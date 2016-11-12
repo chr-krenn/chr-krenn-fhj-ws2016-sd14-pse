@@ -44,15 +44,15 @@
 
 	<h:form name="createCommunity">
 		<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
-	        <h:outputLabel for="topic" value="Community Name:" />
-			<p:inputText> #{communityBean.newName}</p:inputText> 
+	        <h:outputLabel for="name" value="Community Name:" />
+			<p:inputText id="name" value="#{communityBean.newName}"/> 
 			<h:outputLabel for="description" value="Description:" />
 			<p:inputTextarea rows="5" cols="30" counter="display" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" > #{communityBean.newDescription}</p:inputTextarea>
     		<h:outputText id="display" />
 	        <h:outputText value="Public: " />
 	        <p:selectBooleanCheckbox> #{communityBean.newPublicState}</p:selectBooleanCheckbox>
    		 </h:panelGrid>
-		<p:commandButton value="Submit"  icon="ui-icon-check" action="#{communityBean.createCommunity(communityBean.newName)}" />
+		<p:commandButton value="Submit"  icon="ui-icon-check" action="#{communityBean.createCommunity()}" />
 	</h:form>
 	
 	<h:form id="creatForm">

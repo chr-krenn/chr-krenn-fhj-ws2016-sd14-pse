@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -20,6 +20,7 @@ import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 
 @Named
+@SessionScoped
 /**
  * @author schoeneg14, purkart
  *
@@ -137,16 +138,16 @@ public class CommunityBean implements Serializable{
 	 *
 	 */
 	public void createCommunity() {
-		LOGGER.error("Creating new Community...");
+		LOGGER.debug("Creating new Community...");
     	
 		// TODO Get UserDto for logged in user...
 		if(this.newName != null) {
 			
 			//CommunityDto newCommunity = this.communityDto.createCommunity(this.newName);
-			//LOGGER.debug("Created new community with ID {}", newCommunity.getId());
+			LOGGER.debug("Created new community with name {}", this.newName);
 			
 		} else {
-			LOGGER.error("Name is empty, can't create comunity");
+			LOGGER.debug("Name is empty, can't create comunity");
 		}
 	}
 }

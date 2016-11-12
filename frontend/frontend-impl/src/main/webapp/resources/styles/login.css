@@ -1,0 +1,50 @@
+body,
+html body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+
+    font-family: 'glacial_indifference',sans-serif;
+    font-size: 18px;
+    background: #76b82a url('#{resource['images/logo.png']}') no-repeat 15vw 7vh;
+
+    color: white;
+    font-weight: 300;
+
+    padding: calc(9vh + 120px) 15vw;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.input {
+    margin-bottom: 0.8rem;
+}
+
+.submit, .input {
+    width: 40%;
+    min-width: 450px;
+}
+
+.input label {
+    width: 150px;
+    display: inline-block;
+}
+
+.input input {
+    width: calc(100% - 150px);
+    display: inline-block;
+    border: none;
+}
+
+.submit button {
+    float: right;
+    margin: 0;
+    width: 150px;
+}

@@ -1,20 +1,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:h="http://java.sun.com/jsf/html"
-   xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:p="http://primefaces.org/ui">
-   <h:head>
-      <title>Welcome</title>
-   </h:head>
-   <h:body>
-   <h3>Login</h3>
-      <h:form id="login" onsubmit="action='j_security_check';" prependId="false">
-        <h:panelGrid columns="2">
-	        <p:outputLabel for="j_username" value="Username" />
-	        <p:inputText id="j_username" maxlength="40" size="20" required="true" />            
-	        <p:outputLabel for="j_password" value="Password" />
-	        <p:password id="j_password" maxlength="40" size="20" required="true" />
-	        <p:commandButton id="submit" value="Login" ajax="false"/>
-   		</h:panelGrid>
-		</h:form> 
-   </h:body>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>PSE Login</title>
+    <h:outputStylesheet name="styles/login.css" />
+    <h:outputStylesheet name="styles/font/glacialindifference.css" />
+    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet"></link>
+    <link href="http://www.primefaces.org/prime-ui/demo/css/aristo/theme.css" rel="stylesheet"></link>
+    <link href="http://www.primefaces.org/prime-ui/demo/css/sh.css" rel="stylesheet"></link>
+    <link href="http://www.primefaces.org/css/all.css" rel="stylesheet"></link>
+</h:head>
+<h:body>
+    <h1>Login</h1>
+    <h:form id="login" onsubmit="action='j_security_check';" prependId="false">
+        <div class="input">
+            <p:outputLabel for="j_username" value="Username" />
+            <p:inputText id="j_username" maxlength="40" size="20" required="true" />
+        </div>
+        <div class="input">
+            <p:outputLabel for="j_password" value="Password" />
+            <p:password id="j_password" maxlength="40" size="20" required="true" />
+        </div>
+        <div class="submit">
+            <p:commandButton id="submit" value="Login" ajax="false"/>
+        </div>
+    </h:form>
+</h:body>
 </html>

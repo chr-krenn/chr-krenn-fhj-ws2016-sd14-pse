@@ -18,9 +18,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import at.fhj.swd14.pse.converter.CommunityConverter;
 import at.fhj.swd14.pse.converter.PersonConverter;
 import at.fhj.swd14.pse.converter.StatusConverter;
 import at.fhj.swd14.pse.converter.UserConverter;
+import at.fhj.swd14.pse.person.PersonDto;
+import at.fhj.swd14.pse.person.PersonImage;
 import at.fhj.swd14.pse.repository.CommunityRepository;
 import at.fhj.swd14.pse.repository.PersonRepository;
 import at.fhj.swd14.pse.repository.PersonStatusRepository;
@@ -57,6 +60,13 @@ public class CommunityServiceImplTest {
 		
 	}
 	
-	
+	@Test
+	public void testSaveCommunity()
+	{
+		CommunityDto dummyCommDto = CommunityConverter.convert(community);		
+		service.save(dummyCommDto);
+		
+		Mockito.verify(communityRepo,Mockito.times(1)).save(Mockito.any(Community.class));
+	}
 	
 }

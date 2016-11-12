@@ -29,6 +29,14 @@ public class CommunityDto {
     	this.publicState = publicState;
     }
     
+    private boolean activeState = false;
+    public boolean getActiveState(){
+    	return this.activeState;
+    }    
+    public void setActiveState(boolean activeState){
+    	this.activeState = activeState;
+    }
+    
     private String name;
 	public String getName() {
 		return name;

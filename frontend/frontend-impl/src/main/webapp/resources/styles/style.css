@@ -1,0 +1,132 @@
+/* ================================= */
+/* Base styles
+/* ================================= */
+html,
+html body {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'glacial_indifference',sans-serif;
+    font-size: 14px;
+    color: #2c2727;
+    font-weight: 300;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1, h2, h3 {
+    font-weight: 500;
+    font-size: 1.75rem;
+}
+
+
+/* ================================= */
+/* Structure
+/* ================================= */
+nav,
+header,
+body {display:block; width: 100vw; }
+nav {
+    background: #76b82a;
+    height: 90px;
+}
+nav > div {
+    width: 100%;
+    max-width: 1280px;
+    height: 100%;
+    margin: 0 auto;
+    background: transparent url('#{resource['images/logo.png']}') no-repeat 1.5rem center / 100px;
+}
+nav > div ul {
+    display: inline-block;
+    float: right;
+    list-style: none;
+    margin: 30px 0;
+}
+nav > div ul li {
+    float: left;
+    margin-left: 24px;
+}
+nav > div ul li a,
+nav > div ul li a:visited,
+nav > div ul li a:hover {
+    text-decoration: none;
+    color: white;
+    padding: 0 18px;
+    border-radius: 15px;
+    line-height: 30px;
+    display: block;
+    -webkit-transition: all 300ms ease-out;
+    -moz-transition: all 300ms ease-out;
+    -ms-transition: all 300ms ease-out;
+    -o-transition: all 300ms ease-out;
+    transition: all 300ms ease-out;
+}
+nav > div ul li a:hover {
+    background: #6daa27;
+    -webkit-box-shadow: inset 0 0 6px rgba(130,133,130,0.5);
+    -moz-box-shadow: inset 0 0 6px rgba(130,133,130,0.5);
+    box-shadow: inset 0 0 6px rgba(130,133,130,0.5);
+}
+
+
+body {
+    background: #ffffff;
+}
+header {
+    background: #2c2727;
+    height: 240px;
+}
+.main {
+    width: 100%;
+    margin: -240px auto 0;
+    max-width: 1280px;
+    background: rgba(255,255,255,.1);
+    min-height: calc(100vh - 120px);
+    box-shadow: 0 10px 10px rgba(40,40,40,.2);
+}
+.main .content-ctr,
+.main .content-lft,
+.main .content-rgt {
+    display: block;
+    float: left;
+    padding: 1rem 2rem;
+}
+.main .content-ctr {
+    background: #ffffff;
+    margin-top: 60px;
+    width: calc(100% - 360px);
+    min-height: calc(100vh - 150px);
+    box-shadow: 0 10px 10px rgba(40,40,40,.2);
+}
+.main .content-lft,
+.main .content-rgt {
+    min-height: 240px;
+}
+.main .content-lft {
+    width: 120px
+}
+.main .content-rgt {
+    width: 240px;
+}
+
+/* ================================= */
+/* Styles
+/* ================================= */
+
+
+/* ================================= */
+/* Helper classes
+/* ================================= */
+.clearfix:after {
+    content: '';
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}

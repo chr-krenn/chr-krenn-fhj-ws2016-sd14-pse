@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS user
   ENGINE = INNODB;
 
 #create table community
-CREATE TABLE IF NOT EXISTS communities (
+CREATE TABLE IF NOT EXISTS community (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '0',
   `public` bit(1) NOT NULL,
@@ -26,6 +26,11 @@ CREATE TABLE IF NOT EXISTS communities (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB;
 
+CREATE TABLE IF NOT EXISTS `community_user` (
+  `community_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`community_id`,`user_id`)
+) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS user_roles (
   id         BIGINT      NOT NULL AUTO_INCREMENT PRIMARY KEY,

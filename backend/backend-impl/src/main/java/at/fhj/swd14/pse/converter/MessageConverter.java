@@ -22,7 +22,7 @@ public class MessageConverter {
         MessageDto dto = new MessageDto(message.getId());
         dto.setAuthor(UserConverter.convert(message.getAuthor()));
         dto.setRecipient(UserConverter.convert(message.getRecipient()));
-        dto.setCommunityId(message.getCommunityId());
+        dto.setCommunity(CommunityConverter.convert(message.getCommunity()));
         dto.setTitle(message.getTitle());
         dto.setContent(message.getContent());
         dto.setCreated(message.getCreated());
@@ -38,7 +38,7 @@ public class MessageConverter {
         Message message = new Message(dto.getId());
         message.setAuthor(UserConverter.convert(dto.getAuthor()));
         message.setRecipient(UserConverter.convert(dto.getRecipient()));
-        message.setCommunityId(dto.getCommunityId());
+        message.setCommunity(CommunityConverter.convert(dto.getCommunity()));
         message.setTitle(dto.getTitle());
         message.setContent(dto.getContent());
         message.setChilds(new ArrayList<>(CommentConverter.convertToDoList(dto.getChilds())));

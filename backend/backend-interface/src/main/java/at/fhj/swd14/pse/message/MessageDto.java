@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import at.fhj.swd14.pse.comment.CommentDto;
+import at.fhj.swd14.pse.community.CommunityDto;
 import at.fhj.swd14.pse.user.UserDto;
 
 public class MessageDto implements Serializable {
@@ -19,7 +20,7 @@ public class MessageDto implements Serializable {
 	private UserDto author;
 	private UserDto recipient;
 	
-	private Long communityId; //TODO: add object-composition as soon as the communityDto is implemented 
+	private CommunityDto community; 
 
 	private String title;
 	private String content;
@@ -77,14 +78,14 @@ public class MessageDto implements Serializable {
 		this.recipient = recipient;
 	}
 	
-	public Long getCommunityId() {
-		return communityId;
+	public CommunityDto getCommunity() {
+		return community;
 	}
 
-	public void setCommunityId(Long communityId) {
-		this.communityId = communityId;
+	public void setCommunity(CommunityDto community) {
+		this.community = community;
 	}
-
+	
 	public String getTitle() {
 		return title;
 	}
@@ -132,7 +133,7 @@ public class MessageDto implements Serializable {
                 "id=" + getId() +
                 "recipientId=" + getRecipient() +
                 ", userId='" + getAuthor().getId() + '\'' +
-                ", communityId='" + getCommunityId() + '\'' +
+                ", communityId='" + getCommunity() + '\'' +
                 ", title='" + getTitle() + '\'' +
                 '}';
 	}

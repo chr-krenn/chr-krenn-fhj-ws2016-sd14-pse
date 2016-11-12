@@ -67,7 +67,7 @@ public class MessageBean implements Serializable {
     			message.setAuthor(currentUser);
     			// TODO: insert accurate community id - might be null in future!
     			long communityId = 1;
-    			message.setCommunityId(communityId);
+    			//message.setCommunity(community); TODO: implement set Community function
     			// TODO: insert accurate recipient - might be null in future!
     			UserDto recipient = new UserDto();
     			long recpipientId = 1;

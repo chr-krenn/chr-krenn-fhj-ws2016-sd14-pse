@@ -17,10 +17,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.swing.table.TableStringConverter;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import at.fhj.swd14.pse.comment.Comment;
+import at.fhj.swd14.pse.community.Community;
 import at.fhj.swd14.pse.user.User;
 
 @Entity
@@ -33,9 +35,9 @@ import at.fhj.swd14.pse.user.User;
 
 	//TODO: finish query so that only relevant messages are returned (global, own, joined Community)
 	// especially: change to community entity as soon as it's implemented!!
-	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.community_id = :communityId"),
+	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.community.id = :communityId"),
 	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m"),
-	@NamedQuery(name="Message.findGlobalMessages", query="SELECT m FROM Message m WHERE m.community_id IS NULL AND "
+	@NamedQuery(name="Message.findGlobalMessages", query="SELECT m FROM Message m WHERE m.community IS NULL AND "
 			+ "m.recipient IS NULL")
 	
 	
@@ -54,11 +56,11 @@ public class Message implements Serializable {
     @ManyToOne
     private User author;
     
-    @ManyToOne
+    @ManyToOne(optional=true)
     private User recipient;
-	
-    @Column
-	private Long community_id; //TODO: add community relation as soon as the community-entity is implemented
+
+    @ManyToOne(optional = true)
+    private Community community;
 
     @Size(max = 256)
     @NotNull
@@ -117,12 +119,13 @@ public class Message implements Serializable {
 		this.recipient = recipient;
 	}
 	
-	public Long getCommunityId() {
-		return community_id;
+	public Community getCommunity() {
+		return community;
 	}
-	public void setCommunityId(Long communityId) {
-		this.community_id = communityId;
+	public void setCommunity(Community community) {
+		this.community = community;
 	}
+	
 	public String getTitle() {
 		return title;
 	}
@@ -148,7 +151,7 @@ public class Message implements Serializable {
 		return "Message{" +
                 "id=" + getId() +
                 ", userId='" + getAuthor() + '\'' +
-                ", communityId='" + getCommunityId() + '\'' +
+                ", communityId='" + getCommunity() + '\'' +
                 ", title='" + getTitle() + '\'' +
                 '}';
 	}

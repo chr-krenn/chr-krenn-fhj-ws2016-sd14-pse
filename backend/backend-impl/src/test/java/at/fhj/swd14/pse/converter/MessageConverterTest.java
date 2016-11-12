@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import at.fhj.swd14.pse.comment.Comment;
 import at.fhj.swd14.pse.comment.CommentDto;
+import at.fhj.swd14.pse.community.Community;
+import at.fhj.swd14.pse.community.CommunityDto;
 import at.fhj.swd14.pse.message.Message;
 import at.fhj.swd14.pse.message.MessageDto;
 import at.fhj.swd14.pse.user.User;
@@ -22,6 +24,8 @@ public class MessageConverterTest {
 	private static UserDto authorDto;
 	private static User recipient;
 	private static UserDto recipientDto;
+	private static Community community;
+	private static CommunityDto communityDto;
 	
 	// TODO test with community class
 	private static Long communityId;
@@ -38,6 +42,10 @@ public class MessageConverterTest {
 		recipient.setMail("recipient@swd14.com");
 		recipientDto = new UserDto(200L);
 		recipient.setMail("recipient@swd14.com");
+		
+		community = new Community();
+		community.setId(300L);
+		communityDto = new CommunityDto(300L);
 		
 		communityId = 1L;
 	}
@@ -88,6 +96,7 @@ public class MessageConverterTest {
 		assertEquals(expected.getId(), actual.getId());
 		assertEquals(expected.getAuthor().getId(), actual.getAuthor().getId());
 		assertEquals(expected.getRecipient().getId(), actual.getRecipient().getId());
+		assertEquals(expected.getCommunity().getId(), actual.getCommunity().getId());
 		assertEquals(expected.getTitle(), actual.getTitle());
 		assertEquals(expected.getContent(), actual.getContent());
 		assertEquals(expected.getChilds().size(), actual.getChilds().size());
@@ -101,6 +110,7 @@ public class MessageConverterTest {
 		assertEquals(expected.getId(), actual.getId());
 		assertEquals(expected.getAuthor().getId(), actual.getAuthor().getId());
 		assertEquals(expected.getRecipient().getId(), actual.getRecipient().getId());
+		assertEquals(expected.getCommunity().getId(), actual.getCommunity().getId());
 		assertEquals(expected.getTitle(), actual.getTitle());
 		assertEquals(expected.getContent(), actual.getContent());
 		assertEquals(expected.getChilds().size(), actual.getChilds().size());
@@ -115,7 +125,7 @@ public class MessageConverterTest {
 		Message m = new Message(id);
 		m.setAuthor(author);
 		m.setRecipient(recipient);
-		m.setCommunityId(communityId);
+		m.setCommunity(community);
 		m.setTitle(title);
 		m.setContent(content);
 		m.setChilds(createCommentEntities());
@@ -126,7 +136,7 @@ public class MessageConverterTest {
 		MessageDto dto = new MessageDto(id);
 		dto.setAuthor(authorDto);
 		dto.setRecipient(recipientDto);
-		dto.setCommunityId(communityId);
+		dto.setCommunity(communityDto);
 		dto.setTitle(title);
 		dto.setContent(content);
 		dto.setChilds(createCommentDtos());

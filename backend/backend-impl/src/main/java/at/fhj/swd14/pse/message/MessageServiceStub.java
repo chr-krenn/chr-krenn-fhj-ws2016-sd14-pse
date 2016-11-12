@@ -1,17 +1,12 @@
 package at.fhj.swd14.pse.message;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import at.fhj.swd14.pse.comment.CommentDto;
-import at.fhj.swd14.pse.converter.MessageConverter;
-import at.fhj.swd14.pse.message.MessageDto;
-import at.fhj.swd14.pse.message.MessageService;
 import at.fhj.swd14.pse.repository.MessageRepository;
 import at.fhj.swd14.pse.user.UserDto;
 
@@ -37,7 +32,7 @@ public class MessageServiceStub implements MessageService {
 		MessageDto message = new MessageDto();
 		message.setId(id);
 		message.setAuthor(author);
-		message.setCommunityId(1L);
+		//message.setCommunityId(1L);
 		message.setContent("FindById_" + id + "_Content_" + message.getId());
 		message.setTitle("Title_" + message.getId());
 		return new MessageDto(id);
@@ -81,7 +76,7 @@ public class MessageServiceStub implements MessageService {
 			MessageDto message = new MessageDto();
 			message.setId((long) i);
 			message.setAuthor(author);
-			message.setCommunityId(1L);
+			//message.setCommunityId(1L);
 			message.setContent(prefix + "_" + id + "_Content_" + message.getId());
 			message.setTitle("Title_" + message.getId());
 

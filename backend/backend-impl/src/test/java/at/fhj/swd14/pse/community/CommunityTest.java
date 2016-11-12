@@ -9,7 +9,7 @@ import org.junit.Test;
 public class CommunityTest {
 
 	@BeforeClass
-	public void beforeClass(){
+	public static void beforeClass(){
 		//drop table
 	}
 	
@@ -32,7 +32,7 @@ public class CommunityTest {
 	
 	
 	@AfterClass
-	public void afterClass(){
+	public static void afterClass(){
 		//drop create table
 	}
 	

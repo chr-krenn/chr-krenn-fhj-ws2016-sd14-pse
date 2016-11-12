@@ -30,19 +30,6 @@ public class MessageStreamBean implements Serializable {
 
 	@EJB(name = "ejb/MessageService")
 	private MessageService messageService;
-	
-	/**
-	 * MessageDto for new messages
-	 */
-	private MessageDto message;
-	
-	public MessageDto getMessage() {
-		return this.message;
-	}
-	
-	public void setMessage(MessageDto message) {
-		this.message = message;
-	}
 
 	/**
 	 * The CommunityDto to use
@@ -146,7 +133,6 @@ public class MessageStreamBean implements Serializable {
 	*/
 	public MessageStreamBean() {
     	LOGGER.debug("Create: " + MessageStreamBean.class.getSimpleName());
-    	this.message = new MessageDto();
 	}
 	
 	/**
@@ -189,28 +175,6 @@ public class MessageStreamBean implements Serializable {
 		}
 
 		return new ArrayList<CommentDto>();
-	}
-
-	/**
-	 * Creates a new Message via MessageService
-	 *
-	 * @param title
-	 *            The Messages title
-	 * @param content
-	 *            The Messages content
-	 */
-	public void createMessage() {
-		LOGGER.debug("Creating message");
-    	
-		if(currentCommunity != null) {
-			this.message.setCommunityId(currentCommunity.getId());
-		}
-		// TODO: add author and community/recipient - check which of those applies
- 
-		final long generatedId = messageService.save(new MessageDto());
-		LOGGER.debug("Created new message with ID {}", generatedId);
-
-		this.message = messageService.find(generatedId);
 	}
 
 	/**

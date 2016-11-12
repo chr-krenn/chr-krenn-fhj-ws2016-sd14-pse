@@ -50,11 +50,12 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public List<MessageDto> findUserRelated(Long userId) {
-		Map<String, Object> parameter = new HashMap<>();
-		parameter.put("userId", userId);
+		
 		
 		//TODO: query isn't implemented yet
-		return executeNamedQuery("Message.findUserRelated", parameter);
+		//Map<String, Object> parameter = new HashMap<>();
+		//parameter.put("userId", userId);
+		return executeNamedQuery("Message.findUserRelated");
 	}
 
 	@Override

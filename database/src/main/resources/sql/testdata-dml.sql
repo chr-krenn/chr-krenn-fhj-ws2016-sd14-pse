@@ -23,6 +23,14 @@ INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student5', '
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('admin1'  , 'admin', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('admin1'  , 'user', 'Roles');
 
+#messages
+INSERT INTO `message` (author_id, recipient_id, community_id, title, content)
+	VALUES (1, NULL, NULL, 'First global Msg', 'Hey there guys, I just delivered the first global message!');
+INSERT INTO `message` (author_id, recipient_id, community_id, title, content)
+	VALUES (2, NULL, 2, 'First community message', 'This is my first message in this community. Be nice to it!');
+INSERT INTO `message` (author_id, recipient_id, community_id, title, content)
+	VALUES (2, 3, NULL, 'Important private message', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy...');
+
 #news
 INSERT INTO news (title, message, author_id, activation, termination)
 VALUES ('News 1', 'Short News Message', 1, CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 DAY));

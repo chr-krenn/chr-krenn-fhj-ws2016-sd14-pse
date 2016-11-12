@@ -4,14 +4,16 @@
         xmlns:p="http://primefaces.org/ui"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <ul>
-        <li><p:link outcome="index" value="Start"/></li>
-        <li><p:link outcome="user" value="Profile"/></li>
-        <li><p:link outcome="users" value="Users"/></li>
-        <li><p:link outcome="communities" value="Communities"/></li>
-        <c:if test="#{facesContext.externalContext.isUserInRole('admin')}">
-            <li><p:link outcome="administration" value="Administration"/></li>
-        </c:if>
-        <li><p:commandLink outcome="login" value="Logout" immediate="true" action="#{userBean.logout}"/></li>
-    </ul>
+    <div>
+        <ul>
+            <li><p:link outcome="index" value="Start"/></li>
+            <li><p:link outcome="user" value="Profile"/></li>
+            <li><p:link outcome="users" value="Users"/></li>
+            <li><p:link outcome="communities" value="Communities"/></li>
+            <c:if test="#{facesContext.externalContext.isUserInRole('admin')}">
+                <li><p:link outcome="administration" value="Administration"/></li>
+            </c:if>
+            <li><p:commandLink outcome="login" value="Logout" immediate="true" action="#{userBean.logout}"/></li>
+        </ul>
+    </div>
 </ui:composition>

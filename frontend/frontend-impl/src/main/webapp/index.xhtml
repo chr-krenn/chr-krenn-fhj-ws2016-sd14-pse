@@ -1,23 +1,65 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:h="http://java.sun.com/jsf/html"
-   xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:p="http://primefaces.org/ui">
-   <h:head>
-      <title>Welcome</title>
-   </h:head>
-   <h:body>
-	<h3>Welcome to PSE</h3>
-	<h:form>
-    <p:commandButton type="submit" immediate="true"  action="#{userBean.logout}" value="Logout" icon="ui-icon-extlink" />
-    <p><h:commandLink action="#{personBean.showPersonByUserId}"
-        value="PersonTest">
-        <f:param name="userId" value="1" />
-    </h:commandLink></p>
-    <p><h:commandLink action="#{personBean.showLoggedInPerson}"
-        value="LoggedInPersonTest"></h:commandLink></p>       
-    </h:form><br/>
-    <p:link outcome="person/personShowAllTest" value="ShowAllPersons"> </p:link>
-    <br/>
-    <p:link outcome="community" value="Community Management"> </p:link>
-   </h:body>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Welcome</title>
+    <h:outputStylesheet name="styles/font/glacialindifference.css" />
+    <h:outputStylesheet name="styles/style.css" />
+    <link href="development/prime-ui-0.9.5.css" rel="stylesheet"></link>
+    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"
+          rel="stylesheet"></link>
+    <link href="http://www.primefaces.org/prime-ui/demo/css/aristo/theme.css"
+          rel="stylesheet"></link>
+    <link href="http://www.primefaces.org/prime-ui/demo/css/sh.css"
+          rel="stylesheet"></link>
+    <link href="http://www.primefaces.org/css/all.css" rel="stylesheet"></link>
+    <link href="styles/style.css" rel="stylesheet"></link>
+</h:head>
+<h:body>
+    <nav>
+        <ui:include src="navTop.xhtml" />
+    </nav>
+    <header>
+    </header>
+    <div class="main clearfix">
+        <section class="content-lft">
+        </section>
+        <section class="content-ctr">
+            <ui:include src="messageAdd.xhtml" />
+            <ui:include src="messagestream.xhtml" />
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <hr></hr>
+            <h:form>
+                <p:commandButton type="submit" immediate="true"  action="#{userBean.logout}" value="Logout" icon="ui-icon-extlink" />
+            <p>
+                <h:commandLink action="#{personBean.showPersonByUserId}" value="PersonTest">
+                    <f:param name="userId" value="1" />
+                </h:commandLink>
+            </p>
+            <p>
+                <h:commandLink action="#{personBean.showLoggedInPerson}"
+                value="LoggedInPersonTest"></h:commandLink></p>
+            </h:form>
+
+            <br/>
+                <p:link outcome="person/personShowAllTest" value="ShowAllPersons"> </p:link>
+                <br/>
+            <p:link outcome="community" value="Community Management"> </p:link>
+        </section>
+        <section class="content-rgt">
+            <h2>Dokumente</h2>
+            <h2>News</h2>
+            <ui:include src="newsAdd.xhtml" />
+            <ui:include src="newsStream.xhtml" />
+        </section>
+    </div>
+</h:body>
 </html>
+

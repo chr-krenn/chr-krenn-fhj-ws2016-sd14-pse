@@ -108,7 +108,7 @@ Also execute create.sql to setup database (testdata).
 | student3      | x    | user |
 | student4      | x    | user |
 | student5      | x    | user |
-| admin1        | x    | admin |
+| admin1        | x    | admin,user |
 
 In order to use the provided authentication config, mysql/mariadb has to be configured to use case-insensitve queries, for this purpose added 
 ```

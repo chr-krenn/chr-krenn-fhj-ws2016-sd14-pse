@@ -13,7 +13,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 
@@ -31,7 +30,7 @@ public class NewsBean implements Serializable {
     private Collection<NewsDto> allNews;
     private Date activationDate;
     private Date terminationDate;
-
+    private Date currentDate;
     private UserDto currentUser;
     @EJB(name = "ejb/NewsService")
     private NewsService newsService;
@@ -48,17 +47,16 @@ public class NewsBean implements Serializable {
     public NewsBean() {
         LOGGER.debug("Create: " + NewsBean.class.getSimpleName());
         this.news = new NewsDto();
-        this.news.setActivation(Instant.now());
-        this.news.setTermination(Instant.now());
-
-        setActivationDate(Date.from(news.getActivation()));
-        setTerminationDate(Date.from(news.getTermination()));
     }
 
     @PostConstruct
     public void init()
     {
-        this.allNews = newsService.findAll();
+        this.allNews = newsService.findAllOnline();
+
+        currentDate = new Date();
+        setActivationDate(currentDate);
+        setTerminationDate(currentDate);
     }
 
     public NewsDto getNews() {
@@ -126,5 +124,13 @@ public class NewsBean implements Serializable {
 
     public void setAllNews(Collection<NewsDto> allNews) {
         this.allNews = allNews;
+    }
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
     }
 }

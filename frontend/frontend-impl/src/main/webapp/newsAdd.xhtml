@@ -12,7 +12,7 @@
                <h:inputTextarea value="#{newsBean.news.message}"/>
 
                <h:outputText value="Gültig von:" />
-               <p:calendar id="activation" value="#{newsBean.activationDate}" mindate="#{now}" />
+               <p:calendar id="activation" value="#{newsBean.activationDate}" mindate="#{newsBean.currentDate}" />
 
                <h:outputText value="Gültig bis:" />
                <p:calendar  id="termination" value="#{newsBean.terminationDate}" mindate="#{newsBean.activationDate}" />

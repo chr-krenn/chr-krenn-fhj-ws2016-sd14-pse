@@ -60,13 +60,6 @@ public class CommunityServiceImplTest {
 		
 	}
 	
-	@Test
-	public void testSaveCommunity()
-	{
-		CommunityDto dummyCommDto = CommunityConverter.convert(community);		
-		service.save(dummyCommDto);
-		
-		Mockito.verify(communityRepo,Mockito.times(1)).save(Mockito.any(Community.class));
-	}
+
 	
 }

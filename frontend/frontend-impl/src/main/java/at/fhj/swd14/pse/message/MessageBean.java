@@ -3,6 +3,7 @@ package at.fhj.swd14.pse.message;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -15,7 +16,7 @@ import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 
 @Named
-@SessionScoped
+@RequestScoped
 public class MessageBean implements Serializable {
 
 	private static final long serialVersionUID = -163448660457877436L;

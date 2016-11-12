@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.user.UserDto;
-
+/**
+ * Dto for a like of a comment.
+ * @author Thomas
+ *
+ */
 public class CommentLikeDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -1,0 +1,18 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<h:form rendered="#{facesContext.externalContext.isUserInRole('user')}">
+			<label>Title:</label>
+			<h:inputText value="#{messageBean.message.title}">
+			</h:inputText><br/>
+			<label>Message Content:</label>
+			<h:inputText value="#{messageBean.message.content}">
+			</h:inputText><br/>
+			<h:commandButton value="Post Message" action="#{messageBean.createMessage()}">
+			</h:commandButton>
+	</h:form>
+
+</ui:composition>

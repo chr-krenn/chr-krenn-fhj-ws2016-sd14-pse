@@ -33,9 +33,9 @@ import at.fhj.swd14.pse.user.User;
 
 	//TODO: finish query so that only relevant messages are returned (global, own, joined Community)
 	// especially: change to community entity as soon as it's implemented!!
-	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.communityId = :communityId"),
+	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.community_id = :communityId"),
 	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m"),
-	@NamedQuery(name="Message.findGlobalMessages", query="SELECT m FROM Message m WHERE m.communityId IS NULL AND "
+	@NamedQuery(name="Message.findGlobalMessages", query="SELECT m FROM Message m WHERE m.community_id IS NULL AND "
 			+ "m.recipient IS NULL")
 	
 	
@@ -58,7 +58,7 @@ public class Message implements Serializable {
     private User recipient;
 	
     @Column
-	private Long communityId; //TODO: add community relation as soon as the community-entity is implemented
+	private Long community_id; //TODO: add community relation as soon as the community-entity is implemented
 
     @Size(max = 256)
     @NotNull
@@ -118,10 +118,10 @@ public class Message implements Serializable {
 	}
 	
 	public Long getCommunityId() {
-		return communityId;
+		return community_id;
 	}
 	public void setCommunityId(Long communityId) {
-		this.communityId = communityId;
+		this.community_id = communityId;
 	}
 	public String getTitle() {
 		return title;

@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS message
   id           BIGINT        NOT NULL AUTO_INCREMENT PRIMARY KEY,
   author_id    BIGINT        NOT NULL REFERENCES `user` (id),
   recipient_id BIGINT        NOT NULL REFERENCES `user` (id),
-  #community_id     BIGINT  NOT NULL REFERENCES `user` (id), TODO: uncomment as soon as the community table exists
+  community_id     BIGINT  NOT NULL REFERENCES `community` (id), #TODO: uncomment as soon as the community table exists
   title        VARCHAR(256)  NOT NULL,
   content      VARCHAR(1024) NOT NULL,
   `created`    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,

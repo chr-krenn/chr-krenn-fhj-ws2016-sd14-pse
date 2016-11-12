@@ -64,9 +64,14 @@ public class MessageBean implements Serializable {
     	if(currentUser != null) {
     		if(message.getContent() != null && message.getTitle() != null) {
     			message.setAuthor(currentUser);
-    			// TODO: insert acurate community id - according to create-ddl.sql not null!
+    			// TODO: insert accurate community id - might be null in future!
     			long communityId = 1;
     			message.setCommunityId(communityId);
+    			// TODO: insert accurate recipient - might be null in future!
+    			UserDto recipient = new UserDto();
+    			long recpipientId = 1;
+    			recipient.setId(recpipientId);
+    			message.setRecipient(recipient);
     	    	final long generatedId = messageService.save(message);
     	    	LOGGER.info("Created new message with ID {}", generatedId);
     	    	//this.message = messageService.find(generatedId);

@@ -2,12 +2,17 @@ package at.fhj.swd14.pse.community;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
+
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import at.fhj.swd14.pse.user.User;
@@ -18,7 +23,7 @@ import at.fhj.swd14.pse.user.UserDto;
 public class Community implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {
@@ -40,6 +45,9 @@ public class Community implements Serializable {
         this.name = name;
     }
 
+    
+    @ManyToOne
+	private User author;
     //	private User author;
     public User getAuthor() {
         return null;
@@ -50,7 +58,7 @@ public class Community implements Serializable {
 //		this.author = author;
     }
 
-    //@Column
+    @Column
     private boolean isPublic = false;
 
     public boolean getPublicState() {
@@ -60,8 +68,21 @@ public class Community implements Serializable {
     public void setPublicState(boolean publicState) {
         this.isPublic = publicState;
     }
+    
+    @Column
+    private boolean isActive = false;
 
-//    private List<UserDto> allowedUsers = new ArrayList<UserDto>();
+    public boolean geActiveState() {
+        return this.isActive;
+    }
+
+    public void setActiveState(boolean activeState) {
+        this.isActive = activeState;
+    }
+    
+//    @OneToMany(mappedBy = "community", cascade = CascadeType.PERSIST)
+//    private List<CommunityUser> allowedUsers;
+//   
 
     public List<UserDto> getAllowedUsers() {        
 //    	return this.allowedUsers;
@@ -72,15 +93,15 @@ public class Community implements Serializable {
 //        this.allowedUsers = allowedUsers;
     }
 
-    //@Column
-    private Date createTime = new Date(0);
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createDate) {
-        this.createTime = createDate;
-    }
+//    @Column
+//    private Date createTime = new Date(0);
+//
+//    public Date getCreateTime() {
+//        return createTime;
+//    }
+//
+//    public void setCreateTime(Date createDate) {
+//        this.createTime = createDate;
+//    }
 
 }

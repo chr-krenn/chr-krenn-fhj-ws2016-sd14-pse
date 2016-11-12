@@ -42,6 +42,7 @@ public class CommunityServiceImplTest {
 	
 	
 	private Community community;
+	private Community communityWithData;
 	private List<Community> communities;
 
 	@Before
@@ -49,6 +50,7 @@ public class CommunityServiceImplTest {
 	{
 		
         community = CommunityTestHelper.getTestCommunity();
+        communityWithData = CommunityTestHelper.getTestCommunityWithData();
 
 	}
 	
@@ -60,6 +62,15 @@ public class CommunityServiceImplTest {
 		
 	}
 	
-
+	@Test
+	public void testSaveCommunity()
+	{
+		CommunityDto dummyCommDto = CommunityConverter.convert(communityWithData);
+		service.save(dummyCommDto);
+		
+		Mockito.verify(communityRepo,Mockito.times(1)).save(Mockito.any(Community.class));
+	}
+	
+	
 	
 }

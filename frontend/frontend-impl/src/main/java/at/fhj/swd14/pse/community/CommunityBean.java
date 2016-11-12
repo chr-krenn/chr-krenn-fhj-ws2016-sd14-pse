@@ -4,20 +4,23 @@
 package at.fhj.swd14.pse.community;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
-import javax.faces.view.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import at.fhj.swd14.pse.user.UserDto;
+import at.fhj.swd14.pse.user.UserService;
+
 @Named
 @Stateful
-@ViewScoped
 /**
  * @author schoeneg14, purkart
  *
@@ -33,8 +36,9 @@ public class CommunityBean implements Serializable{
 	@EJB(name = "ejb/CommunityService")
 	private CommunityService communityService;
 	
-	
-	private CommunityDto communityDto;
+	@EJB(name = "ejb/UserService")
+	private UserService userService;
+
 	private String newName;
 	private String newDescription;
 	private boolean newPublicState;
@@ -89,17 +93,44 @@ public class CommunityBean implements Serializable{
 	private List<CommunityDto> createdCommunities;
 	private List<CommunityDto> joinedCommunities;
 	private List<CommunityDto> publicCommunities;
-	
+
 	/**
 	 * Initializes the bean for the view
 	 */
 	@PostConstruct
 	public void init() {
-		LOGGER.debug("Initialising the CommunityBean");
-		long id = 1234;
-		this.createdCommunities = communityService.findByAuthorId(id);
-		this.joinedCommunities = communityService.findUserRelated(id);
-		this.publicCommunities = communityService.findUserRelated(id);
+		LOGGER.error("Initialising the CommunityBean");
+		
+		// Get logged in user
+		long currentUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();;
+		
+		UserDto testUser = userService.find(currentUserId);
+		
+		this.createdCommunities = communityService.findByAuthorId(currentUserId);
+		this.joinedCommunities = communityService.findUserRelated(currentUserId);
+		this.publicCommunities = communityService.findUserRelated(currentUserId);
+		
+		// Just for testing...
+		CommunityDto test1 = new CommunityDto(currentUserId);
+		test1.setName("test1");
+		test1.setAuthor(testUser);
+		LOGGER.error(test1.toString());
+		
+		CommunityDto test2 = new CommunityDto(currentUserId+1);
+		test2.setName("test2");
+		test2.setAuthor(testUser);
+		
+		CommunityDto test3 = new CommunityDto(currentUserId+2);
+		test3.setName("test3");
+		test3.setAuthor(testUser);
+		
+		this.createdCommunities = new ArrayList<CommunityDto>();
+		this.joinedCommunities = new ArrayList<CommunityDto>();
+		this.publicCommunities = new ArrayList<CommunityDto>();
+		
+		this.createdCommunities.add(test1);
+		this.createdCommunities.add(test2);
+		this.createdCommunities.add(test3);
 	}
 
 	/**
@@ -107,16 +138,16 @@ public class CommunityBean implements Serializable{
 	 *
 	 */
 	public void createCommunity() {
-		LOGGER.debug("Creating new Community...");
+		LOGGER.error("Creating new Community...");
     	
 		// TODO Get UserDto for logged in user...
 		if(this.newName != null) {
-			/* TODO
-			CommunityDto newCommunity = this.communityDto.createCommunity(this.newName);
-			LOGGER.debug("Created new community with ID {}", newCommunity.getId());
-			*/
+			
+			//CommunityDto newCommunity = this.communityDto.createCommunity(this.newName);
+			//LOGGER.debug("Created new community with ID {}", newCommunity.getId());
+			
 		} else {
-			LOGGER.warn("Name is empty, can't create comunity");
+			LOGGER.error("Name is empty, can't create comunity");
 		}
 	}
 }

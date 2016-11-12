@@ -15,7 +15,7 @@
 			<p:ajax process="select_community" partialSubmit="true" listener="#{messageStreamBean.onCommunityChange}" update=":scroller:scroller_message"/>
 			<f:selectItems value="#{messageStreamBean.availableCommunities}" var="community" itemValue="#{community}" itemLabel="#{community.name}" />
 		</p:selectOneMenu>
-		<h:form id="scroller">
+		<h:form>
 			<p:dataScroller id="scroller_message" value="#{messageStreamBean.messages.values()}"
 				var="message" chunkSize="10">
 				<p:outputPanel id="messages">

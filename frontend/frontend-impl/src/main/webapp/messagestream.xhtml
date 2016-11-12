@@ -9,13 +9,13 @@
 	xmlns:p="http://primefaces.org/ui">
 	<h:head>
 	</h:head>
-	
+
 	<h:body>
 		<p:selectOneMenu id="select_community" value="#{messageStreamBean.currentCommunity}" style="width:150px" converter="communityConverter">
-			<p:ajax process="select_community" partialSubmit="true" listener="#{messageStreamBean.onCommunityChange}" update=":scroller:scroller_message"/>
+			<p:ajax process="select_community" partialSubmit="true" listener="#{messageStreamBean.onCommunityChange}" update=":messagestream_scroller:scroller_message"/>
 			<f:selectItems value="#{messageStreamBean.availableCommunities}" var="community" itemValue="#{community}" itemLabel="#{community.name}" />
 		</p:selectOneMenu>
-		<h:form>
+		<h:form id="messagestream_scroller">
 			<p:dataScroller id="scroller_message" value="#{messageStreamBean.messages.values()}"
 				var="message" chunkSize="10">
 				<p:outputPanel id="messages">

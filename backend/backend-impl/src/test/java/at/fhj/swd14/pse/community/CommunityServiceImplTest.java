@@ -84,10 +84,19 @@ public class CommunityServiceImplTest {
 	
 	@Test
 	public void testFindByAuthorId()
-	{	
-		Mockito.when(service.findByAuthorId(1L)).thenReturn(new ArrayList<CommunityDto>() );
-		service.findByAuthorId(1L);
+	{		
+		//TODO anpassen bei der Implementierung, da sonnst error
+		Assert.assertNull(service.findByAuthorId(1L));
 	}
+	
+	@Test
+	public void testFindUserRelated(){
+		//TODO anpassen bei der Implementierung, da sonnst error
+		Assert.assertNull(service.findUserRelated(1L));
+		
+	}
+	
+	
 	
 	
 	

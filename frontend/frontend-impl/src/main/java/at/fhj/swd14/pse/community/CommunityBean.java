@@ -20,7 +20,6 @@ import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 
 @Named
-@Stateful
 /**
  * @author schoeneg14, purkart
  *

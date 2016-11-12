@@ -12,6 +12,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.Date;
 
 @Named
 @SessionScoped
@@ -23,6 +25,9 @@ public class NewsBean implements Serializable {
 	private static final long serialVersionUID = -4507541276214551604L;
 	private NewsDto news;
     private static final Logger LOGGER = LogManager.getLogger(NewsBean.class);
+
+    private Date activationDate;
+    private Date terminationDate;
 
     private UserDto currentUser;
     @EJB(name = "ejb/NewsService")
@@ -40,6 +45,11 @@ public class NewsBean implements Serializable {
     public NewsBean() {
         LOGGER.debug("Create: " + NewsBean.class.getSimpleName());
         this.news = new NewsDto();
+        this.news.setActivation(Instant.now());
+        this.news.setTermination(Instant.now());
+
+        setActivationDate(Date.from(news.getActivation()));
+        setTerminationDate(Date.from(news.getTermination()));
     }
 
     public NewsDto getNews() {
@@ -61,6 +71,15 @@ public class NewsBean implements Serializable {
             PersonDto person = personService.findByUser(currentUser);
 
             if(news.getTitle() != null && news.getMessage() != null) {
+                if(terminationDate != null)
+                {
+                    news.setTermination(terminationDate.toInstant());
+                }
+
+                if(activationDate != null)
+                {
+                    news.setActivation(activationDate.toInstant());
+                }
                 news.setAuthor(person);
                 newsService.save(news);
             }
@@ -74,5 +93,21 @@ public class NewsBean implements Serializable {
 
     public void setCurrentUser(UserDto currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public Date getTerminationDate() {
+        return terminationDate;
+    }
+
+    public void setTerminationDate(Date terminationDate) {
+        this.terminationDate = terminationDate;
+    }
+
+    public Date getActivationDate() {
+        return activationDate;
+    }
+
+    public void setActivationDate(Date activationDate) {
+        this.activationDate = activationDate;
     }
 }

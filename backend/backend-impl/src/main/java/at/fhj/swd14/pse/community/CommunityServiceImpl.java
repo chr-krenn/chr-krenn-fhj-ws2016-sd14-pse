@@ -1,6 +1,8 @@
 package at.fhj.swd14.pse.community;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -31,8 +33,10 @@ public class CommunityServiceImpl implements CommunityService{
 
 	@Override
 	public List<CommunityDto> findByAuthorId(Long creatorUserId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Community> commnitiesPerAuthor = communityRepository.findAll().stream().filter(item -> item.getAuthor().getId() == creatorUserId).collect(Collectors.toList());
+		List<CommunityDto> comDtos = new ArrayList<CommunityDto>();
+		commnitiesPerAuthor.forEach((element) ->  comDtos.add(CommunityConverter.convert(element))); 
+		return comDtos;
 	}
 
 	@Override

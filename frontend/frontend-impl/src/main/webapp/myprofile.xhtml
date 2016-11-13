@@ -1,11 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-    <title>Welcome</title>
+    <title>My profile</title>
     <ui:include src="head.xhtml" />
 </h:head>
 <h:body>
@@ -20,26 +19,14 @@
     <div class="main clearfix">
         <section class="content-lft">
             <ul class="about sidebarlink">
-                <li><p:link outcome="myprofile" value="#{personBean.person.firstname} #{personBean.person.lastname}"/></li>
                 <li><p:link outcome="user" value="Edit profile"/></li>
-            </ul>
-            <h2><p:link outcome="community" value="Communities"></p:link></h2>
-
-            <ul class="communities sidebarlink">
-
             </ul>
         </section>
         <section class="content-ctr">
-            <ui:include src="messageAdd.xhtml" />
-            <ui:include src="messagestream.xhtml" />
+            <ui:include src="person/personPage.xhtml" />
         </section>
         <section class="content-rgt">
-            <h2>Dokumente</h2>
-            <h2>News</h2>
-            <ui:include src="newsAdd.xhtml" />
-            <ui:include src="newsStream.xhtml" />
         </section>
     </div>
 </h:body>
 </html>
-

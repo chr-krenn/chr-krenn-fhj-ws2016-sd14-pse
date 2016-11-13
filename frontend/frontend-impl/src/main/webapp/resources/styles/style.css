@@ -6,10 +6,10 @@ html body {
     margin: 0;
     padding: 0;
 
-    font-family: 'glacial_indifference',sans-serif;
+    font-family: 'Open Sans',sans-serif;
     font-size: 14px;
     color: #2c2727;
-    font-weight: 300;
+    font-weight: 500;
 
     overflow-x: hidden;
     overflow-y: auto;
@@ -20,18 +20,24 @@ html body {
     box-sizing: border-box;
 }
 h1, h2, h3 {
-    font-weight: 500;
-    font-size: 1.75rem;
+    font-weight: 100;
+}
+
+h1.top-header {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    color: white;
+    font-size: 2rem;
 }
 
 h2 {
     color: #413c3c;
     font-size: 1.5em;
     position: relative;
-}
-
-.content-rgt h2 {
+    width: 170px;
     line-height: 40px;
+    margin-bottom: 5px;
     background: rgba(219,241,193,0);
     background: -moz-linear-gradient(left, rgba(219,241,193,0) 0%, rgba(219,241,193,0.58) 58%, rgba(219,241,193,1) 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, rgba(219,241,193,0)), color-stop(58%, rgba(219,241,193,0.58)), color-stop(100%, rgba(219,241,193,1)));
@@ -40,11 +46,106 @@ h2 {
     background: -ms-linear-gradient(left, rgba(219,241,193,0) 0%, rgba(219,241,193,0.58) 58%, rgba(219,241,193,1) 100%);
     background: linear-gradient(to right, rgba(219,241,193,0) 0%, rgba(219,241,193,0.58) 58%, rgba(219,241,193,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbf1c1', endColorstr='#dbf1c1', GradientType=1 );
+}
+
+h2,
+h2:visited,
+h2:hover {
+    text-decoration: none;
+    color: #2c2727;
+}
+
+h3 {
+    color: #aaa;
+    font-size: 0.9rem;
+    display: block;
+    border-bottom: 1px solid #dedede;
+    text-transform: uppercase;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+}
+
+ul.n-list {
+    list-style: none;
+}
+
+ul.f-list li {
+    font-weight: 100;
     margin-bottom: 5px;
+}
+
+.f-list li > button,
+.f-list li label > button {
+    min-width: 120px;
+    margin-left: 5px;
+}
+
+.f-list li > input,
+.f-list li > select,
+.f-list li label > input,
+.f-list li label > select {
+    color: #272727;
+    box-shadow: none !important;
+    font-family: "Open Sans",sans-serif;
+    padding: 4px;
+    outline: none;
+    margin: 0;
+    font-weight: 100;
+    background: white;
+    border-radius: 2px;
+    text-shadow: none;
+    border: 1px solid #dedede;
+    width: 200px;
+    font-size: 1rem;
+}
+
+.f-list li label > span,
+.f-list li > span {
+    display: inline-block;
+    width: 120px;
+}
+
+.f-list li > span.light {
+    width: auto;
+    color: #aaa;
+}
+
+
+ul.sidebarlink {
+    list-style: none;
+    position: absolute;
+    top: 250px;
+    width: 160px;
+}
+
+ul.sidebarlink li {
+    margin-bottom: 2px;
+}
+
+ul.sidebarlink li a {
+    text-decoration: none;
+    line-height: 1.2;
+    display: block;
+    font-size: 0.9rem;
+    padding: .2rem .4rem;
+}
+ul.sidebarlink li a,
+ul.sidebarlink li a:visited,
+ul.sidebarlink li a:hover {
+    color: #2c2727;
+}
+
+ul.sidebarlink li:hover {
+    background: #efefef;
+    cursor: pointer;
+}
+
+.content-rgt h2 {
     width: 280px;
 }
 
-h2::before {
+.content-rgt h2::before {
     content: "";
     position: absolute;
     z-index: -1;
@@ -103,6 +204,22 @@ nav > div ul li a:hover {
     -webkit-box-shadow: inset 0 0 6px rgba(130,133,130,0.5);
     -moz-box-shadow: inset 0 0 6px rgba(130,133,130,0.5);
     box-shadow: inset 0 0 6px rgba(130,133,130,0.5);
+}
+
+.person-detail-left {
+    width: 150px;
+    float: left;
+}
+
+.person-detail-right {
+    width: calc(100% - 160px);
+    float: left;
+    min-height: 110px;
+    margin-bottom: 15px;
+}
+
+.person-detail-right h3 {
+    margin-top: 0;
 }
 
 .profile-name {
@@ -167,8 +284,10 @@ header section img {
     padding: 20px 30px;
 }
 .main .content-ctr {
+    position: relative;
     background: #ffffff;
     margin-top: 60px;
+    padding-top: 35px;
     width: calc(100% - 500px);
     min-height: calc(100vh - 150px);
     box-shadow: 0 10px 10px rgba(40,40,40,.2);
@@ -176,11 +295,12 @@ header section img {
 .main .content-lft,
 .main .content-rgt {
     min-height: 240px;
-    padding-top: 300px;
+    padding-top: 310px;
 }
 
 .main .content-lft {
     width: 200px;
+    position: relative;
 }
 
 .main .content-rgt {
@@ -203,6 +323,5 @@ header section img {
     height: 0;
     clear: both;
 }
-
 
 

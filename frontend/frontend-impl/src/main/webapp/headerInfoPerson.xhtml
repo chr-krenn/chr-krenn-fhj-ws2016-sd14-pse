@@ -10,12 +10,4 @@
             <div style="background-image:url('#{personBean.person.imageUrl}');"></div>
         </c:if>
     </div>
-    <div class="profile-name">
-    <c:if test="${not empty personBean.person.firstname}">
-        <h4>#{personBean.person.firstname}</h4>
-    </c:if>
-    <c:if test="${not empty personBean.person.lastname}">
-        <h4>#{personBean.person.lastname}</h4>
-    </c:if>
-    </div>
 </ui:composition>

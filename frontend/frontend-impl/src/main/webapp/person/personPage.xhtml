@@ -5,49 +5,62 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<h1 class="top-header">#{personBean.person.firstname} #{personBean.person.lastname}</h1>
     <section>
-	    <p>
+	    <div class="person-detail-left">
 	    	<c:if test="${not empty personBean.person.imageUrl}">
 	    		<img src="#{personBean.person.imageUrl}" /> 
 	    	</c:if>
-	    	#{personBean.person.firstname} #{personBean.person.lastname}
-	    </p>
-	    <c:if test="${not empty personBean.person.address}">
-	    	<p>Addresse: #{personBean.person.address}</p>
-	    </c:if>
-	    <c:if test="${not empty personBean.person.place}">
-	    	<p>Ort: #{personBean.person.place}</p>
-	    </c:if>
-	    <c:if test="${not empty personBean.person.department}">
-	    	<p>Abteilung: #{personBean.person.department.name}</p>
-	    </c:if>
-	    <c:if test="${not empty personBean.person.status.name}">
-	    	<p>Status: #{personBean.person.status.name}</p>
-	    </c:if>
-    	<section>
-    		<h1>Mail Adressen</h1>
-    		<p>#{personBean.person.user.mail}</p>
-    		<c:forEach var="mail" items="#{personBean.person.additionalMails}">
-    			<p>#{mail.value}</p>
-    		</c:forEach>
-    	</section>
-    	<section>
-    		<h1>Hobbies</h1>
-    		<c:forEach var="hobby" items="#{personBean.person.hobbies}">
-    			<p>#{hobby.value}</p>
-    		</c:forEach>
-    	</section>
-    	<section>
-    		<h1>Fähigkeiten</h1>
-    		<c:forEach var="knowledge" items="#{personBean.person.knowledges}">
-    			<p>#{knowledge.value}</p>
-    		</c:forEach>
-    	</section>
-    	<section>
-    		<h1>Telefonnummern</h1>
-    		<c:forEach var="number" items="#{personBean.person.phonenumbers}">
-    			<p>#{number.value}</p>
-    		</c:forEach>
-    	</section>
-    </section>
+	    </div>
+		<div class="person-detail-right">
+			<h3>Übersicht</h3>
+			<ul class="n-list f-list">
+				<c:if test="${not empty personBean.person.address}">
+					<li><span>Addresse:</span> #{personBean.person.address}</li>
+				</c:if>
+				<c:if test="${not empty personBean.person.place}">
+					<li><span>Ort:</span> #{personBean.person.place}</li>
+				</c:if>
+				<c:if test="${not empty personBean.person.department}">
+					<li><span>Abteilung:</span> #{personBean.person.department.name}</li>
+				</c:if>
+				<c:if test="${not empty personBean.person.status.name}">
+					<li><span>Status:</span> #{personBean.person.status.name}</li>
+				</c:if>
+			</ul>
+		</div>
+	</section>
+	<section>
+		<h3>Mail Adressen</h3>
+		<ul class="n-list f-list">
+			<li>#{personBean.person.user.mail} <span class="light">(Default)</span></li>
+			<c:forEach var="mail" items="#{personBean.person.additionalMails}">
+				<li>#{mail.value}</li>
+			</c:forEach>
+		</ul>
+	</section>
+	<section>
+		<h3>Hobbies</h3>
+		<ul class="n-list f-list">
+			<c:forEach var="hobby" items="#{personBean.person.hobbies}">
+				<li>#{hobby.value}</li>
+			</c:forEach>
+		</ul>
+	</section>
+	<section>
+		<h3>Fähigkeiten</h3>
+		<ul class="n-list f-list">
+			<c:forEach var="knowledge" items="#{personBean.person.knowledges}">
+				<li>#{knowledge.value}</li>
+			</c:forEach>
+		</ul>
+	</section>
+	<section>
+		<h3>Telefonnummern</h3>
+		<ul class="n-list f-list">
+			<c:forEach var="number" items="#{personBean.person.phonenumbers}">
+				<li>#{number.value}</li>
+			</c:forEach>
+		</ul>
+	</section>
 </ui:composition>

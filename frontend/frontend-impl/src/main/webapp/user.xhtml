@@ -4,21 +4,8 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-    <title>My profile</title>
-    <h:outputStylesheet name="styles/font/glacialindifference.css" />
-    <h:outputStylesheet name="styles/style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&amp;subset=latin-ext"></link>
-    <link href="development/prime-ui-0.9.5.css" rel="stylesheet"></link>
-    <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"
-          rel="stylesheet"></link>
-    <link href="http://www.primefaces.org/prime-ui/demo/css/aristo/theme.css"
-          rel="stylesheet"></link>
-    <link href="http://www.primefaces.org/prime-ui/demo/css/sh.css"
-          rel="stylesheet"></link>
-    <link href="http://www.primefaces.org/css/all.css" rel="stylesheet"></link>
-
-    <style>
-    </style>
+    <title>My profile (edit)</title>
+    <ui:include src="head.xhtml" />
 </h:head>
 <h:body>
     <nav>
@@ -31,6 +18,9 @@
     </header>
     <div class="main clearfix">
         <section class="content-lft">
+            <ul class="about sidebarlink">
+                <li><p:link outcome="myprofile" value="#{personBean.person.firstname} #{personBean.person.lastname}"/></li>
+            </ul>
         </section>
         <section class="content-ctr">
             <ui:include src="person/loggedInPersonPage.xhtml" />

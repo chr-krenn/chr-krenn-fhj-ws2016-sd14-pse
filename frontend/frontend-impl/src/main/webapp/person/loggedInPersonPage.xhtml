@@ -8,127 +8,135 @@
     <f:metadata>
 	    <f:event type="preRenderView" listener="#{personBean.showLoggedInPerson}" />
 	</f:metadata>
+	<h1 class="top-header">Edit profile</h1>
     <section>
     	<c:if test="${not empty personBean.person.firstname}">
     		<h:form>
-			    <p>
-			    	<c:if test="${not empty personBean.person.imageUrl}">
-			    		<img src="#{personBean.person.imageUrl}" /> 
-			    	</c:if>
-			    	<p>
-				    	<label>Image URL: <p:inputText value="#{personBean.person.imageUrl}"/></label>
-				    	<p:commandButton value="Change" action="#{personBean.saveData}" ajax="false"></p:commandButton>
-				    	<p:commandButton value="Delete" action="#{personBean.clearImgUrl}" ajax="false"></p:commandButton>
-			    		<p:fileUpload fileUploadListener="#{personBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
-           					sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-           					 />
-			    	</p>
-			    	<p>
-			    		<label>Firstname: <p:inputText value="#{personBean.person.firstname}" /></label>
-			    	  	<label>Lastname: <p:inputText value="#{personBean.person.lastname}" /></label>
-			    	</p>
-			    </p>
-			    <p>
-			    	<label>Addresse: <p:inputText value="#{personBean.person.address}" /></label>
-			    </p>
-			    <p>
-			    	<label>Ort: <p:inputText value="#{personBean.person.place}"/></label>
-			    </p>
-			    
-		    	<p>
-		    		<label> Abteilung: 
-		    			<h:selectOneMenu value="#{personBean.person.department}">
-		    				<c:forEach var="department" items="#{personBean.departments}">
-		    					<f:selectItem itemValue="#{department}" itemLabel="#{department.name}" />
-		    				</c:forEach>
-		    				<f:converter converterId="DepartmentConverter" />
-		    			</h:selectOneMenu>
-		    			<p:commandButton value="Change" action="#{personBean.saveData}" ajax="false"></p:commandButton>
-		    		</label>
-		    	</p>
-		    	<p>
-		    		<label> Status: 
-		    		<h:selectOneMenu value="#{personBean.person.status.name}">
-		    			<c:forEach var="currentStatus" items="#{personBean.stati}">
-					   		<f:selectItem itemValue="#{currentStatus.name}" itemLabel="#{currentStatus.name}" />
-					   	</c:forEach>
-					</h:selectOneMenu>
-		    		</label>
-		    	</p>
+				<section>
+					<div class="person-detail-left">
+						<c:if test="${not empty personBean.person.imageUrl}">
+							<img src="#{personBean.person.imageUrl}" />
+						</c:if>
+					</div>
+					<div class="person-detail-right">
+						<h3>Bildupload</h3>
+						<label>Image URL: <p:inputText value="#{personBean.person.imageUrl}"/></label>
+						<p:commandButton value="Change" action="#{personBean.saveData}" ajax="false"></p:commandButton>
+						<p:commandButton value="Delete" action="#{personBean.clearImgUrl}" ajax="false"></p:commandButton>
+						<p:fileUpload fileUploadListener="#{personBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
+									  sizeLimit="1000000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+						/>
+					</div>
+				</section>
+				<section>
+					<h3>Übersicht</h3>
+					<ul class="n-list f-list">
+						<li><label><span>Firstname:</span> <p:inputText value="#{personBean.person.firstname}" /></label></li>
+						<li><label><span>Lastname:</span> <p:inputText value="#{personBean.person.lastname}" /></label></li>
+						<li><label><span>Addresse:</span> <p:inputText value="#{personBean.person.address}" /></label></li>
+						<li><label><span>Ort:</span> <p:inputText value="#{personBean.person.place}"/></label></li>
+						<li><label><span>Abteilung:</span>
+							<h:selectOneMenu value="#{personBean.person.department}">
+								<c:forEach var="department" items="#{personBean.departments}">
+									<f:selectItem itemValue="#{department}" itemLabel="#{department.name}" />
+								</c:forEach>
+								<f:converter converterId="DepartmentConverter" />
+							</h:selectOneMenu>
+							<p:commandButton value="Change" action="#{personBean.saveData}" ajax="false"></p:commandButton>
+						</label></li>
+						<li><label><span>Status:</span>
+							<h:selectOneMenu value="#{personBean.person.status.name}">
+								<c:forEach var="currentStatus" items="#{personBean.stati}">
+									<f:selectItem itemValue="#{currentStatus.name}" itemLabel="#{currentStatus.name}" />
+								</c:forEach>
+							</h:selectOneMenu>
+						</label></li>
+					</ul>
+				</section>
 			    <section>
-		    		<h1>Mail Adressen</h1>
-		    		<p>#{personBean.person.user.mail}</p>
-		    		<c:forEach var="mail" items="#{personBean.person.additionalMails}">
-		    			<p>
-		    				<p:inputText value="#{mail.value}"/>
-		    				<p:commandButton value="Remove" action="#{personBean.removeMail}" ajax="false">
-		    					<f:param name="value" value="#{mail.value}" />
-		    				</p:commandButton>
-		    			</p>
-		    		</c:forEach>
-		    		<p>
-		    			<label>New: <p:inputText value="#{personBean.newMail}"/>
-		    				<p:commandButton value="Add" action="#{personBean.addMail}" ajax="false"></p:commandButton>
-		    			</label>
-		    		</p>
+		    		<h3>Mail Adressen</h3>
+					<ul class="n-list f-list">
+						<li><span></span>#{personBean.person.user.mail} <span class="light">(Default)</span></li>
+						<c:forEach var="mail" items="#{personBean.person.additionalMails}">
+							<li><span></span>
+								<p:inputText value="#{mail.value}"/>
+								<p:commandButton value="Remove" action="#{personBean.removeMail}" ajax="false">
+									<f:param name="value" value="#{mail.value}" />
+								</p:commandButton>
+							</li>
+						</c:forEach>
+						<li>
+							<label><span>New:</span> <p:inputText value="#{personBean.newMail}"/>
+								<p:commandButton value="Add" action="#{personBean.addMail}" ajax="false"></p:commandButton>
+							</label>
+						</li>
+					</ul>
 		    	</section>
 		    	<section>
-		    		<h1>Hobbies</h1>
-		    		<c:forEach var="hobby" items="#{personBean.person.hobbies}">
-		    			<p>
-		    				<p:inputText value="#{hobby.value}" />
-		    				<p:commandButton value="Remove" action="#{personBean.removeHobby}" ajax="false">
-		    					<f:param name="value" value="#{hobby.value}" />
-		    				</p:commandButton>
-		    			</p>
-		    		</c:forEach>
-		    		<p>
-			    		<label>New: <p:inputText value="#{personBean.newHobby}"/>
-		    				<p:commandButton value="Add" action="#{personBean.addHobby}" ajax="false"></p:commandButton>
-		    			</label>
-	    			</p>
+		    		<h3>Hobbies</h3>
+					<ul class="n-list f-list">
+						<c:forEach var="hobby" items="#{personBean.person.hobbies}">
+							<li><span></span>
+								<p:inputText value="#{hobby.value}" />
+								<p:commandButton value="Remove" action="#{personBean.removeHobby}" ajax="false">
+									<f:param name="value" value="#{hobby.value}" />
+								</p:commandButton>
+							</li>
+						</c:forEach>
+						<li>
+							<label><span>New:</span> <p:inputText value="#{personBean.newHobby}"/>
+								<p:commandButton value="Add" action="#{personBean.addHobby}" ajax="false"></p:commandButton>
+							</label>
+						</li>
+					</ul>
 		    	</section>
 		    	<section>
-		    		<h1>Fähigkeiten</h1>
-		    		<c:forEach var="knowledge" items="#{personBean.person.knowledges}">
-		    			<p>
-		    				<p:inputText value="#{knowledge.value}"/>
-		    				<p:commandButton value="Remove" action="#{personBean.removeKnowledge}" ajax="false">
-		    					<f:param name="value" value="#{knowledge.value}" />
-		    				</p:commandButton>
-		    			</p>
-		    		</c:forEach>
-		    		<p>
-			    		<label>New: <p:inputText value="#{personBean.newKnowledge}"/>
-		    				<p:commandButton value="Add" action="#{personBean.addKnowledge}" ajax="false"></p:commandButton>
-		    			</label>
-	    			</p>
+		    		<h3>Fähigkeiten</h3>
+					<ul class="n-list f-list">
+						<c:forEach var="knowledge" items="#{personBean.person.knowledges}">
+							<li><span></span>
+								<p:inputText value="#{knowledge.value}"/>
+								<p:commandButton value="Remove" action="#{personBean.removeKnowledge}" ajax="false">
+									<f:param name="value" value="#{knowledge.value}" />
+								</p:commandButton>
+							</li>
+						</c:forEach>
+						<li>
+							<label><span>New:</span> <p:inputText value="#{personBean.newKnowledge}"/>
+								<p:commandButton value="Add" action="#{personBean.addKnowledge}" ajax="false"></p:commandButton>
+							</label>
+						</li>
+					</ul>
 		    	</section>
 		    	<section>
-		    		<h1>Telefonnummern</h1>
-		    		<c:forEach var="number" items="#{personBean.person.phonenumbers}">
-		    			<p>
-		    				<p:inputText value="#{number.value}" />
-		    				<p:commandButton value="Remove" action="#{personBean.removeNumber}" ajax="false">
-		    					<f:param name="value" value="#{number.value}" />
-		    				</p:commandButton>
-		    			</p>
-		    		</c:forEach>
-		    		<p>
-			    		<label>New: <p:inputText value="#{personBean.newNumber}"/>
-		    				<p:commandButton value="Add" action="#{personBean.addNumber}" ajax="false"></p:commandButton>
-		    			</label>
-	    			</p>
+		    		<h3>Telefonnummern</h3>
+					<ul class="n-list f-list">
+						<c:forEach var="number" items="#{personBean.person.phonenumbers}">
+							<li><span></span>
+								<p:inputText value="#{number.value}" />
+								<p:commandButton value="Remove" action="#{personBean.removeNumber}" ajax="false">
+									<f:param name="value" value="#{number.value}" />
+								</p:commandButton>
+							</li>
+						</c:forEach>
+						<li>
+							<label><span>New:</span> <p:inputText value="#{personBean.newNumber}"/>
+								<p:commandButton value="Add" action="#{personBean.addNumber}" ajax="false"></p:commandButton>
+							</label>
+						</li>
+					</ul>
 		    	</section>
 		    	<p><p:commandButton value="Save Changes" action="#{personBean.savePerson}" ajax='false'></p:commandButton></p>
 	    	</h:form>
 	    </c:if>
 	    <c:if test="${empty personBean.person.firstname}">
-	    	<h1>You have not told us your name yet!</h1>
+	    	<h3>You have not told us your name yet!</h3>
 	    	<h:form>
-	    		<p><label>Firstname: <p:inputText value="#{personBean.person.firstname}"></p:inputText></label></p>
-	    		<p><label>Lastname: <p:inputText value="#{personBean.person.lastname}"></p:inputText></label></p>
-	            <p:commandButton value="Save" action="#{personBean.createLoggedInPerson}" ajax='false'/>
+				<ul class="n-list f-list">
+					<li><label><span>Firstname:</span>  <p:inputText value="#{personBean.person.firstname}"></p:inputText></label></li>
+					<li><label><span>Lastname:</span> <p:inputText value="#{personBean.person.lastname}"></p:inputText></label></li>
+					<li><p:commandButton value="Save" action="#{personBean.createLoggedInPerson}" ajax='false'/></li>
+				</ul>
 	        </h:form>
 	    </c:if>
     </section>

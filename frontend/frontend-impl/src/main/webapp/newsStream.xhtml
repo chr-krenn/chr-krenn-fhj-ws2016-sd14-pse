@@ -11,18 +11,18 @@
 
     </h:head>
 	<h:body>
-		<h:form  id="scroller" style="width:50%">
+		<h:form  id="scroller">
 			 <p:dataScroller id="scroller_news" value="#{newsBean.allNews}"
 							 var="news" chunkSize="10" mode="inline" scrollHeight="500">
 
 				<f:facet name="header">
             		Scroll Down to Load More News
         		</f:facet>
-				        <f:facet name="loader">
-            				<p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
+				<f:facet name="loader">
+					<p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
         		</f:facet>
 
-				 <h:panelGrid columns="2" style="width:50%" columnClasses="logo,detail">
+				 <h:panelGrid columns="2" columnClasses="logo,detail">
            			<p:outputPanel>
                 		<h:panelGrid columns="2" cellpadding="5">
                     		<h:outputText value="Titel:" />

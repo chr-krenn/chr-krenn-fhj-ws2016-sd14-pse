@@ -1,15 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Login failed</title>
+	<h:outputStylesheet name="styles/font/glacialindifference.css" />
+	<h:outputStylesheet name="styles/login.css" />
+	<link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet"></link>
+	<link href="http://www.primefaces.org/prime-ui/demo/css/aristo/theme.css" rel="stylesheet"></link>
+	<link href="http://www.primefaces.org/prime-ui/demo/css/sh.css" rel="stylesheet"></link>
+	<link href="http://www.primefaces.org/css/all.css" rel="stylesheet"></link>
 </h:head>
-
 <h:body>
-	<h3>Sorry, there is no such user!!!</h3>
+	<h1>Sorry, there is no such user!!!</h1>
+	<p:link outcome="login" value="Go back to login" />
 </h:body>
 </html>

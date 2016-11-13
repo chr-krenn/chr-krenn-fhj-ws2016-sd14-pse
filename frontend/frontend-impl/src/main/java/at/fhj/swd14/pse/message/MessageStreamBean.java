@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -336,6 +337,7 @@ public class MessageStreamBean implements Serializable
 	 */
 	private Map<Long, MessageDto> getPrivateMessages()
 	{
+		currentUserId =  ((at.fhj.swd14.pse.security.DatabasePrincipal) FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
 		return mapMessages(this.messageService.findUsersPrivateMessages(this.getCurrentUserId()));
 	}
 

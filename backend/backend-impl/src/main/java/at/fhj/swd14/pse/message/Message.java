@@ -31,7 +31,7 @@ import at.fhj.swd14.pse.tag.Tag;
 @Table(name = "message")
 @NamedQueries({
 	@NamedQuery(name="Message.findByAuthorId", query="SELECT m FROM Message m WHERE m.author.id = :authorUserId"),
-	@NamedQuery(name="Message.findUsersPrivateMessages",query="SELECT m FROM Message m WHERE m.recipient IS NOT NULL "
+	@NamedQuery(name="Message.findUsersPrivateMessage",query="SELECT m FROM Message m WHERE m.recipient IS NOT NULL "
 			+ "AND m.recipient.id = :userId"),
 	
 

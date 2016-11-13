@@ -107,14 +107,14 @@
         <ejb-ref-name>ejb/UserService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.user.UserService</remote>
         <lookup-name>
-            java:global/backend-assembly-1.0/backend-impl-1.0/UserServiceImpl!at.fhj.swd14.pse.user.UserService
+            java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/UserServiceImpl!at.fhj.swd14.pse.user.UserService
         </lookup-name>
     </ejb-ref>
     <ejb-ref>
         <ejb-ref-name>ejb/PersonService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.person.PersonService</remote>
         <lookup-name>
-            java:global/backend-assembly-1.0/backend-impl-1.0/PersonServiceImpl!at.fhj.swd14.pse.person.PersonService
+            java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/PersonServiceImpl!at.fhj.swd14.pse.person.PersonService
         </lookup-name>
 
     </ejb-ref>
@@ -122,42 +122,42 @@
         <ejb-ref-name>ejb/MessageService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.message.MessageService</remote>
         <lookup-name>
-            java:global/backend-assembly-1.0/backend-impl-1.0/MessageServiceImpl!at.fhj.swd14.pse.message.MessageService
+            java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/MessageServiceImpl!at.fhj.swd14.pse.message.MessageService
         </lookup-name>
     </ejb-ref>
     <ejb-ref>
         <ejb-ref-name>ejb/CommunityService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.community.CommunityService</remote>
         <lookup-name>
-            java:global/backend-assembly-1.0/backend-impl-1.0/CommunityServiceImpl!at.fhj.swd14.pse.community.CommunityService
+            java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/CommunityServiceImpl!at.fhj.swd14.pse.community.CommunityService
         </lookup-name>
     </ejb-ref>
     <ejb-ref>
         <ejb-ref-name>ejb/CommentService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.comment.CommentService</remote>
         <lookup-name>
-            java:global/backend-assembly-1.0/backend-impl-1.0/CommentServiceImpl!at.fhj.swd14.pse.comment.CommentService
+            java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/CommentServiceImpl!at.fhj.swd14.pse.comment.CommentService
         </lookup-name>
     </ejb-ref>
     <ejb-ref>
         <ejb-ref-name>ejb/TagService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.tag.TagService</remote>
         <lookup-name>
-            java:global/backend-assembly-1.0/backend-impl-1.0/TagServiceImpl!at.fhj.swd14.pse.tag.TagService
+            java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/TagServiceImpl!at.fhj.swd14.pse.tag.TagService
         </lookup-name>
     </ejb-ref>
     <ejb-ref>
         <ejb-ref-name>ejb/NewsService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.news.NewsService</remote>
         <lookup-name>
-            java:global/backend-assembly-1.0/backend-impl-1.0/NewsServiceImpl!at.fhj.swd14.pse.news.NewsService
+            java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/NewsServiceImpl!at.fhj.swd14.pse.news.NewsService
         </lookup-name>
     </ejb-ref>
     <ejb-ref>
         <ejb-ref-name>ejb/DepartmentService</ejb-ref-name>
         <remote>at.fhj.swd14.pse.department.DepartmentService</remote>
         <lookup-name>
-            java:global/backend-assembly-1.0/backend-impl-1.0/DepartmentServiceImpl!at.fhj.swd14.pse.department.DepartmentService
+            java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/DepartmentServiceImpl!at.fhj.swd14.pse.department.DepartmentService
         </lookup-name>
     </ejb-ref>
 

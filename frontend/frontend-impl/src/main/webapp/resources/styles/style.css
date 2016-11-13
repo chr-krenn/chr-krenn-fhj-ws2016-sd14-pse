@@ -157,6 +157,24 @@ ul.sidebarlink li:hover {
     bottom: 3px;
 }
 
+.content-ctr form {
+	border-bottom: 1px solid #dedede;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+}
+
+.postMessage {
+	background-color: rgb(238, 238, 238);
+	padding: 10px;
+}
+
+.postMessage input, textarea  {
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 10px 5px;
+}
+
 /* ================================= */
 /* Structure
 /* ================================= */

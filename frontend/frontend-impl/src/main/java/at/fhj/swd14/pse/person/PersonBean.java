@@ -216,7 +216,7 @@ public class PersonBean implements Serializable{
 	public String savePerson()
 	{
 		personService.saveLoggedInPerson(person);
-		return showLoggedInPerson();
+		return "/user";
 	}
 	
 	public void addMail()

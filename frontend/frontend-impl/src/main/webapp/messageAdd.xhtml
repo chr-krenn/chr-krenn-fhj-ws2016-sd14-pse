@@ -5,14 +5,15 @@
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 	<h:form rendered="#{facesContext.externalContext.isUserInRole('user')}">
-			<label>Title:</label>
-			<h:inputText value="#{messageBean.message.title}">
-			</h:inputText><br/>
-			<label>Message Content:</label>
-			<h:inputText value="#{messageBean.message.content}">
-			</h:inputText><br/>
-			<h:commandButton value="Post Message" action="#{messageBean.createMessage()}">
-			</h:commandButton>
+		<h2>Post a message</h2>
+		<label>Title</label><br/>
+		<h:inputText value="#{messageBean.message.title}">
+		</h:inputText><br/>
+		<label>Message Content</label><br/>
+		<h:inputTextarea value="#{messageBean.message.content}" rows="6" cols="37">
+		</h:inputTextarea><br/>
+		<h:commandButton value="Post Message" action="#{messageBean.createMessage()}">
+		</h:commandButton>
 	</h:form>
 
 </ui:composition>

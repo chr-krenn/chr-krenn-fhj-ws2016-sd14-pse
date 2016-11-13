@@ -6,6 +6,8 @@
 
 	<h:form rendered="#{facesContext.externalContext.isUserInRole('user')}">
 		<h3>Post a message</h3>
+		
+		<div class="postMessage">
 		<label>Title</label><br/>
 		<h:inputText value="#{messageBean.message.title}">
 		</h:inputText><br/>
@@ -14,6 +16,7 @@
 		</h:inputTextarea><br/>
 		<h:commandButton value="Post Message" action="#{messageBean.createMessage()}">
 		</h:commandButton>
+		</div>
 	</h:form>
 
 </ui:composition>

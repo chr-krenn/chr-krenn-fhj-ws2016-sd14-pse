@@ -41,8 +41,11 @@ public class CommunityServiceImpl implements CommunityService{
 
 	@Override
 	public List<CommunityDto> findUserRelated(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
+		//TODO: Return correct user related communities
+		List<Community> communities = communityRepository.findAll();
+		List<CommunityDto> comDtos = new ArrayList<CommunityDto>();
+		communities.forEach((element) ->  comDtos.add(CommunityConverter.convert(element))); 
+		return comDtos;
 	}
 
 }

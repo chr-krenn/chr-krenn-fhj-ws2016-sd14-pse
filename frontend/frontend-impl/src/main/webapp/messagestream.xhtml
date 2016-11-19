@@ -7,16 +7,21 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
+	<f:metadata>
+	    <f:viewParam name="parameterCommunityId" value="#{messageStreamBean.parameterCommunityId}" />
+	</f:metadata>
 	<h:head>
 	</h:head>
 
 	<h:body>
-		<p:selectOneMenu id="select_community" value="#{messageStreamBean.currentCommunity}" style="width:150px" converter="communityConverter">
-			<p:ajax process="select_community" partialSubmit="true" listener="#{messageStreamBean.onCommunityChange}" update=":messagestream_scroller:scroller_message"/>
-			<f:selectItems value="#{messageStreamBean.availableCommunities}" var="community" itemValue="#{community}" itemLabel="#{community.name}" />
-		</p:selectOneMenu>
+		<h:form>
+			<p:selectOneMenu rendered="#{empty param.parameterCommunityId}" id="select_community" value="#{messageStreamBean.currentCommunity}" style="width:150px" converter="#{communityConverter}">
+				<f:selectItems value="#{messageStreamBean.availableCommunities}" var="community" itemValue="#{community}" itemLabel="#{community.name}" />
+				<p:ajax listener="#{messageStreamBean.onCommunityChange()}" update=":messagestream_scroller:scroller_message @this"/>
+			</p:selectOneMenu>
+		</h:form>
 		<h:form id="messagestream_scroller">
-			<p:dataScroller id="scroller_message" value="#{messageStreamBean.messages.values()}"
+			<p:dataScroller id="scroller_message" value="#{messageStreamBean.messages}"
 				var="message" chunkSize="10">
 				<p:outputPanel id="messages">
 					<p:outputPanel id="messageitemdata">

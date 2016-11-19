@@ -10,7 +10,7 @@ import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.community.CommunityDto;
 import at.fhj.swd14.pse.user.UserDto;
 
-public class MessageDto implements Serializable {
+public class MessageDto implements Serializable, Comparable<MessageDto> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -136,6 +136,16 @@ public class MessageDto implements Serializable {
                 ", communityId='" + getCommunity() + '\'' +
                 ", title='" + getTitle() + '\'' +
                 '}';
+	}
+
+	@Override
+	public int compareTo(MessageDto o) {
+		if(o.getCreated().isBefore(this.getCreated())) {
+			return -1;
+		} else if(o.getCreated().isAfter(this.getCreated())) {
+			return 1;
+		}
+		return 0;
 	}
 
 }

@@ -1,42 +1,71 @@
 package at.fhj.swd14.pse.message;
 
-//TODO: Change CommunityDtoStub to CommunityDto in this file
+import javax.ejb.EJB;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
+import javax.inject.Named;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import at.fhj.swd14.pse.community.CommunityDtoStub;
+import at.fhj.swd14.pse.community.CommunityDto;
+import at.fhj.swd14.pse.community.CommunityService;
 
-@FacesConverter("communityConverter")
+@Named
+@ApplicationScoped
 public class CommunityConverter implements Converter {
 	/**
 	 * The LOGGER to use
 	 */
 	private static final Logger LOGGER = LogManager.getLogger(CommunityConverter.class);
+	
+	@EJB(name = "ejb/CommunityService")
+	private CommunityService communityService;
 
-	// @EJB
-	// CommunityService communityService;
+	public CommunityService getCommunityService() {
+		return communityService;
+	}
+
+	public void setCommunityService(CommunityService communityService) {
+		communityService = communityService;
+	}
 
 	/**
 	 * Converter Method to get the right Community for the Selectbox
 	 */
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		CommunityConverter.LOGGER.debug("getAsObject for Value: "+value);
-		//TODO: Change to use real communityService and real CommunityDto
 		if (value == null) {
 			return null;
 		}
 		Long id = Long.parseLong(value);
-		CommunityDtoStub c = new CommunityDtoStub(id);
-		c.setName("Community_"+c.getId());
-
+		CommunityDto c = null;
+		
+		if(id > 0) {
+			c = communityService.find(id);
+		} else {
+			c = getDummyCommunityDto(id);
+		}
 		CommunityConverter.LOGGER.debug("getAsObject returns: "+c);
 		return c;
-//TODO:		return communityService.findById(id);
+	}
+
+	private CommunityDto getDummyCommunityDto(Long id) {
+		CommunityDto c = new CommunityDto(id);
+		switch(id.intValue()) {
+			case -3:
+				c.setName("Alle");
+				break;
+			case -2:
+				c.setName("Private");
+				break;
+			case -1:
+				c.setName("Globale");
+				break;
+		}
+		return c;
 	}
 
 	/**
@@ -44,7 +73,6 @@ public class CommunityConverter implements Converter {
 	 */
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		CommunityConverter.LOGGER.debug("getAsString for Value: "+value);
-		//TODO: Change to use real communityService and real CommunityDto
-		return value instanceof CommunityDtoStub ? ((CommunityDtoStub) value).getId().toString() : "";
+		return value instanceof CommunityDto ? ((CommunityDto) value).getId().toString() : "";
 	}
 }

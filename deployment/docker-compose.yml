@@ -2,7 +2,7 @@ version: '2'
 services:
   sep-mysqldb:
     container_name: "sep-mysqldb"
-    image: swd14-pse/mysql
+    image: swd14/mysql
     environment:
       MYSQL_DATABASE: SEP
       MYSQL_USER: mysql
@@ -11,7 +11,7 @@ services:
     ports:
      - 3306:3306
   sep-wildfly:
-    image: swd14-pse/wildfly
+    image: swd14/wildfly
     depends_on:
       - sep-mysqldb
     environment:

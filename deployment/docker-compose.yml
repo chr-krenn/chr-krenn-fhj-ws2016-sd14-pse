@@ -2,7 +2,7 @@ version: '2'
 services:
   sep-mysqldb:
     container_name: "sep-mysqldb"
-    image: 347280495267.dkr.ecr.eu-central-1.amazonaws.com/swd14/wildfly
+    image: 347280495267.dkr.ecr.eu-central-1.amazonaws.com/swd14/mysql
     environment:
       MYSQL_DATABASE: SEP
       MYSQL_USER: mysql
@@ -11,7 +11,7 @@ services:
     ports:
      - 3306:3306
   sep-wildfly:
-    image: 347280495267.dkr.ecr.eu-central-1.amazonaws.com/swd14/mysql
+    image: 347280495267.dkr.ecr.eu-central-1.amazonaws.com/swd14/wildfly
     depends_on:
       - sep-mysqldb
     environment:

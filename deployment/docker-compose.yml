@@ -4,7 +4,7 @@ services:
     container_name: "sep-mysqldb"
     image: 347280495267.dkr.ecr.eu-central-1.amazonaws.com/swd14/mysql
     environment:
-      MYSQL_DATABASE: SEP
+      MYSQL_DATABASE: pse
       MYSQL_USER: mysql
       MYSQL_PASSWORD: mysql
       MYSQL_ROOT_PASSWORD: supersecret
@@ -16,7 +16,7 @@ services:
       - sep-mysqldb
     environment:
       MYSQL_URI: sep-mysqldb:3306
-      MYSQL_DATABASE: SEP
+      MYSQL_DATABASE: pse
       MYSQL_USER: mysql
       MYSQL_PASSWORD: mysql
     ports:

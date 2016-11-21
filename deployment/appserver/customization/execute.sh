@@ -9,6 +9,7 @@ JBOSS_HOME=/opt/jboss/wildfly
 JBOSS_CLI=$JBOSS_HOME/bin/jboss-cli.sh
 JBOSS_MODE=${1:-"standalone"}
 JBOSS_CONFIG=${2:-"$JBOSS_MODE.xml"}
+JNDI_NAME=java:jboss/datasources/SEP
 
 function wait_for_server() {
   until `$JBOSS_CLI -c ":read-attribute(name=server-state)" 2> /dev/null | grep -q running`; do
@@ -28,6 +29,7 @@ echo "=> MYSQL_DATABASE: " $MYSQL_DATABASE
 echo "=> MYSQL_USER: " $MYSQL_USER
 echo "=> MYSQL_PASSWORD: " $MYSQL_PASSWORD
 echo "=> MYSQL_DRIVER_VERSION: " $MYSQL_DRIVER_VERSION
+echo "=> JNDI_NAME: " $JNDI_NAME
 CONNECTION_URL=jdbc:mysql://$MYSQL_URI/$MYSQL_DATABASE
 echo "=> Connection URL: " $CONNECTION_URL
 
@@ -41,7 +43,7 @@ module add --name=com.mysql --resources=/opt/jboss/wildfly/customization/mysql-c
 /subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql,driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource)
 
 # Add the datasource
-data-source add --name=$MYSQL_DATABASE --driver-name=mysql --jndi-name=java:jboss/datasources/$MYSQL_DATABASE --connection-url=$CONNECTION_URL?useUnicode=true&characterEncoding=UTF-8&useSSL=false --user-name=$MYSQL_USER --password=$MYSQL_PASSWORD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
+data-source add --name=$MYSQL_DATABASE --driver-name=mysql --jndi-name=$JNDI_NAME --connection-url=$CONNECTION_URL?useUnicode=true&characterEncoding=UTF-8&useSSL=false --user-name=$MYSQL_USER --password=$MYSQL_PASSWORD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
 
 # Add the security policy
 /subsystem=security/security-domain=sep-policy:add(cache-type=default)

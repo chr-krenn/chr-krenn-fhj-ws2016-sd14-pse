@@ -50,6 +50,9 @@ data-source add --name=$MYSQL_DATABASE --driver-name=mysql --jndi-name=$JNDI_NAM
 /subsystem=security/security-domain=sep-policy/authentication=classic:add()
 /subsystem=security/security-domain=sep-policy/authentication=classic/login-module=Database:add(code=at.fhj.swd14.pse.security.SecureDatabaseServerLoginModule, flag=required, module-options={"dsJndiName"=>"java:jboss/datasources/SEP","principalsQuery"=>"SELECT id, password, salt FROM user WHERE username=?","rolesQuery"=>"select role, roleGroup from user_roles where username=?","principalClass"=>"at.fhj.swd14.pse.security.DatabasePrincipal","unauthenticatedIdentity"=>"guest"})
 
+# Enable proxying for confidential transport
+/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding, value=true)
+
 # Execute the batch
 run-batch
 EOF

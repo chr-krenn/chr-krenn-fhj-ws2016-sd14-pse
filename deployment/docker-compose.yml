@@ -21,3 +21,4 @@ services:
       MYSQL_PASSWORD: mysql
     ports:
       - 9990:9990
+      - 8080:9700

@@ -147,7 +147,7 @@ public class PersonBean implements Serializable{
 			LOGGER.debug("Found no person for id: "+userId);
 		}
 		
-		return "/person/personTest";
+		return "/user";
 	}
 	
 	private void loadStati()
@@ -164,7 +164,7 @@ public class PersonBean implements Serializable{
 	public String showLoggedInPerson()
 	{
 		Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
-		if(person==null||person.getUser()==null||person.getUser().getId()==null||person.getUser().getId()!=loggedInUserId)
+		if(person==null||person.getId()==null||person.getUser()==null||person.getUser().getId()==null||person.getUser().getId()!=loggedInUserId)
 		{
 			UserDto loggedInUser = userService.find(loggedInUserId);
 			person = personService.findByUser(loggedInUser);
@@ -173,7 +173,7 @@ public class PersonBean implements Serializable{
 		}
 		loadStati();
 		loadDepartments();
-		return "/person/loggedInPersonTest";
+		return "/user";
 	}
 	
 	public String createLoggedInPerson()
@@ -337,6 +337,7 @@ public class PersonBean implements Serializable{
 	}
 	
 	public void handleFileUpload(FileUploadEvent event) {
+		showLoggedInPerson();
 		personService.savePersonImage(person, event.getFile().getContents(), event.getFile().getContentType());
 		person.setImageUrl("/swd14-fe/personImage?id="+person.getId());
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();

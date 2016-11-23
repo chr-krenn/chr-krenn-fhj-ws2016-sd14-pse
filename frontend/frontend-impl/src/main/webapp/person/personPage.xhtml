@@ -7,12 +7,12 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	<h1 class="top-header">#{personBean.person.firstname} #{personBean.person.lastname}</h1>
     <section>
-	    <div class="person-detail-left">
+	    <section>
 	    	<c:if test="${not empty personBean.person.imageUrl}">
-	    		<img src="#{personBean.person.imageUrl}" /> 
+	    		<img src="#{personBean.person.imageUrl}" style="width:auto;height:auto;max-width:100%;max-height:300px"/> 
 	    	</c:if>
-	    </div>
-		<div class="person-detail-right">
+	    </section>
+		<section>
 			<h3>Übersicht</h3>
 			<ul class="n-list f-list">
 				<c:if test="${not empty personBean.person.address}">
@@ -28,7 +28,7 @@
 					<li><span>Status:</span> #{personBean.person.status.name}</li>
 				</c:if>
 			</ul>
-		</div>
+		</section>
 	</section>
 	<section>
 		<h3>Mail Adressen</h3>

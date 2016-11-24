@@ -116,16 +116,16 @@ public class CommunityBean implements Serializable{
 		
 //		// Just for testing...
 		CommunityDto test1 = new CommunityDto(currentUserId);
-		test1.setName("test1");
+		test1.setName("Group 1");
 		test1.setAuthor(testUser);
 		LOGGER.error(test1.toString());
 		
 		CommunityDto test2 = new CommunityDto(currentUserId+1);
-		test2.setName("test2");
+		test2.setName("Group 2");
 		test2.setAuthor(testUser);
 		
 		CommunityDto test3 = new CommunityDto(currentUserId+2);
-		test3.setName("test3");
+		test3.setName("Group 3");
 		test3.setAuthor(testUser);
 		
 		

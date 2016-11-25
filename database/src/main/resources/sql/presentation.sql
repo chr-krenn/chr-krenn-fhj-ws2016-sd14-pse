@@ -108,7 +108,10 @@ TRUNCATE TABLE `person`;
 
 INSERT INTO `person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`, `created`, `modified`) VALUES
 (4, 'Weingartenweg 17/8', 'Patrick', '/swd14-fe/personImage?id=4', 'Kainz', '8130 Frohnleiten', 1, 'online', 8, '2016-11-23 17:02:28', '2016-11-23 17:21:06'),
-(5, 'Irgendwo in Leoben 1', 'Stefan', '/swd14-fe/personImage?id=5', 'Jodl', 'Leoben', 1, 'online', 7, '2016-11-23 17:27:46', '2016-11-23 17:33:49');
+(5, 'Irgendwo in Leoben 1', 'Stefan', '/swd14-fe/personImage?id=5', 'Jodl', 'Leoben', 1, 'online', 7, '2016-11-23 17:27:46', '2016-11-23 17:33:49'),
+(NULL, 'teststraße 3', 'Bernd', 'https://upload.wikimedia.org/wikipedia/commons/5/53/FrankieakaLogan.jpg', 'Maier', 'Kapfenberg', '2', 'Online', '2', '2016-11-23 17:27:46', '2016-11-23 17:33:49'),
+(NULL, 'teststraße 4', 'Johann', 'https://cdn.pixabay.com/photo/2016/04/07/07/22/koala-1313374_960_720.png', 'Müller', 'Seiersberg', '2', 'Abwesend', '1', '2016-11-23 17:27:46', '2016-11-23 17:33:49');
+
 
 --
 -- Truncate table before insert `person_image`

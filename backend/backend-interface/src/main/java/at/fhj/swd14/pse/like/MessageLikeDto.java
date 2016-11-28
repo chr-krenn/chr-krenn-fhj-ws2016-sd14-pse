@@ -25,19 +25,31 @@ public class MessageLikeDto implements Serializable {
     	this.likedMessage = message;
     }
     
-    
+    /**
+     * Returns the liker of a message.
+     * @return The liker of a message.
+     */
     public UserDto getLiker() {
 		return this.liker;
 	}
-    
+    /**
+     * Sets the liker of a message.
+     * @param user The user who likes the message.
+     */
     public void setLiker(UserDto user) {
     	this.liker = user;   	
     }
-    
+    /**
+     * Returns the liked message.
+     * @return The liked message.
+     */
     public MessageDto getLikedMessage() {
     	return this.likedMessage;
     }
-    
+    /**
+     * Sets the liked message.
+     * @param message The liked message.
+     */
     public void setLikedMessage(MessageDto message) {
     	this.likedMessage = message;
     }

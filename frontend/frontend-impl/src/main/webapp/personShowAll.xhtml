@@ -16,7 +16,7 @@
                             <c:if test="${not empty person.imageUrl}">
                                 <img src="#{person.imageUrl}"/>
                             </c:if>
-                            #{person.firstname} #{person.lastname} #{person.user.mail}
+                            	#{person.firstname} #{person.lastname} #{person.user.mail}
                             <ui:repeat value="#{person.phonenumbers}" var="number">
                                 #{number.value}
                             </ui:repeat>

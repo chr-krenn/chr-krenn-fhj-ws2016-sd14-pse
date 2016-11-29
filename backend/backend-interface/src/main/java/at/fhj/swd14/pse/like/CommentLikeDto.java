@@ -5,7 +5,7 @@ import java.io.Serializable;
 import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.user.UserDto;
 /**
- * Dto for a like of a comment.
+ * DTO for a like of a comment.
  * @author Thomas
  *
  */
@@ -25,19 +25,31 @@ public class CommentLikeDto implements Serializable {
     	this.liker = liker;
     	this.likedComment = comment;
     }
-    
+    /**
+     * Sets the person who likes a comment.
+     * @param liker The person who likes a comment.
+     */
     public void setLiker(UserDto liker) {
     	this.liker = liker;
     }
-    
+    /**
+     * Returns the liker of a comment.
+     * @return The liker of a comment.
+     */
     public UserDto getLiker() {
     	return this.liker;
     }
-    
+    /**
+     * Sets the liked comment.
+     * @param likedComment The comment to be liked.
+     */
     public void setLikedComment(CommentDto likedComment) {
     	this.likedComment = likedComment;
     }
-    
+    /**
+     * Returns the liked comment.
+     * @return The liked comment.
+     */
     public CommentDto getLikedComment() {
     	return this.likedComment;
     }

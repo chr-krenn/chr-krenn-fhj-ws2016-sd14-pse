@@ -191,3 +191,19 @@ CREATE TABLE IF NOT EXISTS message_tag
   tags_id          BIGINT        NOT NULL
 )
   ENGINE = INNODB;
+
+#create join table for likes for messages
+CREATE TABLE IF NOT EXISTS like_for_message
+(
+  message_id	BIGINT	NOT NULL REFERENCES message(id),
+  user_id		BIGINT 	NOT NULL REFERENCES `user`(id)
+)
+  ENGINE = INNODB;
+  
+#create join table for likes for comments
+CREATE TABLE IF NOT EXISTS like_for_comment
+(
+  comment_id	BIGINT NOT NULL REFERENCES comment(id),
+  user_id		BIGINT NOT NULL REFERENCES `user`(id)
+)
+  ENGINE = INNODB;

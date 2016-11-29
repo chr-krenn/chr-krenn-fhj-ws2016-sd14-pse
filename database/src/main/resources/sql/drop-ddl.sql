@@ -19,3 +19,5 @@ DROP TABLE IF EXISTS community;
 DROP TABLE IF EXISTS community_user;
 DROP TABLE IF EXISTS tag;
 DROP TABLE IF EXISTS message_tag;
+DROP TABLE IF EXISTS like_for_comment;
+DROP TABLE IF EXISTS like_for_message;

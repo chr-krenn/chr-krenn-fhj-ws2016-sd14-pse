@@ -2,16 +2,11 @@ package at.fhj.swd14.pse.person;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
-import javax.swing.text.html.Option;
-
 import at.fhj.swd14.pse.contact.Contact;
-import at.fhj.swd14.pse.contact.ContactPK;
 import at.fhj.swd14.pse.converter.PersonConverter;
 import at.fhj.swd14.pse.converter.PersonImageConverter;
 import at.fhj.swd14.pse.converter.StatusConverter;
@@ -67,7 +62,12 @@ public class PersonServiceImpl implements PersonService {
 		if(loggedInPerson!=null){
 			contacts=contactRepository.findByPersonId(loggedInPerson.getId());
 		}
-
+		
+		for(PersonDto p : new ArrayList<PersonDto>(resultList)){
+			if(PersonConverter.convert(p).getId() == loggedInPerson.getId()){
+				resultList.remove(p);
+			}
+		}
 		resultList.forEach(p->p.setFriendState("Freund hinzufügen"));
 		//change friend state for already added friends
 		for(Contact contact : contacts){

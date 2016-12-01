@@ -17,10 +17,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import at.fhj.swd14.pse.contact.Contact;
 import at.fhj.swd14.pse.converter.PersonConverter;
 import at.fhj.swd14.pse.converter.PersonImageConverter;
 import at.fhj.swd14.pse.converter.StatusConverter;
 import at.fhj.swd14.pse.converter.UserConverter;
+import at.fhj.swd14.pse.repository.ContactRepository;
 import at.fhj.swd14.pse.repository.PersonImageRepository;
 import at.fhj.swd14.pse.repository.PersonRepository;
 import at.fhj.swd14.pse.repository.PersonStatusRepository;
@@ -49,10 +51,15 @@ public class PersonServiceImplTest {
 	@Mock
 	private PersonVerifier verifier;
 	
-	private User user;
-	private Person person;
-	private List<Person> persons;
+	@Mock
+	private ContactRepository contactRepo;
 	
+	private User user;
+	private User user2;
+	private Person person;
+	private Person person2;
+	private List<Person> persons;
+	private List<Contact> contacts;
 	
 	
 	@Before
@@ -61,9 +68,14 @@ public class PersonServiceImplTest {
 		
         person = PersonTestTools.getDummyPerson();
         user = person.getUser();
-        
+        person2 = PersonTestTools.getDummyPerson2();
+        user2 = person.getUser();
+       
         persons = new ArrayList<Person>();
         persons.add(person);
+        persons.add(person2);
+        contacts = new ArrayList<Contact>();
+        contacts = contactRepo.findByPersonId(1L);
         
         
 	}
@@ -89,10 +101,14 @@ public class PersonServiceImplTest {
 	public void testFindAllUser()
 	{
 		Mockito.when(personRepo.findAll()).thenReturn(persons);
-		Collection<PersonDto> persons = service.findAllUser(1);
-		for(PersonDto person : persons)
+		Mockito.when(personRepo.findByUserId(1L)).thenReturn(person);
+		Mockito.when(contactRepo.findByPersonId(1L)).thenReturn(contacts);
+
+		Collection<PersonDto> persons = service.findAllUser(1L);
+		
+		for(PersonDto p : persons)
 		{
-			PersonDtoTester.assertEquals(person, person);
+			PersonDtoTester.assertEquals(PersonConverter.convert(person2), p);
 		}
 	}
 	

@@ -40,8 +40,7 @@ public class CommunityServiceImpl implements CommunityService{
 		
 		// Test Code
 		Map<String, Object> parametertest = new HashMap<>();
-		long id = 1; // vielleicht ein Object Long TODO
-		parametertest.put("communityId", 1);
+		parametertest.put("communityId", creatorUserId);
 		List<UserDto> users = executeNamedQuery("Community.findAllowedUsers", parametertest, true);
 		// Test Code
 		

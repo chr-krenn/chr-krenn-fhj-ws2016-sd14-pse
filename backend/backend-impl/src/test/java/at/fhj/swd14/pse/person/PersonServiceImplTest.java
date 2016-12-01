@@ -74,6 +74,7 @@ public class PersonServiceImplTest {
         persons = new ArrayList<Person>();
         persons.add(person);
         persons.add(person2);
+        
         contacts = new ArrayList<Contact>();
         contacts = contactRepo.findByPersonId(1L);
         

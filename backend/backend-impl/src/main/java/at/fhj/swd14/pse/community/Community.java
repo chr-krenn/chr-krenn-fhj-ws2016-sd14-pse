@@ -86,14 +86,6 @@ public class Community implements Serializable {
         this.isActive = activeState;
     }
     
-//    @ManyToMany
-//    @JoinTable(name="community_user",
-//                joinColumns=
-//                     @JoinColumn(name="community_id"),
-//                inverseJoinColumns=
-//                     @JoinColumn(name="user_id")
-//    )
-//    
     @ManyToMany(mappedBy = "communities")
     private List<User> allowedUsers;
 
@@ -105,7 +97,7 @@ public class Community implements Serializable {
     }
 
     public void setAllowedUsers(List<UserDto> allowedUsers) {
-//        this.allowedUsers = allowedUsers;
+       this.allowedUsers = (List)UserConverter.convertToDoList(allowedUsers);
     }
 
 }

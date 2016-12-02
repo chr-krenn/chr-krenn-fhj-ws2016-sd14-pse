@@ -11,6 +11,10 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
 
 	private static final long serialVersionUID = 1L;
 	
+	public CommunityDto(){
+    	
+    }
+	
 	private Long id;
 	public CommunityDto(Long id){
     	setId(id);

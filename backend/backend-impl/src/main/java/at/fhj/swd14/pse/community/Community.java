@@ -1,25 +1,32 @@
 package at.fhj.swd14.pse.community;
 
 import java.io.Serializable;
-import java.sql.Date;
-
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import at.fhj.swd14.pse.converter.UserConverter;
 import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserDto;
 
 @Entity
 @Table(name = "community")
+@NamedQueries({
+	@NamedQuery(name="Community.findByAuthorId", query="SELECT c FROM Community c WHERE c.author.id = :authorUserId"),
+	@NamedQuery(name="Community.findUserRelated", query="SELECT c FROM Community c"),
+	@NamedQuery(name="Community.findAllowedUsers", query="SELECT u FROM User u , CommunityUser cu WHERE cu.community.id = :communityId and cu.user.id = u.id")
+})
 public class Community implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -48,7 +55,6 @@ public class Community implements Serializable {
     
     @ManyToOne
 	private User author;
-    //	private User author;
     public User getAuthor() {
         return null;
 //        return this.author;
@@ -80,28 +86,24 @@ public class Community implements Serializable {
         this.isActive = activeState;
     }
     
-//    @OneToMany(mappedBy = "community", cascade = CascadeType.PERSIST)
-//    private List<CommunityUser> allowedUsers;
-//   
+    @ManyToMany
+    @JoinTable(name="community_user",
+                joinColumns=
+                     @JoinColumn(name="community_id"),
+                inverseJoinColumns=
+                     @JoinColumn(name="user_id")
+    )
+    private List<User> allowedUsers;
 
     public List<UserDto> getAllowedUsers() {        
-//    	return this.allowedUsers;
-    	return null;
+    	if (UserConverter.convertToDtoList(this.allowedUsers) instanceof List) {
+    		return (List)UserConverter.convertToDtoList(this.allowedUsers);
+    	}
+    	return null;//TODO @Thomas
     }
 
     public void setAllowedUsers(List<UserDto> allowedUsers) {
 //        this.allowedUsers = allowedUsers;
     }
-
-//    @Column
-//    private Date createTime = new Date(0);
-//
-//    public Date getCreateTime() {
-//        return createTime;
-//    }
-//
-//    public void setCreateTime(Date createDate) {
-//        this.createTime = createDate;
-//    }
 
 }

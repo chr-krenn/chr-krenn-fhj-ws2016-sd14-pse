@@ -27,9 +27,25 @@ public class CommunityServiceImpl implements CommunityService{
 		
 		Community dtoComm = CommunityConverter.convert(community);
 		communityRepository.save(dtoComm);
-        return dtoComm.getId();
+		Community expected = communityRepository.find(dtoComm.getId());
+		if(expected != null)
+		{
+			return expected.getId();
+		}
+        return 0;
 	}
-
+	
+	@Override
+	public long remove(CommunityDto community) {
+		communityRepository.remove(CommunityConverter.convert(community));
+		Community expected = communityRepository.find(community.getId());
+		if(expected != null)
+		{
+			return expected.getId();
+		}
+        return 0;
+	}
+	
 	@Override
 	public CommunityDto find(long id) {
 		return CommunityConverter.convert(communityRepository.find(id));
@@ -38,11 +54,6 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public List<CommunityDto> findByAuthorId(Long creatorUserId) {
 		
-		// Test Code
-		Map<String, Object> parametertest = new HashMap<>();
-		parametertest.put("communityId", creatorUserId);
-		List<UserDto> users = executeNamedQuery("Community.findAllowedUsers", parametertest, true);
-		// Test Code
 		
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("authorUserId", creatorUserId);
@@ -79,4 +90,11 @@ public class CommunityServiceImpl implements CommunityService{
 		return new ArrayList<>(CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name)));
 	}
 
+	@Override
+	public List<CommunityDto> findAll() {	
+		
+		return new ArrayList<>(CommunityConverter.convertToDtoList(communityRepository.findAll()));
+	}
+
+	
 }

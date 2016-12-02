@@ -25,8 +25,7 @@ import at.fhj.swd14.pse.user.UserDto;
 @NamedQueries({
 	@NamedQuery(name="Community.findByAuthorId", query="SELECT c FROM Community c WHERE c.author.id = :authorUserId"),
 	@NamedQuery(name="Community.findUserRelated", query="SELECT c FROM Community c"),
-	@NamedQuery(name="Community.findAllowedUsers", query="SELECT u FROM User u , CommunityUser cu WHERE cu.community.id = :communityId and cu.user.id = u.id")
-})
+	})
 public class Community implements Serializable {
     private static final long serialVersionUID = 1L;
 

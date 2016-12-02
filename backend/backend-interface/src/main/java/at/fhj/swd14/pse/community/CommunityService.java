@@ -17,6 +17,13 @@ public interface CommunityService {
 	 */
 	long save(CommunityDto community);
 	
+	/**
+	 * removes the given community and returns the community id.
+	 * @param community
+	 * @return communityId
+	 */
+	long remove(CommunityDto community);
+	
 	CommunityDto find(long id);
 	
 	/**
@@ -42,5 +49,7 @@ public interface CommunityService {
 	 * @return List of relevant communities
 	 */
 	List<CommunityDto> findAll();
+	
+	
 	
 }

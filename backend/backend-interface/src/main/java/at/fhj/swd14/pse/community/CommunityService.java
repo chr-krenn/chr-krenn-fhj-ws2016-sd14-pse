@@ -36,4 +36,11 @@ public interface CommunityService {
 	 */
 	List<CommunityDto> findUserRelated(Long userId);
 	
+	/**
+	 * returns all communities
+	 * @param userId
+	 * @return List of relevant communities
+	 */
+	List<CommunityDto> findAll();
+	
 }

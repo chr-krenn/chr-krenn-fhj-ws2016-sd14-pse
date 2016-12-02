@@ -66,7 +66,6 @@ public class CommunityConveterTest {
 		this.community.setId((long) 1);
 		this.community.setAllowedUsers(this.getUserDtoList());
 		this.community.setAuthor(this.user_author);
-		this.community.setCreateTime(this.date);
 		this.community.setName(this.name);
 		this.community.setPublicState(this.state);
 

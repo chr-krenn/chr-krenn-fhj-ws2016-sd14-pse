@@ -16,6 +16,8 @@ import javax.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import at.fhj.swd14.pse.message.MessageBean;
+import at.fhj.swd14.pse.message.MessageDto;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 
@@ -93,6 +95,16 @@ public class CommunityBean implements Serializable{
 	private List<CommunityDto> createdCommunities;
 	private List<CommunityDto> joinedCommunities;
 	private List<CommunityDto> publicCommunities;
+	
+	/*
+	private CommunityDto community;
+	public CommunityBean() {
+    	LOGGER.debug("Create: " + CommunityBean.class.getSimpleName());
+    	this.community = new CommunityDto();
+    }
+    */
+	
+	private UserDto loggedInUser;
 
 	/**
 	 * Initializes the bean for the view
@@ -104,16 +116,19 @@ public class CommunityBean implements Serializable{
 		// Get logged in user
 		long currentUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();;
 		
-		UserDto testUser = userService.find(currentUserId);
+		this.loggedInUser = userService.find(currentUserId);
 		
+		refresh();
+	}
+	
+	private void refresh() {
 		this.createdCommunities = new ArrayList<CommunityDto>();
 		this.joinedCommunities = new ArrayList<CommunityDto>();
 		this.publicCommunities = new ArrayList<CommunityDto>();
 		
-		this.createdCommunities = communityService.findByAuthorId(currentUserId);
-		this.joinedCommunities = communityService.findUserRelated(currentUserId);
-		this.publicCommunities = communityService.findUserRelated(currentUserId);
-		
+		this.createdCommunities = communityService.findByAuthorId(this.loggedInUser.getId());
+		this.joinedCommunities = communityService.findUserRelated(this.loggedInUser.getId());
+		this.publicCommunities = communityService.findUserRelated(this.loggedInUser.getId());
 	}
 
 	/**
@@ -123,11 +138,27 @@ public class CommunityBean implements Serializable{
 	public void createCommunity() {
 		LOGGER.debug("Creating new Community...");
     	
-		// TODO Get UserDto for logged in user...
 		if(this.newName != null) {
+			CommunityDto community = new CommunityDto();
+			community.setAuthor(loggedInUser);
+			community.setPublicState(newPublicState);
+			community.setName(newName);
 			
-			//CommunityDto newCommunity = this.communityDto.createCommunity(this.newName);
-			LOGGER.debug("Created new community with name {}", this.newName);
+			if(!newPublicState) {
+				community.setActiveState(true);
+			} else {
+				community.setActiveState(false);
+			}
+			
+			community.setDescription(newDescription);
+			long generatedId = this.communityService.save(community);
+			
+			community = communityService.find(generatedId);
+			
+			LOGGER.error("created new community author: {} desc: {} name: {} public: {}",
+					this.loggedInUser, this.newDescription, this.newName, this.newPublicState);
+			
+			refresh();
 			
 		} else {
 			LOGGER.debug("Name is empty, can't create comunity");

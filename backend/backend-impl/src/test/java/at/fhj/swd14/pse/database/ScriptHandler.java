@@ -7,6 +7,10 @@ import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 //import org.apache.ibatis.jdbc.ScriptRunner;
 
 /**
@@ -16,6 +20,12 @@ import java.sql.DriverManager;
  */
 
 public class ScriptHandler {
+	
+	/**
+	 * The LOGGER to use
+	 */
+	private static final Logger LOGGER = LogManager.getLogger(ScriptHandler.class);
+
 
 	 String host;
 
@@ -47,7 +57,7 @@ public class ScriptHandler {
 //	   sr.runScript(reader);
 //
 //	  } catch (Exception e) {
-//	   System.err.println("Failed to Execute" + path + " The error is " + e.getMessage());
+//		 LOGGER.error("Failed to Execute" + path + " The error is " + e.getMessage());
 //	  }
 	  return true;
 	 }

@@ -56,12 +56,12 @@ public class Community implements Serializable {
     @ManyToOne
 	private User author;
     public User getAuthor() {
-        return null;
-//        return this.author;
+        
+       return this.author;
     }
 
     public void setAuthor(User author) {
-//		this.author = author;
+		this.author = author;
     }
 
     @Column
@@ -86,13 +86,15 @@ public class Community implements Serializable {
         this.isActive = activeState;
     }
     
-    @ManyToMany
-    @JoinTable(name="community_user",
-                joinColumns=
-                     @JoinColumn(name="community_id"),
-                inverseJoinColumns=
-                     @JoinColumn(name="user_id")
-    )
+//    @ManyToMany
+//    @JoinTable(name="community_user",
+//                joinColumns=
+//                     @JoinColumn(name="community_id"),
+//                inverseJoinColumns=
+//                     @JoinColumn(name="user_id")
+//    )
+//    
+    @ManyToMany(mappedBy = "communities")
     private List<User> allowedUsers;
 
     public List<UserDto> getAllowedUsers() {        

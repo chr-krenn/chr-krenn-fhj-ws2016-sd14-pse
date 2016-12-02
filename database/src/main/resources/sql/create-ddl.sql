@@ -141,11 +141,13 @@ CREATE TABLE IF NOT EXISTS community (
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS `community_user` (
-  `community_id` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`community_id`,`user_id`)
-) ENGINE=InnoDB;
+#create tag-message relation
+CREATE TABLE IF NOT EXISTS user_community
+(
+  allowedUsers_id BIGINT        NOT NULL,
+  communities_id BIGINT       NOT NULL
+)
+ENGINE = INNODB;
 
 
 #create message table

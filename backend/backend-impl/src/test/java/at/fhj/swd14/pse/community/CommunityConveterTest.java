@@ -29,7 +29,7 @@ public class CommunityConveterTest {
 	@Before
 	public void setup(){
 		this.userdto_author = this.createUserDto((long) 1, "author@test.cu", "password_author", "salt");
-		this.user_author =this.createUser((long) 1, "author@test.cu", "password_author", "salt");
+		this.user_author = this.createUser((long) 1, "author@test.cu", "password_author", "salt");
 		
 		this.createCommunity();
 		this.createCommunityDto();
@@ -38,14 +38,8 @@ public class CommunityConveterTest {
 	@Test
 	public void testCommunityToCommunityDto(){
 		CommunityDto c = CommunityConverter.convert(this.community);
-		assertCommunityDto(this.communityDto, c);
+		CommunityDtoTester.assertEquals(this.communityDto, c);
 	}
-	
-//	@Test
-//	public void testCommunityDtoToCommunity(){
-//		Community c = CommunityConverter.convert(this.communityDto);
-//		
-//	}
 	
 	
 	private void createCommunityDto(){
@@ -71,7 +65,16 @@ public class CommunityConveterTest {
 
 	}
 	
-	private List<UserDto> getUserDtoList(){
+	private List<User> getUserList(){
+		
+		List<User> user = new ArrayList<>();
+		user.add(this.createUser((long) 1, "mail_1@test.cu", "password_1", "salt"));
+		user.add(this.createUser((long) 2, "mail_2@test.cu", "password_2", "salt"));
+		
+		return user;
+	}
+	
+private List<UserDto> getUserDtoList(){
 		
 		List<UserDto> userDto = new ArrayList<>();
 		userDto.add(this.createUserDto((long) 1, "mail_1@test.cu", "password_1", "salt"));
@@ -81,13 +84,24 @@ public class CommunityConveterTest {
 	}
 	
 	
+	
+	
+	private User createUse(long id, String mail, String password, String salt){
+		User u = new User();
+		u.setId(id);
+		u.setMail(mail);
+		u.setPassword(password);
+		u.setSalt(salt);
+		
+		return u;
+	}
+	
 	private UserDto createUserDto(long id, String mail, String password, String salt){
 		UserDto u = new UserDto();
 		u.setId(id);
 		u.setMail(mail);
 		u.setPassword(password);
 		u.setSalt(salt);
-		
 		return u;
 	}
 	
@@ -99,11 +113,4 @@ public class CommunityConveterTest {
 		
 		return u;
 	}
-	
-	private void assertCommunityDto(CommunityDto expected, CommunityDto actual){
-		CommunityDtoTester.assertEquals(expected, actual);
-		
-	}
-		
-	
 }

@@ -95,6 +95,9 @@ public class CommunityBean implements Serializable{
 	private List<CommunityDto> createdCommunities;
 	private List<CommunityDto> joinedCommunities;
 	private List<CommunityDto> publicCommunities;
+	private List<CommunityDto> allCommunities;
+	private List<CommunityDto> otherCommunities;
+	private List<CommunityDto> communitiesToActivate;
 	
 	/*
 	private CommunityDto community;
@@ -104,6 +107,22 @@ public class CommunityBean implements Serializable{
     }
     */
 	
+	public List<CommunityDto> getCommunitiesToActivate() {
+		return communitiesToActivate;
+	}
+
+	public void setCommunitiesToActivate(List<CommunityDto> communitiesToActivate) {
+		this.communitiesToActivate = communitiesToActivate;
+	}
+
+	public List<CommunityDto> getOtherCommunities() {
+		return otherCommunities;
+	}
+
+	public void setOtherCommunities(List<CommunityDto> otherCommunities) {
+		this.otherCommunities = otherCommunities;
+	}
+
 	private UserDto loggedInUser;
 
 	/**
@@ -125,10 +144,34 @@ public class CommunityBean implements Serializable{
 		this.createdCommunities = new ArrayList<CommunityDto>();
 		this.joinedCommunities = new ArrayList<CommunityDto>();
 		this.publicCommunities = new ArrayList<CommunityDto>();
+		this.allCommunities = new ArrayList<CommunityDto>();
+		this.otherCommunities = new ArrayList<CommunityDto>();
+		this.communitiesToActivate = new ArrayList<CommunityDto>();
 		
 		this.createdCommunities = communityService.findByAuthorId(this.loggedInUser.getId());
 		this.joinedCommunities = communityService.findUserRelated(this.loggedInUser.getId());
 		this.publicCommunities = communityService.findUserRelated(this.loggedInUser.getId());
+		this.allCommunities = communityService.findAll();
+		
+		ArrayList<CommunityDto> dummy = new ArrayList<CommunityDto>();
+		allCommunities.forEach(dto -> {
+			if(dto.getAuthor().getId() != this.loggedInUser.getId())
+			{
+				dummy.add(dto);
+			}
+			
+			if(!dto.getActiveState()) {
+				this.communitiesToActivate.add(dto);
+			}
+		});
+		
+		dummy.forEach(dto -> {
+			if(!dto.getAllowedUsers().contains(this.loggedInUser)) {
+				this.otherCommunities.add(dto);
+			}
+		});
+		
+		
 	}
 
 	/**
@@ -144,6 +187,7 @@ public class CommunityBean implements Serializable{
 			community.setPublicState(newPublicState);
 			community.setName(newName);
 			
+			// If it is a private community, set it to active..
 			if(!newPublicState) {
 				community.setActiveState(true);
 			} else {
@@ -162,6 +206,128 @@ public class CommunityBean implements Serializable{
 			
 		} else {
 			LOGGER.debug("Name is empty, can't create comunity");
+		}
+	}
+	
+	/**
+	 * activate a community
+	 *
+	 */
+	public void activate(CommunityDto community) {
+		LOGGER.debug("activate Comunity: {}", community.getName());
+    	
+		if(community != null) {
+			community.setActiveState(true);
+			
+			this.communityService.save(community);
+			
+			LOGGER.error("activated community {}", community.getName());
+			
+			refresh();
+		}
+	}
+	
+	/**
+	 * deactivate a community
+	 *
+	 */
+	public void deactivate(CommunityDto community) {
+		LOGGER.debug("deactivate Comunity: {}", community.getName());
+    	
+		if(community != null) {
+			community.setActiveState(false);
+			
+			this.communityService.save(community);
+			
+			LOGGER.error("deactivated community {}", community.getName());
+			
+			refresh();
+		}
+	}
+
+	/**
+	 * add the current user to a community
+	 *
+	 */
+	public void join(CommunityDto community) {
+		LOGGER.debug("User {} Joining the Comunity: {}", this.loggedInUser, community.getName());
+    	
+		if(community != null) {
+			if (community.getPublicState()) {
+				//CommunityDto communityToJoin = communityService.find(community.getId());
+				community.addUser(this.loggedInUser);
+				LOGGER.error("adding user {} to community {}",
+						this.loggedInUser, community.getName());
+			} else {
+				community.addPendingUser(this.loggedInUser);
+				LOGGER.error("add join request for user {} and community {}",
+						this.loggedInUser, community.getName());
+			}
+			
+			this.communityService.save(community);
+			
+			LOGGER.error("saved user {} to community {}",
+					this.loggedInUser, community.getName());
+			
+			refresh();	
+		}
+	}
+	
+	/**
+	 * leave a community
+	 *
+	 */
+	public void leave(CommunityDto community) {
+		LOGGER.debug("User {} leaves the Comunity: {}", this.loggedInUser, community.getName());
+    	
+		if(community != null) {
+			community.deleteUser(this.loggedInUser.getId());
+			
+			this.communityService.save(community);
+			
+			LOGGER.error("removed user {} from community {}",
+					this.loggedInUser, community.getName());
+			
+			refresh();
+		}
+	}
+	
+	/**
+	 * accept a user request
+	 *
+	 */
+	public void accept(CommunityDto community) {
+		LOGGER.debug("accept User {} for Comunity: {}", this.loggedInUser, community.getName());
+    	
+		if(community != null) {
+			community.addUser(this.loggedInUser);
+			community.deletePendingUser(this.loggedInUser.getId());
+			
+			this.communityService.save(community);
+			
+			LOGGER.error("accepted user {} for community {}",
+					this.loggedInUser, community.getName());
+			
+			refresh();
+		}
+	}
+	
+	/**
+	 * decline a user request
+	 *
+	 */
+	public void decline(CommunityDto community) {
+		LOGGER.debug("decline User {} lfor Comunity: {}", this.loggedInUser, community.getName());
+    	
+		if(community != null) {
+			community.deletePendingUser(this.loggedInUser.getId());
+			
+			this.communityService.save(community);
+			
+			LOGGER.error("acceptdesclined user {} for community {}",
+					this.loggedInUser, community.getName());
+			
+			refresh();
 		}
 	}
 }

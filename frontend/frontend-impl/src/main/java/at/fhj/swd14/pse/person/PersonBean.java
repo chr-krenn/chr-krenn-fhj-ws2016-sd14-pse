@@ -128,16 +128,6 @@ public class PersonBean implements Serializable{
 	}
 
 	
-	public void growl(String summary, Exception ex)
-	{
-		growl(summary,ex.getMessage());
-	}
-	
-	public void growl(String summary, String message)
-	{
-		FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(summary,  message) );
-	}
 	
 	@PostConstruct
 	public void init()
@@ -148,6 +138,19 @@ public class PersonBean implements Serializable{
 		personPageHandler = new PersonPageHandler(this);
 		loggedInPersonPageHandler = new LoggedInPersonPageHandler(this);
 		showLoggedInPerson();
+		LOGGER.debug("PersonBean initialized successfully");
+	}
+
+	public void growl(String summary, Exception ex)
+	{
+		growl(summary,ex.getMessage());
+	}
+	
+	public void growl(String summary, String message)
+	{
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage(summary,  message) );
+		LOGGER.trace("Send growl to user with summary "+summary+" and message "+message);
 	}
 	
 	public String showPersonByUserId()

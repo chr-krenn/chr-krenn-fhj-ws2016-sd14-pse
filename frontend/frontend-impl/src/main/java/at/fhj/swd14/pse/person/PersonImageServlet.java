@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Servlet to serve person images
  * @author Patrick Kainz
@@ -17,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "PersonImageServlet", urlPatterns = {"/personImage"})
 public class PersonImageServlet extends HttpServlet {
+
+	private static final Logger LOGGER = LogManager.getLogger(PersonImageServlet.class);
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,14 +32,18 @@ public class PersonImageServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
         Long id =Long.parseLong(request.getParameter("id"));
+        
+        LOGGER.trace("Retrieving image for user: "+id);
+        
         PersonImageDto img = service.getPersonImage(id);
 
         response.setContentType(img.getContentType());
         ServletOutputStream outputStream = response.getOutputStream();
         outputStream.write(img.getData());
         outputStream.close();
+        
+        LOGGER.trace("Image for user "+id+" retrieved");
     }
 
     @Override

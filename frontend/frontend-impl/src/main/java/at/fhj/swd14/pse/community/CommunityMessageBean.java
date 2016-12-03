@@ -16,6 +16,8 @@ import javax.inject.Named;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.primefaces.event.CloseEvent;
+import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
@@ -93,50 +95,49 @@ public class CommunityMessageBean implements Serializable{
 		
 	}
 
-//	/**
-//	 * Creates a new Community
-//	 *
-//	 */
-//	public void createCommunity() {
-//		LOGGER.debug("Creating new Community...");
-//    	
-//		// TODO Get UserDto for logged in user...
-//		if(this.newName != null) {
-//			
-//			//CommunityDto newCommunity = this.communityDto.createCommunity(this.newName);
-//			LOGGER.debug("Created new community with name {}", this.newName);
-//			
-//		} else {
-//			LOGGER.debug("Name is empty, can't create comunity");
-//		}
+	
+
+	
+//	private List<CommunityDto> listMyCommunities =new ArrayList<CommunityDto>();
+//	public List<CommunityDto> getListMyCommunities() {
+//		listMyCommunities.addAll(joinedCommunities);
+//		listMyCommunities.addAll(joinedCommunities);
+//		return  listMyCommunities;
+//	    }
+//	
+//	public void setListMyCommunities(){
+//		
 //	}
+	     
+//	    public void update() {
+//	        addMessage("Success", "Data updated");
+//	    }
+//	     
+//	    public void delete() {
+//	        addMessage("Success", "Data deleted");
+//	    }
+//	     
+//	    public void addMessage(String summary, String detail) {
+//	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+//	        FacesContext.getCurrentInstance().addMessage(null, message);
+//	    }
 	
-	private List<CommunityDto> listMyCommunities =new ArrayList<CommunityDto>();
-	public List<CommunityDto> getListMyCommunities() {
-		listMyCommunities.addAll(joinedCommunities);
-		listMyCommunities.addAll(joinedCommunities);
-		return  listMyCommunities;
-	    }
 	
-	public void setListMyCommunities(){
+	
+		private long selectedId ;
+		public long getselectedId() {
+			return selectedId;
+		}
+	
+		public void setselectedId(long id) {
+			this.selectedId = id;
+		}
+		    
 		
-	}
-	     
-	    public void update() {
-	        addMessage("Success", "Data updated");
-	    }
-	     
-	    public void delete() {
-	        addMessage("Success", "Data deleted");
-	    }
-	     
-	    public void addMessage(String summary, String detail) {
-	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-	        FacesContext.getCurrentInstance().addMessage(null, message);
-	    }
-	    
-	  
 		
+		
+	
+
 		private MenuModel createMenuModel;
 		public MenuModel getCreateMenuModel(){
 			createMenuModel = new DefaultMenuModel();
@@ -144,23 +145,26 @@ public class CommunityMessageBean implements Serializable{
 	    		DefaultSubMenu firstSubmenu = new DefaultSubMenu("My Communities");
 	    		DefaultSubMenu secondSubmenu = new DefaultSubMenu("Public Communities");
 	    		
-	    		for(CommunityDto comm : this.getListMyCommunities())
+	    	
+	    		for(CommunityDto comm : this.getJoinedCommunities())
 	    		{
-	    			DefaultMenuItem item = new DefaultMenuItem(comm.getName());
-	    			firstSubmenu.addElement(item);
-	    			item.setIcon("ui-icon-extlink");
+	    			DefaultMenuItem item1= new DefaultMenuItem(comm.getName());
+	    			firstSubmenu.addElement(item1);
+	    			item1.setIcon("ui-icon-extlink");    			
+	    			item1.setUrl("messagestream.xhtml?parameterCommunityId="+comm.getId());
 	    		}
 	    		
 	    		for(CommunityDto comm : this.getPublicCommunities())
 	    		{
-	    			DefaultMenuItem item = new DefaultMenuItem(comm.getName());
-	    			secondSubmenu.addElement(item);
-	    			item.setIcon("ui-icon-extlink");
+	    			DefaultMenuItem item2 = new DefaultMenuItem(comm.getName());
+	    			secondSubmenu.addElement(item2);
+	    			item2.setIcon("ui-icon-extlink");
+	    			item2.setUrl("messagestream.xhtml?parameterCommunityId="+comm.getId());
+
 	    		}
-	    		
-//	    		item.setUrl("http://www.primefaces.org");
-//	    		item.setIcon("ui-icon-home");
-//	    		
+
+
+    		
 	    		createMenuModel.addElement(firstSubmenu);
 	    		createMenuModel.addElement(secondSubmenu);
 	    		
@@ -171,5 +175,10 @@ public class CommunityMessageBean implements Serializable{
 		public void setCreateMenuModel(){
 			
 		}
+		
+//		<f:metadata>
+//	    <f:viewParam name="parameterCommunityId" value="#{communityMessageBean.selectedId}" />
+//	</f:metadata>
+		
 	
 }

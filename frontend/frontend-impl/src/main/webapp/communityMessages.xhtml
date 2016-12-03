@@ -8,10 +8,7 @@
     <ui:include src="head.xhtml" />
 </h:head>
 <h:body>
-<context-param>
-   <param-name>facelets.SKIP_COMMENTS</param-name>
-   <param-value>true</param-value>
-</context-param>
+	
     <nav>
         <ui:include src="navTop.xhtml" />
     </nav>
@@ -30,12 +27,10 @@
 			<h:form>
     			<p:growl autoUpdate="true"/>
     			<p:menu model="#{communityMessageBean.createMenuModel}"/>
-
 			</h:form>
 			</ul> 
         </section>
-        <section class="content-rgt">
-        </section>
+        	
     </div>
 </h:body>
 </html>

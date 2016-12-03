@@ -22,6 +22,7 @@ import at.fhj.swd14.pse.security.DatabasePrincipal;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 import org.junit.Assert;
+import org.junit.Before;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.mock;
@@ -40,6 +41,12 @@ public class PersonBeanTest {
 
     @Mock
     private UserService userService;
+    
+    private FacesContext context;
+    private ExternalContext extContext;
+    private PersonDto person;
+    private List<StatusDto> stati;
+    private List<DepartmentDto> deps;
 	
     public PersonDto getDummyPerson()
     {
@@ -70,20 +77,35 @@ public class PersonBeanTest {
         return myperson;
     }
     
+    @Before
+    public void setup()
+    {
+    	person = getDummyPerson();
+    	when(userService.find(1L)).thenReturn(person.getUser());
+    	when(personService.findByUser(person.getUser())).thenReturn(person);
+    	context = ContextMocker.mockFacesContext();
+    	extContext = mock(ExternalContext.class);
+    	when(context.getExternalContext()).thenReturn(extContext);
+    	DatabasePrincipal principal = Mockito.mock(DatabasePrincipal.class);
+		Mockito.when(extContext.getUserPrincipal()).thenReturn(principal);
+		Mockito.when(principal.getUserId()).thenReturn(person.getUser().getId());
+    	stati = new LinkedList<StatusDto>();
+    	stati.add(new StatusDto("online"));
+    	deps = new LinkedList<DepartmentDto>();
+    	DepartmentDto dep = new DepartmentDto(1L);
+    	dep.setName("test");
+    	deps.add(dep);
+    	when(personService.findAllStati()).thenReturn(stati);
+    	when(departmentService.findAll()).thenReturn(deps);
+		unitUnderTest.init();
+    }
+    
     @Test
     public void testPersonByUserId()
     {
-    	PersonDto person = getDummyPerson();
-    	when(userService.find(1L)).thenReturn(person.getUser());
-    	when(personService.findByUser(person.getUser())).thenReturn(person);
-    	FacesContext context = ContextMocker.mockFacesContext();
-    	ExternalContext extContext = mock(ExternalContext.class);
-    	when(context.getExternalContext()).thenReturn(extContext);
-    	
     	Map<String,String> paramMap = new HashMap<String,String>();
     	paramMap.put("userId","1");
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
-    	
     	String path = unitUnderTest.showPersonByUserId();
     	Assert.assertEquals("/user", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
@@ -93,26 +115,7 @@ public class PersonBeanTest {
     
     @Test
     public void testLoggedInPerson()
-    {
-    	PersonDto person = getDummyPerson();
-    	FacesContext context = ContextMocker.mockFacesContext();
-		ExternalContext extContext = Mockito.mock(ExternalContext.class);
-		Mockito.when(context.getExternalContext()).thenReturn(extContext);
-		DatabasePrincipal principal = Mockito.mock(DatabasePrincipal.class);
-		Mockito.when(extContext.getUserPrincipal()).thenReturn(principal);
-		Mockito.when(principal.getUserId()).thenReturn(person.getUser().getId());
-    	when(personService.findByUser(person.getUser())).thenReturn(person);
-    	when(userService.find(person.getUser().getId())).thenReturn(person.getUser());
-    	
-    	List<StatusDto> stati = new LinkedList<StatusDto>();
-    	stati.add(new StatusDto("online"));
-    	List<DepartmentDto> deps = new LinkedList<DepartmentDto>();
-    	DepartmentDto dep = new DepartmentDto(1L);
-    	dep.setName("test");
-    	deps.add(dep);
-    	when(personService.findAllStati()).thenReturn(stati);
-    	when(departmentService.findAll()).thenReturn(deps);
-    	
+    {    	
     	String path = unitUnderTest.showLoggedInPerson();
     	Assert.assertEquals("/user", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
@@ -128,15 +131,7 @@ public class PersonBeanTest {
     {
     	PersonDto person = getDummyPerson();
     	unitUnderTest.setPerson(person);
-    	FacesContext context = ContextMocker.mockFacesContext();
-		ExternalContext extContext = Mockito.mock(ExternalContext.class);
-		Mockito.when(context.getExternalContext()).thenReturn(extContext);
-		DatabasePrincipal principal = Mockito.mock(DatabasePrincipal.class);
-		Mockito.when(extContext.getUserPrincipal()).thenReturn(principal);
-		Mockito.when(principal.getUserId()).thenReturn(1L);
-		Mockito.when(userService.find(1L)).thenReturn(person.getUser());
-    	when(userService.find(person.getUser().getId())).thenReturn(person.getUser());
-		unitUnderTest.createLoggedInPerson();
+    	unitUnderTest.createLoggedInPerson();
 		Mockito.verify(personService,Mockito.times(1)).saveLoggedInPerson(Mockito.any(PersonDto.class));
     }
     
@@ -202,9 +197,6 @@ public class PersonBeanTest {
     {
     	PersonDto person = getDummyPerson();
     	unitUnderTest.setPerson(person);
-    	FacesContext context = ContextMocker.mockFacesContext();
-    	ExternalContext extContext = mock(ExternalContext.class);
-    	when(context.getExternalContext()).thenReturn(extContext);
     	Map<String,String> paramMap = new HashMap<String,String>();
     	paramMap.put("value","test2@test.de");
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
@@ -217,9 +209,6 @@ public class PersonBeanTest {
     {
     	PersonDto person = getDummyPerson();
     	unitUnderTest.setPerson(person);
-    	FacesContext context = ContextMocker.mockFacesContext();
-    	ExternalContext extContext = mock(ExternalContext.class);
-    	when(context.getExternalContext()).thenReturn(extContext);
     	Map<String,String> paramMap = new HashMap<String,String>();
     	paramMap.put("value","testknowledge");
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
@@ -232,9 +221,6 @@ public class PersonBeanTest {
     {
     	PersonDto person = getDummyPerson();
     	unitUnderTest.setPerson(person);
-    	FacesContext context = ContextMocker.mockFacesContext();
-    	ExternalContext extContext = mock(ExternalContext.class);
-    	when(context.getExternalContext()).thenReturn(extContext);
     	Map<String,String> paramMap = new HashMap<String,String>();
     	paramMap.put("value","testhobby");
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
@@ -247,9 +233,6 @@ public class PersonBeanTest {
     {
     	PersonDto person = getDummyPerson();
     	unitUnderTest.setPerson(person);
-    	FacesContext context = ContextMocker.mockFacesContext();
-    	ExternalContext extContext = mock(ExternalContext.class);
-    	when(context.getExternalContext()).thenReturn(extContext);
     	Map<String,String> paramMap = new HashMap<String,String>();
     	paramMap.put("value","0664664664");
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);

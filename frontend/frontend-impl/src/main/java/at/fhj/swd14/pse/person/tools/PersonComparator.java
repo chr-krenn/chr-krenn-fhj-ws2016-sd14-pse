@@ -1,6 +1,8 @@
-package at.fhj.swd14.pse.person;
+package at.fhj.swd14.pse.person.tools;
 
 import java.util.Comparator;
+
+import at.fhj.swd14.pse.person.PersonDto;
 
 public class PersonComparator implements Comparator<PersonDto> {
 

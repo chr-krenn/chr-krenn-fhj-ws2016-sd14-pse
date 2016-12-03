@@ -32,6 +32,8 @@ public class PersonPageHandler {
 	
 	public String showPersonByUserId()
 	{
+		Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
+		bean.setLoggedInUserId(loggedInUserId);
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 	    int userId = Integer.parseInt(params.get("userId"));
 		UserDto user = userService.find(userId);

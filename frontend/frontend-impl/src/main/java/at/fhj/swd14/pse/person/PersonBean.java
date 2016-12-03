@@ -53,7 +53,16 @@ public class PersonBean implements Serializable{
 	private PersonVerifier verifier;
 	private PersonPageHandler personPageHandler;
 	private LoggedInPersonPageHandler loggedInPersonPageHandler;
+	private Long loggedInUserId; 
 	
+	public Long getLoggedInUserId() {
+		return loggedInUserId;
+	}
+
+	public void setLoggedInUserId(Long loggedInUserId) {
+		this.loggedInUserId = loggedInUserId;
+	}
+
 	public PersonVerifier getVerifier() {
 		return verifier;
 	}

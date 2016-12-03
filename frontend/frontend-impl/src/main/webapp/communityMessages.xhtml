@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>List of Communities</title>
+    <ui:include src="head.xhtml" />
+</h:head>
+<h:body>
+<context-param>
+   <param-name>facelets.SKIP_COMMENTS</param-name>
+   <param-value>true</param-value>
+</context-param>
+    <nav>
+        <ui:include src="navTop.xhtml" />
+    </nav>
+    <header>
+        <section>
+            <ui:include src="headerInfoPerson.xhtml" />
+        </section>
+    </header>
+    <div class="main clearfix">
+        <section class="content-lft">
+
+        </section>
+        
+        <section class="content-lft">
+        <ul class="about sidebarlink">
+			<h:form>
+    			<p:growl autoUpdate="true"/>
+    			<p:menu model="#{communityMessageBean.createMenuModel}"/>
+
+			</h:form>
+			</ul> 
+        </section>
+        <section class="content-rgt">
+        </section>
+    </div>
+</h:body>
+</html>

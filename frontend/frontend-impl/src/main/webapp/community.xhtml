@@ -40,12 +40,12 @@
 		<h:outputLabel for="name" value="Community Name:" />
 		<p:inputText id="name" value="#{communityBean.newName}"/>
 		<h:outputLabel for="description" value="Description:" />
-		<p:inputTextarea id="description" rows="5" cols="30" counter="display" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" > #{communityBean.newDescription}</p:inputTextarea>
-		<h:outputText id="display" />
+		<p:inputTextarea id="description" rows="5" cols="30" counter="display" maxlength="140" counterTemplate="{0} characters remaining." autoResize="false" value="#{communityBean.newDescription}"/>
+		<h:outputText id="display"/>
 		<h:outputText value="Public: " />
-		<p:selectBooleanCheckbox> #{communityBean.newPublicState}</p:selectBooleanCheckbox>
+		<p:selectBooleanCheckbox id="newPublicState" value="#{communityBean.newPublicState}"/>
 	 </h:panelGrid>
-	<p:commandButton value="Submit"  icon="ui-icon-check" action="#{communityBean.createCommunity()}" />
+	<p:commandButton value="Submit"  icon="ui-icon-check" action="#{communityBean.createCommunity()}"/>
 </h:form>
 	
 <h:form id="creatForm">
@@ -109,10 +109,10 @@
 </h:form>
 
 <h:form id="publicForm">
-	<p:dataTable var="community" value="#{communityBean.publicCommunities}">
+	<p:dataTable var="community" value="#{communityBean.otherCommunities}">
 		<p:growl id="growl" life="2000" />
 		<f:facet name="header">
-				All public Communities
+				Other Communities
 		</f:facet>
 		<p:column headerText="Author">
 			<h:outputText value="#{community.author.mail}" />
@@ -130,7 +130,7 @@
 <!-- 		        <h:outputText value="#{community.description}" /> -->
 		</p:column>
 		<p:column headerText="Status">
-			<p:commandButton value="join" update="growl" />
+			<p:commandButton value="join" update="growl" action="#{communityBean.join(community)}"/>
 		</p:column>
 	</p:dataTable>
 </h:form>

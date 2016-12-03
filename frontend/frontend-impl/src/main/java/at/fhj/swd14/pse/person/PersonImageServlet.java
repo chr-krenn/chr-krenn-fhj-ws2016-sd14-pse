@@ -31,6 +31,8 @@ public class PersonImageServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	//exceptions cannot be handled here, as there is no user interaction except the image
 
         Long id =Long.parseLong(request.getParameter("id"));
         

@@ -132,13 +132,19 @@ public class PersonBean implements Serializable{
 	@PostConstruct
 	public void init()
 	{
-		//we will have to init with the logged in user if possible, because right after login the render method 
-		//is not called for some reason
-		verifier = new PersonVerifier(this);
-		personPageHandler = new PersonPageHandler(this);
-		loggedInPersonPageHandler = new LoggedInPersonPageHandler(this);
-		showLoggedInPerson();
-		LOGGER.debug("PersonBean initialized successfully");
+		try{
+			//we will have to init with the logged in user if possible, because right after login the render method 
+			//is not called for some reason
+			verifier = new PersonVerifier(this);
+			personPageHandler = new PersonPageHandler(this);
+			loggedInPersonPageHandler = new LoggedInPersonPageHandler(this);
+			showLoggedInPerson();
+			LOGGER.debug("PersonBean initialized successfully");
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 
 	public void growl(String summary, Exception ex)
@@ -155,80 +161,174 @@ public class PersonBean implements Serializable{
 	
 	public String showPersonByUserId()
 	{
-		return personPageHandler.showPersonByUserId();
+		try{
+			return personPageHandler.showPersonByUserId();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+			return null;
+		}
 	}
 	
 	
 	
 	public String showLoggedInPerson()
 	{
-		return loggedInPersonPageHandler.showLoggedInPerson();
+		try{
+			return loggedInPersonPageHandler.showLoggedInPerson();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+			return null;
+		}
 	}
 
 	public String createLoggedInPerson()
 	{
-		return loggedInPersonPageHandler.createLoggedInPerson();
+		try{
+			return loggedInPersonPageHandler.createLoggedInPerson();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+			return null;
+		}
 	}
 	
 	
 	public void saveData()
 	{
-		loggedInPersonPageHandler.saveData();
+		try{
+			loggedInPersonPageHandler.saveData();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 	
 	public void clearImgUrl()
 	{
-		loggedInPersonPageHandler.clearImgUrl();
+		try{
+			loggedInPersonPageHandler.clearImgUrl();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 	
 	public String savePerson()
 	{
-		return loggedInPersonPageHandler.savePerson();
+		try{
+			return loggedInPersonPageHandler.savePerson();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+			return null;
+		}
 	}
 	
 	public void addMail()
 	{
-		loggedInPersonPageHandler.addMail();
+		try{
+			loggedInPersonPageHandler.addMail();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 	
 	public void addKnowledge()
 	{
-		loggedInPersonPageHandler.addKnowledge();
+		try{
+			loggedInPersonPageHandler.addKnowledge();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 	
 	public void addHobby()
 	{
-		loggedInPersonPageHandler.addHobby();
+		try{
+			loggedInPersonPageHandler.addHobby();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 	
 	public void addNumber()
 	{
-		loggedInPersonPageHandler.addNumber();
+		try{
+			loggedInPersonPageHandler.addNumber();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 
 
 	public void removeMail()
 	{
-		loggedInPersonPageHandler.removeMail();
+		try{
+			loggedInPersonPageHandler.removeMail();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 	
 	public void removeKnowledge()
 	{
-		loggedInPersonPageHandler.removeKnowledge();
+		try{
+			loggedInPersonPageHandler.removeKnowledge();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 	
 	public void removeHobby()
 	{
-		loggedInPersonPageHandler.removeHobby();
+		try{
+			loggedInPersonPageHandler.removeHobby();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 	
 	public void removeNumber()
 	{
-		loggedInPersonPageHandler.removeNumber();
+		try{
+			loggedInPersonPageHandler.removeNumber();
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
 	}
 	
 	public void handleFileUpload(FileUploadEvent event) {
-		loggedInPersonPageHandler.handleFileUpload(event);
+		try {
+			loggedInPersonPageHandler.handleFileUpload(event);
+		}
+		catch(Exception ex)
+		{
+			growl("Error occured",ex);
+		}
     }
 
 	public void changeFriendState(long personID){

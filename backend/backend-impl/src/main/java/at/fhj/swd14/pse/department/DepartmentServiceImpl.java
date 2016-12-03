@@ -25,8 +25,15 @@ public class DepartmentServiceImpl implements DepartmentService{
 	
 	@Override
 	public Collection<DepartmentDto> findAll() {
-		LOGGER.trace("Finding all Departments");
-		return DepartmentConverter.convertToDtoList(depRepo.findAll());
+		try{
+			LOGGER.trace("Finding all Departments");
+			return DepartmentConverter.convertToDtoList(depRepo.findAll());
+		}
+		catch(Exception ex)
+		{
+			LOGGER.error("Error during finding of all departments",ex);
+			throw new DepartmentServiceException("Departments could not be found");
+		}
 	}
 
 }

@@ -113,7 +113,7 @@ public class PersonServiceImplTest {
 		}
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=PersonServiceException.class)
 	public void testSaveNull()
 	{
 		service.saveLoggedInPerson(null);

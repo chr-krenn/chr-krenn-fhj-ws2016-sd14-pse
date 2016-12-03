@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import javax.ejb.Singleton;
 
 import at.fhj.swd14.pse.department.Department;
+import at.fhj.swd14.pse.exception.VerificationException;
 import at.fhj.swd14.pse.repository.AbstractPersonInformationRepository;
 import at.fhj.swd14.pse.repository.DepartmentRepository;
 import at.fhj.swd14.pse.repository.HobbyRepository;
@@ -47,28 +48,28 @@ public class PersonVerifier {
 	public void verifyUser(PersonDto person)
 	{
 		if(person.getUser()==null||person.getUser().getId()==null)
-			throw new IllegalArgumentException("No user provided");
+			throw new VerificationException("No user provided");
 		User user = userRepo.find(person.getUser().getId());
 		if(user==null)
-			throw new IllegalArgumentException("Given user not found in the database");
+			throw new VerificationException("Given user not found in the database");
 	}
 	
 	public void verifyStatus(PersonDto person)
 	{
 		if(person.getStatus()==null||person.getStatus().getName()==null)
 		{
-			throw new IllegalArgumentException("No status provided");
+			throw new VerificationException("No status provided");
 		}
 		Status status = statusRepo.findByName(person.getStatus().getName());
 		if(status==null)
-			throw new IllegalArgumentException("Status invalid");
+			throw new VerificationException("Status invalid");
 	}
 	
 	public void verifyNotNull(PersonDto person)
 	{
 		if(person.getFirstname()==null||person.getFirstname().length()==0
 				||person.getLastname()==null||person.getLastname().length()==0)
-			throw new IllegalArgumentException("No first and lastname given");
+			throw new VerificationException("No first and lastname given");
 	}
 	
 	public void verifyDepartment(PersonDto person)
@@ -78,7 +79,7 @@ public class PersonVerifier {
 		{
 			Department department = departmentRepo.find(person.getDepartment().getId());
 			if(department==null)
-				throw new IllegalArgumentException("Department not found in database");
+				throw new VerificationException("Department not found in database");
 		}
 	}
 	
@@ -93,7 +94,7 @@ public class PersonVerifier {
 			{
 				AbstractPersonInformation real = (AbstractPersonInformation)repo.find(info.getId());
 				if(real==null)
-					throw new IllegalArgumentException("The PersonInformation object with the id "+info.getId()+" does not exist");
+					throw new VerificationException("The PersonInformation object with the id "+info.getId()+" does not exist");
 			}
 			else
 			{

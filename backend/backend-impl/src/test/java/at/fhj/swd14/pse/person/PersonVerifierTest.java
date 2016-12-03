@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.converter.PersonConverter;
+import at.fhj.swd14.pse.exception.VerificationException;
 import at.fhj.swd14.pse.repository.DepartmentRepository;
 import at.fhj.swd14.pse.repository.HobbyRepository;
 import at.fhj.swd14.pse.repository.KnowledgeRepository;
@@ -59,21 +60,21 @@ public class PersonVerifierTest {
 		Mockito.when(departmentRepo.find(1L)).thenReturn(dummyPerson.getDepartment());
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testUserNull()
 	{
 		dummyPersonDto.setUser(null);
 		verifier.verifyUser(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testUserIdNull()
 	{
 		dummyPersonDto.getUser().setId(null);
 		verifier.verifyUser(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testUserNotFound()
 	{
 		Mockito.when(userRepo.find(1L)).thenReturn(null);
@@ -87,21 +88,21 @@ public class PersonVerifierTest {
 		verifier.verifyUser(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testStatusNull()
 	{
 		dummyPersonDto.setStatus(null);
 		verifier.verifyStatus(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testStatusNameNull()
 	{
 		dummyPersonDto.getStatus().setName(null);
 		verifier.verifyStatus(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testStatusNotFound()
 	{
 		Mockito.when(statusRepo.findByName("online")).thenReturn(null);
@@ -114,28 +115,28 @@ public class PersonVerifierTest {
 		verifier.verifyStatus(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testFirstnameNull()
 	{
 		dummyPersonDto.setFirstname(null);
 		verifier.verifyNotNull(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testFirstnameEmpty()
 	{
 		dummyPersonDto.setFirstname("");
 		verifier.verifyNotNull(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testLastnameNull()
 	{
 		dummyPersonDto.setLastname(null);
 		verifier.verifyNotNull(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testLastnameEmpty()
 	{
 		dummyPersonDto.setLastname("");
@@ -148,7 +149,7 @@ public class PersonVerifierTest {
 		verifier.verifyNotNull(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testDepartmentNotFound()
 	{
 		Mockito.when(departmentRepo.find(1L)).thenReturn(null);
@@ -168,7 +169,7 @@ public class PersonVerifierTest {
 		verifier.verifyDepartment(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testPhonenumberWrong()
 	{
 		dummyPersonDto.getPhonenumbers().get(0).setId(1L);
@@ -192,7 +193,7 @@ public class PersonVerifierTest {
 		verifier.correlateNumbers(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testMailaddressWrong()
 	{
 		dummyPersonDto.getAdditionalMails().get(0).setId(1L);
@@ -216,7 +217,7 @@ public class PersonVerifierTest {
 		verifier.correlateMails(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testHobbyWrong()
 	{
 		dummyPersonDto.getHobbies().get(0).setId(1L);
@@ -240,7 +241,7 @@ public class PersonVerifierTest {
 		verifier.correlateHobbies(dummyPersonDto);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=VerificationException.class)
 	public void testKnowledgeWrong()
 	{
 		dummyPersonDto.getKnowledges().get(0).setId(1L);

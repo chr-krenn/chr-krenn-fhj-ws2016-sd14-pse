@@ -6,6 +6,10 @@ import java.util.Optional;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import at.fhj.swd14.pse.contact.Contact;
 import at.fhj.swd14.pse.converter.PersonConverter;
 import at.fhj.swd14.pse.converter.PersonImageConverter;
@@ -21,6 +25,8 @@ import at.fhj.swd14.pse.user.UserService;
  */
 @Stateless
 public class PersonServiceImpl implements PersonService {
+	
+	private static final Logger LOGGER = LogManager.getLogger(PersonServiceImpl.class);
 
 	@EJB
 	private PersonRepository repository;
@@ -45,11 +51,13 @@ public class PersonServiceImpl implements PersonService {
 	
 	@Override
 	public PersonDto find(long id) {
+		LOGGER.trace("Finding person by id: "+id);
 		return PersonConverter.convert(repository.find(id));
 	}
 
 	@Override
 	public PersonDto findByUser(UserDto user) {
+		LOGGER.trace("Finding person by userid: "+user.getId());
 		return PersonConverter.convert(repository.findByUserId(user.getId()));
 	}
 
@@ -108,7 +116,10 @@ public class PersonServiceImpl implements PersonService {
 	public void saveLoggedInPerson(PersonDto person) {
 		//first of all check if the person is null
 		if(person==null)
+		{
+			LOGGER.error("Cannot save null as person");
 			throw new IllegalArgumentException("Cannot insert null as person");
+		}
 		//we need to verify the Dto object before we can store it into the database
 		//step 1, check if the given user exists
 		verifier.verifyUser(person);
@@ -123,24 +134,44 @@ public class PersonServiceImpl implements PersonService {
 		verifier.correlateKnowledges(person);
 		verifier.correlateMails(person);
 		verifier.correlateNumbers(person);
+		
+		LOGGER.trace("Person to save verified");
 		//step 6 convert the person
 		Person personEntity = PersonConverter.convert(person);
+		LOGGER.trace("Person to save converted to entity");
 		//step 7 save
 		repository.update(personEntity);
+		LOGGER.debug("Person stored");
 	}
 
 	@Override
 	public Collection<StatusDto> findAllStati() {
+		LOGGER.trace("Retrieving status values from database");
 		return StatusConverter.convertToDtoList(statusRepo.findAll());
 	}
 
 	@Override
 	public void savePersonImage(PersonDto person, byte[] imageData, String contentType) {
+		
+		if(imageData==null||imageData.length==0)
+		{
+			LOGGER.error("Cannot save empty image");
+			throw new IllegalArgumentException("Cannot save empty image");
+		}
+		
+		if(person==null||person.getId()==null)
+		{
+			LOGGER.error("Cannot store image for empty person");
+			throw new IllegalArgumentException("Cannot store image for empty person");
+		}
+		
+		LOGGER.trace("Saving image for person "+person.getId());
 		PersonImage existing = imgRepo.getByPersonId(person.getId());
 		if(existing!=null)
 		{
 			imgRepo.remove(existing);
 			imgRepo.flush();
+			LOGGER.trace("Image for person "+person.getId()+" already exists and was deleted");
 		}
 		PersonImage img = new PersonImage();
 		img.setData(imageData);
@@ -148,16 +179,23 @@ public class PersonServiceImpl implements PersonService {
 		
 		Person personEntity = repository.find(person.getId());
 		if(personEntity == null)
+		{
+			LOGGER.error("Cannot save image for nonexistent person "+person.getId());
 			throw new IllegalArgumentException("Person does not exists");
-		
+		}
 		img.setPerson(personEntity);
 		
 		imgRepo.save(img);
+		LOGGER.debug("Person image saved for person: "+person.getId());
 	}
 
 	@Override
 	public PersonImageDto getPersonImage(Long personid) {
 		PersonImage img = imgRepo.getByPersonId(personid);
+		if(img!=null)
+			LOGGER.trace("Image for person "+personid+" was retrieved successfully");
+		else
+			LOGGER.trace("Could not retrieve image for person "+personid);
 		return PersonImageConverter.convert(img);
 	}
 

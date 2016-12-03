@@ -72,8 +72,8 @@
 		<p:column headerText="Public">
 			<h:outputText value="#{community.publicState}" />
 		</p:column>
-		<p:column headerText="Status">
-			<p:commandButton value="delete" update="growl" />
+		<p:column headerText="Action">
+			<p:commandButton value="deactivate" update="growl" action="#{communityBean.deactivate(community)}"/>
 		</p:column>
 	</p:dataTable>
 </h:form>
@@ -102,8 +102,8 @@
 		<p:column headerText="Public">
 			<h:outputText value="#{community.publicState}" />
 		</p:column>
-		<p:column headerText="Status">
-			<p:commandButton value="leave" update="growl" />
+		<p:column headerText="Action">
+			<p:commandButton value="leave" update="growl" action="#{communityBean.leave(community)}"/>
 		</p:column>
 	</p:dataTable>
 </h:form>
@@ -129,15 +129,14 @@
 		<p:column headerText="Description">
 <!-- 		        <h:outputText value="#{community.description}" /> -->
 		</p:column>
-		<p:column headerText="Status">
+		<p:column headerText="Action">
 			<p:commandButton value="join" update="growl" action="#{communityBean.join(community)}"/>
 		</p:column>
 	</p:dataTable>
 </h:form>
 
-
 <h:form id="activateForm">
-	<p:dataTable var="community" value="#{communityBean.publicCommunities}">
+	<p:dataTable var="community" value="#{communityBean.communitiesToActivate}">
 		<p:growl id="growl" life="2000" />
 		<f:facet name="header">
 				Activate Community
@@ -157,16 +156,9 @@
 		<p:column headerText="Description">
 <!-- 		        <h:outputText value="#{community.description}" /> -->
 		</p:column>
-<!-- 		    <p:column headerText="Activate"> -->
-<!-- 		        <p:inputSwitch value="#{community.activState}" > -->
-<!-- 	            	<p:ajax listener="#{communityBean.addMessage}" update="growl" /> -->
-<!-- 	        	</p:inputSwitch> -->
-<!-- 	        	<p:dialog header="Values" modal="true" resizable="false" showEffect="fade" widgetVar="dlg"> -->
-<!-- 			        <h:panelGrid columns="1" id="display"> -->
-<!-- 			            <h:outputText value="#{community.activateState}" /> -->
-<!-- 			        </h:panelGrid> -->
-<!-- 		    	</p:dialog> -->
-<!-- 		    </p:column> -->
+		<p:column headerText="Action">
+			<p:commandButton value="activate" update="growl" action="#{communityBean.activate(community)}"/>
+		</p:column>
 	</p:dataTable>
 </h:form>
 

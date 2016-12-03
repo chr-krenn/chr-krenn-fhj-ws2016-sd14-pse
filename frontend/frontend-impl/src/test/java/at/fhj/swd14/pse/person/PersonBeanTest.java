@@ -48,7 +48,7 @@ public class PersonBeanTest {
     private List<StatusDto> stati;
     private List<DepartmentDto> deps;
 	
-    public PersonDto getDummyPerson()
+    public static PersonDto getDummyPerson()
     {
 		UserDto myuser = new UserDto(1L);
         myuser.setMail("test@test.de");
@@ -110,7 +110,6 @@ public class PersonBeanTest {
     	Assert.assertEquals("/myprofile", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
     	PersonDtoTester.assertEquals(person, unitUnderTest.getPerson());
-
     }
     
     @Test

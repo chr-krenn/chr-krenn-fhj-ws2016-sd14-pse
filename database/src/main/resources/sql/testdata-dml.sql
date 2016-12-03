@@ -13,8 +13,8 @@ INSERT INTO `user` (`id`, `username`, `password`, `salt`, `created`, `modified`)
 #person
 INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 1', 'Bernhard', 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRxOXdV15ruEqhPAJJ5cMxWFBIqLexBFQIMLYWQ8aTjxFFjxnGBKuUOwCU', 'Testmayer', 'Graz', '1', 'Online', '1');
 INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 2', 'Max', 'https://i.ytimg.com/vi/S4UG_l-CHF4/maxresdefault.jpg', 'Mustermann', 'Wien', '2', 'Abwesend', '2');
-INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 3', 'Bernd', 'https://upload.wikimedia.org/wikipedia/commons/5/53/FrankieakaLogan.jpg', 'Maier', 'Kapfenberg', '2', 'Online', '2');
-INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 4', 'Johann', 'https://cdn.pixabay.com/photo/2016/04/07/07/22/koala-1313374_960_720.png', 'Müller', 'Seiersberg', '2', 'Abwesend', '1');
+INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 3', 'Bernd', 'https://upload.wikimedia.org/wikipedia/commons/5/53/FrankieakaLogan.jpg', 'Maier', 'Kapfenberg', '2', 'Online', '3');
+INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 4', 'Johann', 'https://cdn.pixabay.com/photo/2016/04/07/07/22/koala-1313374_960_720.png', 'Müller', 'Seiersberg', '2', 'Abwesend', '4');
 
 #user_roles
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student1', 'user', 'Roles');

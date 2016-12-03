@@ -147,7 +147,7 @@ public class PersonBean implements Serializable{
 			LOGGER.debug("Found no person for id: "+userId);
 		}
 		
-		return "/user";
+		return "/myprofile";
 	}
 	
 	private void loadStati()

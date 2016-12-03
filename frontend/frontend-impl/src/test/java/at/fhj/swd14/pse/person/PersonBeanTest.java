@@ -85,7 +85,7 @@ public class PersonBeanTest {
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
     	
     	String path = unitUnderTest.showPersonByUserId();
-    	Assert.assertEquals("/user", path);
+    	Assert.assertEquals("/myprofile", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
     	PersonDtoTester.assertEquals(person, unitUnderTest.getPerson());
 

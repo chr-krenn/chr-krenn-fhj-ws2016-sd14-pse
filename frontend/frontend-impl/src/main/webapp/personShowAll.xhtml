@@ -10,16 +10,20 @@
         <h:form id="personListForm">
             <ui:repeat value="#{personBean.showAllPersons()}" var="person">
             	     <li>
-                        <h:commandLink action="#{personBean.showPersonByUserId}">
+                        <h:commandLink action="#{personBean.showPersonByUserId()}">
                             <f:param name="userId" value="#{person.user.id}"/>
-
-                            <c:if test="${not empty person.imageUrl}">
-                                <img src="#{person.imageUrl}"/>
-                            </c:if>
-                            	#{person.firstname} #{person.lastname} #{person.user.mail}
-                            <ui:repeat value="#{person.phonenumbers}" var="number">
-                                #{number.value}
-                            </ui:repeat>
+                            <p>
+                            	<c:if test="${not empty personBean.person.imageUrl}">
+                            		<h:graphicImage value="#{person.imageUrl}" width="80px"/>
+                            	</c:if>
+                            	#{person.firstname} #{person.lastname}
+                            </p>
+                            <p>#{person.user.mail}</p>
+                           	<p>
+                            	<ui:repeat value="#{person.phonenumbers}" var="number">
+                                	#{number.value}
+                            	</ui:repeat>
+                            </p>
                         </h:commandLink>
 						<p:growl id="growl" life="2000"/>
                         <p:commandButton value="#{person.friendState}" id="nonAjax"

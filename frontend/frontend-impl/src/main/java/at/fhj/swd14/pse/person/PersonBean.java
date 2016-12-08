@@ -138,22 +138,24 @@ public class PersonBean implements Serializable{
 
 	
 	
+	protected void setPersonPageHandler(PersonPageHandler personPageHandler) {
+		this.personPageHandler = personPageHandler;
+	}
+
+	protected void setLoggedInPersonPageHandler(LoggedInPersonPageHandler loggedInPersonPageHandler) {
+		this.loggedInPersonPageHandler = loggedInPersonPageHandler;
+	}
+
 	@PostConstruct
 	public void init()
 	{
-		try{
-			//we will have to init with the logged in user if possible, because right after login the render method 
-			//is not called for some reason
-			verifier = new PersonVerifier(this);
-			personPageHandler = new PersonPageHandler(this);
-			loggedInPersonPageHandler = new LoggedInPersonPageHandler(this);
-			showLoggedInPerson();
-			LOGGER.debug("PersonBean initialized successfully");
-		}
-		catch(Exception ex)
-		{
-			growl("Error occured",ex);
-		}
+		//we will have to init with the logged in user if possible, because right after login the render method 
+		//is not called for some reason
+		verifier = new PersonVerifier(this);
+		personPageHandler = new PersonPageHandler(this);
+		loggedInPersonPageHandler = new LoggedInPersonPageHandler(this);
+		showLoggedInPerson();
+		LOGGER.debug("PersonBean initialized successfully");
 	}
 
 	public void growl(String summary, Exception ex)

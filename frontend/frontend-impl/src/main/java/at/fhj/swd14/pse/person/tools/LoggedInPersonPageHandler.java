@@ -133,8 +133,8 @@ public class LoggedInPersonPageHandler {
 		{
 			if(existing.getValue().equals(bean.getNewMail()))
 			{
-				bean.setNewMail(null);
 				bean.growl("Incorrect Input","Mail "+bean.getNewMail()+" already exists");
+				bean.setNewMail(null);
 				return;
 			}
 		}
@@ -157,8 +157,8 @@ public class LoggedInPersonPageHandler {
 		{
 			if(existing.getValue().equals(bean.getNewKnowledge()))
 			{
-				bean.setNewKnowledge(null);
 				bean.growl("Incorrect Input","Knowledge "+bean.getNewKnowledge()+" already exists");
+				bean.setNewKnowledge(null);
 				return;
 			}
 		}
@@ -181,8 +181,9 @@ public class LoggedInPersonPageHandler {
 		{
 			if(existing.getValue().equals(bean.getNewHobby()))
 			{
+				bean.growl("Incorrect Input","Hobby "+bean.getNewHobby()+" already exists");
 				bean.setNewHobby(null);
-				throw new IllegalArgumentException("Hobby already exists");
+				return;
 			}
 		}
 		HobbyDto hobby = new HobbyDto();
@@ -204,8 +205,8 @@ public class LoggedInPersonPageHandler {
 		{
 			if(existing.getValue().equals(bean.getNewNumber()))
 			{
-				bean.setNewNumber(null);
 				bean.growl("Incorrect Input","Number "+bean.getNewNumber()+" already exists");
+				bean.setNewNumber(null);
 				return;
 			}
 		}

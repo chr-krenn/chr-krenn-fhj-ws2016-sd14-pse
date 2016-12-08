@@ -7,8 +7,6 @@ import java.util.List;
 import at.fhj.swd14.pse.department.DepartmentDto;
 import at.fhj.swd14.pse.user.UserDto;
 
-import javax.faces.event.ActionEvent;
-
 /**
  * Data transfer object for person
  *

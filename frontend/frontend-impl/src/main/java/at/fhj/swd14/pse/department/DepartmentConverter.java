@@ -25,7 +25,7 @@ public class DepartmentConverter implements Converter {
 		Long id = Long.parseLong(value);
 		
 		for(DepartmentDto dto : departments)
-			if(dto.getId()==id)
+			if(dto.getId()!=null&&dto.getId().equals(id))
 				return dto;
 		return null;
 		

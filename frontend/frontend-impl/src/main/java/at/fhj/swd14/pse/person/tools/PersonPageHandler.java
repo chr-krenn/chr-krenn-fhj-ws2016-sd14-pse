@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.person.tools;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.faces.context.FacesContext;
@@ -13,7 +14,9 @@ import at.fhj.swd14.pse.person.PersonService;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 
-public class PersonPageHandler {
+public class PersonPageHandler implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private static final Logger LOGGER = LogManager.getLogger(PersonPageHandler.class);
 	

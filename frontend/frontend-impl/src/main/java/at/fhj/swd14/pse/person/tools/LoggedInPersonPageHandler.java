@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.person.tools;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -26,7 +27,9 @@ import at.fhj.swd14.pse.person.StatusDto;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 
-public class LoggedInPersonPageHandler {
+public class LoggedInPersonPageHandler implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private static final Logger LOGGER = LogManager.getLogger(LoggedInPersonPageHandler.class);
 	
@@ -66,7 +69,7 @@ public class LoggedInPersonPageHandler {
 		LOGGER.trace("Showing person for logged in user "+loggedInUserId);
 		
 		if(bean.getPerson()==null||bean.getPerson().getId()==null||bean.getPerson().getUser()==null||
-				bean.getPerson().getUser().getId()==null||bean.getPerson().getUser().getId()!=loggedInUserId)
+				bean.getPerson().getUser().getId()==null||!bean.getPerson().getUser().getId().equals(loggedInUserId))
 		{
 			UserDto loggedInUser = userService.find(loggedInUserId);
 			PersonDto person = personService.findByUser(loggedInUser);

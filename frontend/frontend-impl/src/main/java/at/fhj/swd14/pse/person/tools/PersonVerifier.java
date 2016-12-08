@@ -1,13 +1,16 @@
 package at.fhj.swd14.pse.person.tools;
 
+import java.io.Serializable;
+
 import at.fhj.swd14.pse.person.HobbyDto;
 import at.fhj.swd14.pse.person.KnowledgeDto;
 import at.fhj.swd14.pse.person.MailaddressDto;
 import at.fhj.swd14.pse.person.PersonBean;
 import at.fhj.swd14.pse.person.PhonenumberDto;
 
-public class PersonVerifier {
+public class PersonVerifier implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private PersonBean bean;
 	
 	public PersonVerifier(PersonBean bean)

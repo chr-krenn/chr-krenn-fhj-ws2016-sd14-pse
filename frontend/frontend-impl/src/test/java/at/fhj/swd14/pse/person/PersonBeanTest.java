@@ -5,19 +5,22 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.primefaces.event.FileUploadEvent;
 
 import at.fhj.swd14.pse.department.DepartmentDto;
 import at.fhj.swd14.pse.department.DepartmentService;
 import at.fhj.swd14.pse.general.ContextMocker;
+import at.fhj.swd14.pse.person.tools.LoggedInPersonPageHandler;
+import at.fhj.swd14.pse.person.tools.PersonPageHandler;
 import at.fhj.swd14.pse.security.DatabasePrincipal;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
@@ -238,6 +241,175 @@ public class PersonBeanTest {
     	unitUnderTest.removeNumber();
     	Assert.assertEquals(0, unitUnderTest.getPerson().getPhonenumbers().size());
     }
+    
+    
+    private void growled(int times)
+    {
+    	Mockito.verify(context,Mockito.times(times)).addMessage(Mockito.anyString(), Mockito.any(FacesMessage.class));
+    }
+    
+    @Test
+    public void testGrowl()
+    {
+    	unitUnderTest.growl("test",new Exception("hallo"));
+    	growled(1);
+    }
+    
+    @Test
+    public void testUserIdException()
+    {
+    	PersonPageHandler personPageHandler = Mockito.mock(PersonPageHandler.class);
+    	unitUnderTest.setPersonPageHandler(personPageHandler);
+    	Mockito.doThrow(Exception.class).when(personPageHandler).showPersonByUserId();
+    	unitUnderTest.showPersonByUserId();
+    	growled(1);
+    }
+    
+    private LoggedInPersonPageHandler setLoggedInHandler()
+    {
+    	LoggedInPersonPageHandler loggedInHandler = Mockito.mock(LoggedInPersonPageHandler.class);
+    	unitUnderTest.setLoggedInPersonPageHandler(loggedInHandler);
+    	return loggedInHandler;
+    }
+    
+    @Test
+    public void testLoggedInException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).showLoggedInPerson();
+    	unitUnderTest.showLoggedInPerson();
+    	growled(1);
+    }
+    
+    @Test
+    public void testCreateException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).createLoggedInPerson();
+    	unitUnderTest.createLoggedInPerson();
+    	growled(1);
+    }
+    
+    @Test
+    public void testSaveDataException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).saveData();
+    	unitUnderTest.saveData();
+    	growled(1);
+    }
+    
+    @Test
+    public void testClearException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).clearImgUrl();
+    	unitUnderTest.clearImgUrl();
+    	growled(1);
+    }
+    
+    @Test
+    public void testSaveException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).savePerson();
+    	unitUnderTest.savePerson();
+    	growled(1);
+    }
+    
+    @Test
+    public void testAddMailException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).addMail();
+    	unitUnderTest.addMail();
+    	growled(1);
+    }
+    
+    @Test
+    public void testAddKnowledgeException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).addKnowledge();
+    	unitUnderTest.addKnowledge();
+    	growled(1);
+    }
+    
+    @Test
+    public void testAddHobbyException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).addHobby();
+    	unitUnderTest.addHobby();
+    	growled(1);
+    }
+    
+    @Test
+    public void testAddNumberException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).addNumber();
+    	unitUnderTest.addNumber();
+    	growled(1);
+    }
+    
+    @Test
+    public void testRemoveMailException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).removeMail();
+    	unitUnderTest.removeMail();
+    	growled(1);
+    }
+    
+    @Test
+    public void testRemoveKnowledgeException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).removeKnowledge();
+    	unitUnderTest.removeKnowledge();
+    	growled(1);
+    }
+    
+    @Test
+    public void testRemoveHobbyException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).removeHobby();
+    	unitUnderTest.removeHobby();
+    	growled(1);
+    }
+    
+    @Test
+    public void testRemoveNumberException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).removeNumber();
+    	unitUnderTest.removeNumber();
+    	growled(1);
+    }
+    
+    @Test
+    public void testHandleFileUploadException()
+    {
+    	LoggedInPersonPageHandler handler = setLoggedInHandler();
+    	Mockito.doThrow(Exception.class).when(handler).handleFileUpload(Mockito.any());
+    	unitUnderTest.handleFileUpload(Mockito.mock(FileUploadEvent.class));
+    	growled(1);
+    }
+    
+    
+    @Test
+    public void testComplete()
+    {
+    	//here are all the things we have to do for 100% completion...
+    	setLoggedInHandler();
+    	unitUnderTest.getLoggedInUserId();
+    	unitUnderTest.saveData();
+    	unitUnderTest.clearImgUrl();
+    	unitUnderTest.handleFileUpload(Mockito.mock(FileUploadEvent.class));
+    }
+    
 }
 
 

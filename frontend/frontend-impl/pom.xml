@@ -37,6 +37,10 @@
             <artifactId>javaee-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
             <groupId>at.fhj.swd14.pse</groupId>
             <artifactId>backend-testing-commons</artifactId>
             <scope>test</scope>

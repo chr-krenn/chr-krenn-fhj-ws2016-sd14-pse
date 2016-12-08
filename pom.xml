@@ -24,6 +24,7 @@
 
     <properties>
         <javaee-api.version>7.0</javaee-api.version>
+        <javaservlet-api.version>3.1.0</javaservlet-api.version>
         <log4j-core.version>2.7</log4j-core.version>
         <primefaces.version>6.0</primefaces.version>
         <jsf-impl.version>2.2.13</jsf-impl.version>
@@ -96,6 +97,11 @@
                 <version>${javaee-api.version}</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+			    <groupId>javax.servlet</groupId>
+			    <artifactId>javax.servlet-api</artifactId>
+			    <version>${javaservlet-api.version}</version>
+			</dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>

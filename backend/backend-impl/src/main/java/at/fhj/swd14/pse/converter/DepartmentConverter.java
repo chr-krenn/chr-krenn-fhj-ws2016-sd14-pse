@@ -31,6 +31,7 @@ public class DepartmentConverter {
             return null;
         }
         Department dep =  new Department(department.getId());
+        dep.setName(department.getName());
         return dep;
     }
 

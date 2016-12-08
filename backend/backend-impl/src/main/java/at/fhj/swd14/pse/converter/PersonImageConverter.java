@@ -40,7 +40,7 @@ public class PersonImageConverter {
         return imgs.stream().map(PersonImageConverter::convert).collect(Collectors.toList());
     }
 
-    public static Collection<PersonImage> convertToList(Collection<PersonImageDto> dtos) {
+    public static Collection<PersonImage> convertToDoList(Collection<PersonImageDto> dtos) {
         if (dtos == null) {
             return null;
         }

@@ -27,6 +27,7 @@ import at.fhj.swd14.pse.repository.PersonImageRepository;
 import at.fhj.swd14.pse.repository.PersonRepository;
 import at.fhj.swd14.pse.repository.PersonStatusRepository;
 import at.fhj.swd14.pse.user.User;
+import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 import org.junit.Assert;
 
@@ -154,6 +155,23 @@ public class PersonServiceImplTest {
 	}
 	
 	@Test
+	public void testSavePersonImageExists()
+	{
+		PersonDto dummyDto = PersonConverter.convert(person);
+		byte[] imgData = new byte[1];
+		imgData[0]=1;
+		String contentType = "image/png";
+		
+		Mockito.when(personRepo.find(dummyDto.getId())).thenReturn(person);
+		PersonImage existing = new PersonImage(1L);
+		Mockito.when(imgRepo.getByPersonId(person.getId())).thenReturn(existing);
+		service.savePersonImage(dummyDto, imgData, contentType);
+		Mockito.verify(imgRepo,Mockito.times(1)).remove(existing);
+		Mockito.verify(imgRepo,Mockito.times(1)).flush();
+		Mockito.verify(imgRepo,Mockito.times(1)).save(Mockito.any(PersonImage.class));
+	}
+	
+	@Test
 	public void testGetPersonImage()
 	{
 		PersonImage img = new PersonImage(1L);
@@ -165,4 +183,126 @@ public class PersonServiceImplTest {
 		PersonImageDtoTester.assertEquals(PersonImageConverter.convert(img),dto);
 	}
 	
+	@Test(expected=PersonServiceException.class)
+	public void testFindException()
+	{
+		Mockito.doThrow(Exception.class).when(personRepo).find(Mockito.anyLong());
+		service.find(1L);
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testFindError()
+	{
+		Mockito.doThrow(Error.class).when(personRepo).find(Mockito.anyLong());
+		service.find(1L);
+	}
+	
+	
+	@Test(expected=PersonServiceException.class)
+	public void testFindByUserException()
+	{
+		Mockito.doThrow(Exception.class).when(personRepo).findByUserId(Mockito.anyLong());
+		service.findByUser(new UserDto(1L));
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testFindByUserError()
+	{
+		Mockito.doThrow(Error.class).when(personRepo).findByUserId(Mockito.anyLong());
+		service.findByUser(new UserDto(1L));
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testSaveException()
+	{
+		Mockito.doThrow(Exception.class).when(verifier).verifyUser(Mockito.any());
+		service.saveLoggedInPerson(new PersonDto());
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testSaveError()
+	{
+		Mockito.doThrow(Error.class).when(verifier).verifyUser(Mockito.any());
+		service.saveLoggedInPerson(new PersonDto());
+	}
+	
+	
+	@Test(expected=PersonServiceException.class)
+	public void testStatusException()
+	{
+		Mockito.doThrow(Exception.class).when(statusRepo).findAll();
+		service.findAllStati();
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testStatusError()
+	{
+		Mockito.doThrow(Error.class).when(statusRepo).findAll();
+		service.findAllStati();
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testImageDataNull()
+	{
+		service.savePersonImage(new PersonDto(), null, "png");
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testImageDataEmpty()
+	{
+		service.savePersonImage(new PersonDto(), new byte[0], "png");
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testImagePersonNull()
+	{
+		service.savePersonImage(null, new byte[1], "png");
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testImageIdNullEmpty()
+	{
+		service.savePersonImage(new PersonDto(), new byte[1], "png");
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testImagePersonNotFoundEmpty()
+	{
+		Mockito.when(personRepo.find(Mockito.anyLong())).thenReturn(null);
+		service.savePersonImage(PersonConverter.convert(person), new byte[1], "png");
+	}
+	@Test(expected=PersonServiceException.class)
+	public void testImageException()
+	{
+		Mockito.doThrow(Exception.class).when(imgRepo).getByPersonId(Mockito.anyLong());
+		service.savePersonImage(PersonConverter.convert(person), new byte[1], "png");
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testImageError()
+	{
+		Mockito.doThrow(Error.class).when(imgRepo).getByPersonId(Mockito.anyLong());
+		service.savePersonImage(PersonConverter.convert(person), new byte[1], "png");
+	}
+	
+	@Test
+	public void testImageNotFound()
+	{
+		PersonImageDto dto = service.getPersonImage(null);
+		Assert.assertNull(dto);
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testGetImageException()
+	{
+		Mockito.doThrow(Exception.class).when(imgRepo).getByPersonId(Mockito.anyLong());
+		service.getPersonImage(null);
+	}
+	
+	@Test(expected=PersonServiceException.class)
+	public void testGetImageError()
+	{
+		Mockito.doThrow(Error.class).when(imgRepo).getByPersonId(Mockito.anyLong());
+		service.getPersonImage(null);
+	}
 }

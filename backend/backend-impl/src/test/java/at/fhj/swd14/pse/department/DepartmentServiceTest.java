@@ -36,4 +36,11 @@ public class DepartmentServiceTest {
 		Assert.assertEquals(1, dtos.size());
 		DepartmentDtoTester.assertEquals(DepartmentConverter.convert(dep), dtos.get(0));
 	}
+	
+	@Test(expected=DepartmentServiceException.class)
+	public void testFindAllException()
+	{
+		Mockito.doThrow(Exception.class).when(depRepo).findAll();
+		service.findAll();
+	}
 }

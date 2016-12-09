@@ -1,11 +1,17 @@
 package at.fhj.swd14.pse.uitest;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import at.fhj.swd14.pse.pageobjects.*;
 
 public class PersonTest extends BaseUITest {
+	
+	@BeforeClass
+	public static void setup() {
+		login();
+	}
 	
 	@Ignore
 	@Test

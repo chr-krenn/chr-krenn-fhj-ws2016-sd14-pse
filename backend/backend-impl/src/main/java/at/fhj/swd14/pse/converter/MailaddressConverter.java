@@ -62,7 +62,7 @@ public class MailaddressConverter {
         if (mailaddresss == null) {
             return null;
         }
-        LinkedList<MailaddressDto> newMailaddresss = new LinkedList<MailaddressDto>();
+        LinkedList<MailaddressDto> newMailaddresss = new LinkedList<>();
         for(Mailaddress val : mailaddresss)
         	newMailaddresss.add(convert(val,person));
         return newMailaddresss;
@@ -79,7 +79,7 @@ public class MailaddressConverter {
         if (mailaddresss == null) {
             return null;
         }
-        LinkedList<Mailaddress> newMailaddresss = new LinkedList<Mailaddress>();
+        LinkedList<Mailaddress> newMailaddresss = new LinkedList<>();
         for(MailaddressDto dto : mailaddresss)
         	newMailaddresss.add(convert(dto,person));
         return newMailaddresss;

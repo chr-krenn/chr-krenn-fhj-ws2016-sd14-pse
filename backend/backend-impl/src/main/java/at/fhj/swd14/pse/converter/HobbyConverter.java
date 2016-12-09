@@ -62,7 +62,7 @@ public class HobbyConverter {
         if (hobbys == null) {
             return null;
         }
-        LinkedList<HobbyDto> newHobbys = new LinkedList<HobbyDto>();
+        LinkedList<HobbyDto> newHobbys = new LinkedList<>();
         for(Hobby val : hobbys)
         	newHobbys.add(convert(val,person));
         return newHobbys;
@@ -79,7 +79,7 @@ public class HobbyConverter {
         if (hobbys == null) {
             return null;
         }
-        LinkedList<Hobby> newHobbys = new LinkedList<Hobby>();
+        LinkedList<Hobby> newHobbys = new LinkedList<>();
         for(HobbyDto dto : hobbys)
         	newHobbys.add(convert(dto,person));
         return newHobbys;

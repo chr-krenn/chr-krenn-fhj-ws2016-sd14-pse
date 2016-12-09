@@ -27,6 +27,11 @@ import at.fhj.swd14.pse.person.StatusDto;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 
+/**
+ * This class performs handling for the loggedinpersonpage
+ * @author Patrick Kainz
+ *
+ */
 public class LoggedInPersonPageHandler implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -43,6 +48,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 	{
 		if(bean==null)
 			throw new IllegalArgumentException("bean may not be null");
+		//as we are taking over responsibilities of the bean, we must use it as the sole datasource
 		this.bean=bean;
 		userService = bean.getUserService();
 		personService = bean.getPersonService();
@@ -50,12 +56,18 @@ public class LoggedInPersonPageHandler implements Serializable{
 		verifier = bean.getVerifier();
 	}
 	
+	/**
+	 * Load all stati to the bean
+	 */
 	private void loadStati()
 	{
 		bean.setStati(new ArrayList<StatusDto>(personService.findAllStati()));
 		LOGGER.trace("Status values loaded, count="+bean.getStati().size());
 	}
 	
+	/**
+	 * Load all departments to the bean
+	 */
 	private void loadDepartments()
 	{
 		bean.setDepartments(new ArrayList<DepartmentDto>(departmentService.findAll()));
@@ -63,11 +75,16 @@ public class LoggedInPersonPageHandler implements Serializable{
 		LOGGER.trace("Department values loaded, count="+bean.getDepartments().size());
 	}
 	
+	/**
+	 * Loads the logged in person to the bean
+	 * @return next page to navigate to
+	 */
 	public String showLoggedInPerson()
 	{
 		Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
 		LOGGER.trace("Showing person for logged in user "+loggedInUserId);
 		
+		//if anything is null, or if the loggedInUser changed, we must reload everything
 		if(bean.getPerson()==null||bean.getPerson().getId()==null||bean.getPerson().getUser()==null||
 				bean.getPerson().getUser().getId()==null||!bean.getPerson().getUser().getId().equals(loggedInUserId))
 		{
@@ -75,6 +92,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 			PersonDto person = personService.findByUser(loggedInUser);
 			if(person==null)
 			{
+				//set empty person if nothing is found
 				person = new PersonDto();
 				LOGGER.trace("No person for logged in user "+loggedInUserId+" found");
 			}
@@ -84,19 +102,27 @@ public class LoggedInPersonPageHandler implements Serializable{
 		}
 		else
 			LOGGER.trace("Logged in person already loaded");
+		//load all stati and departments to bean
 		loadStati();
 		loadDepartments();
 		return "/user";
 	}
 
+	/**
+	 * This creates a person object to the service, with name only and for the logged in user
+	 * @return next page to navigate to
+	 */
 	public String createLoggedInPerson()
 	{
 		if(verifier.verifyName())
 		{
+			//retrieve the logged in user
 			Long loggedInUserId =  ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
 			UserDto loggedInUser = userService.find(loggedInUserId);
 			bean.getPerson().setUser(loggedInUser);
+			//status may not be null, so might as well set it to online
 			bean.getPerson().setStatus(new StatusDto("online"));
+			//store it
 			personService.saveLoggedInPerson(bean.getPerson());
 			LOGGER.debug("Person created for logged in user: "+loggedInUserId);
 		}
@@ -105,12 +131,18 @@ public class LoggedInPersonPageHandler implements Serializable{
 		return showLoggedInPerson();
 	}
 	
+	/**
+	 * This is just for sync purposes, we don't do anything here
+	 */
 	public void saveData()
 	{
 		//we actually need to do nothing here, as long as the value is synchronized to the server
 		LOGGER.trace("Person data saved to bean");
 	}
 	
+	/**
+	 * Resets the image url of the current person to null
+	 */
 	public void clearImgUrl()
 	{
 		bean.getPerson().setImageUrl(null);
@@ -118,6 +150,10 @@ public class LoggedInPersonPageHandler implements Serializable{
 		LOGGER.trace("Img URL cleared");
 	}
 	
+	/**
+	 * Verifies and stores a person
+	 * @return next page to navigate to
+	 */
 	public String savePerson()
 	{
 		if(verifier.verifyPerson())
@@ -130,8 +166,13 @@ public class LoggedInPersonPageHandler implements Serializable{
 		return "/user";
 	}
 	
+	/**
+	 * Adds a new mail to the list of mails on the person
+	 * Only on client side, call savePerson to save to backend
+	 */
 	public void addMail()
 	{
+		//check if the mail already exists
 		for(MailaddressDto existing : bean.getPerson().getAdditionalMails())
 		{
 			if(existing.getValue().equals(bean.getNewMail()))
@@ -144,18 +185,26 @@ public class LoggedInPersonPageHandler implements Serializable{
 		MailaddressDto mail = new MailaddressDto();
 		mail.setValue(bean.getNewMail());
 		mail.setPerson(bean.getPerson());
+		//verify the mail
 		if(verifier.verifyMail(mail))
 		{
+			//store it
 			bean.getPerson().getAdditionalMails().add(mail);
 			LOGGER.trace("Mail added: "+bean.getNewMail());
+			//empty the field
 			bean.setNewMail(null);
 		}
 		else
 			LOGGER.trace("Mail could not be verified: "+bean.getNewMail());
 	}
 	
+	/**
+	 * Adds a new knowledge to the list of Knowledges on the person
+	 * Only on client side, call savePerson to save to backend
+	 */
 	public void addKnowledge()
 	{
+		//same process as addMail
 		for(KnowledgeDto existing : bean.getPerson().getKnowledges())
 		{
 			if(existing.getValue().equals(bean.getNewKnowledge()))
@@ -178,8 +227,13 @@ public class LoggedInPersonPageHandler implements Serializable{
 			LOGGER.trace("Knowledge could not be verified: "+bean.getNewKnowledge());
 	}
 	
+	/**
+	 * Adds a new hobby to the list of hobbies on the person
+	 * Only on client side, call savePerson to save to backend
+	 */
 	public void addHobby()
 	{
+		//same process as addMail
 		for(HobbyDto existing : bean.getPerson().getHobbies())
 		{
 			if(existing.getValue().equals(bean.getNewHobby()))
@@ -202,8 +256,13 @@ public class LoggedInPersonPageHandler implements Serializable{
 			LOGGER.trace("Hobby could not be verified: "+bean.getNewHobby());
 	}
 	
+	/**
+	 * Adds a new number to the list of numbers on the person
+	 * Only on client side, call savePerson to save to backend
+	 */
 	public void addNumber()
 	{
+		//same process as add mail
 		for(PhonenumberDto existing : bean.getPerson().getPhonenumbers())
 		{
 			if(existing.getValue().equals(bean.getNewNumber()))
@@ -226,6 +285,9 @@ public class LoggedInPersonPageHandler implements Serializable{
 			LOGGER.trace("Number could not be verified: "+bean.getNewNumber());
 	}
 	
+	/**
+	 * Removes the given mail (GET/POST Parameter "value") from the person
+	 */
 	public void removeMail()
 	{
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -241,6 +303,9 @@ public class LoggedInPersonPageHandler implements Serializable{
 	    }
 	}
 	
+	/**
+	 * Removes the given knowledge (GET/POST Parameter "value") from the person
+	 */
 	public void removeKnowledge()
 	{
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -256,6 +321,9 @@ public class LoggedInPersonPageHandler implements Serializable{
 	    }
 	}
 	
+	/**
+	 * Removes the given hobby (GET/POST Parameter "value") from the person
+	 */
 	public void removeHobby()
 	{
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -271,6 +339,9 @@ public class LoggedInPersonPageHandler implements Serializable{
 	    }
 	}
 	
+	/**
+	 * Removes the given number (GET/POST Parameter "value") from the person
+	 */
 	public void removeNumber()
 	{
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
@@ -286,11 +357,19 @@ public class LoggedInPersonPageHandler implements Serializable{
 	    }
 	}
 	
+	/**
+	 * This handles a file upload from the html page
+	 * @param event event containing file data and type
+	 */
 	public void handleFileUpload(FileUploadEvent event) {
 		LOGGER.trace("Uploading image");
+		//load the person again just to be save
 		showLoggedInPerson();
+		//save the image
 		personService.savePersonImage(bean.getPerson(), event.getFile().getContents(), event.getFile().getContentType());
+		//set the url on the person to our image retrieval servlet so we can show the image we just uploaded
 		bean.getPerson().setImageUrl("/swd14-fe/personImage?id="+bean.getPerson().getId());
+		//redirect to the page we came from, in order to reload the page
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 		try{
 			ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());

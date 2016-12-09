@@ -26,6 +26,11 @@ import at.fhj.swd14.pse.person.tools.PersonVerifier;
 import at.fhj.swd14.pse.user.UserService;
 
 
+/**
+ * Bean for all person pages
+ * @author Patrick Kainz
+ *
+ */
 @Named
 @SessionScoped
 public class PersonBean implements Serializable{
@@ -146,23 +151,38 @@ public class PersonBean implements Serializable{
 		this.loggedInPersonPageHandler = loggedInPersonPageHandler;
 	}
 
+	/**
+	 * Initialize Person data, as we need to display it immediately
+	 */
 	@PostConstruct
 	public void init()
 	{
 		//we will have to init with the logged in user if possible, because right after login the render method 
 		//is not called for some reason
+		//we defer many things to other classes so create them now
 		verifier = new PersonVerifier(this);
 		personPageHandler = new PersonPageHandler(this);
 		loggedInPersonPageHandler = new LoggedInPersonPageHandler(this);
+		//load the logged in person already
 		showLoggedInPerson();
 		LOGGER.debug("PersonBean initialized successfully");
 	}
 
+	/**
+	 * Print an exception on the page
+	 * @param summary summary message
+	 * @param ex Exception to print
+	 */
 	public void growl(String summary, Exception ex)
 	{
 		growl(summary,ex.getMessage());
 	}
 	
+	/**
+	 * Print a message to the page
+	 * @param summary summary message
+	 * @param message message to print
+	 */
 	public void growl(String summary, String message)
 	{
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -170,6 +190,10 @@ public class PersonBean implements Serializable{
 		LOGGER.trace("Send growl to user with summary "+summary+" and message "+message);
 	}
 	
+	/**
+	 * Shows the person by the userid passed
+	 * @return next page to navigate to
+	 */
 	public String showPersonByUserId()
 	{
 		try{
@@ -183,7 +207,10 @@ public class PersonBean implements Serializable{
 	}
 	
 	
-	
+	/**
+	 * Shows the logged in person
+	 * @return next page to navigate to
+	 */
 	public String showLoggedInPerson()
 	{
 		try{
@@ -196,6 +223,10 @@ public class PersonBean implements Serializable{
 		}
 	}
 
+	/**
+	 * Creates a new person for the logged in user
+	 * @return next page to navigate to
+	 */
 	public String createLoggedInPerson()
 	{
 		try{
@@ -208,7 +239,9 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
-	
+	/**
+	 * Just here for sync with the client
+	 */
 	public void saveData()
 	{
 		try{
@@ -220,6 +253,9 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
+	/**
+	 * Resets the persons image url to null
+	 */
 	public void clearImgUrl()
 	{
 		try{
@@ -231,6 +267,10 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
+	/**
+	 * Saves the person to the backend
+	 * @return next page to navigate to
+	 */
 	public String savePerson()
 	{
 		try{
@@ -243,6 +283,9 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
+	/**
+	 * Adds a mail to the current person, only in frontend
+	 */
 	public void addMail()
 	{
 		try{
@@ -254,6 +297,9 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
+	/**
+	 * Adds a knowledge to the current person, only in frontend
+	 */
 	public void addKnowledge()
 	{
 		try{
@@ -265,6 +311,9 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
+	/**
+	 * Adds a hobby to the current person, only in frontend
+	 */
 	public void addHobby()
 	{
 		try{
@@ -276,6 +325,9 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
+	/**
+	 * Adds a number to the current person, only in frontend
+	 */
 	public void addNumber()
 	{
 		try{
@@ -286,8 +338,10 @@ public class PersonBean implements Serializable{
 			growl("Error occured",ex);
 		}
 	}
-
-
+	
+	/**
+	 * Removes the passed mail from the current person, only in frontend
+	 */
 	public void removeMail()
 	{
 		try{
@@ -299,6 +353,9 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
+	/**
+	 * Removes the passed knowledge from the current person, only in frontend
+	 */
 	public void removeKnowledge()
 	{
 		try{
@@ -310,6 +367,9 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
+	/**
+	 * Removes the passed hobby from the current person, only in frontend
+	 */
 	public void removeHobby()
 	{
 		try{
@@ -321,6 +381,9 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
+	/**
+	 * Removes the passed number from the current person, only in frontend
+	 */
 	public void removeNumber()
 	{
 		try{
@@ -332,6 +395,10 @@ public class PersonBean implements Serializable{
 		}
 	}
 	
+	/**
+	 * Handles a file upload from the page
+	 * @param event event holding data and datatype
+	 */
 	public void handleFileUpload(FileUploadEvent event) {
 		try {
 			loggedInPersonPageHandler.handleFileUpload(event);

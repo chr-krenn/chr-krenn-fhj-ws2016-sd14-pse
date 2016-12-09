@@ -29,23 +29,39 @@ public class PersonImageServlet extends HttpServlet {
     private PersonService service;
 
 
+	/**
+	 * Processes both get and post request
+	 * @param request Request data
+	 * @param response Response channel
+	 * @throws ServletException
+	 * @throws IOException
+	 */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
     	//exceptions cannot be handled here, as there is no user interaction except the image
-
-        Long id =Long.parseLong(request.getParameter("id"));
-        
-        LOGGER.trace("Retrieving image for user: "+id);
-        
-        PersonImageDto img = service.getPersonImage(id);
-
-        response.setContentType(img.getContentType());
-        ServletOutputStream outputStream = response.getOutputStream();
-        outputStream.write(img.getData());
-        outputStream.close();
-        
-        LOGGER.trace("Image for user "+id+" retrieved");
+        try{
+	    	Long id =Long.parseLong(request.getParameter("id"));
+	        
+	        LOGGER.trace("Retrieving image for user: "+id);
+	        PersonImageDto img = service.getPersonImage(id);
+	        //write content type and content to the response
+	        response.setContentType(img.getContentType());
+	        ServletOutputStream outputStream = response.getOutputStream();
+	        outputStream.write(img.getData());
+	        outputStream.close();
+	        
+	        LOGGER.trace("Image for user "+id+" retrieved");
+        }
+        //at least log exceptions and errors, if we can't pass them to the page
+        catch(Exception ex)
+        {
+        	LOGGER.error("Exception occured while retrieving person image",ex);
+        }
+        catch(Error err)
+        {
+        	LOGGER.fatal("Error occured while retrieving person image",err);
+        }
     }
 
     @Override

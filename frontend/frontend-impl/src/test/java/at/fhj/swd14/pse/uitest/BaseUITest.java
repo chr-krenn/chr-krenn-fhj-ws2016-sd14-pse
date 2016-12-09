@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import at.fhj.swd14.pse.pageobjects.*;
 
+/**
+ * The base class for all Selenium tests
+ */
 public abstract class BaseUITest {
 	
 	private static final String STUDENT1_PW = "x";
@@ -39,16 +42,27 @@ public abstract class BaseUITest {
 		}
 	}
 	
+	/*
+	 * Login with default account
+	 */
 	protected WelcomePage login() {
 		return login(STUDENT1, STUDENT1_PW);
 	}
 	
+	/*
+	 * Login
+	 * @param username
+	 * @param password
+	 */
 	protected WelcomePage login(String username, String password) {
 		LoginPage loginPage = new LoginPage(webdriver);
 		WelcomePage welcomePage = loginPage.loginValidUser(username, password);
 		return welcomePage;
 	}
 	
+	/*
+	 * Go to the "Welcome" page to examine results
+	 */
 	protected WelcomePage gotoStartPage() {
 		webdriver.get(LINK);
 		return new WelcomePage(webdriver);

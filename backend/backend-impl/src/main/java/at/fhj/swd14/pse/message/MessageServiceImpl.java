@@ -53,9 +53,9 @@ public class MessageServiceImpl implements MessageService {
 		
 		
 		//TODO: query isn't implemented yet
-		//Map<String, Object> parameter = new HashMap<>();
-		//parameter.put("userId", userId);
-		return executeNamedQuery("Message.findUserRelated");
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("userId", userId);
+		return executeNamedQuery("Message.findUserRelated", parameter);
 	}
 
 	@Override

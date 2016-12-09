@@ -45,6 +45,10 @@ public class PersonVerifier {
 	@EJB
 	private KnowledgeRepository knowledgeRepo;
 	
+	/**
+	 * Verifies the user of the person, which has to be not null, have an id and exist in the database
+	 * @param person PersonDto for which to verify the user
+	 */
 	public void verifyUser(PersonDto person)
 	{
 		if(person.getUser()==null||person.getUser().getId()==null)
@@ -54,6 +58,10 @@ public class PersonVerifier {
 			throw new VerificationException("Given user not found in the database");
 	}
 	
+	/**
+	 * Verifies the status for the given person, which has to be not null, have a name and exist
+	 * @param person PersonDto for which to verify the status
+	 */
 	public void verifyStatus(PersonDto person)
 	{
 		if(person.getStatus()==null||person.getStatus().getName()==null)
@@ -65,6 +73,10 @@ public class PersonVerifier {
 			throw new VerificationException("Status invalid");
 	}
 	
+	/**
+	 * Verifies the name of a person, which has to be neither null nor empty
+	 * @param person PersonDto for which to verify the name
+	 */
 	public void verifyNotNull(PersonDto person)
 	{
 		if(person.getFirstname()==null||person.getFirstname().length()==0
@@ -72,6 +84,10 @@ public class PersonVerifier {
 			throw new VerificationException("No first and lastname given");
 	}
 	
+	/**
+	 * Verifies the Department of a person which has to be not null, have an id and exist
+	 * @param person PersonDto for which to verify the department
+	 */
 	public void verifyDepartment(PersonDto person)
 	{
 		//department may be null
@@ -83,13 +99,22 @@ public class PersonVerifier {
 		}
 	}
 	
+	/**
+	 * This utility function can verify a list of AbstractPersonInformationDto of a certain class 
+	 * by checking:
+	 * - Does the client pass an id already? if so it has to exist in the database
+	 * - If not we check if the same value exists in the database and add the id to the dto object
+	 * @param person PersonDto to verify these infos for
+	 * @param infos List of K Objects to verify
+	 * @param repo Repository to use for database queries
+	 */
 	private <T extends AbstractPersonInformation,K extends AbstractPersonInformationDto> 
 		void correlatePersonInformation(PersonDto person, List<K> infos, 
 			AbstractPersonInformationRepository<T> repo)
 	{
 		for(AbstractPersonInformationDto info : infos)
 		{
-			//check if the id is set, if so we just need to check if
+			//check if the id is set, if so we just need to check if it exists in the database
 			if(info.getId()!=null)
 			{
 				AbstractPersonInformation real = (AbstractPersonInformation)repo.find(info.getId());
@@ -111,21 +136,41 @@ public class PersonVerifier {
 		}
 	}
 	
+	/**
+	 * Correlate (assign ids, if they are not yet set for info already in the database) and verify (if id is set
+	 * check if the info exist) any PhoenumberDto objects on a PersonDto
+	 * @param person PersonDto to do the check for
+	 */
 	public void correlateNumbers(PersonDto person) {
 		this.<Phonenumber,PhonenumberDto>correlatePersonInformation
 		(person, person.getPhonenumbers(), phonenumberRepo);
 	}
 
+	/**
+	 * Correlate (assign ids, if they are not yet set for info already in the database) and verify (if id is set
+	 * check if the info exist) any MailaddressDto objects on a PersonDto
+	 * @param person PersonDto to do the check for
+	 */
 	public void correlateMails(PersonDto person) {
 		this.<Mailaddress,MailaddressDto>correlatePersonInformation
 		(person, person.getAdditionalMails(), mailaddressRepo);
 	}
 
+	/**
+	 * Correlate (assign ids, if they are not yet set for info already in the database) and verify (if id is set
+	 * check if the info exist) any KnowledgeDto objects on a PersonDto
+	 * @param person PersonDto to do the check for
+	 */
 	public void correlateKnowledges(PersonDto person) {
 		this.<Knowledge,KnowledgeDto>correlatePersonInformation
 		(person, person.getKnowledges(), knowledgeRepo);
 	}
 
+	/**
+	 * Correlate (assign ids, if they are not yet set for info already in the database) and verify (if id is set
+	 * check if the info exist) any HobbyDto objects on a PersonDto
+	 * @param person PersonDto to do the check for
+	 */
 	public void correlateHobbies(PersonDto person) {
 		this.<Hobby,HobbyDto>correlatePersonInformation
 		(person, person.getHobbies(), hobbyRepo);

@@ -11,6 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+/**
+ * PersonImage Entity
+ * @author Patrick Kainz
+ *
+ */
 @Entity
 @Table(name="person_image")
 @NamedQuery(name="PersonImage.findByPerson", query="SELECT p FROM PersonImage p WHERE p.person.id = :personid")

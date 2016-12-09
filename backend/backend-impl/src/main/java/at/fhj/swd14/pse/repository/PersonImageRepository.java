@@ -20,6 +20,11 @@ public class PersonImageRepository extends AbstractRepository<PersonImage> {
 		super(PersonImage.class);
 	}
 	
+	/**
+	 * Returns a PersonImage by personid
+	 * @param personid id of the person to search for in the database
+	 * @return PersonImage object found, or null
+	 */
 	public PersonImage getByPersonId(Long personid)
 	{
 		List<PersonImage> results =  entityManager.createNamedQuery("PersonImage.findByPerson",PersonImage.class)

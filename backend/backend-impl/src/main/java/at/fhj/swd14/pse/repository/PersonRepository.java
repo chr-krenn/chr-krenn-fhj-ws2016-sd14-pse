@@ -21,6 +21,11 @@ public class PersonRepository extends AbstractRepository<Person> {
 		super(Person.class);
 	}
 	
+	/**
+	 * Returns a person object by its userid
+	 * @param id userid to search for in the database
+	 * @return Person Object found, or null
+	 */
 	public Person findByUserId(long id)
 	{
 		List<Person> results =  entityManager.createNamedQuery("Person.findByUserId",Person.class)

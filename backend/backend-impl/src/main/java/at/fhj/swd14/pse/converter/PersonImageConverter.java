@@ -10,6 +10,11 @@ public class PersonImageConverter {
 
 	private PersonImageConverter(){};
 
+	/**
+	 * Convertes the given PersonImage object to a PersonImageDto Object
+	 * @param img PersonImage object to convert
+	 * @return PersonImageDto object
+	 */
     public static PersonImageDto convert(PersonImage img) {
         if (img == null) {
             return null;
@@ -21,6 +26,12 @@ public class PersonImageConverter {
         return dto;
     }
 
+    /**
+     * Converts the given PersonImageDto Object to a PersonImage Object
+     * No Database Operations are performed
+     * @param dto PersonImageDto Object
+     * @return PersonImage Object
+     */
     public static PersonImage convert(PersonImageDto dto) {
         if (dto == null) {
             return null;
@@ -33,6 +44,11 @@ public class PersonImageConverter {
         
     }
 
+    /**
+     * Converts the given collection of PersonImage Objects to a Collection of PersonImageDto Objects
+     * @param imgs Collection of PersonImage Objects
+     * @return Collection (internal type: List) of PersonImageDto Objects
+     */
     public static Collection<PersonImageDto> convertToDtoList(Collection<PersonImage> imgs) {
         if (imgs == null) {
             return null;
@@ -40,6 +56,12 @@ public class PersonImageConverter {
         return imgs.stream().map(PersonImageConverter::convert).collect(Collectors.toList());
     }
 
+    /**
+     * Converts the given collection of PersonImageDto objects to a Collection of PersonImage Objects
+     * No Database Operations are performed
+     * @param dtos Collection of PersonImageDto Objects
+     * @return Collection (internal type: List) of PersonImage Objects
+     */
     public static Collection<PersonImage> convertToDoList(Collection<PersonImageDto> dtos) {
         if (dtos == null) {
             return null;

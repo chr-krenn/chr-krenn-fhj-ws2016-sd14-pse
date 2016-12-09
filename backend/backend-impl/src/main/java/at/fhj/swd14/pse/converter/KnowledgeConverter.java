@@ -19,7 +19,12 @@ public class KnowledgeConverter {
 
     }
 	
-
+	/**
+	 * Converts the given Knowledge Object to a KnowledgeDto Object
+	 * @param knowledge Knowledge Object
+	 * @param personDto As a hobby can not exist without a person, the PersonDto Object to assign it to
+	 * @return The KnowledgeDto object
+	 */
     public static KnowledgeDto convert(Knowledge knowledge, PersonDto personDto) {
         if (knowledge == null) {
             return null;
@@ -30,6 +35,13 @@ public class KnowledgeConverter {
         return dto;
     }
 
+    /**
+     * Converts a KnowledgeDto Object to a Knowledge Object
+     * No database operations are performed
+     * @param knowledge KnowledgeDto Object to convert
+     * @param person As a Knowledge cannot exist without a person, the Person object to assign it to
+     * @return Knowledge Object
+     */
     public static Knowledge convert(KnowledgeDto knowledge, Person person) {
         if (knowledge == null) {
             return null;
@@ -40,6 +52,12 @@ public class KnowledgeConverter {
         return val;
     }
 
+    /**
+     * Converts a collection of Knowledge Objects of the same person to a list of KnowledgeDto Objects
+     * @param knowledges Collection of Knowledge Objects
+     * @param person As a Knowledge cannot exist without a person, the PersonDto object to assign it to
+     * @return Collection (internal type: List) of KnowledgeDto Objects
+     */
     public static Collection<KnowledgeDto> convertToDtoList(Collection<Knowledge> knowledges, PersonDto person) {
         if (knowledges == null) {
             return null;
@@ -50,6 +68,13 @@ public class KnowledgeConverter {
         return newKnowledges;
     }
 
+    /**
+     * Converts a collection of KnowledgeDto Objects of the same person to a list of Knowledge objects
+     * No Database operations performed
+     * @param knowledges Collection of KnowledgeDto Objects
+     * @param person As a Knowledge cannot exist without a person, the Person object to assign it to
+     * @return Collection (internal type: List) of KnowledgeDto Objects
+     */
     public static Collection<Knowledge> convertToDoList(Collection<KnowledgeDto> knowledges, Person person) {
         if (knowledges == null) {
             return null;

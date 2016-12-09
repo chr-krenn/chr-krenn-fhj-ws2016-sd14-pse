@@ -222,6 +222,7 @@ public class PersonServiceImpl implements PersonService {
 			
 			LOGGER.trace("Saving image for person "+person.getId());
 			PersonImage existing = imgRepo.getByPersonId(person.getId());
+			//delete any existing person images (only one per person allowed)
 			if(existing!=null)
 			{
 				imgRepo.remove(existing);
@@ -232,6 +233,7 @@ public class PersonServiceImpl implements PersonService {
 			img.setData(imageData);
 			img.setContentType(contentType);
 			
+			//retrieve the person we have to assign the image to
 			Person personEntity = repository.find(person.getId());
 			if(personEntity == null)
 			{
@@ -239,7 +241,7 @@ public class PersonServiceImpl implements PersonService {
 				throw new VerificationException("Person does not exists");
 			}
 			img.setPerson(personEntity);
-			
+			//save the image
 			imgRepo.save(img);
 			LOGGER.debug("Person image saved for person: "+person.getId());
 		}

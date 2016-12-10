@@ -13,11 +13,9 @@ public class ProfilePage extends AbstractPage {
 	private static final By HOBBYSECTION = By.xpath("//h3[contains(text(), 'Hobbies')]/following-sibling::*[1]");
 	private static final By SKILLSECTION = By.xpath("//h3[contains(text(), 'Fähigkeiten')]/following-sibling::*[1]");
 	private static final By TELNRSECTION = By.xpath("//h3[contains(text(), 'Telefonnummern')]/following-sibling::*[1]");
-	private static final String TITLE = "profile";
 
 	public ProfilePage(WebDriver webdriver) {
 		super(webdriver);
-		wait.until(ExpectedConditions.titleContains(TITLE));
 	}
 	
 	public boolean addEmail(String mail) {

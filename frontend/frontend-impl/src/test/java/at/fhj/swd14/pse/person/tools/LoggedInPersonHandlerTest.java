@@ -351,27 +351,20 @@ public class LoggedInPersonHandlerTest {
 	public void testFileUpload() throws IOException
 	{
 		FileUploadEvent event = Mockito.mock(FileUploadEvent.class);
-		UploadedFile file = Mockito.mock(UploadedFile.class);
-		Mockito.when(event.getFile()).thenReturn(file);
-		byte[] filedata=new byte[1];
-		Mockito.when(file.getContents()).thenReturn(filedata);
-		Mockito.when(file.getContentType()).thenReturn("png");
-		Mockito.when(bean.getPerson()).thenReturn(person);
-		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
-		Mockito.when(extContext.getRequest()).thenReturn(request);
-		Mockito.when(request.getRequestURI()).thenReturn("http://test");
-		handler.handleFileUpload(event);
-		Mockito.verify(personService,Mockito.times(1)).savePersonImage(person, filedata, "png");
-		Mockito.verify(extContext,Mockito.times(1)).redirect("http://test");
-		Mockito.verify(bean,Mockito.times(0)).growl(Mockito.anyString(),Mockito.anyString());
-		Assert.assertEquals(person.getImageUrl(), "/swd14-fe/personImage?id="+person.getId());
-		
+		byte[] filedata = doFileUpload(event);
+		verifyFileUpload(event, filedata, 0);
 	}
 	
 	@Test
 	public void testFileUploadFailed() throws IOException
 	{
 		FileUploadEvent event = Mockito.mock(FileUploadEvent.class);
+		byte[] filedata = doFileUpload(event);
+		Mockito.doThrow(IOException.class).when(extContext).redirect(Mockito.anyString());
+		verifyFileUpload(event, filedata, 1);
+	}
+
+	private byte[] doFileUpload(FileUploadEvent event) {
 		UploadedFile file = Mockito.mock(UploadedFile.class);
 		Mockito.when(event.getFile()).thenReturn(file);
 		byte[] filedata=new byte[1];
@@ -381,12 +374,14 @@ public class LoggedInPersonHandlerTest {
 		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
 		Mockito.when(extContext.getRequest()).thenReturn(request);
 		Mockito.when(request.getRequestURI()).thenReturn("http://test");
-		Mockito.doThrow(IOException.class).when(extContext).redirect(Mockito.anyString());
+		return filedata;
+	}
+
+	private void verifyFileUpload(FileUploadEvent event, byte[] filedata, int times) throws IOException {
 		handler.handleFileUpload(event);
 		Mockito.verify(personService,Mockito.times(1)).savePersonImage(person, filedata, "png");
 		Mockito.verify(extContext,Mockito.times(1)).redirect("http://test");
-		Mockito.verify(bean,Mockito.times(1)).growl(Mockito.anyString(),Mockito.anyString());
+		Mockito.verify(bean,Mockito.times(times)).growl(Mockito.anyString(),Mockito.anyString());
 		Assert.assertEquals(person.getImageUrl(), "/swd14-fe/personImage?id="+person.getId());
-		
 	}
 }

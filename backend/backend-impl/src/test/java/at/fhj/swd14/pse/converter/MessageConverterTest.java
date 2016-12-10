@@ -27,9 +27,6 @@ public class MessageConverterTest {
 	private static Community community;
 	private static CommunityDto communityDto;
 	
-	// TODO test with community class
-	private static Long communityId;
-	
 	@BeforeClass
 	public static void setup(){
 		
@@ -46,8 +43,6 @@ public class MessageConverterTest {
 		community = new Community();
 		community.setId(300L);
 		communityDto = new CommunityDto(300L);
-		
-		communityId = 1L;
 	}
 	
 	@Test

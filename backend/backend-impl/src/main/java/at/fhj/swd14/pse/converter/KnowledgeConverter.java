@@ -62,7 +62,7 @@ public class KnowledgeConverter {
         if (knowledges == null) {
             return null;
         }
-        LinkedList<KnowledgeDto> newKnowledges = new LinkedList<KnowledgeDto>();
+        LinkedList<KnowledgeDto> newKnowledges = new LinkedList<>();
         for(Knowledge val : knowledges)
         	newKnowledges.add(convert(val,person));
         return newKnowledges;
@@ -79,7 +79,7 @@ public class KnowledgeConverter {
         if (knowledges == null) {
             return null;
         }
-        LinkedList<Knowledge> newKnowledges = new LinkedList<Knowledge>();
+        LinkedList<Knowledge> newKnowledges = new LinkedList<>();
         for(KnowledgeDto dto : knowledges)
         	newKnowledges.add(convert(dto,person));
         return newKnowledges;

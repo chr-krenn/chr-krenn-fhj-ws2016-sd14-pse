@@ -10,13 +10,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class UsersPage extends AbstractPage {
 	
 	private static final String USERLISTSTRING = "//form[@id='personListForm']/li";
-	private static final String TITLE = "User";
 	private static final String ENTFERNEN = "Entfernen";
 	private static final String FREUND_HINZUFUEGEN = "Freund hinzufügen";
 
 	protected UsersPage(WebDriver webdriver) {
 		super(webdriver);
-		wait.until(ExpectedConditions.titleContains(TITLE));
 	}
 	
 	public int retrieveUserListCount() {

@@ -69,7 +69,7 @@ public class PersonServiceImplTest {
 		
         person = PersonTestTools.getDummyPerson();
         user = person.getUser();
-        person2 = PersonTestTools.getDummyPerson2();
+        person2 = PersonTestTools.getAnotherDummyPerson();
         user2 = person.getUser();
        
         persons = new ArrayList<Person>();

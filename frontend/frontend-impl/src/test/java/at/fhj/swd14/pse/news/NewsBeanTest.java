@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.news;
 
 import at.fhj.swd14.pse.general.ContextMocker;
 import at.fhj.swd14.pse.general.RequestContextMocker;
+import at.fhj.swd14.pse.person.CommonPersonBeanTest;
 import at.fhj.swd14.pse.person.PersonBeanTest;
 import at.fhj.swd14.pse.person.PersonDto;
 import at.fhj.swd14.pse.person.PersonService;
@@ -55,8 +56,7 @@ public class NewsBeanTest {
     }
 
     public NewsDto getDummyNews(){
-        PersonBeanTest personTest = new PersonBeanTest();
-        PersonDto person = personTest.getDummyPerson();
+        PersonDto person = CommonPersonBeanTest.getDummyPerson();
 
         NewsDto news = new NewsDto();
         news.setAuthor(person);

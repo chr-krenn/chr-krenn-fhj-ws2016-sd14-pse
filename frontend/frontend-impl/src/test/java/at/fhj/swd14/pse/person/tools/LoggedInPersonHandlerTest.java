@@ -1,16 +1,13 @@
 package at.fhj.swd14.pse.person.tools;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Assert;
@@ -22,17 +19,16 @@ import org.primefaces.model.UploadedFile;
 
 import at.fhj.swd14.pse.department.DepartmentDto;
 import at.fhj.swd14.pse.department.DepartmentService;
-import at.fhj.swd14.pse.general.ContextMocker;
+import at.fhj.swd14.pse.person.CommonPersonBeanTest;
+import at.fhj.swd14.pse.person.CommonPersonBeanTestData;
 import at.fhj.swd14.pse.person.HobbyDto;
 import at.fhj.swd14.pse.person.KnowledgeDto;
 import at.fhj.swd14.pse.person.MailaddressDto;
 import at.fhj.swd14.pse.person.PersonBean;
-import at.fhj.swd14.pse.person.PersonBeanTest;
 import at.fhj.swd14.pse.person.PersonDto;
 import at.fhj.swd14.pse.person.PersonService;
 import at.fhj.swd14.pse.person.PhonenumberDto;
 import at.fhj.swd14.pse.person.StatusDto;
-import at.fhj.swd14.pse.security.DatabasePrincipal;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserDtoTester;
 import at.fhj.swd14.pse.user.UserService;
@@ -45,7 +41,6 @@ public class LoggedInPersonHandlerTest {
 	private PersonService personService;
 	private DepartmentService departmentService;
 	private PersonVerifier verifier;
-	private FacesContext context;
     private ExternalContext extContext;
     private PersonDto person;
     private List<StatusDto> stati;
@@ -65,25 +60,12 @@ public class LoggedInPersonHandlerTest {
 		Mockito.when(bean.getDepartmentService()).thenReturn(departmentService);
 		Mockito.when(bean.getVerifier()).thenReturn(verifier);
 		handler = new LoggedInPersonPageHandler(bean);
-		person = PersonBeanTest.getDummyPerson();
-    	when(userService.find(1L)).thenReturn(person.getUser());
-    	when(personService.findByUser(person.getUser())).thenReturn(person);
-    	context = ContextMocker.mockFacesContext();
-    	extContext = mock(ExternalContext.class);
-    	when(context.getExternalContext()).thenReturn(extContext);
-    	DatabasePrincipal principal = Mockito.mock(DatabasePrincipal.class);
-		Mockito.when(extContext.getUserPrincipal()).thenReturn(principal);
-		Mockito.when(principal.getUserId()).thenReturn(person.getUser().getId());
-    	stati = new LinkedList<StatusDto>();
-    	stati.add(new StatusDto("online"));
-    	deps = new LinkedList<DepartmentDto>();
-    	DepartmentDto dep = new DepartmentDto(1L);
-    	dep.setName("test");
-    	deps.add(dep);
-    	when(personService.findAllStati()).thenReturn(stati);
-    	when(departmentService.findAll()).thenReturn(deps);
-    	when(bean.getDepartments()).thenReturn(deps);
-    	user=person.getUser();
+		CommonPersonBeanTestData data = CommonPersonBeanTest.setupTest(userService, personService, departmentService);
+    	person = data.getPerson();
+    	extContext = data.getExtContext();
+    	stati = data.getStati();
+    	deps = data.getDeps();
+		user=person.getUser();
 	}
 	
 	@Test(expected=IllegalArgumentException.class)

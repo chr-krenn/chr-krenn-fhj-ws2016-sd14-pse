@@ -5,14 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import at.fhj.swd14.pse.person.CommonPersonBeanTest;
 import at.fhj.swd14.pse.person.HobbyDto;
 import at.fhj.swd14.pse.person.KnowledgeDto;
 import at.fhj.swd14.pse.person.MailaddressDto;
 import at.fhj.swd14.pse.person.PersonBean;
-import at.fhj.swd14.pse.person.PersonBeanTest;
 import at.fhj.swd14.pse.person.PersonDto;
 import at.fhj.swd14.pse.person.PhonenumberDto;
-import at.fhj.swd14.pse.person.tools.PersonVerifier;
 
 public class PersonVerifierTest {
 	
@@ -25,7 +24,7 @@ public class PersonVerifierTest {
 	{
 		bean = Mockito.mock(PersonBean.class);
 		verifier = new PersonVerifier(bean);
-		person=PersonBeanTest.getDummyPerson();
+		person=CommonPersonBeanTest.getDummyPerson();
 		Mockito.when(bean.getPerson()).thenReturn(person);
 	}
 	

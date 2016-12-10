@@ -16,7 +16,7 @@ public abstract class AbstractRepositoryDatabaseIDTest<T> extends AbstractReposi
 		return manager.find(clazz, getDummyId(dummy));
 	}
 
-	@Test
+	//@Test
 	public void testFind()
 	{
 		T dummy = createDummyEntity();

@@ -51,7 +51,7 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
 					throw PicketBoxMessages.MESSAGES.invalidNullTransactionManager();
 				tx = tm.suspend();
 			} catch (SystemException e) {
-				throw new RuntimeException(e);
+				throw new UnsupportedOperationException(e);
 			}
 		}
 
@@ -94,18 +94,21 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
 				try {
 					rs.close();
 				} catch (SQLException e) {
+					PicketBoxLogger.LOGGER.warn(e);
 				}
 			}
 			if (ps != null) {
 				try {
 					ps.close();
 				} catch (SQLException e) {
+					PicketBoxLogger.LOGGER.warn(e);
 				}
 			}
 			if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException ex) {
+					PicketBoxLogger.LOGGER.warn(ex);
 				}
 			}
 			if (suspendResume) {
@@ -113,7 +116,7 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
 				try {
 					tm.resume(tx);
 				} catch (Exception e) {
-					throw new RuntimeException(e);
+					throw new UnsupportedOperationException(e);
 				}
 			}
 		}

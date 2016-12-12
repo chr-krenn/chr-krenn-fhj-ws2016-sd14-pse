@@ -37,13 +37,16 @@
         <maven-ear-plugin.version>2.10.1</maven-ear-plugin.version>
         <maven-ejb-plugin.version>2.5.1</maven-ejb-plugin.version>
         <maven-war-plugin.version>3.0.0</maven-war-plugin.version>
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>2.19.1</maven-failsafe-plugin.version>
         <java.version>1.8</java.version>
         <commons-lang3.version>3.5</commons-lang3.version>
         <picketbox.version>5.0.0.Alpha3</picketbox.version>
         <jboss-logging.version>3.3.0.Final</jboss-logging.version>
         <ejb.version>3.1</ejb.version>
-        <mysql.version>6.0.5</mysql.version>
-        <hibernate-core.version>5.2.5.Final</hibernate-core.version>
+        <mysql-driver.version>6.0.5</mysql-driver.version>
+        <eclipselink.version>2.6.4</eclipselink.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencyManagement>
@@ -100,10 +103,10 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-			    <groupId>javax.servlet</groupId>
-			    <artifactId>javax.servlet-api</artifactId>
-			    <version>${javaservlet-api.version}</version>
-			</dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javaservlet-api.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
@@ -152,15 +155,15 @@
                 <version>${mockito-all.version}</version>
             </dependency>
             <dependency>
-			    <groupId>mysql</groupId>
-			    <artifactId>mysql-connector-java</artifactId>
-			    <version>${mysql.version}</version>
-			</dependency>  
-			<dependency>
-		      <groupId>org.hibernate</groupId>
-		      <artifactId>hibernate-core</artifactId>
-		      <version>${hibernate-core.version}</version>
-		    </dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-driver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>eclipselink</artifactId>
+                <version>${eclipselink.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -213,6 +216,30 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>*IntegrationTest.java</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven-failsafe-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <includes>
+                            <include>*IntegrationTest.java</include>
+                        </includes>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
     <persistence-unit name="SEP_TEST">
-    	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>at.fhj.swd14.pse.department.Department</class>
         <class>at.fhj.swd14.pse.person.Person</class>
         <class>at.fhj.swd14.pse.person.Hobby</class>
@@ -18,7 +18,7 @@
         <class>at.fhj.swd14.pse.news.News</class>
         <class>at.fhj.swd14.pse.tag.Tag</class>
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pse"/>
             <property name="javax.persistence.jdbc.user" value="student"/>
             <property name="javax.persistence.jdbc.password" value="student"/>

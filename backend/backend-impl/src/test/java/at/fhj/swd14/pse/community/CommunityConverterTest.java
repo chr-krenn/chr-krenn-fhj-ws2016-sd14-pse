@@ -13,7 +13,7 @@ import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.community.*;
 
 
-public class CommunityConveterTest {
+public class CommunityConverterTest {
  
 	Community  community;
 	CommunityDto communityDto;

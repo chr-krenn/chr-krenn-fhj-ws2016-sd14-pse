@@ -1,10 +1,9 @@
 package at.fhj.swd14.pse.repository;
 
 import java.util.List;
+import java.util.Properties;
 
 import javax.persistence.*;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -41,7 +40,7 @@ public abstract class AbstractRepositoryIntegrationTest<T> {
     @Before
     public void setup() throws ClassNotFoundException {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SEP_TEST",
-                System.getProperties()); // Properties must be passed to override default persitence.xml
+                buildEntityManagerFactoryProperties()); // Properties must be passed to override default persitence.xml
         manager = factory.createEntityManager();
 
         repository = getRepository();
@@ -51,6 +50,13 @@ public abstract class AbstractRepositoryIntegrationTest<T> {
         transaction.begin();
 
         exec("DELETE FROM " + clazz.getSimpleName());
+    }
+
+    private Properties buildEntityManagerFactoryProperties() {
+        final Properties properties = new Properties();
+        properties.putAll(System.getenv());
+        properties.putAll(System.getProperties());
+        return properties;
     }
 
     @Test

@@ -65,13 +65,6 @@
                     <ejbVersion>${ejb.version}</ejbVersion>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <configuration>
-                    <systemProperties combine.children="append"></systemProperties>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 

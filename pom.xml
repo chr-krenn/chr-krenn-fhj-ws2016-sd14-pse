@@ -255,4 +255,24 @@
         <connection>scm:git:git://github.com/chr-krenn/chr-krenn-fhj-ws2016-sd14-pse.git</connection>
         <developerConnection>scm:git:git@github.com/chr-krenn/chr-krenn-fhj-ws2016-sd14-pse.git</developerConnection>
     </scm>
+
+    <profiles>
+        <profile>
+            <id>integration-tests</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <systemProperties combine.children="append"/>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

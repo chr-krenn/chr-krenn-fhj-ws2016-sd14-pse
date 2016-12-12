@@ -1,13 +1,13 @@
 package at.fhj.swd14.pse.person;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-
-import java.io.Serializable;
 
 /**
  * Abstract Super Class for ManyToOne Text Information Entitys for the Person class

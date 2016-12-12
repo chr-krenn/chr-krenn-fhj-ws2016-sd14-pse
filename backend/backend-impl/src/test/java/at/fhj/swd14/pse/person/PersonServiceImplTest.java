@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +30,6 @@ import at.fhj.swd14.pse.repository.PersonStatusRepository;
 import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
-import org.junit.Assert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersonServiceImplTest {

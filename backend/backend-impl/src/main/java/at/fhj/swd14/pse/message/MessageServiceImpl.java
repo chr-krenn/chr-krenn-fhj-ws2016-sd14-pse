@@ -9,8 +9,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import at.fhj.swd14.pse.converter.MessageConverter;
-import at.fhj.swd14.pse.message.MessageDto;
-import at.fhj.swd14.pse.message.MessageService;
 import at.fhj.swd14.pse.repository.MessageRepository;
 
 @Stateless

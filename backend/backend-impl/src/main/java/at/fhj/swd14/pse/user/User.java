@@ -1,5 +1,8 @@
 package at.fhj.swd14.pse.user;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,10 +12,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import at.fhj.swd14.pse.community.Community;
-import at.fhj.swd14.pse.tag.Tag;
-
-import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "user")

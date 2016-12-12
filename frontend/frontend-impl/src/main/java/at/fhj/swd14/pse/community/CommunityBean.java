@@ -16,8 +16,6 @@ import javax.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import at.fhj.swd14.pse.message.MessageBean;
-import at.fhj.swd14.pse.message.MessageDto;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 

@@ -4,7 +4,10 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import at.fhj.swd14.pse.pageobjects.*;
+
+import at.fhj.swd14.pse.pageobjects.ProfilePage;
+import at.fhj.swd14.pse.pageobjects.UsersPage;
+import at.fhj.swd14.pse.pageobjects.WelcomePage;
 
 public class PersonTest extends BaseUITest {
 	

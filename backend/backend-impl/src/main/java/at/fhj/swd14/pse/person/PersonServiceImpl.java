@@ -15,7 +15,11 @@ import at.fhj.swd14.pse.converter.PersonConverter;
 import at.fhj.swd14.pse.converter.PersonImageConverter;
 import at.fhj.swd14.pse.converter.StatusConverter;
 import at.fhj.swd14.pse.exception.VerificationException;
-import at.fhj.swd14.pse.repository.*;
+import at.fhj.swd14.pse.repository.ContactRepository;
+import at.fhj.swd14.pse.repository.PersonImageRepository;
+import at.fhj.swd14.pse.repository.PersonRepository;
+import at.fhj.swd14.pse.repository.PersonStatusRepository;
+import at.fhj.swd14.pse.repository.UserRepository;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 

@@ -1,7 +1,8 @@
 package at.fhj.swd14.pse.department;
 
-import javax.ejb.Remote;
 import java.util.Collection;
+
+import javax.ejb.Remote;
 
 /**
  * Department service class

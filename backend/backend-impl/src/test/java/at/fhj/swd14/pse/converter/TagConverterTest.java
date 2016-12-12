@@ -1,15 +1,12 @@
 package at.fhj.swd14.pse.converter;
 
 
-import at.fhj.swd14.pse.tag.Tag;
-import at.fhj.swd14.pse.tag.TagDto;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collection;
-
-import static org.junit.Assert.assertEquals;
+import at.fhj.swd14.pse.tag.Tag;
+import at.fhj.swd14.pse.tag.TagDto;
 
 public class TagConverterTest {
 

@@ -14,7 +14,8 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.community.Community;
-import at.fhj.swd14.pse.converter.*;
+import at.fhj.swd14.pse.converter.MessageConverter;
+import at.fhj.swd14.pse.converter.UserConverter;
 import at.fhj.swd14.pse.repository.MessageRepository;
 import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserDto;

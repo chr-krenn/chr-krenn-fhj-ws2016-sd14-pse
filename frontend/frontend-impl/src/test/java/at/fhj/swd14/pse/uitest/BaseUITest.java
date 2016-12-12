@@ -4,7 +4,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import at.fhj.swd14.pse.pageobjects.*;
+
+import at.fhj.swd14.pse.pageobjects.LoginPage;
+import at.fhj.swd14.pse.pageobjects.WelcomePage;
 
 /**
  * The base class for all Selenium tests

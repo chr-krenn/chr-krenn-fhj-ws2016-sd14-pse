@@ -10,7 +10,6 @@ import org.junit.Test;
 import at.fhj.swd14.pse.converter.CommunityConverter;
 import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserDto;
-import at.fhj.swd14.pse.community.*;
 
 
 public class CommunityConverterTest {

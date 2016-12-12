@@ -1,7 +1,6 @@
 package at.fhj.swd14.pse.repository;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 public abstract class AbstractRepositoryDatabaseIDTest<T> extends AbstractRepositoryDatabaseTest<T>{
 

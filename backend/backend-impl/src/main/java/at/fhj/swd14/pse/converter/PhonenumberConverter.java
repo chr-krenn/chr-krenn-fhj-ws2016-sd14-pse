@@ -3,10 +3,10 @@ package at.fhj.swd14.pse.converter;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import at.fhj.swd14.pse.person.Phonenumber;
-import at.fhj.swd14.pse.person.PhonenumberDto;
 import at.fhj.swd14.pse.person.Person;
 import at.fhj.swd14.pse.person.PersonDto;
+import at.fhj.swd14.pse.person.Phonenumber;
+import at.fhj.swd14.pse.person.PhonenumberDto;
 
 /**
  * Converter between Phonenumber and PhonenumberDto

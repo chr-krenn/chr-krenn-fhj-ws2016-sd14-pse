@@ -1,9 +1,8 @@
 package at.fhj.swd14.pse.like;
 
-import javax.ejb.Remote;
-import at.fhj.swd14.pse.user.UserDto;
-import at.fhj.swd14.pse.message.MessageDto;
 import java.util.List;
+
+import javax.ejb.Remote;
 
 @Remote
 public interface MessageLikeService {

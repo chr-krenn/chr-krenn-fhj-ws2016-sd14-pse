@@ -1,10 +1,10 @@
 package at.fhj.swd14.pse.user;
 
-import at.fhj.swd14.pse.converter.UserConverter;
-import at.fhj.swd14.pse.repository.UserRepository;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
+import at.fhj.swd14.pse.converter.UserConverter;
+import at.fhj.swd14.pse.repository.UserRepository;
 
 @Stateless
 public class UserServiceImpl implements UserService {

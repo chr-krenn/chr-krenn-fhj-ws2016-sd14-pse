@@ -1,21 +1,23 @@
 package at.fhj.swd14.pse.news;
 
-import at.fhj.swd14.pse.person.PersonDto;
-import at.fhj.swd14.pse.person.PersonService;
-import at.fhj.swd14.pse.user.UserDto;
-import at.fhj.swd14.pse.user.UserService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.primefaces.context.RequestContext;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.primefaces.context.RequestContext;
+
+import at.fhj.swd14.pse.person.PersonDto;
+import at.fhj.swd14.pse.person.PersonService;
+import at.fhj.swd14.pse.user.UserDto;
+import at.fhj.swd14.pse.user.UserService;
 
 @Named
 @SessionScoped

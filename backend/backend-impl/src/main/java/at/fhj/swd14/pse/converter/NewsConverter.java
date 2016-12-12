@@ -1,10 +1,10 @@
 package at.fhj.swd14.pse.converter;
 
-import at.fhj.swd14.pse.news.News;
-import at.fhj.swd14.pse.news.NewsDto;
-
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import at.fhj.swd14.pse.news.News;
+import at.fhj.swd14.pse.news.NewsDto;
 
 public class NewsConverter {
 

@@ -1,13 +1,8 @@
 package at.fhj.swd14.pse.converter;
 
-import at.fhj.swd14.pse.news.News;
-import at.fhj.swd14.pse.news.NewsDto;
-import at.fhj.swd14.pse.person.Person;
-import at.fhj.swd14.pse.person.PersonDto;
-import at.fhj.swd14.pse.person.Status;
-import at.fhj.swd14.pse.user.User;
-import at.fhj.swd14.pse.user.UserDto;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -15,7 +10,15 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Random;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import at.fhj.swd14.pse.news.News;
+import at.fhj.swd14.pse.news.NewsDto;
+import at.fhj.swd14.pse.person.Person;
+import at.fhj.swd14.pse.person.PersonDto;
+import at.fhj.swd14.pse.person.Status;
+import at.fhj.swd14.pse.user.User;
+import at.fhj.swd14.pse.user.UserDto;
 
 public class NewsConverterTest {
     private static final Random RANDOM = new Random();

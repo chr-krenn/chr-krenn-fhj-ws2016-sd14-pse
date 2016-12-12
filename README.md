@@ -129,3 +129,22 @@ Take the following two artifacts and deploy them to Wildfly by copying them to `
 
 - localhost:8080/swd14-fe/ --> Welcome page (/index.xhtml)
 - localhost:8080/swd14-fe/ --> User protected area (automatically forwarded to login if not logged in. after successfull login system redirects you to requested ressource)
+
+## Integration tests
+
+The projects maven file includes integration tests inside the profile integration-tests, which is activated by default. Deactivate it via -P-integration-tests, if you do not want to run integration tests.
+
+###Database tests
+
+The database tests are integration tests and can be based on the class AbstractRepositoryIntegrationTest in backend-impl/src/test/java/repository/. If the entity includes a numeric primary key, use AbstractRepositoryIDIntegrationTest instead. You will have to implement the abstract methods as well as additional tests required to test any repository functionality not included in AbstractRepository. For an example please see the class DepartmentRepositoryIntegrationTest.
+
+The following methods will have to be implemented:
+- getRepository: Returns the repository to be used for the test (only instantiate the repository once per test)
+- createDummyEntity: Creates a new object of the entity managed by the repository to be tested, the primary key may not be set, if it is automatically created, otherwise a new value will have to be generated for the test (the table is cleared during test setup, however if the cascading between entitys is not setup correctly, using an existing key may cause inconstancies). 
+- assertEquals: This will check all fields of both entities for equality
+- fetchDummy: refetches the passed dummy from the database (implemented in AbstractRepositoryIDIntegrationTest)
+- getDummyId: IDIntegrationTest only, return the primary key from the passed object
+- modifyDummy: Modify the object passed, so that an update in the database can be verified
+- copyDummyPK: Copy the primary key from the passed source object to the passed destination object
+
+Please note that during test setup a transaction is started, and during teardown it is rolled back. Please do not use any commands that affect the transaction handling or change the database permanently.

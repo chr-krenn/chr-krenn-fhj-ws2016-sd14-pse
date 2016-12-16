@@ -16,7 +16,7 @@ public class ProfilePage extends AbstractPage {
 	private static final By TELNRSECTION = By.xpath("//h3[contains(text(), 'Telefonnummern')]/following-sibling::*[1]");
 
 	public ProfilePage(WebDriver webdriver) {
-		super(webdriver);
+		super(webdriver, "profile");
 	}
 	
 	public boolean addEmail(String mail) {

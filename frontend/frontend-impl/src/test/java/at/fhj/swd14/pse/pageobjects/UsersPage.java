@@ -15,7 +15,7 @@ public class UsersPage extends AbstractPage {
 	private static final String FREUND_HINZUFUEGEN = "Freund hinzufügen";
 
 	protected UsersPage(WebDriver webdriver) {
-		super(webdriver);
+		super(webdriver, "user");
 	}
 	
 	public int retrieveUserListCount() {

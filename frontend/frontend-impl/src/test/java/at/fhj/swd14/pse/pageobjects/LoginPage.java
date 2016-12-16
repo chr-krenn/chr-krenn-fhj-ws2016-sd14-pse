@@ -10,7 +10,7 @@ public class LoginPage extends AbstractPage {
 	private final By loginButton = By.id("submit");
 
 	public LoginPage(WebDriver webdriver) {
-		super(webdriver);
+		super(webdriver, "login");
 	}
 
     public WelcomePage loginValidUser(String username, String password) {

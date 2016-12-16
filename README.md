@@ -156,5 +156,7 @@ There's an BaseUITest from which you can derive from. You just need to call the 
 To keep our tests clean we use the PageObjectPattern. You just need to derive from the AbstractPage class. 
 * There should be **no asserts** in the PageObject.
 * Prefered selector order: by id > name > css > xpath
-* Avoid Thread.sleep prefer ExplicitWait or FluentWait
+* Avoid Thread.sleep and implicit waits
+* Prefer ExplicitWait or FluentWait
 * Use relative URLs
+

@@ -9,7 +9,7 @@ public class WelcomePage extends AbstractPage {
 	private final By usersLink = By.linkText("Users");
 
 	public WelcomePage(WebDriver webdriver) {
-		super(webdriver);
+		super(webdriver, "welcome");
 	}
 
     public ProfilePage changeToOwnProfilePage() {

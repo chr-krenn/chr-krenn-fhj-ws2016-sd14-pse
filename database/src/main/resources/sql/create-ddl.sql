@@ -1,3 +1,4 @@
+# noinspection SqlNoDataSourceInspectionForFile
 # select correct database
 USE pse;
 
@@ -190,8 +191,8 @@ CREATE TABLE IF NOT EXISTS tag
 #create tag-message relation
 CREATE TABLE IF NOT EXISTS message_tag
 (
-  messages_id      BIGINT        NOT NULL,
-  tags_id          BIGINT        NOT NULL
+  messages_id      BIGINT        NOT NULL  REFERENCES message(id),
+  tags_id          BIGINT        NOT NULL  REFERENCES tag(id)
 )
   ENGINE = INNODB;
 

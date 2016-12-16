@@ -75,4 +75,8 @@ public class Tag implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Message> getMessages(){return this.messages;}
+    public void setMessages(List<Message> messages){this.messages = messages;}
+    public void addMessage(Message message){this.messages.add(message);}
 }

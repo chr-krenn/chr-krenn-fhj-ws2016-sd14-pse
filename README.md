@@ -148,3 +148,15 @@ The following methods will have to be implemented:
 - copyDummyPK: Copy the primary key from the passed source object to the passed destination object
 
 Please note that during test setup a transaction is started, and during teardown it is rolled back. Please do not use any commands that affect the transaction handling or change the database permanently.
+
+## UI tests with Selenium
+The UI tests can be found in the **frontend-impl/src/test** package. We are using version 2.53.1 at the moment.
+### How to
+There's an BaseUITest from which you can derive from. You just need to call the login in your sub testclass in @BeforeClass with a default student or your own user login.
+To keep our tests clean we use the PageObjectPattern. You just need to derive from the AbstractPage class. 
+* There should be **no asserts** in the PageObject.
+* Prefered selector order: by id > name > css > xpath
+* Avoid Thread.sleep and implicit waits
+* Prefer ExplicitWait or FluentWait
+* Use relative URLs
+

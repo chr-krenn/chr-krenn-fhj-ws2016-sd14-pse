@@ -20,7 +20,7 @@ abstract class AbstractPage {
 	protected final WebDriverWait wait;
 	protected final WebDriverWaitFactory waitFactory;
 
-	protected AbstractPage(WebDriver webdriver) {
+	protected AbstractPage(WebDriver webdriver, String pagename) {
 		if(webdriver == null) {
 			throw new IllegalArgumentException("webdriver cannot be null");
 		}
@@ -28,6 +28,9 @@ abstract class AbstractPage {
 		waitFactory = new WebDriverWaitFactory(webdriver);
 		wait = waitFactory.create();
 		waitForReadyDom(webdriver);
+		if(!webdriver.getTitle().toLowerCase().contains(pagename.toLowerCase())) {
+			throw new IllegalArgumentException("webdriver is not on specified page " + pagename);
+		}
 	}
 
 	/*

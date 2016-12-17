@@ -142,8 +142,8 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
 	public String toString(){
 		return "MessageDto{" +
                 "id=" + getId() +
-                "recipientId=" + getRecipient() +
-                ", userId='" + getAuthor().getId() + '\'' +
+                ", recipientId=" + getRecipient() +
+                ", userId='" + getAuthor() + '\'' +
                 ", communityId='" + getCommunity() + '\'' +
                 ", title='" + getTitle() + '\'' +
                 '}';

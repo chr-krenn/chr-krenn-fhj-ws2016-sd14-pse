@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.person;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.ejb.EJB;
@@ -56,36 +57,22 @@ public class PersonServiceImpl implements PersonService {
 	
 	@Override
 	public PersonDto find(long id) {
-		try{
+		try {
 			LOGGER.trace("Finding person by id: "+id);
 			return PersonConverter.convert(repository.find(id));
-		}
-		catch(Exception ex)
-		{
+		} catch(Exception ex) {
 			LOGGER.error("Exception during finding person by id "+id,ex);
-			throw new PersonServiceException("Finding person by id failed for id "+id);
-		}
-		catch(Error err)
-		{
-			LOGGER.fatal("Error during finding person by id "+id,err);
 			throw new PersonServiceException("Finding person by id failed for id "+id);
 		}
 	}
 
 	@Override
 	public PersonDto findByUser(UserDto user) {
-		try{
-			LOGGER.trace("Finding person by userid: "+user.getId());
+		try {
+			LOGGER.trace("Finding person by userid: " + user.getId());
 			return PersonConverter.convert(repository.findByUserId(user.getId()));
-		}
-		catch(Exception ex)
-		{
+		} catch(Exception ex) {
 			LOGGER.error("Exception during finding person by userid "+user.getId(),ex);
-			throw new PersonServiceException("Finding person by userid "+user.getId()+" failed");
-		}
-		catch(Error err)
-		{
-			LOGGER.fatal("Error during finding person by userid "+user.getId(),err);
 			throw new PersonServiceException("Finding person by userid "+user.getId()+" failed");
 		}
 	}
@@ -101,7 +88,7 @@ public class PersonServiceImpl implements PersonService {
 		}
 		//remove logged in person from friend view
 		for(PersonDto p : new ArrayList<>(resultList)){
-			if(PersonConverter.convert(p).getId() == loggedInPerson.getId()){
+			if(Objects.equals(PersonConverter.convert(p).getId(), loggedInPerson.getId())){
 				resultList.remove(p);
 			}
 		}
@@ -172,20 +159,11 @@ public class PersonServiceImpl implements PersonService {
 			//step 7 save
 			repository.update(personEntity);
 			LOGGER.debug("Person stored");
-		}
-		catch(VerificationException ex)
-		{
+		} catch(VerificationException ex) {
 			LOGGER.debug("Invalid input was supplied by frontend: "+ex.getMessage(),ex);
 			throw new PersonServiceException("Invalid input was supplied by frontend: "+ex.getMessage());
-		}
-		catch(Exception ex)
-		{
+		} catch(Exception ex) {
 			LOGGER.error("Exception during saving of person",ex);
-			throw new PersonServiceException("Person could not be saved");
-		}
-		catch(Error err)
-		{
-			LOGGER.fatal("Error during saving of person",err);
 			throw new PersonServiceException("Person could not be saved");
 		}
 	}
@@ -195,15 +173,8 @@ public class PersonServiceImpl implements PersonService {
 		try{
 			LOGGER.trace("Retrieving status values from database");
 			return StatusConverter.convertToDtoList(statusRepo.findAll());
-		}
-		catch(Exception ex)
-		{
+		} catch(Exception ex) {
 			LOGGER.error("Error during finding all stati",ex);
-			throw new PersonServiceException("Stati could not be found");
-		}
-		catch(Error err)
-		{
-			LOGGER.fatal("Error during finding all stati",err);
 			throw new PersonServiceException("Stati could not be found");
 		}
 	}
@@ -248,42 +219,26 @@ public class PersonServiceImpl implements PersonService {
 			//save the image
 			imgRepo.save(img);
 			LOGGER.debug("Person image saved for person: "+person.getId());
-		}
-		catch(VerificationException ex)
-		{
+		} catch(VerificationException ex)	{
 			LOGGER.debug("Invalid input was supplied by frontend: "+ex.getMessage(),ex);
 			throw new PersonServiceException("Invalid input was supplied by frontend: "+ex.getMessage());
-		}
-		catch(Exception ex)
-		{
+		} catch(Exception ex) {
 			LOGGER.error("Exception during saving of image for person "+person.getId(),ex);
-			throw new PersonServiceException("Person image for person "+person.getId()+" could not be saved");
-		}
-		catch(Error err)
-		{
-			LOGGER.fatal("Error during saving of image for person "+person.getId(),err);
 			throw new PersonServiceException("Person image for person "+person.getId()+" could not be saved");
 		}
 	}
 
 	@Override
 	public PersonImageDto getPersonImage(Long personid) {
-		try{
+		try {
 			PersonImage img = imgRepo.getByPersonId(personid);
 			if(img!=null)
 				LOGGER.trace("Image for person "+personid+" was retrieved successfully");
 			else
 				LOGGER.trace("Could not retrieve image for person "+personid);
 			return PersonImageConverter.convert(img);
-		}
-		catch(Exception ex)
-		{
+		} catch(Exception ex) {
 			LOGGER.error("Exception during retrieval of image for person "+personid,ex);
-			throw new PersonServiceException("Image for person "+personid+" could not be retrieved");
-		}
-		catch(Error err)
-		{
-			LOGGER.fatal("Error during retrieval of image for person "+personid,err);
 			throw new PersonServiceException("Image for person "+personid+" could not be retrieved");
 		}
 	}

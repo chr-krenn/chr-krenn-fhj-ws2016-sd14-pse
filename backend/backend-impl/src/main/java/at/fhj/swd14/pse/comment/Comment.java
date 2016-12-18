@@ -35,7 +35,6 @@ public class Comment implements Serializable {
     @ManyToOne
     private User author;
 
-    @JoinColumn(name = "parentmessage_id")
     @ManyToOne
     private Message parentMessage;
 

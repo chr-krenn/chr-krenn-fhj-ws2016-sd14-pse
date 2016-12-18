@@ -13,10 +13,10 @@ import at.fhj.swd14.pse.repository.CommentRepository;
 
 @Stateless
 public class CommentServiceImpl implements CommentService {
-	
-	@EJB
+
+    @EJB
     private CommentRepository commentRepository;
-	
+
     @Override
     public long save(CommentDto comment) {
         Comment doComment = CommentConverter.convert(comment);
@@ -26,25 +26,24 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDto find(long id) {
-    	
         return CommentConverter.convert(commentRepository.find(id));
     }
 
     @Override
-	public List<CommentDto> findByAuthorId(long authorUserId) {
-		Map<String, Object> parameter = new HashMap<>();
-		parameter.put("authorUserId", authorUserId);
-		return executeNamedQuery("Comment.findByAuthorId", parameter);
-	}
+    public List<CommentDto> findByAuthorId(long authorUserId) {
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("authorUserId", authorUserId);
+        return executeNamedQuery("Comment.findByAuthorId", parameter);
+    }
 
-	@Override
-	public List<CommentDto> findByMessageId(long messageId) {
-		Map<String, Object> parameter = new HashMap<>();
-		parameter.put("commentId", messageId);
-		return executeNamedQuery("Comment.findByCommunityId", parameter);
-	}
-    
-    private List<CommentDto> executeNamedQuery(String name, Map<String, Object> parameter){
-		return new ArrayList<>(CommentConverter.convertToDtoList(commentRepository.executeNamedQuery(name, parameter)));
-	}
+    @Override
+    public List<CommentDto> findByMessageId(long messageId) {
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("commentId", messageId);
+        return executeNamedQuery("Comment.findByCommunityId", parameter);
+    }
+
+    private List<CommentDto> executeNamedQuery(String name, Map<String, Object> parameter) {
+        return new ArrayList<>(CommentConverter.convertToDtoList(commentRepository.executeNamedQuery(name, parameter)));
+    }
 }

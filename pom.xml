@@ -47,19 +47,6 @@
         <mysql-driver.version>6.0.5</mysql-driver.version>
         <eclipselink.version>2.6.4</eclipselink.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <sonar-maven-plugin.version>3.1.1</sonar-maven-plugin.version>
-        <!-- sonar properties -->
-        <sonar.projectKey>pseswd14</sonar.projectKey>
-        <sonar.projectName>PSE</sonar.projectName>
-        <sonar.projectVersion>1.1-SNAPSHOT</sonar.projectVersion>
-        <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
-        <sonar.modules>backend-impl,backend-interface,frontend-impl</sonar.modules>
-        <backend-impl.sonar.projectName>backend-impl</backend-impl.sonar.projectName>
-        <backend-impl.sonar.projectBaseDir>backend/backend-impl</backend-impl.sonar.projectBaseDir>
-        <backend-interface.sonar.projectName>backend-interface</backend-interface.sonar.projectName>
-        <backend-interface.sonar.projectBaseDir>backend/backend-interface</backend-interface.sonar.projectBaseDir>
-        <frontend-impl.sonar.projectName>frontend-impl</frontend-impl.sonar.projectName>
-        <frontend-impl.sonar.projectBaseDir>frontend/frontend-impl</frontend-impl.sonar.projectBaseDir>
     </properties>
 
     <dependencyManagement>
@@ -253,11 +240,6 @@
                             <include>*IntegrationTest.java</include>
                         </includes>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.sonarsource.scanner.maven</groupId>
-                    <artifactId>sonar-maven-plugin</artifactId>
-                    <version>${sonar-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

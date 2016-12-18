@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import at.fhj.swd14.pse.comment.Comment;
 import at.fhj.swd14.pse.community.Community;
+import at.fhj.swd14.pse.message.Message;
 
 @Entity
 @Table(name = "user")
@@ -37,6 +38,9 @@ public class User implements Serializable {
     
     @ManyToMany(mappedBy = "users")
     private List<Comment> comments;
+    
+    @ManyToMany(mappedBy = "users")
+    private List<Message> messages;
 
     public User(Long id) {
         this.id = id;

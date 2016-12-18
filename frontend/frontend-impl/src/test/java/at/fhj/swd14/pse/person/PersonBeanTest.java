@@ -50,7 +50,7 @@ public class PersonBeanTest {
     @Before
     public void setup()
     {
-    	CommonPersonBeanTestData data = CommonPersonBeanTest.setupTest(userService, personService, departmentService);
+    	CommonPersonBeanTestData data = PersonUtil.setupServices(userService, personService, departmentService);
     	person = data.getPerson();
     	context = data.getContext();
     	extContext = data.getExtContext();
@@ -87,7 +87,7 @@ public class PersonBeanTest {
     @Test
     public void testCreate()
     {
-    	PersonDto person = CommonPersonBeanTest.getDummyPerson();
+    	PersonDto person = PersonUtil.getDummyPerson();
     	unitUnderTest.setPerson(person);
     	unitUnderTest.createLoggedInPerson();
 		Mockito.verify(personService,Mockito.times(1)).saveLoggedInPerson(Mockito.any(PersonDto.class));
@@ -96,7 +96,7 @@ public class PersonBeanTest {
     @Test
     public void testSave()
     {
-    	PersonDto person = CommonPersonBeanTest.getDummyPerson();
+    	PersonDto person = PersonUtil.getDummyPerson();
     	unitUnderTest.setPerson(person);
     	unitUnderTest.savePerson();
     	Mockito.verify(personService,Mockito.times(1)).saveLoggedInPerson(Mockito.any(PersonDto.class));
@@ -105,7 +105,7 @@ public class PersonBeanTest {
     @Test
     public void testAddMail()
     {
-    	PersonDto person = CommonPersonBeanTest.getDummyPerson();
+    	PersonDto person = PersonUtil.getDummyPerson();
     	person.getAdditionalMails().clear();
     	unitUnderTest.setPerson(person);
     	unitUnderTest.setNewMail("test@test.de");
@@ -117,7 +117,7 @@ public class PersonBeanTest {
     @Test
     public void testAddKnowledge()
     {
-    	PersonDto person = CommonPersonBeanTest.getDummyPerson();
+    	PersonDto person = PersonUtil.getDummyPerson();
     	person.getKnowledges().clear();
     	unitUnderTest.setPerson(person);
     	unitUnderTest.setNewKnowledge("test");
@@ -129,7 +129,7 @@ public class PersonBeanTest {
     @Test
     public void testAddHobby()
     {
-    	PersonDto person = CommonPersonBeanTest.getDummyPerson();
+    	PersonDto person = PersonUtil.getDummyPerson();
     	person.getHobbies().clear();
     	unitUnderTest.setPerson(person);
     	unitUnderTest.setNewHobby("test");
@@ -141,7 +141,7 @@ public class PersonBeanTest {
     @Test
     public void testAddNumber()
     {
-    	PersonDto person = CommonPersonBeanTest.getDummyPerson();
+    	PersonDto person = PersonUtil.getDummyPerson();
     	person.getPhonenumbers().clear();
     	unitUnderTest.setPerson(person);
     	unitUnderTest.setNewNumber("0664664664");
@@ -153,7 +153,7 @@ public class PersonBeanTest {
     @Test
     public void testRemoveMail()
     {
-    	PersonDto person = CommonPersonBeanTest.getDummyPerson();
+    	PersonDto person = PersonUtil.getDummyPerson();
     	unitUnderTest.setPerson(person);
     	Map<String,String> paramMap = new HashMap<>();
     	paramMap.put("value","test2@test.de");
@@ -165,7 +165,7 @@ public class PersonBeanTest {
     @Test
     public void testRemoveKnowledge()
     {
-    	PersonDto person = CommonPersonBeanTest.getDummyPerson();
+    	PersonDto person = PersonUtil.getDummyPerson();
     	unitUnderTest.setPerson(person);
     	Map<String,String> paramMap = new HashMap<>();
     	paramMap.put("value","testknowledge");
@@ -177,7 +177,7 @@ public class PersonBeanTest {
     @Test
     public void testRemoveHobby()
     {
-    	PersonDto person = CommonPersonBeanTest.getDummyPerson();
+    	PersonDto person = PersonUtil.getDummyPerson();
     	unitUnderTest.setPerson(person);
     	Map<String,String> paramMap = new HashMap<>();
     	paramMap.put("value","testhobby");
@@ -189,7 +189,7 @@ public class PersonBeanTest {
     @Test
     public void testRemoveNumber()
     {
-    	PersonDto person = CommonPersonBeanTest.getDummyPerson();
+    	PersonDto person = PersonUtil.getDummyPerson();
     	unitUnderTest.setPerson(person);
     	Map<String,String> paramMap = new HashMap<>();
     	paramMap.put("value","0664664664");

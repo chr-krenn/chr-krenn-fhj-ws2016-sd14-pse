@@ -13,7 +13,7 @@ import org.primefaces.context.RequestContext;
 
 import at.fhj.swd14.pse.general.ContextMocker;
 import at.fhj.swd14.pse.general.RequestContextMocker;
-import at.fhj.swd14.pse.person.CommonPersonBeanTest;
+import at.fhj.swd14.pse.person.PersonUtil;
 import at.fhj.swd14.pse.person.PersonDto;
 import at.fhj.swd14.pse.person.PersonService;
 import at.fhj.swd14.pse.user.UserDto;
@@ -44,7 +44,7 @@ public class NewsBeanTest {
     }
 
     public NewsDto getDummyNews(){
-        PersonDto person = CommonPersonBeanTest.getDummyPerson();
+        PersonDto person = PersonUtil.getDummyPerson();
 
         NewsDto news = new NewsDto();
         news.setAuthor(person);

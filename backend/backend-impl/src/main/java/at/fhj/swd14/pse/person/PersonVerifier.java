@@ -117,7 +117,7 @@ public class PersonVerifier {
 			//check if the id is set, if so we just need to check if it exists in the database
 			if(info.getId()!=null)
 			{
-				AbstractPersonInformation real = (AbstractPersonInformation)repo.find(info.getId());
+				AbstractPersonInformation real = repo.find(info.getId());
 				if(real==null)
 					throw new VerificationException("The PersonInformation object with the id "+info.getId()+" does not exist");
 			}
@@ -126,7 +126,7 @@ public class PersonVerifier {
 				if(person.getId()!=null)//if we are adding a new person, there is no need to check this
 				{
 					//we need to check if that entry already exists
-					AbstractPersonInformation real = (AbstractPersonInformation)repo.findByValue(person.getId(), info.getValue());
+					AbstractPersonInformation real = repo.findByValue(person.getId(), info.getValue());
 					if(real!=null)
 					{
 						info.setId(real.getId()); //if it already exists just use the existing id
@@ -142,7 +142,7 @@ public class PersonVerifier {
 	 * @param person PersonDto to do the check for
 	 */
 	public void correlateNumbers(PersonDto person) {
-		this.<Phonenumber,PhonenumberDto>correlatePersonInformation
+		this.correlatePersonInformation
 		(person, person.getPhonenumbers(), phonenumberRepo);
 	}
 
@@ -152,7 +152,7 @@ public class PersonVerifier {
 	 * @param person PersonDto to do the check for
 	 */
 	public void correlateMails(PersonDto person) {
-		this.<Mailaddress,MailaddressDto>correlatePersonInformation
+		this.correlatePersonInformation
 		(person, person.getAdditionalMails(), mailaddressRepo);
 	}
 
@@ -162,7 +162,7 @@ public class PersonVerifier {
 	 * @param person PersonDto to do the check for
 	 */
 	public void correlateKnowledges(PersonDto person) {
-		this.<Knowledge,KnowledgeDto>correlatePersonInformation
+		this.correlatePersonInformation
 		(person, person.getKnowledges(), knowledgeRepo);
 	}
 
@@ -172,7 +172,7 @@ public class PersonVerifier {
 	 * @param person PersonDto to do the check for
 	 */
 	public void correlateHobbies(PersonDto person) {
-		this.<Hobby,HobbyDto>correlatePersonInformation
+		this.correlatePersonInformation
 		(person, person.getHobbies(), hobbyRepo);
 	}
 

@@ -61,7 +61,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 	 */
 	private void loadStati()
 	{
-		bean.setStati(new ArrayList<StatusDto>(personService.findAllStati()));
+		bean.setStati(new ArrayList<>(personService.findAllStati()));
 		LOGGER.trace("Status values loaded, count="+bean.getStati().size());
 	}
 	
@@ -70,7 +70,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 	 */
 	private void loadDepartments()
 	{
-		bean.setDepartments(new ArrayList<DepartmentDto>(departmentService.findAll()));
+		bean.setDepartments(new ArrayList<>(departmentService.findAll()));
 		DepartmentConverter.setDepartments(bean.getDepartments());
 		LOGGER.trace("Department values loaded, count="+bean.getDepartments().size());
 	}

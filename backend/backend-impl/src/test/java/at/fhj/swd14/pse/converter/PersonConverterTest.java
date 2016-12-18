@@ -79,14 +79,14 @@ public class PersonConverterTest {
 	@Test
 	public void testDtoListNull()
 	{
-		Collection<Person> values = PersonConverter.convertToDoList((Collection<PersonDto>)null);
+		Collection<Person> values = PersonConverter.convertToDoList(null);
 		Assert.assertNull(values);
 	}
 	
 	@Test
 	public void testDoListNull()
 	{
-		Collection<PersonDto> values = PersonConverter.convertToDtoList((Collection<Person>)null);
+		Collection<PersonDto> values = PersonConverter.convertToDtoList(null);
 		Assert.assertNull(values);
 	}
 	
@@ -94,7 +94,7 @@ public class PersonConverterTest {
 	public void testDtoList()
 	{
 		PersonDto dto = convert(PersonTestTools.getDummyPerson());
-		List<PersonDto> list = new LinkedList<PersonDto>();
+		List<PersonDto> list = new LinkedList<>();
 		list.add(dto);
 		Collection<Person> values = PersonConverter.convertToDoList(list);
 		Assert.assertTrue(values instanceof List);
@@ -107,7 +107,7 @@ public class PersonConverterTest {
 	public void testDoList()
 	{
 		Person person = PersonTestTools.getDummyPerson();
-		List<Person> list = new LinkedList<Person>();
+		List<Person> list = new LinkedList<>();
 		list.add(person);
 		Collection<PersonDto> values = PersonConverter.convertToDtoList(list);
 		Assert.assertTrue(values instanceof List);

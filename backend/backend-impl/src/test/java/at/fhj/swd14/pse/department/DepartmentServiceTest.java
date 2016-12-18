@@ -29,7 +29,7 @@ public class DepartmentServiceTest {
 	{
 		Department dep = new Department(1L);
 		dep.setName("test");
-		List<Department> deps = new LinkedList<Department>();
+		List<Department> deps = new LinkedList<>();
 		deps.add(dep);
 		Mockito.when(depRepo.findAll()).thenReturn(deps);
 		List<DepartmentDto> dtos = (List<DepartmentDto>)service.findAll();

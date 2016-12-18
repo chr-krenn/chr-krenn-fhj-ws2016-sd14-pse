@@ -49,14 +49,14 @@ public class HobbyConverterTest {
 	@Test
 	public void testDtoListNull()
 	{
-		Collection<Hobby> values = HobbyConverter.convertToDoList((Collection<HobbyDto>)null,new Person());
+		Collection<Hobby> values = HobbyConverter.convertToDoList(null,new Person());
 		Assert.assertNull(values);
 	}
 	
 	@Test
 	public void testDoListNull()
 	{
-		Collection<HobbyDto> values = HobbyConverter.convertToDtoList((Collection<Hobby>)null,new PersonDto());
+		Collection<HobbyDto> values = HobbyConverter.convertToDtoList(null,new PersonDto());
 		Assert.assertNull(values);
 	}
 	
@@ -65,7 +65,7 @@ public class HobbyConverterTest {
 	{
 		HobbyDto dto = new HobbyDto();
 		dto.setValue("hallo");
-		List<HobbyDto> list = new LinkedList<HobbyDto>();
+		List<HobbyDto> list = new LinkedList<>();
 		list.add(dto);
 		Collection<Hobby> values = HobbyConverter.convertToDoList(list,new Person());
 		Assert.assertTrue(values instanceof List);
@@ -79,7 +79,7 @@ public class HobbyConverterTest {
 	{
 		Hobby hobby = new Hobby();
 		hobby.setValue("hallo");
-		List<Hobby> list = new LinkedList<Hobby>();
+		List<Hobby> list = new LinkedList<>();
 		list.add(hobby);
 		Collection<HobbyDto> values = HobbyConverter.convertToDtoList(list, new PersonDto());
 		Assert.assertTrue(values instanceof List);

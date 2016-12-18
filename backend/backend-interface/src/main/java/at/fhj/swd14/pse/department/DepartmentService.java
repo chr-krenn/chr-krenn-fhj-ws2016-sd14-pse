@@ -15,5 +15,5 @@ public interface DepartmentService {
 	 * Get all departments in existence
 	 * @return Collection of all departments found
 	 */
-	public Collection<DepartmentDto> findAll();
+    Collection<DepartmentDto> findAll();
 }

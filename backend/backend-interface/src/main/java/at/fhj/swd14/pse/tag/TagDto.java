@@ -57,7 +57,7 @@ public class TagDto implements Serializable{
     public void setMessages(List<MessageDto> messages){this.messages = messages;}
     public void addMessage(MessageDto message){
         if(messages == null){
-            messages = new ArrayList<MessageDto>();
+            messages = new ArrayList<>();
         }
         this.messages.add(message);
     }

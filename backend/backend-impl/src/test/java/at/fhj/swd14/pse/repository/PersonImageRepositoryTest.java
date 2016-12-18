@@ -35,7 +35,7 @@ public class PersonImageRepositoryTest {
 		TypedQuery<PersonImage> query = Mockito.mock(TypedQuery.class);
 		Mockito.when(manager.createNamedQuery(Mockito.anyString(), Mockito.eq(PersonImage.class))).thenReturn(query);
 		Mockito.when(query.setParameter(Mockito.anyString(), Mockito.any())).thenReturn(query);
-		resultList = new LinkedList<PersonImage>();
+		resultList = new LinkedList<>();
 		Mockito.when(query.getResultList()).thenReturn(resultList);
 	}
 	

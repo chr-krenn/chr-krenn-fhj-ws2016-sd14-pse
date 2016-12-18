@@ -34,7 +34,7 @@ public class TagServiceImplTest {
 	@Before
 	public void setup() throws NamingException
 	{
-		tags = new ArrayList<Tag>();
+		tags = new ArrayList<>();
 		Tag tag = new Tag(1L);
 		tag.setName("testtag1");
 		

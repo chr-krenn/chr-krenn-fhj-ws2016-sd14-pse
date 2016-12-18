@@ -47,14 +47,14 @@ public class DepartmentConverterTest {
 	@Test
 	public void testDtoListNull()
 	{
-		Collection<Department> values = DepartmentConverter.convertToDoList((Collection<DepartmentDto>)null);
+		Collection<Department> values = DepartmentConverter.convertToDoList(null);
 		Assert.assertNull(values);
 	}
 	
 	@Test
 	public void testDoListNull()
 	{
-		Collection<DepartmentDto> values = DepartmentConverter.convertToDtoList((Collection<Department>)null);
+		Collection<DepartmentDto> values = DepartmentConverter.convertToDtoList(null);
 		Assert.assertNull(values);
 	}
 	
@@ -63,7 +63,7 @@ public class DepartmentConverterTest {
 	{
 		DepartmentDto dto = new DepartmentDto(1L);
 		dto.setName("hallo");
-		List<DepartmentDto> list = new LinkedList<DepartmentDto>();
+		List<DepartmentDto> list = new LinkedList<>();
 		list.add(dto);
 		Collection<Department> values = DepartmentConverter.convertToDoList(list);
 		Assert.assertTrue(values instanceof List);
@@ -77,7 +77,7 @@ public class DepartmentConverterTest {
 	{
 		Department dep = new Department();
 		dep.setName("hallo");
-		List<Department> list = new LinkedList<Department>();
+		List<Department> list = new LinkedList<>();
 		list.add(dep);
 		Collection<DepartmentDto> values = DepartmentConverter.convertToDtoList(list);
 		Assert.assertTrue(values instanceof List);

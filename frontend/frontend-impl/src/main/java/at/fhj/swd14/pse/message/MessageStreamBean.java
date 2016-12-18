@@ -214,7 +214,7 @@ public class MessageStreamBean implements Serializable {
 			return message.getChilds();
 		}
 
-		return new ArrayList<CommentDto>();
+		return new ArrayList<>();
 	}
 
 	/**
@@ -268,7 +268,7 @@ public class MessageStreamBean implements Serializable {
 		} else if (currentCommunity.getId() > 0) { // Community Messages
 			setMessages(getCommunityMessages(currentCommunity.getId()));
 		} else {
-			setMessages(new ArrayList<MessageDto>()); // Default
+			setMessages(new ArrayList<>()); // Default
 		}
 	}
 
@@ -280,10 +280,10 @@ public class MessageStreamBean implements Serializable {
 	private void initAvailableCommunities() {
 		LOGGER.debug("Initialising the Communities for the Selectbox");
 		if (getParameterCommunityId() != null) {
-			availableCommunities = new ArrayList<CommunityDto>();
+			availableCommunities = new ArrayList<>();
 			availableCommunities.add(communityService.find(getParameterCommunityId()));
 		} else {
-			availableCommunities = new ArrayList<CommunityDto>();
+			availableCommunities = new ArrayList<>();
 			CommunityDto c = new CommunityDto(-3L);
 			c.setName("Alle");
 			CommunityDto c2 = new CommunityDto(-2L);
@@ -341,7 +341,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return A map of Messages
 	 */
 	private Map<Long, MessageDto> mapMessages(List<MessageDto> messageList) {
-		Map<Long, MessageDto> mappedMessages = new HashMap<Long, MessageDto>();
+		Map<Long, MessageDto> mappedMessages = new HashMap<>();
 		for (MessageDto message : messageList) {
 			mappedMessages.put(message.getId(), message);
 		}

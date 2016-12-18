@@ -26,18 +26,18 @@ public class PersonTestTools {
         department.setName("testdepartment");
         
         Person myperson = new Person(1L,myuser);
-        myperson.setAdditionalMails(new LinkedList<Mailaddress>());
+        myperson.setAdditionalMails(new LinkedList<>());
         myperson.getAdditionalMails().add(new Mailaddress("test2@test.de"));
         myperson.setAddress("testaddress");
         myperson.setDepartment(department);
         myperson.setFirstname("firstname");
-        myperson.setHobbies(new LinkedList<Hobby>());
+        myperson.setHobbies(new LinkedList<>());
         myperson.getHobbies().add(new Hobby("testhobby"));
         myperson.setImageUrl("http://testimg.org");
-        myperson.setKnowledges(new LinkedList<Knowledge>());
+        myperson.setKnowledges(new LinkedList<>());
         myperson.getKnowledges().add(new Knowledge("testknowledge"));
         myperson.setLastname("lastname");
-        myperson.setNumbers(new LinkedList<Phonenumber>());
+        myperson.setNumbers(new LinkedList<>());
         myperson.getNumbers().add(new Phonenumber("0664664664"));
         myperson.setPlace("testplace");
         myperson.setStatus(new Status("online"));

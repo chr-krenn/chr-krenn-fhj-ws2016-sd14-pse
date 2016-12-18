@@ -29,18 +29,18 @@ public class CommonPersonBeanTest {
         
         PersonDto myperson = new PersonDto(1L);
         myperson.setUser(myuser);
-        myperson.setAdditionalMails(new LinkedList<MailaddressDto>());
+        myperson.setAdditionalMails(new LinkedList<>());
         myperson.getAdditionalMails().add(new MailaddressDto(1L,"test2@test.de"));
         myperson.setAddress("testaddress");
         myperson.setDepartment(department);
         myperson.setFirstname("firstname");
-        myperson.setHobbies(new LinkedList<HobbyDto>());
+        myperson.setHobbies(new LinkedList<>());
         myperson.getHobbies().add(new HobbyDto(1L,"testhobby"));
         myperson.setImageUrl("http://testimg.org");
-        myperson.setKnowledges(new LinkedList<KnowledgeDto>());
+        myperson.setKnowledges(new LinkedList<>());
         myperson.getKnowledges().add(new KnowledgeDto(1L,"testknowledge"));
         myperson.setLastname("lastname");
-        myperson.setPhonenumbers(new LinkedList<PhonenumberDto>());
+        myperson.setPhonenumbers(new LinkedList<>());
         myperson.getPhonenumbers().add(new PhonenumberDto(1L,"0664664664"));
         myperson.setPlace("testplace");
         myperson.setStatus(new StatusDto("Online"));
@@ -59,9 +59,9 @@ public class CommonPersonBeanTest {
     	DatabasePrincipal principal = Mockito.mock(DatabasePrincipal.class);
 		Mockito.when(data.getExtContext().getUserPrincipal()).thenReturn(principal);
 		Mockito.when(principal.getUserId()).thenReturn(data.getPerson().getUser().getId());
-    	data.setStati(new LinkedList<StatusDto>());
+    	data.setStati(new LinkedList<>());
     	data.getStati().add(new StatusDto("online"));
-    	data.setDeps(new LinkedList<DepartmentDto>());
+    	data.setDeps(new LinkedList<>());
     	DepartmentDto dep = new DepartmentDto(1L);
     	dep.setName("test");
     	data.getDeps().add(dep);

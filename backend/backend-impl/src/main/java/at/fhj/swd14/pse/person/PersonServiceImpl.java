@@ -95,12 +95,12 @@ public class PersonServiceImpl implements PersonService {
 		Collection<PersonDto> resultList=PersonConverter.convertToDtoList(repository.findAll());
 
 		Person loggedInPerson=repository.findByUserId(loggedInUserID);
-		Collection<Contact> contacts=new ArrayList<Contact>();
+		Collection<Contact> contacts= new ArrayList<>();
 		if(loggedInPerson!=null){
 			contacts=contactRepository.findByPersonId(loggedInPerson.getId());
 		}
 		//remove logged in person from friend view
-		for(PersonDto p : new ArrayList<PersonDto>(resultList)){
+		for(PersonDto p : new ArrayList<>(resultList)){
 			if(PersonConverter.convert(p).getId() == loggedInPerson.getId()){
 				resultList.remove(p);
 			}

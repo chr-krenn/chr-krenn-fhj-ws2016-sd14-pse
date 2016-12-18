@@ -47,14 +47,14 @@ public class StatusConverterTest {
 	@Test
 	public void testDtoListNull()
 	{
-		Collection<Status> values = StatusConverter.convertToDoList((Collection<StatusDto>)null);
+		Collection<Status> values = StatusConverter.convertToDoList(null);
 		Assert.assertNull(values);
 	}
 	
 	@Test
 	public void testDoListNull()
 	{
-		Collection<StatusDto> values = StatusConverter.convertToDtoList((Collection<Status>)null);
+		Collection<StatusDto> values = StatusConverter.convertToDtoList(null);
 		Assert.assertNull(values);
 	}
 	
@@ -63,7 +63,7 @@ public class StatusConverterTest {
 	{
 		StatusDto dto = new StatusDto();
 		dto.setName("hallo");
-		List<StatusDto> list = new LinkedList<StatusDto>();
+		List<StatusDto> list = new LinkedList<>();
 		list.add(dto);
 		Collection<Status> values = StatusConverter.convertToDoList(list);
 		Assert.assertTrue(values instanceof List);
@@ -77,7 +77,7 @@ public class StatusConverterTest {
 	{
 		Status status = new Status();
 		status.setName("hallo");
-		List<Status> list = new LinkedList<Status>();
+		List<Status> list = new LinkedList<>();
 		list.add(status);
 		Collection<StatusDto> values = StatusConverter.convertToDtoList(list);
 		Assert.assertTrue(values instanceof List);

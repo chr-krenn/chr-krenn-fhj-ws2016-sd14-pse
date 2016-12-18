@@ -8,9 +8,9 @@ import at.fhj.swd14.pse.person.PersonImageDto;
 
 public class PersonImageConverter {
 
-	private PersonImageConverter(){};
+	private PersonImageConverter(){}
 
-	/**
+    /**
 	 * Convertes the given PersonImage object to a PersonImageDto Object
 	 * @param img PersonImage object to convert
 	 * @return PersonImageDto object

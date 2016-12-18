@@ -62,7 +62,7 @@ public class PhonenumberConverter {
         if (phonenumbers == null) {
             return null;
         }
-        LinkedList<PhonenumberDto> newPhonenumbers = new LinkedList<PhonenumberDto>();
+        LinkedList<PhonenumberDto> newPhonenumbers = new LinkedList<>();
         for(Phonenumber val : phonenumbers)
         	newPhonenumbers.add(convert(val,person));
         return newPhonenumbers;
@@ -79,7 +79,7 @@ public class PhonenumberConverter {
         if (phonenumbers == null) {
             return null;
         }
-        LinkedList<Phonenumber> newPhonenumbers = new LinkedList<Phonenumber>();
+        LinkedList<Phonenumber> newPhonenumbers = new LinkedList<>();
         for(PhonenumberDto dto : phonenumbers)
         	newPhonenumbers.add(convert(dto,person));
         return newPhonenumbers;

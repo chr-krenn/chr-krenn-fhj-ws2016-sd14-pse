@@ -49,14 +49,14 @@ public class MailaddressConverterTest {
 	@Test
 	public void testDtoListNull()
 	{
-		Collection<Mailaddress> values = MailaddressConverter.convertToDoList((Collection<MailaddressDto>)null,new Person());
+		Collection<Mailaddress> values = MailaddressConverter.convertToDoList(null,new Person());
 		Assert.assertNull(values);
 	}
 	
 	@Test
 	public void testDoListNull()
 	{
-		Collection<MailaddressDto> values = MailaddressConverter.convertToDtoList((Collection<Mailaddress>)null,new PersonDto());
+		Collection<MailaddressDto> values = MailaddressConverter.convertToDtoList(null,new PersonDto());
 		Assert.assertNull(values);
 	}
 	
@@ -65,7 +65,7 @@ public class MailaddressConverterTest {
 	{
 		MailaddressDto dto = new MailaddressDto();
 		dto.setValue("hallo");
-		List<MailaddressDto> list = new LinkedList<MailaddressDto>();
+		List<MailaddressDto> list = new LinkedList<>();
 		list.add(dto);
 		Collection<Mailaddress> values = MailaddressConverter.convertToDoList(list,new Person());
 		Assert.assertTrue(values instanceof List);
@@ -79,7 +79,7 @@ public class MailaddressConverterTest {
 	{
 		Mailaddress addr = new Mailaddress();
 		addr.setValue("hallo");
-		List<Mailaddress> list = new LinkedList<Mailaddress>();
+		List<Mailaddress> list = new LinkedList<>();
 		list.add(addr);
 		Collection<MailaddressDto> values = MailaddressConverter.convertToDtoList(list, new PersonDto());
 		Assert.assertTrue(values instanceof List);

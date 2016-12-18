@@ -67,14 +67,14 @@ public class PersonImageConverterTest {
 	@Test
 	public void testDtoListNull()
 	{
-		Collection<PersonImage> values = PersonImageConverter.convertToDoList((Collection<PersonImageDto>)null);
+		Collection<PersonImage> values = PersonImageConverter.convertToDoList(null);
 		Assert.assertNull(values);
 	}
 	
 	@Test
 	public void testDoListNull()
 	{
-		Collection<PersonImageDto> values = PersonImageConverter.convertToDtoList((Collection<PersonImage>)null);
+		Collection<PersonImageDto> values = PersonImageConverter.convertToDtoList(null);
 		Assert.assertNull(values);
 	}
 	
@@ -89,7 +89,7 @@ public class PersonImageConverterTest {
 		PersonDto person = new PersonDto(1L);
 		person.setUser(new UserDto());
 		dto.setPerson(person);
-		List<PersonImageDto> list = new LinkedList<PersonImageDto>();
+		List<PersonImageDto> list = new LinkedList<>();
 		list.add(dto);
 		Collection<PersonImage> values = PersonImageConverter.convertToDoList(list);
 		Assert.assertTrue(values instanceof List);
@@ -110,7 +110,7 @@ public class PersonImageConverterTest {
 		img.setData(data);
 		img.setId(1L);
 		img.setPerson(new Person(1L,new User()));
-		List<PersonImage> list = new LinkedList<PersonImage>();
+		List<PersonImage> list = new LinkedList<>();
 		list.add(img);
 		Collection<PersonImageDto> values = PersonImageConverter.convertToDtoList(list);
 		Assert.assertTrue(values instanceof List);

@@ -62,7 +62,7 @@ public class PersonBeanTest {
     @Test
     public void testPersonByUserId()
     {
-    	Map<String,String> paramMap = new HashMap<String,String>();
+    	Map<String,String> paramMap = new HashMap<>();
     	paramMap.put("userId","1");
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
     	String path = unitUnderTest.showPersonByUserId();
@@ -155,7 +155,7 @@ public class PersonBeanTest {
     {
     	PersonDto person = CommonPersonBeanTest.getDummyPerson();
     	unitUnderTest.setPerson(person);
-    	Map<String,String> paramMap = new HashMap<String,String>();
+    	Map<String,String> paramMap = new HashMap<>();
     	paramMap.put("value","test2@test.de");
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
     	unitUnderTest.removeMail();
@@ -167,7 +167,7 @@ public class PersonBeanTest {
     {
     	PersonDto person = CommonPersonBeanTest.getDummyPerson();
     	unitUnderTest.setPerson(person);
-    	Map<String,String> paramMap = new HashMap<String,String>();
+    	Map<String,String> paramMap = new HashMap<>();
     	paramMap.put("value","testknowledge");
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
     	unitUnderTest.removeKnowledge();
@@ -179,7 +179,7 @@ public class PersonBeanTest {
     {
     	PersonDto person = CommonPersonBeanTest.getDummyPerson();
     	unitUnderTest.setPerson(person);
-    	Map<String,String> paramMap = new HashMap<String,String>();
+    	Map<String,String> paramMap = new HashMap<>();
     	paramMap.put("value","testhobby");
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
     	unitUnderTest.removeHobby();
@@ -191,7 +191,7 @@ public class PersonBeanTest {
     {
     	PersonDto person = CommonPersonBeanTest.getDummyPerson();
     	unitUnderTest.setPerson(person);
-    	Map<String,String> paramMap = new HashMap<String,String>();
+    	Map<String,String> paramMap = new HashMap<>();
     	paramMap.put("value","0664664664");
     	when(extContext.getRequestParameterMap()).thenReturn(paramMap);
     	unitUnderTest.removeNumber();

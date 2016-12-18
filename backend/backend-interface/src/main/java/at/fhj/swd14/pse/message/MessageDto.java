@@ -113,7 +113,7 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
     public void setTags(List<TagDto> tags) { this.tags = tags; }
     public void addTag(TagDto tag){
         if(tags == null)
-            tags = new ArrayList<TagDto>();
+            tags = new ArrayList<>();
         tags.add(tag);
     }
 	

@@ -72,11 +72,11 @@ public class PersonServiceImplTest {
         person2 = PersonTestTools.getAnotherDummyPerson();
         user2 = person.getUser();
        
-        persons = new ArrayList<Person>();
+        persons = new ArrayList<>();
         persons.add(person);
         persons.add(person2);
         
-        contacts = new ArrayList<Contact>();
+        contacts = new ArrayList<>();
         contacts = contactRepo.findByPersonId(1L);
         
         
@@ -131,7 +131,7 @@ public class PersonServiceImplTest {
 	@Test
 	public void testFindAllStati()
 	{
-		List<Status> stati = new LinkedList<Status>();
+		List<Status> stati = new LinkedList<>();
 		stati.add(new Status("online"));
 		Mockito.when(statusRepo.findAll()).thenReturn(stati);
 		Collection<StatusDto> result = service.findAllStati();

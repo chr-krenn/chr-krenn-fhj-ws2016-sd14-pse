@@ -416,7 +416,7 @@ public class PersonBean implements Serializable{
 	
 	public Collection<PersonDto> showAllPersons(){
 		Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
-		List<PersonDto> allPersons = new ArrayList<PersonDto>(personService.findAllUser(loggedInUserId));
+		List<PersonDto> allPersons = new ArrayList<>(personService.findAllUser(loggedInUserId));
 		Collections.sort(allPersons,new PersonComparator());
 		if(allPersons.size()==0){
 			LOGGER.debug("Found no user in db");

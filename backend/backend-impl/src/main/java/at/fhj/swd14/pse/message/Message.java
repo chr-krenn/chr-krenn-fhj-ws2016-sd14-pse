@@ -132,7 +132,7 @@ public class Message implements Serializable {
     public void setTags(List<Tag> tags) { this.tags = tags; }
     public void addTag(Tag tag){
         if(tags == null)
-            tags = new ArrayList<Tag>();
+            tags = new ArrayList<>();
         tags.add(tag);
     }
 	

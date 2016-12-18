@@ -59,7 +59,7 @@ public class PersonPageHandlerTest {
 	@Test
 	public void testUserNull()
 	{
-		Map<String,String> params = new HashMap<String,String>();
+		Map<String,String> params = new HashMap<>();
 		params.put("userId", person.getUser().getId().toString());
 		Mockito.when(extContext.getRequestParameterMap()).thenReturn(params);
 		Mockito.when(userService.find(person.getUser().getId())).thenReturn(null);
@@ -70,7 +70,7 @@ public class PersonPageHandlerTest {
 	@Test
 	public void testPersonNull()
 	{
-		Map<String,String> params = new HashMap<String,String>();
+		Map<String,String> params = new HashMap<>();
 		params.put("userId", person.getUser().getId().toString());
 		Mockito.when(extContext.getRequestParameterMap()).thenReturn(params);
 		Mockito.when(personService.findByUser(person.getUser())).thenReturn(null);
@@ -81,7 +81,7 @@ public class PersonPageHandlerTest {
 	@Test
 	public void testFound()
 	{
-		Map<String,String> params = new HashMap<String,String>();
+		Map<String,String> params = new HashMap<>();
 		params.put("userId", person.getUser().getId().toString());
 		Mockito.when(extContext.getRequestParameterMap()).thenReturn(params);
 		handler.showPersonByUserId();

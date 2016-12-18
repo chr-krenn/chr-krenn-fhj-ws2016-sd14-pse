@@ -64,7 +64,7 @@ public class MessageServiceStub implements MessageService {
 	}
 	
 	private List<MessageDto> getTestMessages(String prefix, long id){
-		List<MessageDto> allMessages = new ArrayList<MessageDto>();
+		List<MessageDto> allMessages = new ArrayList<>();
 		
 		for (int i = 1; i < 100; i++) {
 			UserDto author = new UserDto();

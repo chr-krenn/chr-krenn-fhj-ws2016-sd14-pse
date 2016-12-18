@@ -35,7 +35,7 @@ public class AbstractPersonInformationRepositoryTest {
 		TypedQuery<Hobby> query = Mockito.mock(TypedQuery.class);
 		Mockito.when(manager.createNamedQuery(Mockito.anyString(), Mockito.eq(Hobby.class))).thenReturn(query);
 		Mockito.when(query.setParameter(Mockito.anyString(), Mockito.any())).thenReturn(query);
-		resultList = new LinkedList<Hobby>();
+		resultList = new LinkedList<>();
 		Mockito.when(query.getResultList()).thenReturn(resultList);
 	}
 	

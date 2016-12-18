@@ -284,7 +284,7 @@ public class LoggedInPersonHandlerTest {
 	public void testRemoveMail()
 	{
 		person.getAdditionalMails().add(new MailaddressDto(null, "hallo@hallo.de"));
-		Map<String,String> params = new HashMap<String,String>();
+		Map<String,String> params = new HashMap<>();
 		params.put("value","hallo@hallo.de");
 		Mockito.when(extContext.getRequestParameterMap()).thenReturn(params);
 		Mockito.when(bean.getPerson()).thenReturn(person);
@@ -296,7 +296,7 @@ public class LoggedInPersonHandlerTest {
 	public void testRemoveKnowledge()
 	{
 		person.getKnowledges().add(new KnowledgeDto(null, "hallo"));
-		Map<String,String> params = new HashMap<String,String>();
+		Map<String,String> params = new HashMap<>();
 		params.put("value","hallo");
 		Mockito.when(extContext.getRequestParameterMap()).thenReturn(params);
 		Mockito.when(bean.getPerson()).thenReturn(person);
@@ -308,7 +308,7 @@ public class LoggedInPersonHandlerTest {
 	public void testRemoveHobby()
 	{
 		person.getHobbies().add(new HobbyDto(null, "hallo"));
-		Map<String,String> params = new HashMap<String,String>();
+		Map<String,String> params = new HashMap<>();
 		params.put("value","hallo");
 		Mockito.when(extContext.getRequestParameterMap()).thenReturn(params);
 		Mockito.when(bean.getPerson()).thenReturn(person);
@@ -320,7 +320,7 @@ public class LoggedInPersonHandlerTest {
 	public void testRemoveNumber()
 	{
 		person.getPhonenumbers().add(new PhonenumberDto(null, "hallo"));
-		Map<String,String> params = new HashMap<String,String>();
+		Map<String,String> params = new HashMap<>();
 		params.put("value","hallo");
 		Mockito.when(extContext.getRequestParameterMap()).thenReturn(params);
 		Mockito.when(bean.getPerson()).thenReturn(person);

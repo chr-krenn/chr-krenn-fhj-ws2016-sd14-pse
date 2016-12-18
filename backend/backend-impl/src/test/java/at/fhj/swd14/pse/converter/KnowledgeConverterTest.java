@@ -49,14 +49,14 @@ public class KnowledgeConverterTest {
 	@Test
 	public void testDtoListNull()
 	{
-		Collection<Knowledge> values = KnowledgeConverter.convertToDoList((Collection<KnowledgeDto>)null,new Person());
+		Collection<Knowledge> values = KnowledgeConverter.convertToDoList(null,new Person());
 		Assert.assertNull(values);
 	}
 	
 	@Test
 	public void testDoListNull()
 	{
-		Collection<KnowledgeDto> values = KnowledgeConverter.convertToDtoList((Collection<Knowledge>)null,new PersonDto());
+		Collection<KnowledgeDto> values = KnowledgeConverter.convertToDtoList(null,new PersonDto());
 		Assert.assertNull(values);
 	}
 	
@@ -65,7 +65,7 @@ public class KnowledgeConverterTest {
 	{
 		KnowledgeDto dto = new KnowledgeDto();
 		dto.setValue("hallo");
-		List<KnowledgeDto> list = new LinkedList<KnowledgeDto>();
+		List<KnowledgeDto> list = new LinkedList<>();
 		list.add(dto);
 		Collection<Knowledge> values = KnowledgeConverter.convertToDoList(list,new Person());
 		Assert.assertTrue(values instanceof List);
@@ -79,7 +79,7 @@ public class KnowledgeConverterTest {
 	{
 		Knowledge know = new Knowledge();
 		know.setValue("hallo");
-		List<Knowledge> list = new LinkedList<Knowledge>();
+		List<Knowledge> list = new LinkedList<>();
 		list.add(know);
 		Collection<KnowledgeDto> values = KnowledgeConverter.convertToDtoList(list, new PersonDto());
 		Assert.assertTrue(values instanceof List);

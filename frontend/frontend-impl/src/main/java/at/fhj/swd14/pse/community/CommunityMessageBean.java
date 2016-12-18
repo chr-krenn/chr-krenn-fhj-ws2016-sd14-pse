@@ -78,13 +78,13 @@ public class CommunityMessageBean implements Serializable{
 		LOGGER.error("Initialising the CommunityBean");
 		
 		// Get logged in user
-		long currentUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();;
-		
+		long currentUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
+
 		UserDto testUser = userService.find(currentUserId);
 		
-		this.createdCommunities = new ArrayList<CommunityDto>();
-		this.joinedCommunities = new ArrayList<CommunityDto>();
-		this.publicCommunities = new ArrayList<CommunityDto>();
+		this.createdCommunities = new ArrayList<>();
+		this.joinedCommunities = new ArrayList<>();
+		this.publicCommunities = new ArrayList<>();
 		
 		this.createdCommunities = communityService.findByAuthorId(currentUserId);
 		this.joinedCommunities = communityService.findUserRelated(currentUserId);

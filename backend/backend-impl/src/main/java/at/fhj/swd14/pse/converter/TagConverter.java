@@ -8,7 +8,7 @@ import at.fhj.swd14.pse.tag.TagDto;
 
 public class TagConverter {
 
-    private TagConverter(){};
+    private TagConverter(){}
 
     /**
      * Converts a Tag to a TagDto

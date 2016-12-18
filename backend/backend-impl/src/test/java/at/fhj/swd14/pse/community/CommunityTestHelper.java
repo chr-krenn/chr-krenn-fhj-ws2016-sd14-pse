@@ -48,10 +48,10 @@ public class CommunityTestHelper {
 		community.setName("Test Community");
 //		community.setCreateTime(today);
 		community.setPublicState(true);
-		community.setAllowedUsers(users);;
-		
-	
-		return community;
+		community.setAllowedUsers(users);
+
+
+        return community;
 		
 		
 	}

@@ -49,14 +49,14 @@ public class PhonenumberConverterTest {
 	@Test
 	public void testDtoListNull()
 	{
-		Collection<Phonenumber> values = PhonenumberConverter.convertToDoList((Collection<PhonenumberDto>)null,new Person());
+		Collection<Phonenumber> values = PhonenumberConverter.convertToDoList(null,new Person());
 		Assert.assertNull(values);
 	}
 	
 	@Test
 	public void testDoListNull()
 	{
-		Collection<PhonenumberDto> values = PhonenumberConverter.convertToDtoList((Collection<Phonenumber>)null,new PersonDto());
+		Collection<PhonenumberDto> values = PhonenumberConverter.convertToDtoList(null,new PersonDto());
 		Assert.assertNull(values);
 	}
 	
@@ -65,7 +65,7 @@ public class PhonenumberConverterTest {
 	{
 		PhonenumberDto dto = new PhonenumberDto();
 		dto.setValue("hallo");
-		List<PhonenumberDto> list = new LinkedList<PhonenumberDto>();
+		List<PhonenumberDto> list = new LinkedList<>();
 		list.add(dto);
 		Collection<Phonenumber> values = PhonenumberConverter.convertToDoList(list,new Person());
 		Assert.assertTrue(values instanceof List);
@@ -79,7 +79,7 @@ public class PhonenumberConverterTest {
 	{
 		Phonenumber number = new Phonenumber();
 		number.setValue("hallo");
-		List<Phonenumber> list = new LinkedList<Phonenumber>();
+		List<Phonenumber> list = new LinkedList<>();
 		list.add(number);
 		Collection<PhonenumberDto> values = PhonenumberConverter.convertToDtoList(list, new PersonDto());
 		Assert.assertTrue(values instanceof List);

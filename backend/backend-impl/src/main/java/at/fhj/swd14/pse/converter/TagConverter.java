@@ -2,10 +2,8 @@ package at.fhj.swd14.pse.converter;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
-import at.fhj.swd14.pse.message.MessageDto;
 import at.fhj.swd14.pse.tag.Tag;
 import at.fhj.swd14.pse.tag.TagDto;
 

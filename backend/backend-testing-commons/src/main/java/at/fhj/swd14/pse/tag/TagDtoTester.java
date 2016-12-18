@@ -6,6 +6,10 @@ import java.util.List;
 
 public class TagDtoTester {
 
+	private TagDtoTester(){
+        //hide the constructor
+    }
+
 	public static void assertEquals(TagDto expected, TagDto actual) {
 		Assert.assertEquals(expected.getId(), actual.getId());
 		Assert.assertEquals(expected.getName(), actual.getName());

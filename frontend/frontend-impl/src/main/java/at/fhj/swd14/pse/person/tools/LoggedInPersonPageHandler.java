@@ -14,7 +14,6 @@ import org.apache.logging.log4j.Logger;
 import org.primefaces.event.FileUploadEvent;
 
 import at.fhj.swd14.pse.department.DepartmentConverter;
-import at.fhj.swd14.pse.department.DepartmentDto;
 import at.fhj.swd14.pse.department.DepartmentService;
 import at.fhj.swd14.pse.person.HobbyDto;
 import at.fhj.swd14.pse.person.KnowledgeDto;
@@ -35,6 +34,8 @@ import at.fhj.swd14.pse.user.UserService;
 public class LoggedInPersonPageHandler implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	private static final String ERR_INCORRECT_INPUT="Incorrect Input";
+	private static final String MSG_ALREADY_EXISTS=" already exists";
 
 	private static final Logger LOGGER = LogManager.getLogger(LoggedInPersonPageHandler.class);
 	
@@ -177,7 +178,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 		{
 			if(existing.getValue().equals(bean.getNewMail()))
 			{
-				bean.growl("Incorrect Input","Mail "+bean.getNewMail()+" already exists");
+				bean.growl(ERR_INCORRECT_INPUT,"Mail "+bean.getNewMail()+MSG_ALREADY_EXISTS);
 				bean.setNewMail(null);
 				return;
 			}
@@ -209,7 +210,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 		{
 			if(existing.getValue().equals(bean.getNewKnowledge()))
 			{
-				bean.growl("Incorrect Input","Knowledge "+bean.getNewKnowledge()+" already exists");
+				bean.growl(ERR_INCORRECT_INPUT,"Knowledge "+bean.getNewKnowledge()+MSG_ALREADY_EXISTS);
 				bean.setNewKnowledge(null);
 				return;
 			}
@@ -238,7 +239,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 		{
 			if(existing.getValue().equals(bean.getNewHobby()))
 			{
-				bean.growl("Incorrect Input","Hobby "+bean.getNewHobby()+" already exists");
+				bean.growl(ERR_INCORRECT_INPUT,"Hobby "+bean.getNewHobby()+MSG_ALREADY_EXISTS);
 				bean.setNewHobby(null);
 				return;
 			}
@@ -267,7 +268,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 		{
 			if(existing.getValue().equals(bean.getNewNumber()))
 			{
-				bean.growl("Incorrect Input","Number "+bean.getNewNumber()+" already exists");
+				bean.growl(ERR_INCORRECT_INPUT,"Number "+bean.getNewNumber()+MSG_ALREADY_EXISTS);
 				bean.setNewNumber(null);
 				return;
 			}

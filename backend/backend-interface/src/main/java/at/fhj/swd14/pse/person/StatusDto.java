@@ -12,6 +12,15 @@ public class StatusDto implements Serializable {
     
     private String name;
 
+    public StatusDto(String name) {
+		this.name = name;
+	}
+    
+    public StatusDto()
+    {
+    	//just here for instantiation
+    }
+    
 	public String getName() {
 		return name;
 	}
@@ -19,13 +28,4 @@ public class StatusDto implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public StatusDto(String name) {
-		this.name = name;
-	}
-    
-    public StatusDto()
-    {
-    	
-    }
 }

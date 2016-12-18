@@ -30,7 +30,7 @@ public abstract class AbstractPersonInformationRepository<T extends AbstractPers
 				.setParameter("personid", personid)
 				.setParameter("value", value)
 				.getResultList();
-		if(infos.size()==0)
+		if(infos.isEmpty())
 			return null;
 		else
 			return infos.get(0);

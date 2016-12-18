@@ -12,14 +12,14 @@ public class DepartmentDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Long id;
+	
+	private String name;
+
 	public DepartmentDto(Long id)
 	{
 		setId(id);
 	}
-	
-	private Long id;
-	
-	private String name;
 	
 	public Long getId() {
 		return id;

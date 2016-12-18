@@ -11,6 +11,7 @@ public class PhonenumberDto extends AbstractPersonInformationDto {
 	private static final long serialVersionUID = 1L;
 
 	public PhonenumberDto() {
+		//just here for instantiation
 	}
 
 	public PhonenumberDto(Long id) {

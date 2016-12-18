@@ -14,6 +14,14 @@ public class PersonImageDto implements Serializable{
     private byte[] data;
     private String contentType;
     private Long id;
+    
+    public PersonImageDto() {
+		//just here to instantiate
+	}
+	public PersonImageDto(Long id) {
+		this.id = id;
+	}
+	
 	public byte[] getData() {
 		return data;
 	}
@@ -38,11 +46,7 @@ public class PersonImageDto implements Serializable{
 	public void setPerson(PersonDto person) {
 		this.person = person;
 	}
-	public PersonImageDto() {
-	}
-	public PersonImageDto(Long id) {
-		this.id = id;
-	}
+	
     
     
     

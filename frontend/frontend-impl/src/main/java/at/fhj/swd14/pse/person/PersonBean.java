@@ -39,6 +39,8 @@ public class PersonBean implements Serializable{
 
 	private static final Logger LOGGER = LogManager.getLogger(PersonBean.class);
 	
+	private static final String ERR_OCCURED = "Error occured";
+	
 	@EJB(name = "ejb/PersonService")
     private PersonService personService;
 	
@@ -201,7 +203,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 			return null;
 		}
 	}
@@ -218,7 +220,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 			return null;
 		}
 	}
@@ -234,7 +236,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 			return null;
 		}
 	}
@@ -249,7 +251,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
@@ -263,7 +265,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
@@ -278,7 +280,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 			return null;
 		}
 	}
@@ -293,7 +295,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
@@ -307,7 +309,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
@@ -321,7 +323,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
@@ -335,7 +337,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
@@ -349,7 +351,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
@@ -363,7 +365,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
@@ -377,7 +379,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
@@ -391,7 +393,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
@@ -405,7 +407,7 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
     }
 

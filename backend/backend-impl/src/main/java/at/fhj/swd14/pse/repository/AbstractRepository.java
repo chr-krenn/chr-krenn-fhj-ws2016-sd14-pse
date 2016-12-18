@@ -34,7 +34,7 @@ public abstract class AbstractRepository<T> {
 
     public List<T> findAll() {
         TypedQuery<T> query = entityManager.createQuery(
-                "SELECT entity FROM " + entityClass.getTypeName() + " entity" + " ORDER BY entity.id", entityClass);
+                "SELECT entity FROM " + entityClass.getTypeName() + " entity", entityClass);
 
         return query.getResultList();
     }

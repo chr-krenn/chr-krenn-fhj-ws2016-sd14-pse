@@ -21,6 +21,7 @@ import at.fhj.swd14.pse.person.Person;
 @Entity
 @Table(name="department")
 public class Department implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -31,6 +32,15 @@ public class Department implements Serializable {
 	@OneToMany(mappedBy="department")
 	private List<Person> members;
 	
+	public Department(Long id) {
+		this.id = id;
+	}
+	
+	public Department()
+	{
+		//do nothing, its just here so that you can instanciate it without a parameter
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -47,12 +57,4 @@ public class Department implements Serializable {
 		this.id = id;
 	}
 
-	public Department(Long id) {
-		this.id = id;
-	}
-	
-	public Department()
-	{
-		
-	}
 }

@@ -29,7 +29,7 @@ public class PersonImageRepository extends AbstractRepository<PersonImage> {
 	{
 		List<PersonImage> results =  entityManager.createNamedQuery("PersonImage.findByPerson",PersonImage.class)
 				.setParameter("personid", personid).getResultList();
-		if(results.size()==0)
+		if(results.isEmpty())
 			return null;
 		else
 			return results.get(0);

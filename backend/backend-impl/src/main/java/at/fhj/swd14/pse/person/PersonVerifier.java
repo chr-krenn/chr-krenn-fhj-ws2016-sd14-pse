@@ -176,9 +176,5 @@ public class PersonVerifier {
 		(person, person.getHobbies(), hobbyRepo);
 	}
 
-	public PersonVerifier()
-	{
-		
-	}
 	
 }

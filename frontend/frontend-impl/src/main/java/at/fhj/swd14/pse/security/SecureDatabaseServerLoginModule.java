@@ -37,8 +37,8 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
 	 */
 	protected String getUsersPassword() throws LoginException {
 		String username = getUsername();
-		String password = null;
-		String salt = null;
+		String password;
+		String salt;
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -64,7 +64,7 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
 			ps = conn.prepareStatement(principalsQuery);
 			ps.setString(1, username);
 			rs = ps.executeQuery();
-			if (rs.next() == false) {
+			if (!rs.next()) {
 				throw PicketBoxMessages.MESSAGES.noMatchingUsernameFoundInPrincipals();
 			}
 
@@ -116,7 +116,7 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
 				try {
 					tm.resume(tx);
 				} catch (Exception e) {
-					throw new UnsupportedOperationException(e);
+					PicketBoxLogger.LOGGER.warn(e);
 				}
 			}
 		}

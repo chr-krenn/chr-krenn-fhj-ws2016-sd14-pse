@@ -34,10 +34,10 @@ public class MessageStreamBean implements Serializable {
 	private static final Logger LOGGER = LogManager.getLogger(MessageStreamBean.class);
 
 	@EJB(name = "ejb/MessageService")
-	private MessageService messageService;
+	private transient MessageService messageService;
 
 	@EJB(name = "ejb/CommunityService")
-	private CommunityService communityService;
+	private transient CommunityService communityService;
 
 	/**
 	 * Maps to a GET Parameter of the xhtml file

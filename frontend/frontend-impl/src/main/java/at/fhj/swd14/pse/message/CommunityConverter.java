@@ -22,14 +22,14 @@ public class CommunityConverter implements Converter {
 	private static final Logger LOGGER = LogManager.getLogger(CommunityConverter.class);
 	
 	@EJB(name = "ejb/CommunityService")
-	private CommunityService communityService;
+	private transient CommunityService communityService;
 
 	public CommunityService getCommunityService() {
 		return communityService;
 	}
 
 	public void setCommunityService(CommunityService communityService) {
-		communityService = communityService;
+		this.communityService = communityService;
 	}
 
 	/**

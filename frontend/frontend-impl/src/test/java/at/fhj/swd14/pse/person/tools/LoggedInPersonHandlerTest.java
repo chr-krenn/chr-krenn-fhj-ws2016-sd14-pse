@@ -19,7 +19,7 @@ import org.primefaces.model.UploadedFile;
 
 import at.fhj.swd14.pse.department.DepartmentDto;
 import at.fhj.swd14.pse.department.DepartmentService;
-import at.fhj.swd14.pse.person.CommonPersonBeanTest;
+import at.fhj.swd14.pse.person.PersonUtil;
 import at.fhj.swd14.pse.person.CommonPersonBeanTestData;
 import at.fhj.swd14.pse.person.HobbyDto;
 import at.fhj.swd14.pse.person.KnowledgeDto;
@@ -60,7 +60,7 @@ public class LoggedInPersonHandlerTest {
 		Mockito.when(bean.getDepartmentService()).thenReturn(departmentService);
 		Mockito.when(bean.getVerifier()).thenReturn(verifier);
 		handler = new LoggedInPersonPageHandler(bean);
-		CommonPersonBeanTestData data = CommonPersonBeanTest.setupTest(userService, personService, departmentService);
+		CommonPersonBeanTestData data = PersonUtil.setupServices(userService, personService, departmentService);
     	person = data.getPerson();
     	extContext = data.getExtContext();
     	stati = data.getStati();

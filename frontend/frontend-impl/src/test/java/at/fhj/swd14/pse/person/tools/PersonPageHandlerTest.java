@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import at.fhj.swd14.pse.general.ContextMocker;
-import at.fhj.swd14.pse.person.CommonPersonBeanTest;
+import at.fhj.swd14.pse.person.PersonUtil;
 import at.fhj.swd14.pse.person.PersonBean;
 import at.fhj.swd14.pse.person.PersonDto;
 import at.fhj.swd14.pse.person.PersonService;
@@ -39,7 +39,7 @@ public class PersonPageHandlerTest {
 		Mockito.when(bean.getUserService()).thenReturn(userService);
 		Mockito.when(bean.getPersonService()).thenReturn(personService);
 		handler = new PersonPageHandler(bean);
-		person = CommonPersonBeanTest.getDummyPerson();
+		person = PersonUtil.getDummyPerson();
     	when(userService.find(1L)).thenReturn(person.getUser());
     	when(personService.findByUser(person.getUser())).thenReturn(person);
     	context = ContextMocker.mockFacesContext();

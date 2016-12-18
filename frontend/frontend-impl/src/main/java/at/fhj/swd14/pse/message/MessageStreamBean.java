@@ -1,28 +1,20 @@
 package at.fhj.swd14.pse.message;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.community.CommunityDto;
 import at.fhj.swd14.pse.community.CommunityService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.*;
 
 @Named
-@Stateful
 @ViewScoped
 public class MessageStreamBean implements Serializable {
 	// ---------- Member including Get/Set ------------

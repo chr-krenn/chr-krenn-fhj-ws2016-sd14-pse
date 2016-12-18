@@ -48,6 +48,10 @@
         <eclipselink.version>2.6.4</eclipselink.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <sonar-maven-plugin.version>3.1.1</sonar-maven-plugin.version>
+        <sonar.projectKey>pseswd14</sonar.projectKey>
+        <sonar.projectName>PSE</sonar.projectName>
+        <sonar.projectVersion>1.1-SNAPSHOT</sonar.projectVersion>
+        <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
     </properties>
 
     <dependencyManagement>

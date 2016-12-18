@@ -50,20 +50,23 @@ public final class PasswordHasher {
      */
 
     public String hash(String rawPass, String salt) {
-        String generatedPassword = null;
         try {
             MessageDigest md = MessageDigest.getInstance(HASH_ALGORITHM);
             md.update(salt.getBytes("UTF-8"));
             byte[] bytes = md.digest(rawPass.getBytes("UTF-8"));
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            generatedPassword = sb.toString();
+            return convertToHex(bytes);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             LOG.error("Could not enocde password", e);
+            throw new AssertionError(e);
         }
-        return generatedPassword;
+    }
+
+    private String convertToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte aByte : bytes) {
+            sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+        }
+        return sb.toString();
     }
 
     /**
@@ -154,7 +157,7 @@ public final class PasswordHasher {
         // upper case character, a random 1-digit
         // lower case character, a random 1-digit number and random character
         // into a random alphanumeric string
-        StringBuffer s = new StringBuffer(pwd);
+        StringBuilder s = new StringBuilder(pwd);
         // LOG.debug("Before: " + s);
         s.replace(positionOfUpperCaseCharacter, positionOfUpperCaseCharacter + 1, generateRandomUpperCaseCharacter());
         s.replace(positionOfLowerCaseCharacter, positionOfLowerCaseCharacter + 1, generateRandomLowerCaseCharacter());

@@ -1,11 +1,16 @@
 package at.fhj.swd14.pse.comment;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -33,6 +38,20 @@ public class Comment implements Serializable {
 	@ManyToOne
 	private Message parentMessage;
 
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(
+			name = "like_for_comment",
+			joinColumns =
+				{
+						@JoinColumn(name = "message_id")
+				},
+			inverseJoinColumns =
+				{
+						@JoinColumn(name = "user_id")
+				}
+			)
+	private List<User> users;
+	
 	public Comment() {
 
 	}

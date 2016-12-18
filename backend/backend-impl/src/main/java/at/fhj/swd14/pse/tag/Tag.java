@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.tag;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -35,7 +36,7 @@ public class Tag implements Serializable{
     private String name;
 
     @ManyToMany(mappedBy = "tags")
-    private List<Message> messages;
+    private Collection<Message> messages;
 
     public Tag(){}
 
@@ -76,7 +77,7 @@ public class Tag implements Serializable{
         this.name = name;
     }
 
-    public List<Message> getMessages(){return this.messages;}
-    public void setMessages(List<Message> messages){this.messages = messages;}
+    public Collection<Message> getMessages(){return this.messages;}
+    public void setMessages(Collection<Message> messages){this.messages = messages;}
     public void addMessage(Message message){this.messages.add(message);}
 }

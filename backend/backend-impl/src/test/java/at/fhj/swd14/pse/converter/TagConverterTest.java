@@ -92,4 +92,18 @@ public class TagConverterTest {
         Collection<Tag> tagList = TagConverter.convertToList(null);
         Assert.assertTrue(tagList.isEmpty());
     }
+
+    @Test
+    public void testConvertEmptyList(){
+
+        Collection<TagDto> dtoList = TagConverter.convertToDtoList(new ArrayList<>());
+        Assert.assertTrue(dtoList.isEmpty());
+    }
+
+    @Test
+    public void testConvertEmptyDtoList(){
+
+        Collection<Tag> tagList = TagConverter.convertToList(new ArrayList<>());
+        Assert.assertTrue(tagList.isEmpty());
+    }
 }

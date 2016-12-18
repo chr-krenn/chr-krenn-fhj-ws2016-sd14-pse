@@ -2,8 +2,10 @@ package at.fhj.swd14.pse.converter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import at.fhj.swd14.pse.message.MessageDto;
 import at.fhj.swd14.pse.tag.Tag;
 import at.fhj.swd14.pse.tag.TagDto;
 
@@ -20,7 +22,9 @@ public class TagConverter {
         if (tag == null) {
             return null;
         }
-        return new TagDto(tag.getId(), tag.getName());
+        TagDto dto = new TagDto(tag.getId(), tag.getName());
+        dto.setMessages(MessageConverter.convertToDtoList(tag.getMessages()));
+        return dto;
     }
 
     /**
@@ -32,7 +36,9 @@ public class TagConverter {
         if (tagDto == null) {
             return null;
         }
-        return new Tag(tagDto.getId(), tagDto.getName());
+        Tag tag = new Tag(tagDto.getId(), tagDto.getName());
+        tag.setMessages(MessageConverter.convertToDoList(tagDto.getMessages()));
+        return tag;
     }
 
     /**
@@ -42,7 +48,7 @@ public class TagConverter {
      */
     public static Collection<TagDto> convertToDtoList(Collection<Tag> tags) {
         if (tags == null || tags.isEmpty()) {
-            return new ArrayList<TagDto>();
+            return new ArrayList<>();
         }
         return tags.stream().map(TagConverter::convert).collect(Collectors.toList());
     }
@@ -54,7 +60,7 @@ public class TagConverter {
      */
     public static Collection<Tag> convertToList(Collection<TagDto> tagDtos) {
         if (tagDtos == null || tagDtos.isEmpty()) {
-            return new ArrayList<Tag>();
+            return new ArrayList<>();
         }
         return tagDtos.stream().map(TagConverter::convert).collect(Collectors.toList());
     }

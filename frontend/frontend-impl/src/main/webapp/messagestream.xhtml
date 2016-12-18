@@ -52,9 +52,9 @@
 						</p:dataScroller>
 					</p:outputPanel>
 					<h:form id="form_newcomment" >
-						<h:inputText id="text_newcomment_content" binding="#{text_newcomment_content}">
+						<h:inputText id="text_newcomment_content" value="#{commentBean.comment.text}">
 						</h:inputText>
-						<h:commandButton value="Kommentar erstellen" action="#{messageStreamBean.createComment(message.id, text_newcomment_content.value)}" process="@form">
+						<h:commandButton value="Post Comment" action="#{commentBean.createComment(message.id)}" process="@form">
 							<f:ajax execute="@form" render="@none" />
 						</h:commandButton>
 					</h:form>

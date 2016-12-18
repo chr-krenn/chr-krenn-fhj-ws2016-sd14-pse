@@ -1,11 +1,14 @@
 package at.fhj.swd14.pse.comment;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -28,7 +31,9 @@ public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @Column
     private String text;
 
@@ -88,6 +93,20 @@ public class Comment implements Serializable {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    @Column(insertable = false, updatable = false)
+    private Instant created;
+    
+    public Instant getCreated() {
+    	return created;
+    }
+
+    @Column(insertable = false, updatable = false)
+    private Instant modified;
+    
+    public Instant getModified() {
+    	return modified;
     }
 
     @Override

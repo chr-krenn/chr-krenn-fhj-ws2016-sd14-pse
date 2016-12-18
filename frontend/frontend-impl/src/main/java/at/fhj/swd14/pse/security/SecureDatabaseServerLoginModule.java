@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.security.auth.login.FailedLoginException;
 import javax.security.auth.login.LoginException;
 import javax.sql.DataSource;
 import javax.transaction.SystemException;
@@ -83,22 +84,7 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
             try (PreparedStatement ps = connection.prepareStatement(principalsQuery);) {
                 ps.setString(1, username);
                 try (ResultSet rs = ps.executeQuery()) {
-                    if (!rs.next()) {
-                        throw PicketBoxMessages.MESSAGES.noMatchingUsernameFoundInPrincipals();
-                    }
-
-                    final Long userId = rs.getLong(1);
-                    final String password = rs.getString(2);
-                    final String salt = rs.getString(3);
-
-                    // Set the tenant and user properties on the custom principal
-                    // there maybe a better place to do this, but this is the only place
-                    // I can see it working without having to hit the database with
-                    // another query.
-                    DatabasePrincipal principle = (DatabasePrincipal) getIdentity();
-                    principle.setUserId(userId);
-                    principle.setSalt(salt);
-                    return convertRawPassword(password);
+                    return processUserQueryResultSet(rs);
                 }
             }
         } catch (SQLException ex) {
@@ -106,6 +92,25 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
             le.initCause(ex);
             throw le;
         }
+    }
+
+    private String processUserQueryResultSet(ResultSet rs) throws SQLException, FailedLoginException {
+        if (!rs.next()) {
+            throw PicketBoxMessages.MESSAGES.noMatchingUsernameFoundInPrincipals();
+        }
+
+        final Long userId = rs.getLong(1);
+        final String password = rs.getString(2);
+        final String salt = rs.getString(3);
+
+        // Set the tenant and user properties on the custom principal
+        // there maybe a better place to do this, but this is the only place
+        // I can see it working without having to hit the database with
+        // another query.
+        DatabasePrincipal principle = (DatabasePrincipal) getIdentity();
+        principle.setUserId(userId);
+        principle.setSalt(salt);
+        return convertRawPassword(password);
     }
 
 }

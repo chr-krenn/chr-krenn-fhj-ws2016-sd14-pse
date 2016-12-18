@@ -54,13 +54,8 @@ public class PersonImageServlet extends HttpServlet {
 	        LOGGER.trace("Image for user "+id+" retrieved");
         }
         //at least log exceptions and errors, if we can't pass them to the page
-        catch(Exception ex)
-        {
+        catch(Exception ex)        {
         	LOGGER.error("Exception occured while retrieving person image",ex);
-        }
-        catch(Error err)
-        {
-        	LOGGER.fatal("Error occured while retrieving person image",err);
         }
     }
 

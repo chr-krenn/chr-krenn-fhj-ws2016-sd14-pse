@@ -35,22 +35,12 @@ public class Comment implements Serializable {
     @ManyToOne
     private User author;
 
-    @Column(name = "parentmessage_id")
+    @JoinColumn(name = "parentmessage_id")
     @ManyToOne
     private Message parentMessage;
 
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(
-			name = "like_for_comment",
-			joinColumns =
-				{
-						@JoinColumn(name = "comment_id")
-				},
-			inverseJoinColumns =
-				{
-						@JoinColumn(name = "user_id")
-				}
-			)
+    @JoinTable(name = "like_for_comment", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
 	
 	public Comment() {

@@ -49,10 +49,10 @@ public class PersonDto implements Serializable {
         setId(id);
     }
 
-	public PersonDto() {
-		//just here to instantiate
-	}
-	
+    public PersonDto() {
+        //just here to instantiate
+    }
+
     public StatusDto getStatus() {
         return status;
     }
@@ -165,5 +165,9 @@ public class PersonDto implements Serializable {
 
     public void setFriendState(String friendState) {
         this.friendState = friendState;
+    }
+
+    public boolean matchesUserId(Long userId) {
+        return id != null && user != null && user.matchesUserId(userId);
     }
 }

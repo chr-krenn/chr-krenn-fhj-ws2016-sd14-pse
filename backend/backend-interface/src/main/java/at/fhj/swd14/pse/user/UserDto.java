@@ -7,11 +7,11 @@ public class UserDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    
-    private String mail;    
-    
+
+    private String mail;
+
     private String password;
-    
+
     private String salt;
 
     public UserDto() {
@@ -30,34 +30,38 @@ public class UserDto implements Serializable {
     }
 
     public String getMail() {
-  		return mail;
-  	}
+        return mail;
+    }
 
-  	public void setMail(String mail) {
-  		this.mail = mail;
-  	}
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 
-  	public String getPassword() {
-  		return password;
-  	}
+    public String getPassword() {
+        return password;
+    }
 
-  	public void setPassword(String password) {
-  		this.password = password;
-  	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-  	public String getSalt() {
-  		return salt;
-  	}
+    public String getSalt() {
+        return salt;
+    }
 
-  	public void setSalt(String salt) {
-  		this.salt = salt;
-  	}
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
-  	@Override
-      public String toString() {
-          return "User{" +
-                  "id=" + id +
-                  ", mail='" + mail + '\'' +
-                  '}';
-      }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", mail='" + mail + '\'' +
+                '}';
+    }
+
+    public boolean matchesUserId(Long userId) {
+        return id != null && id.equals(userId);
+    }
 }

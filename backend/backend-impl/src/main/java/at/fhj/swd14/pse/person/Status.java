@@ -18,7 +18,10 @@ import javax.persistence.Table;
 public class Status implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@Id
+	private String name;
+	
 	public Status(String name) {
 		setName(name);
 	}
@@ -28,8 +31,6 @@ public class Status implements Serializable {
 		//just here for instantiation
 	}
 	
-	@Id
-	private String name;
 	
 	public String getName() {
 		return name;

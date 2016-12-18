@@ -16,6 +16,7 @@ import at.fhj.swd14.pse.person.PhonenumberDto;
 public class PersonVerifier implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	private static final String ERR_INVALID_INPUT = "Incorrect Input";
 	private PersonBean bean;
 	
 	public PersonVerifier(PersonBean bean)
@@ -33,12 +34,12 @@ public class PersonVerifier implements Serializable {
 	{
 		if(bean.getPerson().getFirstname()==null||bean.getPerson().getFirstname().length()==0)
 		{
-			bean.growl("Incorrect Input","Firstname is empty");
+			bean.growl(ERR_INVALID_INPUT,"Firstname is empty");
 			return false;
 		}
 		if(bean.getPerson().getLastname()==null||bean.getPerson().getLastname().length()==0)
 		{
-			bean.growl("Incorrect Input","Lastname is empty");
+			bean.growl(ERR_INVALID_INPUT,"Lastname is empty");
 			return false;
 		}
 		return true;
@@ -53,12 +54,12 @@ public class PersonVerifier implements Serializable {
 	{
 		if(mail==null||mail.getValue()==null||mail.getValue().length()==0)
 		{
-			bean.growl("Incorrect Input","Cannot add empty mail address to person");
+			bean.growl(ERR_INVALID_INPUT,"Cannot add empty mail address to person");
 			return false;
 		}
 		if(!mail.getValue().matches("[a-z0-9]+@[a-z0-9\\.]+"))
 		{
-			bean.growl("Incorrect Input","Mailaddress "+mail.getValue()+" is not a valid mail address");
+			bean.growl(ERR_INVALID_INPUT,"Mailaddress "+mail.getValue()+" is not a valid mail address");
 			return false;
 		}
 		return true;
@@ -73,7 +74,7 @@ public class PersonVerifier implements Serializable {
 	{
 		if(hobby==null||hobby.getValue()==null||hobby.getValue().length()==0)
 		{
-			bean.growl("Incorrect Input","Cannot add empty hobby to person");
+			bean.growl(ERR_INVALID_INPUT,"Cannot add empty hobby to person");
 			return false;
 		}
 		return true;
@@ -88,7 +89,7 @@ public class PersonVerifier implements Serializable {
 	{
 		if(knowledge == null||knowledge.getValue()==null||knowledge.getValue().length()==0)
 		{
-			bean.growl("Incorrect Input","Cannot add empty knowledge to person");
+			bean.growl(ERR_INVALID_INPUT,"Cannot add empty knowledge to person");
 			return false;
 		}
 		return true;
@@ -103,12 +104,12 @@ public class PersonVerifier implements Serializable {
 	{
 		if(number==null||number.getValue()==null||number.getValue().length()==0)
 		{
-			bean.growl("Incorrect Input","Cannot add empty phonenumber to person");
+			bean.growl(ERR_INVALID_INPUT,"Cannot add empty phonenumber to person");
 			return false;
 		}
 		if(!number.getValue().matches("\\+?[0-9]+"))
 		{
-			bean.growl("Incorrect Input","The phonenumber "+number.getValue()+" is not a valid phonenumber");
+			bean.growl(ERR_INVALID_INPUT,"The phonenumber "+number.getValue()+" is not a valid phonenumber");
 			return false;
 		}
 		return true;

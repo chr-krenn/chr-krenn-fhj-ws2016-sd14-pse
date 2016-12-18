@@ -36,6 +36,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private static final String ERR_INCORRECT_INPUT="Incorrect Input";
 	private static final String MSG_ALREADY_EXISTS=" already exists";
+	private static final String PARAM_VALUE="value";
 
 	private static final Logger LOGGER = LogManager.getLogger(LoggedInPersonPageHandler.class);
 	
@@ -292,7 +293,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 	public void removeMail()
 	{
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-	    String value = params.get("value");
+	    String value = params.get(PARAM_VALUE);
 	    LOGGER.trace("Removing mail: "+value);
 	    for(MailaddressDto address : bean.getPerson().getAdditionalMails())
 	    {
@@ -310,7 +311,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 	public void removeKnowledge()
 	{
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-	    String value = params.get("value");
+	    String value = params.get(PARAM_VALUE);
 	    LOGGER.trace("Removing Knowledge: "+value);
 	    for(KnowledgeDto knowledge : bean.getPerson().getKnowledges())
 	    {
@@ -328,7 +329,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 	public void removeHobby()
 	{
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-	    String value = params.get("value");
+	    String value = params.get(PARAM_VALUE);
 	    LOGGER.trace("Removing Hobby: "+value);
 	    for(HobbyDto hobby : bean.getPerson().getHobbies())
 	    {
@@ -346,7 +347,7 @@ public class LoggedInPersonPageHandler implements Serializable{
 	public void removeNumber()
 	{
 		Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-	    String value = params.get("value");
+	    String value = params.get(PARAM_VALUE);
 	    LOGGER.trace("Removing Number: "+value);
 	    for(PhonenumberDto number : bean.getPerson().getPhonenumbers())
 	    {

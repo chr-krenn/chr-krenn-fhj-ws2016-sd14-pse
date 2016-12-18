@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import at.fhj.swd14.pse.comment.Comment;
 import at.fhj.swd14.pse.community.Community;
 
 @Entity
@@ -33,6 +34,9 @@ public class User implements Serializable {
     
     @ManyToMany
 	private List<Community> communities;
+    
+    @ManyToMany(mappedBy = "users")
+    private List<Comment> comments;
 
     public User(Long id) {
         this.id = id;

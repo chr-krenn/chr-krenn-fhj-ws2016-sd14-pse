@@ -7,12 +7,15 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -77,6 +80,20 @@ public class Message implements Serializable {
 
     @Column(insertable = false, updatable = false)
     private Instant modified;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+    		name = "like_for_message",
+    		joinColumns =
+    			{
+    					@JoinColumn(name = "comment_id")
+    			},
+    		inverseJoinColumns =
+    			{
+    					@JoinColumn(name = "user_id")
+    			}
+    		)
+    private List<User> users;
     
     public Message(){
     }
@@ -152,6 +169,14 @@ public class Message implements Serializable {
 
     public Instant getModified() {
         return modified;
+    }
+    
+    public void setUsers(List<User> users) {
+    	this.users = users;
+    }
+    
+    public List<User> getUsers() {
+    	return this.users;
     }
 	
 	@Override

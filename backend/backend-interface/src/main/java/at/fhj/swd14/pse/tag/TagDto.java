@@ -3,7 +3,6 @@ package at.fhj.swd14.pse.tag;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import at.fhj.swd14.pse.message.MessageDto;
 

@@ -47,6 +47,7 @@
         <mysql-driver.version>6.0.5</mysql-driver.version>
         <eclipselink.version>2.6.4</eclipselink.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <sonar-maven-plugin.version>3.1.1</sonar-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -240,6 +241,11 @@
                             <include>*IntegrationTest.java</include>
                         </includes>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

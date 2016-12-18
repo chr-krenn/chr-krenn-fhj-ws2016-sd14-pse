@@ -21,6 +21,7 @@ public class PersonTestTools {
 		User myuser = new User(id);
 		myuser.setMail(mail);
         myuser.setPassword("testpassword");
+        myuser.setSalt("12345");
         
         Department department = new Department(1L);
         department.setName("testdepartment");

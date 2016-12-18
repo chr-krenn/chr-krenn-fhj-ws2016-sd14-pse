@@ -69,6 +69,16 @@ public class Person implements Serializable {
     @ManyToOne
     private Department department;
     
+    public Person(Long id, User user) {
+        this.id = id;
+        setUser(user);
+    }
+
+    public Person() {
+    	//don't do anything, its just here so that you can instantiate without params
+    }
+
+    
     public List<Phonenumber> getNumbers() {
 		return numbers;
 	}
@@ -166,14 +176,6 @@ public class Person implements Serializable {
 	public void setPlace(String place) {
 		this.place = place;
 	}
-
-	public Person(Long id, User user) {
-        this.id = id;
-        setUser(user);
-    }
-
-    public Person() {
-    }
 
     public Long getId() {
         return id;

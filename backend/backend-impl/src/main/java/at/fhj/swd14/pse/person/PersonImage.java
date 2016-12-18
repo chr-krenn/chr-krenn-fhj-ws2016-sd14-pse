@@ -35,6 +35,14 @@ public class PersonImage implements Serializable{
 	@ManyToOne(optional=false)
 	private Person person;
 
+	public PersonImage() {
+		super();
+	}
+
+	public PersonImage(Long id) {
+		setId(id);
+	}
+	
 	public String getContentType() {
 		return contentType;
 	}
@@ -67,13 +75,6 @@ public class PersonImage implements Serializable{
 		this.data = data;
 	}
 
-	public PersonImage() {
-		super();
-	}
-
-	public PersonImage(Long id) {
-		setId(id);
-	}
 	
 	
 }

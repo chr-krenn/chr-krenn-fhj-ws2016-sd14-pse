@@ -30,7 +30,7 @@ public class PersonRepository extends AbstractRepository<Person> {
 	{
 		List<Person> results =  entityManager.createNamedQuery("Person.findByUserId",Person.class)
 				.setParameter("userid", id).getResultList();
-		if(results.size()==0)
+		if(results.isEmpty())
 			return null;
 		else
 			return results.get(0);

@@ -33,6 +33,8 @@ import at.fhj.swd14.pse.user.UserService;
 public class PersonServiceImpl implements PersonService {
 	
 	private static final Logger LOGGER = LogManager.getLogger(PersonServiceImpl.class);
+	private static final String ERR_INVALID_INPUT = "Invalid input was supplied by frontend: ";
+	private static final String MSG_IMAGE_FOR_PERSON = "Image for person ";
 
 	@EJB
 	private PersonRepository repository;
@@ -160,8 +162,8 @@ public class PersonServiceImpl implements PersonService {
 			repository.update(personEntity);
 			LOGGER.debug("Person stored");
 		} catch(VerificationException ex) {
-			LOGGER.debug("Invalid input was supplied by frontend: "+ex.getMessage(),ex);
-			throw new PersonServiceException("Invalid input was supplied by frontend: "+ex.getMessage());
+			LOGGER.debug(ERR_INVALID_INPUT+ex.getMessage(),ex);
+			throw new PersonServiceException(ERR_INVALID_INPUT+ex.getMessage());
 		} catch(Exception ex) {
 			LOGGER.error("Exception during saving of person",ex);
 			throw new PersonServiceException("Person could not be saved");
@@ -202,7 +204,7 @@ public class PersonServiceImpl implements PersonService {
 			{
 				imgRepo.remove(existing);
 				imgRepo.flush();
-				LOGGER.trace("Image for person "+person.getId()+" already exists and was deleted");
+				LOGGER.trace(MSG_IMAGE_FOR_PERSON+person.getId()+" already exists and was deleted");
 			}
 			PersonImage img = new PersonImage();
 			img.setData(imageData);
@@ -220,11 +222,14 @@ public class PersonServiceImpl implements PersonService {
 			imgRepo.save(img);
 			LOGGER.debug("Person image saved for person: "+person.getId());
 		} catch(VerificationException ex)	{
-			LOGGER.debug("Invalid input was supplied by frontend: "+ex.getMessage(),ex);
-			throw new PersonServiceException("Invalid input was supplied by frontend: "+ex.getMessage());
+			LOGGER.debug(ERR_INVALID_INPUT+ex.getMessage(),ex);
+			throw new PersonServiceException(ERR_INVALID_INPUT+ex.getMessage());
 		} catch(Exception ex) {
-			LOGGER.error("Exception during saving of image for person "+person.getId(),ex);
-			throw new PersonServiceException("Person image for person "+person.getId()+" could not be saved");
+			Long personid = 0L;
+			if(person!=null)
+				personid = person.getId();
+			LOGGER.error("Exception during saving of image for person "+personid,ex);
+			throw new PersonServiceException("Person image for person "+personid+" could not be saved");
 		}
 	}
 
@@ -233,13 +238,13 @@ public class PersonServiceImpl implements PersonService {
 		try {
 			PersonImage img = imgRepo.getByPersonId(personid);
 			if(img!=null)
-				LOGGER.trace("Image for person "+personid+" was retrieved successfully");
+				LOGGER.trace(MSG_IMAGE_FOR_PERSON+personid+" was retrieved successfully");
 			else
 				LOGGER.trace("Could not retrieve image for person "+personid);
 			return PersonImageConverter.convert(img);
 		} catch(Exception ex) {
 			LOGGER.error("Exception during retrieval of image for person "+personid,ex);
-			throw new PersonServiceException("Image for person "+personid+" could not be retrieved");
+			throw new PersonServiceException(MSG_IMAGE_FOR_PERSON+personid+" could not be retrieved");
 		}
 	}
 

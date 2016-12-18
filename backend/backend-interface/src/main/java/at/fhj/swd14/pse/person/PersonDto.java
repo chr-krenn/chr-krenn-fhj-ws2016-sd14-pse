@@ -44,6 +44,15 @@ public class PersonDto implements Serializable {
 
     private String friendState;
 
+
+    public PersonDto(long id) {
+        setId(id);
+    }
+
+	public PersonDto() {
+		//just here to instantiate
+	}
+	
     public StatusDto getStatus() {
         return status;
     }
@@ -149,13 +158,6 @@ public class PersonDto implements Serializable {
         this.place = place;
     }
 
-
-    public PersonDto(long id) {
-        setId(id);
-    }
-
-	public PersonDto() {
-	}
 
     public String getFriendState() {
         return friendState;

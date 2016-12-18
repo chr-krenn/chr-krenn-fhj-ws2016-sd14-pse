@@ -28,6 +28,20 @@ public abstract class AbstractPersonInformation implements Serializable {
 	@ManyToOne(optional=false)
 	private Person person;
 	
+	public AbstractPersonInformation(Long id) {
+		this.id = id;
+	}
+	
+	public AbstractPersonInformation(String value)
+	{
+		setValue(value);
+	}
+	
+	public AbstractPersonInformation()
+	{
+		
+	}
+
 	public Person getPerson() {
 		return person;
 	}
@@ -52,18 +66,5 @@ public abstract class AbstractPersonInformation implements Serializable {
 		this.id = id;
 	}
 
-	public AbstractPersonInformation(Long id) {
-		this.id = id;
-	}
-	
-	public AbstractPersonInformation(String value)
-	{
-		setValue(value);
-	}
-	
-	public AbstractPersonInformation()
-	{
-		
-	}
 	
 }

@@ -19,14 +19,13 @@ import org.apache.logging.log4j.Logger;
 
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
-
-@Named
-@SessionScoped
 /**
  * @author schoeneg14, purkart
  *
  */
-public class CommunityBean implements Serializable{
+@Named
+@SessionScoped
+public class CommunityBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -35,10 +34,10 @@ public class CommunityBean implements Serializable{
 	private static final Logger LOGGER = LogManager.getLogger(CommunityBean.class);
 
 	@EJB(name = "ejb/CommunityService")
-	private CommunityService communityService;
+	private transient CommunityService communityService;
 
 	@EJB(name = "ejb/UserService")
-	private UserService userService;
+	private transient UserService userService;
 
 	private String newName;
 	private String newDescription;

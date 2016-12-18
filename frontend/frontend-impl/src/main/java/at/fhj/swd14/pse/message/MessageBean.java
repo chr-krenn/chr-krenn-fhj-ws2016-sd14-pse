@@ -23,13 +23,13 @@ public class MessageBean implements Serializable {
 	private static final Logger LOGGER = LogManager.getLogger(MessageBean.class);
 
     @EJB(name = "ejb/MessageService")
-    private MessageService messageService;
+    private transient MessageService messageService;
     
     @EJB(name = "ejb/PersonService")
-    private PersonService personService;
+    private transient PersonService personService;
 
     @EJB(name = "ejb/UserService")
-    private UserService userService;
+    private transient UserService userService;
     
     /**
      * The message to be transmitted

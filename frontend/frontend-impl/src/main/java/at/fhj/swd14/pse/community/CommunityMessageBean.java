@@ -26,7 +26,7 @@ import at.fhj.swd14.pse.user.UserService;
 @Named
 @SessionScoped
 
-public class CommunityMessageBean implements Serializable{
+public class CommunityMessageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -35,10 +35,10 @@ public class CommunityMessageBean implements Serializable{
 	private static final Logger LOGGER = LogManager.getLogger(CommunityBean.class);
 
 	@EJB(name = "ejb/CommunityService")
-	private CommunityService communityService;
+	private transient CommunityService communityService;
 	
 	@EJB(name = "ejb/UserService")
-	private UserService userService;
+	private transient UserService userService;
 
 	
 

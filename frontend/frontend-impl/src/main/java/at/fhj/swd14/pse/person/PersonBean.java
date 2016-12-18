@@ -42,13 +42,13 @@ public class PersonBean implements Serializable{
 	private static final String ERR_OCCURED = "Error occured";
 	
 	@EJB(name = "ejb/PersonService")
-    private PersonService personService;
+    private transient PersonService personService;
 	
 	@EJB(name = "ejb/UserService")
-    private UserService userService;
+    private transient UserService userService;
 	
 	@EJB(name = "ejb/DepartmentService")
-    private DepartmentService departmentService;
+    private transient DepartmentService departmentService;
 	
 	private PersonDto person;
 	private List<StatusDto> stati;

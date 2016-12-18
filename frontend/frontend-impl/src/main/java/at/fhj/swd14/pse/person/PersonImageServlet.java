@@ -26,7 +26,7 @@ public class PersonImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB(name = "ejb/PersonService")
-    private PersonService service;
+    private transient PersonService service;
 
 
 	/**

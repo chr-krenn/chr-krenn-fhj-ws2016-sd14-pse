@@ -20,7 +20,7 @@ public class UserBean implements Serializable {
 	private static final Logger LOGGER = LogManager.getLogger(UserBean.class);
 
     @EJB(name = "ejb/UserService")
-    private UserService userService;
+    private transient UserService userService;
 
     private UserDto user;
     

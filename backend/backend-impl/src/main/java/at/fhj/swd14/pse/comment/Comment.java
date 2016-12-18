@@ -43,7 +43,7 @@ public class Comment implements Serializable {
 			name = "like_for_comment",
 			joinColumns =
 				{
-						@JoinColumn(name = "message_id")
+						@JoinColumn(name = "comment_id")
 				},
 			inverseJoinColumns =
 				{

@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.converter;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -40,8 +41,8 @@ public class TagConverter {
      * @return tagDtos
      */
     public static Collection<TagDto> convertToDtoList(Collection<Tag> tags) {
-        if (tags == null) {
-            return null;
+        if (tags == null || tags.isEmpty()) {
+            return new ArrayList<TagDto>();
         }
         return tags.stream().map(TagConverter::convert).collect(Collectors.toList());
     }
@@ -52,8 +53,8 @@ public class TagConverter {
      * @return tags
      */
     public static Collection<Tag> convertToList(Collection<TagDto> tagDtos) {
-        if (tagDtos == null) {
-            return null;
+        if (tagDtos == null || tagDtos.isEmpty()) {
+            return new ArrayList<Tag>();
         }
         return tagDtos.stream().map(TagConverter::convert).collect(Collectors.toList());
     }

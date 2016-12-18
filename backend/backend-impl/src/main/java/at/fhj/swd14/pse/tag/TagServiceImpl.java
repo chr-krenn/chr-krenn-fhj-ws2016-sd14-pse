@@ -11,7 +11,6 @@ import javax.ejb.Stateless;
 import at.fhj.swd14.pse.converter.TagConverter;
 import at.fhj.swd14.pse.repository.TagRepository;
 
-//Todo: implement methods
 @Stateless
 public class TagServiceImpl implements TagService {
 
@@ -35,7 +34,7 @@ public class TagServiceImpl implements TagService {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("tagName", name);
         List<TagDto> tagList = executeNamedQuery("Tag.findByName", parameter);
-        if (tagList.size() > 0)
+        if (!tagList.isEmpty())
             return tagList.get(0);
         else
             return null;

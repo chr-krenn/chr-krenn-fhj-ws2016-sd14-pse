@@ -41,9 +41,9 @@ public class LoggedInPersonPageHandler implements Serializable {
     private static final Logger LOGGER = LogManager.getLogger(LoggedInPersonPageHandler.class);
 
     private PersonBean bean;
-    private UserService userService;
-    private PersonService personService;
-    private DepartmentService departmentService;
+    private transient UserService userService;
+    private transient PersonService personService;
+    private transient DepartmentService departmentService;
     private PersonVerifier verifier;
 
     public LoggedInPersonPageHandler(PersonBean bean) {

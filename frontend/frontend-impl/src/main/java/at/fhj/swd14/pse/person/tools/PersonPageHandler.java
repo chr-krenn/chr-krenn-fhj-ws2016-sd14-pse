@@ -26,8 +26,8 @@ public class PersonPageHandler implements Serializable{
 	private static final Logger LOGGER = LogManager.getLogger(PersonPageHandler.class);
 	
 	private PersonBean bean;
-	private UserService userService;
-	private PersonService personService;
+	private transient UserService userService;
+	private transient PersonService personService;
 	
 	public PersonPageHandler(PersonBean bean)
 	{

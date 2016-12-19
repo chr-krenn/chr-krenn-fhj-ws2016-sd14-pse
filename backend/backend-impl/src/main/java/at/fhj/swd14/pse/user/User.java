@@ -81,6 +81,22 @@ public class User implements Serializable {
 		this.salt = salt;
 	}
 
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public List<Comment> getComments() {
+		return this.comments;
+	}
+	
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
+	
+	public List<Message> getMessages() {
+		return this.messages;
+	}
+	
 	@Override
     public String toString() {
         return "User{" +

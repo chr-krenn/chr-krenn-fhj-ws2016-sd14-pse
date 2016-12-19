@@ -54,14 +54,18 @@ public class CommentLikeServiceImpl implements CommentLikeService {
 
 	@Override
 	public int getLikeCountForComment(long commentId) {
-		// TODO Auto-generated method stub
-		return 0;
+		Comment comment = commentRepository.find(commentId);
+		List<User> users = comment.getUsers();
+		
+		return users.size();
 	}
 
 	@Override
 	public int getLikeCountForUserForComments(long userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		User user = userRepository.find(userId);
+		List<Comment> comments = user.getComments();
+		
+		return comments.size();
 	}
 
 }

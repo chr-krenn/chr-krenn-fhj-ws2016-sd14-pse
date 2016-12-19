@@ -1,12 +1,16 @@
 package at.fhj.swd14.pse.like;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+
+import at.fhj.swd14.pse.comment.Comment;
 import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.converter.CommentConverter;
 import at.fhj.swd14.pse.converter.UserConverter;
 import at.fhj.swd14.pse.repository.CommentRepository;
 import at.fhj.swd14.pse.repository.UserRepository;
+import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserDto;
 
 public class CommentLikeServiceImpl implements CommentLikeService {
@@ -26,14 +30,26 @@ public class CommentLikeServiceImpl implements CommentLikeService {
 
 	@Override
 	public CommentLikeDto getCommentLike(long userId, long commentId) {
-		// TODO Auto-generated method stub
-		return null;
+		UserDto userDTO = UserConverter.convert(userRepository.find(userId));
+		CommentDto commentDTO = CommentConverter.convert(commentRepository.find(commentId));
+		CommentLikeDto commentLikeDTO = new CommentLikeDto(userDTO,commentDTO);
+		
+		return commentLikeDTO;
 	}
 
 	@Override
 	public List<CommentLikeDto> getCommentLikes(long commentId) {
-		// TODO Auto-generated method stub
-		return null;
+		CommentDto commentDTO = CommentConverter.convert(commentRepository.find(commentId));
+		Comment comment = commentRepository.find(commentId);
+		List<User> users = comment.getUsers();
+		List<CommentLikeDto> commentLikes = new ArrayList<CommentLikeDto>();
+		for (int i = 0; i < users.size(); i ++)
+		{
+			CommentLikeDto commentLike = new CommentLikeDto(UserConverter.convert(users.get(i)),commentDTO);
+			commentLikes.add(commentLike);
+		}
+		
+		return commentLikes;
 	}
 
 	@Override

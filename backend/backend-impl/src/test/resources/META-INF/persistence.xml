@@ -12,6 +12,7 @@
         <class>at.fhj.swd14.pse.person.Status</class>
         <class>at.fhj.swd14.pse.user.User</class>
         <class>at.fhj.swd14.pse.community.Community</class>
+        <class>at.fhj.swd14.pse.community.UserCommunity</class>
         <class>at.fhj.swd14.pse.comment.Comment</class>
         <class>at.fhj.swd14.pse.contact.Contact</class>
         <class>at.fhj.swd14.pse.message.Message</class>

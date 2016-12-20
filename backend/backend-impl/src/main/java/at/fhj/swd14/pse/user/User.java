@@ -9,8 +9,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import at.fhj.swd14.pse.comment.Comment;
 import at.fhj.swd14.pse.community.Community;
 import at.fhj.swd14.pse.community.UserCommunity;
+import at.fhj.swd14.pse.message.Message;
 import at.fhj.swd14.pse.tag.Tag;
 
 import java.io.Serializable;
@@ -41,6 +43,12 @@ public class User implements Serializable {
     public List<UserCommunity> getCommunities(){
     	return userCommunities;
     }
+    
+    @ManyToMany(mappedBy = "users")
+    private List<Comment> comments;
+    
+    @ManyToMany(mappedBy = "users")
+    private List<Message> messages;
     
     public User(Long id) {
         this.id = id;
@@ -80,6 +88,22 @@ public class User implements Serializable {
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
+	
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public List<Comment> getComments() {
+		return this.comments;
+	}
+	
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
+	
+	public List<Message> getMessages() {
+		return this.messages;
+}
 
 	@Override
     public String toString() {

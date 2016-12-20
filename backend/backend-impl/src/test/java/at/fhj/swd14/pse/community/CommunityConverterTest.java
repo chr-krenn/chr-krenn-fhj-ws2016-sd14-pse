@@ -34,11 +34,11 @@ public class CommunityConverterTest {
 		this.createCommunityDto();
 	}
 	
-	@Test
-	public void testCommunityToCommunityDto(){
-		CommunityDto c = CommunityConverter.convert(this.community);
-		CommunityDtoTester.assertEquals(this.communityDto, c);
-	}
+//	@Test
+//	public void testCommunityToCommunityDto(){
+////		CommunityDto c = CommunityConverter.convert(this.community);
+////		CommunityDtoTester.assertEquals(this.communityDto, c);
+//	}
 	
 	
 	private void createCommunityDto(){

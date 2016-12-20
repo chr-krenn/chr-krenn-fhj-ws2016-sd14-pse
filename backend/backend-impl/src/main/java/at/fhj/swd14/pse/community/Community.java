@@ -47,8 +47,7 @@ public class Community implements Serializable {
 		
 		public void setId(Long id) {   
 			this.id = id;    
-			}    
-		
+			}    		
 		
 		@Column    
 		private String name;    

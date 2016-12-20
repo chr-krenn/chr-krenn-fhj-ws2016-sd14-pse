@@ -95,7 +95,7 @@ public class MessageStreamBean implements Serializable {
 	/**
 	 * The Messages to display in the view
 	 */
-	private Map<Long, MessageDto> messageMap;
+	private Map<Long, MessageDto> messageMap = new HashMap<>();
 
 	/**
 	 * Gets the messages to display in the view

@@ -19,16 +19,32 @@
     </header>
     <div class="main clearfix">
         <section class="content-lft">
-
+        <h:form>
+        <p:growl id="msgs" autoUpdate="true"/>
+		    <p:orderList value="#{communityMessageBean.joinedCommunities}" var="community" itemValue="#{community}"  responsive="true">
+		        <p:ajax event="select" listener="#{messageStreamBean.setCurrentCommunity(community)}" update="msgs"/>
+		        
+		        <f:facet name="caption">Joined communities</f:facet>
+		 
+		        <p:column style="width:32px">
+		            <h:outputText value="#{community.name}" />
+		        </p:column>
+		 
+		    </p:orderList>
+    </h:form>
         </section>
         
         <section class="content-lft">
         <ul class="about sidebarlink">
-			<h:form>
-    			<p:growl autoUpdate="true"/>
-    			<p:menu model="#{communityMessageBean.createMenuModel}"/>
-			</h:form>
+			
 			</ul> 
+        </section>
+        <section class="content-ctr" id="messagestream">
+          <h:form>
+    			
+    			<ui:include src="messagestream.xhtml" />
+			</h:form>
+            
         </section>
         	
     </div>

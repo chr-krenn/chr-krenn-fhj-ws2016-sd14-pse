@@ -18,7 +18,10 @@ public class CommunityConverter {
 		}
 		CommunityDto dto = new CommunityDto(community.getId());
 		dto.setId(community.getId());
-		dto.setAllowedUsers(community.getAllowedUsers());		
+		dto.setAllowedUsers(community.getAllowedUsers());
+//		
+//		List<>
+//		dto.setPendingUsers();
 		dto.setName(community.getName());
 		dto.setAuthor(UserConverter.convert(community.getAuthor()));
 		dto.setActiveState(community.geActiveState());

@@ -1,11 +1,11 @@
 package at.fhj.swd14.pse.repository;
 
-import at.fhj.swd14.pse.contact.Contact;
-import at.fhj.swd14.pse.person.Person;
+import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.Singleton;
-import java.util.List;
+
+import at.fhj.swd14.pse.contact.Contact;
 
 /**
  * Created by Dominik Groß on 11.11.2016.

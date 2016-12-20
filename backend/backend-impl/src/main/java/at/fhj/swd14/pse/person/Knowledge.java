@@ -20,17 +20,14 @@ public class Knowledge extends AbstractPersonInformation implements Serializable
 
 	public Knowledge() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Knowledge(Long id) {
 		super(id);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Knowledge(String value) {
 		super(value);
-		// TODO Auto-generated constructor stub
 	}
 	
 }

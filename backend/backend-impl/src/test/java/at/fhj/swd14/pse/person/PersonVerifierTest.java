@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.person;
 
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +19,6 @@ import at.fhj.swd14.pse.repository.MailaddressRepository;
 import at.fhj.swd14.pse.repository.PersonStatusRepository;
 import at.fhj.swd14.pse.repository.PhonenumberRepository;
 import at.fhj.swd14.pse.repository.UserRepository;
-import org.junit.Assert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersonVerifierTest {

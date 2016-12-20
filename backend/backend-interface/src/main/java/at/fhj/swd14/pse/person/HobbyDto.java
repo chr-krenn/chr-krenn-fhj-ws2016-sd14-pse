@@ -15,7 +15,7 @@ public class HobbyDto extends AbstractPersonInformationDto {
 	
 	public HobbyDto()
 	{
-		
+		//don't do anything, its just here so that you can instantiate without params
 	}
 
 	public HobbyDto(Long id, String value) {

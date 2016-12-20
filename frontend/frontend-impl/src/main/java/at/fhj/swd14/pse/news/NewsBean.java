@@ -1,30 +1,29 @@
 package at.fhj.swd14.pse.news;
 
-import at.fhj.swd14.pse.person.PersonDto;
-import at.fhj.swd14.pse.person.PersonService;
-import at.fhj.swd14.pse.user.UserDto;
-import at.fhj.swd14.pse.user.UserService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.primefaces.context.RequestContext;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.primefaces.context.RequestContext;
+
+import at.fhj.swd14.pse.person.PersonDto;
+import at.fhj.swd14.pse.person.PersonService;
+import at.fhj.swd14.pse.user.UserDto;
+import at.fhj.swd14.pse.user.UserService;
 
 @Named
 @SessionScoped
-public class NewsBean implements Serializable{
+public class NewsBean implements Serializable {
 
-  /**
-   *
-   */
-  private static final long serialVersionUID = -4507541276214551604L;
+  private static final long serialVersionUID = 1L;
   private NewsDto news;
   private static final Logger LOGGER = LogManager.getLogger(NewsBean.class);
 
@@ -34,13 +33,13 @@ public class NewsBean implements Serializable{
   private Date currentDate;
   private UserDto currentUser;
   @EJB(name = "ejb/NewsService")
-  private NewsService newsService;
+  private transient NewsService newsService;
 
   @EJB(name = "ejb/PersonService")
-  private PersonService personService;
+  private transient PersonService personService;
 
   @EJB(name = "ejb/UserService")
-  private UserService userService;
+  private transient UserService userService;
   private String buttonNewsText;
 
   private final static String NEWS_ADD_TEXT = "News hinzufügen";

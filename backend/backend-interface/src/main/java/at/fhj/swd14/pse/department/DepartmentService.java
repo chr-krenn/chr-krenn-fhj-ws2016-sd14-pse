@@ -1,7 +1,8 @@
 package at.fhj.swd14.pse.department;
 
-import javax.ejb.Remote;
 import java.util.Collection;
+
+import javax.ejb.Remote;
 
 /**
  * Department service class
@@ -10,5 +11,9 @@ import java.util.Collection;
  */
 @Remote
 public interface DepartmentService {
-	public Collection<DepartmentDto> findAll();
+	/**
+	 * Get all departments in existence
+	 * @return Collection of all departments found
+	 */
+    Collection<DepartmentDto> findAll();
 }

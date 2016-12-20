@@ -29,11 +29,18 @@ public class DepartmentServiceTest {
 	{
 		Department dep = new Department(1L);
 		dep.setName("test");
-		List<Department> deps = new LinkedList<Department>();
+		List<Department> deps = new LinkedList<>();
 		deps.add(dep);
 		Mockito.when(depRepo.findAll()).thenReturn(deps);
 		List<DepartmentDto> dtos = (List<DepartmentDto>)service.findAll();
 		Assert.assertEquals(1, dtos.size());
 		DepartmentDtoTester.assertEquals(DepartmentConverter.convert(dep), dtos.get(0));
+	}
+	
+	@Test(expected=DepartmentServiceException.class)
+	public void testFindAllException()
+	{
+		Mockito.doThrow(Exception.class).when(depRepo).findAll();
+		service.findAll();
 	}
 }

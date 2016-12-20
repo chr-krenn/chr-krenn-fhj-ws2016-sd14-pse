@@ -9,8 +9,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import at.fhj.swd14.pse.converter.MessageConverter;
-import at.fhj.swd14.pse.message.MessageDto;
-import at.fhj.swd14.pse.message.MessageService;
 import at.fhj.swd14.pse.repository.MessageRepository;
 
 @Stateless
@@ -53,9 +51,9 @@ public class MessageServiceImpl implements MessageService {
 		
 		
 		//TODO: query isn't implemented yet
-		//Map<String, Object> parameter = new HashMap<>();
-		//parameter.put("userId", userId);
-		return executeNamedQuery("Message.findUserRelated");
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("userId", userId);
+		return executeNamedQuery("Message.findUserRelated", parameter);
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public class CommentServiceImplTest
 		user.setId(1L);
 		user.setMail("mail");
 		
-		comments = new ArrayList<Comment>();
+		comments = new ArrayList<>();
 		Comment comment = new Comment(1L);
 		comment.setText("test-comment");
 		// TODO: check equals errors

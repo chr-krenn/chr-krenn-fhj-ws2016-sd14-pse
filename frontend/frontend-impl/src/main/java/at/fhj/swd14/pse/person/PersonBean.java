@@ -26,6 +26,11 @@ import at.fhj.swd14.pse.person.tools.PersonVerifier;
 import at.fhj.swd14.pse.user.UserService;
 
 
+/**
+ * Bean for all person pages
+ * @author Patrick Kainz
+ *
+ */
 @Named
 @SessionScoped
 public class PersonBean implements Serializable{
@@ -34,14 +39,16 @@ public class PersonBean implements Serializable{
 
 	private static final Logger LOGGER = LogManager.getLogger(PersonBean.class);
 	
+	private static final String ERR_OCCURED = "Error occured";
+	
 	@EJB(name = "ejb/PersonService")
-    private PersonService personService;
+    private transient PersonService personService;
 	
 	@EJB(name = "ejb/UserService")
-    private UserService userService;
+    private transient UserService userService;
 	
 	@EJB(name = "ejb/DepartmentService")
-    private DepartmentService departmentService;
+    private transient DepartmentService departmentService;
 	
 	private PersonDto person;
 	private List<StatusDto> stati;
@@ -138,29 +145,46 @@ public class PersonBean implements Serializable{
 
 	
 	
+	protected void setPersonPageHandler(PersonPageHandler personPageHandler) {
+		this.personPageHandler = personPageHandler;
+	}
+
+	protected void setLoggedInPersonPageHandler(LoggedInPersonPageHandler loggedInPersonPageHandler) {
+		this.loggedInPersonPageHandler = loggedInPersonPageHandler;
+	}
+
+	/**
+	 * Initialize Person data, as we need to display it immediately
+	 */
 	@PostConstruct
 	public void init()
 	{
-		try{
-			//we will have to init with the logged in user if possible, because right after login the render method 
-			//is not called for some reason
-			verifier = new PersonVerifier(this);
-			personPageHandler = new PersonPageHandler(this);
-			loggedInPersonPageHandler = new LoggedInPersonPageHandler(this);
-			showLoggedInPerson();
-			LOGGER.debug("PersonBean initialized successfully");
-		}
-		catch(Exception ex)
-		{
-			growl("Error occured",ex);
-		}
+		//we will have to init with the logged in user if possible, because right after login the render method 
+		//is not called for some reason
+		//we defer many things to other classes so create them now
+		verifier = new PersonVerifier(this);
+		personPageHandler = new PersonPageHandler(this);
+		loggedInPersonPageHandler = new LoggedInPersonPageHandler(this);
+		//load the logged in person already
+		showLoggedInPerson();
+		LOGGER.debug("PersonBean initialized successfully");
 	}
 
+	/**
+	 * Print an exception on the page
+	 * @param summary summary message
+	 * @param ex Exception to print
+	 */
 	public void growl(String summary, Exception ex)
 	{
 		growl(summary,ex.getMessage());
 	}
 	
+	/**
+	 * Print a message to the page
+	 * @param summary summary message
+	 * @param message message to print
+	 */
 	public void growl(String summary, String message)
 	{
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -168,6 +192,10 @@ public class PersonBean implements Serializable{
 		LOGGER.trace("Send growl to user with summary "+summary+" and message "+message);
 	}
 	
+	/**
+	 * Shows the person by the userid passed
+	 * @return next page to navigate to
+	 */
 	public String showPersonByUserId()
 	{
 		try{
@@ -175,13 +203,16 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 			return null;
 		}
 	}
 	
 	
-	
+	/**
+	 * Shows the logged in person
+	 * @return next page to navigate to
+	 */
 	public String showLoggedInPerson()
 	{
 		try{
@@ -189,11 +220,15 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 			return null;
 		}
 	}
 
+	/**
+	 * Creates a new person for the logged in user
+	 * @return next page to navigate to
+	 */
 	public String createLoggedInPerson()
 	{
 		try{
@@ -201,12 +236,14 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 			return null;
 		}
 	}
 	
-	
+	/**
+	 * Just here for sync with the client
+	 */
 	public void saveData()
 	{
 		try{
@@ -214,10 +251,13 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
+	/**
+	 * Resets the persons image url to null
+	 */
 	public void clearImgUrl()
 	{
 		try{
@@ -225,10 +265,14 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
+	/**
+	 * Saves the person to the backend
+	 * @return next page to navigate to
+	 */
 	public String savePerson()
 	{
 		try{
@@ -236,11 +280,14 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 			return null;
 		}
 	}
 	
+	/**
+	 * Adds a mail to the current person, only in frontend
+	 */
 	public void addMail()
 	{
 		try{
@@ -248,10 +295,13 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
+	/**
+	 * Adds a knowledge to the current person, only in frontend
+	 */
 	public void addKnowledge()
 	{
 		try{
@@ -259,10 +309,13 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
+	/**
+	 * Adds a hobby to the current person, only in frontend
+	 */
 	public void addHobby()
 	{
 		try{
@@ -270,10 +323,13 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
+	/**
+	 * Adds a number to the current person, only in frontend
+	 */
 	public void addNumber()
 	{
 		try{
@@ -281,11 +337,13 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
-
-
+	
+	/**
+	 * Removes the passed mail from the current person, only in frontend
+	 */
 	public void removeMail()
 	{
 		try{
@@ -293,10 +351,13 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
+	/**
+	 * Removes the passed knowledge from the current person, only in frontend
+	 */
 	public void removeKnowledge()
 	{
 		try{
@@ -304,10 +365,13 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
+	/**
+	 * Removes the passed hobby from the current person, only in frontend
+	 */
 	public void removeHobby()
 	{
 		try{
@@ -315,10 +379,13 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
+	/**
+	 * Removes the passed number from the current person, only in frontend
+	 */
 	public void removeNumber()
 	{
 		try{
@@ -326,17 +393,21 @@ public class PersonBean implements Serializable{
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
 	}
 	
+	/**
+	 * Handles a file upload from the page
+	 * @param event event holding data and datatype
+	 */
 	public void handleFileUpload(FileUploadEvent event) {
 		try {
 			loggedInPersonPageHandler.handleFileUpload(event);
 		}
 		catch(Exception ex)
 		{
-			growl("Error occured",ex);
+			growl(ERR_OCCURED,ex);
 		}
     }
 
@@ -347,7 +418,7 @@ public class PersonBean implements Serializable{
 	
 	public Collection<PersonDto> showAllPersons(){
 		Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
-		List<PersonDto> allPersons = new ArrayList<PersonDto>(personService.findAllUser(loggedInUserId));
+		List<PersonDto> allPersons = new ArrayList<>(personService.findAllUser(loggedInUserId));
 		Collections.sort(allPersons,new PersonComparator());
 		if(allPersons.size()==0){
 			LOGGER.debug("Found no user in db");

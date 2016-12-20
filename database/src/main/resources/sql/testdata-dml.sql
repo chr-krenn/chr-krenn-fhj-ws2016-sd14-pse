@@ -89,4 +89,17 @@ INSERT INTO `community` (`id`, `name`, `ispublic`, `author_id`, `created`, `modi
 INSERT INTO `community` (`id`, `name`, `ispublic`, `author_id`, `created`, `modified`, `isactive`)
 	VALUES ('4', 'Group 4', true, 4, NULL, NULL, true);
 
+	#tags
+	INSERT INTO tag(name) VALUES ('swd14');
+	INSERT INTO tag(name) VALUES ('PSE');
+	INSERT INTO tag(name) VALUES ('FHJoanneum');
+	INSERT INTO tag(name) VALUES ('nofilter');
+
+	#message_tag relation
+  INSERT INTO message_tag(messages_id,tags_id) VALUES (1, 1);
+  INSERT INTO message_tag(messages_id,tags_id) VALUES (1, 2);
+  INSERT INTO message_tag(messages_id,tags_id) VALUES (3, 3);
+  INSERT INTO message_tag(messages_id,tags_id) VALUES (4, 4);
+  INSERT INTO message_tag(messages_id,tags_id) VALUES (5, 4);
+
 COMMIT;

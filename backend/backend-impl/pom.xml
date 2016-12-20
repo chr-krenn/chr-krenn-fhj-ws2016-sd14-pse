@@ -36,8 +36,18 @@
             <artifactId>mockito-all</artifactId>
         </dependency>
         <dependency>
-        	<groupId>at.fhj.swd14.pse</groupId>
+            <groupId>at.fhj.swd14.pse</groupId>
             <artifactId>backend-testing-commons</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -1,11 +1,6 @@
 package at.fhj.swd14.pse.community;
 
 
-import static org.mockito.Mockito.times;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -19,17 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.converter.CommunityConverter;
-import at.fhj.swd14.pse.converter.PersonConverter;
-import at.fhj.swd14.pse.converter.StatusConverter;
-import at.fhj.swd14.pse.converter.UserConverter;
-import at.fhj.swd14.pse.person.PersonDto;
-import at.fhj.swd14.pse.person.PersonImage;
 import at.fhj.swd14.pse.repository.CommunityRepository;
-import at.fhj.swd14.pse.repository.PersonRepository;
-import at.fhj.swd14.pse.repository.PersonStatusRepository;
-import at.fhj.swd14.pse.user.User;
-import at.fhj.swd14.pse.user.UserService;
-import org.junit.Assert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommunityServiceImplTest {

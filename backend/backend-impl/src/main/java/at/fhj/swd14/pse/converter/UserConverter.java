@@ -1,10 +1,10 @@
 package at.fhj.swd14.pse.converter;
 
-import at.fhj.swd14.pse.user.User;
-import at.fhj.swd14.pse.user.UserDto;
-
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import at.fhj.swd14.pse.user.User;
+import at.fhj.swd14.pse.user.UserDto;
 
 public class UserConverter {
 

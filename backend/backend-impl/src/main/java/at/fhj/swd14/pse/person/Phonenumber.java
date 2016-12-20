@@ -20,17 +20,14 @@ public class Phonenumber extends AbstractPersonInformation implements Serializab
 
 	public Phonenumber() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Phonenumber(Long id) {
 		super(id);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Phonenumber(String value) {
 		super(value);
-		// TODO Auto-generated constructor stub
 	}
 	
 }

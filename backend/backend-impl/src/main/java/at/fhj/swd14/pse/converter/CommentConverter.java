@@ -5,47 +5,65 @@ import java.util.stream.Collectors;
 
 import at.fhj.swd14.pse.comment.Comment;
 import at.fhj.swd14.pse.comment.CommentDto;
+import at.fhj.swd14.pse.message.Message;
+import at.fhj.swd14.pse.message.MessageDto;
 
-public class CommentConverter {
-		
-	public CommentConverter() {
+public final class CommentConverter {
 
-	}
+    private CommentConverter() {
+    }
 
-	public static CommentDto convert(Comment comment) {
-		if (comment == null) {
-			return null;
-		}
+    public static CommentDto convert(final Comment comment) {
+        return convert(comment, comment.getParentMessage() != null ? MessageConverter.convert(comment.getParentMessage()) : null);
+    }
 
-		CommentDto dto = new CommentDto(comment.getId());
-		dto.setAuthor(UserConverter.convert(comment.getAuthor()));
-		dto.setParentMessage(MessageConverter.convert(comment.getParentMessage()));
-		dto.setText(comment.getText());
-		return dto;
-	}
+    public static CommentDto convert(final Comment comment, final MessageDto parentMessage) {
+        if (comment == null) {
+            return null;
+        }
 
-	public static Comment convert(CommentDto dto) {
-		if (dto == null) {
-			return null;
-		}
-		Comment comment = new Comment(dto.getId());
-		comment.setAuthor(UserConverter.convert(dto.getAuthor()));
-		comment.setParentMessage(MessageConverter.convert(dto.getParentMessage()));
-		comment.setText(dto.getText());
-		return comment;
-	}
+        final CommentDto dto = new CommentDto(comment.getId());
+        dto.setAuthor(UserConverter.convert(comment.getAuthor()));
+        dto.setParentMessage(parentMessage);
+        dto.setText(comment.getText());
+        return dto;
+    }
 
-	public static Collection<CommentDto> convertToDtoList(Collection<Comment> comments) {
-		if (comments == null) {
-			return null;
-		}
-		return comments.stream().map(CommentConverter::convert).collect(Collectors.toList());
-	}
+    public static Comment convert(final CommentDto dto) {
+        return convert(dto, dto.getParentMessage() != null ? MessageConverter.convert(dto.getParentMessage()) : null);
+    }
 
-	public static Collection<Comment> convertToDoList(Collection<CommentDto> comments) {
-		if (comments == null) {
-			return null;
-		}
-		return comments.stream().map(CommentConverter::convert).collect(Collectors.toList());
-	}
+    public static Comment convert(final CommentDto dto, final Message parentMessage) {
+        if (dto == null) {
+            return null;
+        }
+        final Comment comment = new Comment(dto.getId());
+        comment.setAuthor(UserConverter.convert(dto.getAuthor()));
+        comment.setParentMessage(parentMessage);
+        comment.setText(dto.getText());
+        return comment;
+    }
+
+    public static Collection<CommentDto> convertToDtoList(final Collection<Comment> comments) {
+        return convertToDtoList(comments, null);
+    }
+
+    public static Collection<Comment> convertToDoList(final Collection<CommentDto> comments) {
+        return convertToDoList(comments, null);
+    }
+
+    public static Collection<Comment> convertToDoList(final Collection<CommentDto> comments, final Message parentMessage) {
+        if (comments == null) {
+            return null;
+        }
+        return comments.stream().map(c -> convert(c, parentMessage)).collect(Collectors.toList());
+    }
+
+    public static Collection<CommentDto> convertToDtoList(final Collection<Comment> comments, final MessageDto parentMessage) {
+        if (comments == null) {
+            return null;
+        }
+        return comments.stream().map(c -> convert(c, parentMessage)).collect(Collectors.toList());
+    }
+
 }

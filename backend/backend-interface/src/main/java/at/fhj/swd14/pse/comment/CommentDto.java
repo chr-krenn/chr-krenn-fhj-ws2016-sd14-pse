@@ -1,9 +1,9 @@
 package at.fhj.swd14.pse.comment;
 
+import java.io.Serializable;
+
 import at.fhj.swd14.pse.message.MessageDto;
 import at.fhj.swd14.pse.user.UserDto;
-
-import java.io.Serializable;
 
 public class CommentDto implements Serializable {
     private static final long serialVersionUID = 1L;

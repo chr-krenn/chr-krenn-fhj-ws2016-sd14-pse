@@ -1,13 +1,13 @@
 package at.fhj.swd14.pse.person;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-
-import java.io.Serializable;
 
 /**
  * Abstract Super Class for ManyToOne Text Information Entitys for the Person class
@@ -28,6 +28,20 @@ public abstract class AbstractPersonInformation implements Serializable {
 	@ManyToOne(optional=false)
 	private Person person;
 	
+	public AbstractPersonInformation(Long id) {
+		this.id = id;
+	}
+	
+	public AbstractPersonInformation(String value)
+	{
+		setValue(value);
+	}
+	
+	public AbstractPersonInformation()
+	{
+		
+	}
+
 	public Person getPerson() {
 		return person;
 	}
@@ -52,18 +66,5 @@ public abstract class AbstractPersonInformation implements Serializable {
 		this.id = id;
 	}
 
-	public AbstractPersonInformation(Long id) {
-		this.id = id;
-	}
-	
-	public AbstractPersonInformation(String value)
-	{
-		setValue(value);
-	}
-	
-	public AbstractPersonInformation()
-	{
-		
-	}
 	
 }

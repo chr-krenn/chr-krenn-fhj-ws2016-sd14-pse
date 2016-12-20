@@ -7,25 +7,27 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.swing.table.TableStringConverter;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import at.fhj.swd14.pse.comment.Comment;
 import at.fhj.swd14.pse.community.Community;
-import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.tag.Tag;
+import at.fhj.swd14.pse.user.User;
 
 @Entity
 @Table(name = "message")
@@ -33,16 +35,12 @@ import at.fhj.swd14.pse.tag.Tag;
 	@NamedQuery(name="Message.findByAuthorId", query="SELECT m FROM Message m WHERE m.author.id = :authorUserId"),
 	@NamedQuery(name="Message.findUsersPrivateMessage",query="SELECT m FROM Message m WHERE m.recipient IS NOT NULL "
 			+ "AND m.recipient.id = :userId"),
-	
-
-	//TODO: finish query so that only relevant messages are returned (global, own, joined Community)
-	// especially: change to community entity as soon as it's implemented!!
 	@NamedQuery(name="Message.findByCommunityId", query="SELECt m FROM Message m WHERE m.community.id = :communityId"),
-	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m"),
 	@NamedQuery(name="Message.findGlobalMessages", query="SELECT m FROM Message m WHERE m.community IS NULL AND "
-			+ "m.recipient IS NULL")
+			+ "m.recipient IS NULL"),
 	
-	
+	//TODO: finish query so that only relevant messages are returned (global, own, joined Community)
+	@NamedQuery(name="Message.findUserRelated", query="SELECT m FROM Message m WHERE m.recipient.id = :userId OR m.author.id = :userId")
 })
 public class Message implements Serializable {
 	
@@ -82,6 +80,20 @@ public class Message implements Serializable {
 
     @Column(insertable = false, updatable = false)
     private Instant modified;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+    		name = "like_for_message",
+    		joinColumns =
+    			{
+    					@JoinColumn(name = "comment_id")
+    			},
+    		inverseJoinColumns =
+    			{
+    					@JoinColumn(name = "user_id")
+    			}
+    		)
+    private List<User> users;
     
     public Message(){
     }
@@ -120,7 +132,7 @@ public class Message implements Serializable {
     public void setTags(List<Tag> tags) { this.tags = tags; }
     public void addTag(Tag tag){
         if(tags == null)
-            tags = new ArrayList<Tag>();
+            tags = new ArrayList<>();
         tags.add(tag);
     }
 	
@@ -157,6 +169,14 @@ public class Message implements Serializable {
 
     public Instant getModified() {
         return modified;
+    }
+    
+    public void setUsers(List<User> users) {
+    	this.users = users;
+    }
+    
+    public List<User> getUsers() {
+    	return this.users;
     }
 	
 	@Override

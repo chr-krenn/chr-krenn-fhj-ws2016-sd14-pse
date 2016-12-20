@@ -16,6 +16,19 @@ public class AbstractPersonInformationDto implements Serializable {
 	private String value;
 	private PersonDto person;
 	
+	public AbstractPersonInformationDto(Long id) {
+		this.id = id;
+	}
+	public AbstractPersonInformationDto()
+	{
+		//don't do anything, its just here so that you can instantiate without params
+	}
+	public AbstractPersonInformationDto(Long id, String value)
+	{
+		this(id);
+		setValue(value);
+	}
+	
 	public PersonDto getPerson() {
 		return person;
 	}
@@ -33,17 +46,5 @@ public class AbstractPersonInformationDto implements Serializable {
 	}
 	public void setValue(String value) {
 		this.value = value;
-	}
-	public AbstractPersonInformationDto(Long id) {
-		this.id = id;
-	}
-	public AbstractPersonInformationDto()
-	{
-		
-	}
-	public AbstractPersonInformationDto(Long id, String value)
-	{
-		this(id);
-		setValue(value);
 	}
 }

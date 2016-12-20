@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import at.fhj.swd14.pse.message.MessageDto;
-
 @Remote
 public interface CommunityService {
 

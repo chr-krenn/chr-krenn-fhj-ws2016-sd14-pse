@@ -1,13 +1,7 @@
 package at.fhj.swd14.pse.user;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +11,10 @@ import javax.persistence.Table;
 
 import at.fhj.swd14.pse.community.Community;
 import at.fhj.swd14.pse.community.UserCommunity;
+import at.fhj.swd14.pse.tag.Tag;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -36,14 +34,7 @@ public class User implements Serializable {
     @Column
     private String salt;
     
-//    private Set<UserCommunity> communities;
-//    
-//    @OneToMany(mappedBy = "user")
-//	public  Set<UserCommunity> getCommunities(){
-//    	return communities;
-//    	
-//    }
-	
+
     @OneToMany(mappedBy = "user")
     private List<UserCommunity> userCommunities;
   
@@ -51,11 +42,6 @@ public class User implements Serializable {
     	return userCommunities;
     }
     
-//   
-//    public List<UserCommunity> getUsers(){
-//    	return userCommunitys;
-//    }
-
     public User(Long id) {
         this.id = id;
     }

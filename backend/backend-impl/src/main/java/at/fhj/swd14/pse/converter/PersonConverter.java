@@ -13,6 +13,11 @@ public class PersonConverter {
     private PersonConverter() {
     }
 
+    /**
+	 * Convertes the given Person object to a PersonDto Object
+	 * @param person Person object to convert
+	 * @return PersonDto object
+	 */
     public static PersonDto convert(Person person) {
         if (person == null) {
             return null;
@@ -38,6 +43,12 @@ public class PersonConverter {
         return dto;
     }
 
+    /**
+     * Converts the given PersonDto Object to a Person Object
+     * No Database Operations are performed
+     * @param person PersonDto Object
+     * @return Person Object
+     */
     public static Person convert(PersonDto dto) {
         if (dto == null) {
             return null;
@@ -62,6 +73,11 @@ public class PersonConverter {
         return person;
     }
 
+    /**
+     * Converts the given collection of Person Objects to a Collection of PersonDto Objects
+     * @param persons Collection of Person Objects
+     * @return Collection (internal type: List) of PersonDto Objects
+     */
     public static Collection<PersonDto> convertToDtoList(Collection<Person> persons) {
         if (persons == null) {
             return null;
@@ -69,6 +85,12 @@ public class PersonConverter {
         return persons.stream().map(PersonConverter::convert).collect(Collectors.toList());
     }
 
+    /**
+     * Converts the given collection of PersonDto objects to a Collection of Person Objects
+     * No Database Operations are performed
+     * @param persons Collection of PersonDto Objects
+     * @return Collection (internal type: List) of Person Objects
+     */
     public static Collection<Person> convertToDoList(Collection<PersonDto> persons) {
         if (persons == null) {
             return null;

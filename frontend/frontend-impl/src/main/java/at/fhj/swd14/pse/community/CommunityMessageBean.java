@@ -10,14 +10,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.primefaces.event.CloseEvent;
-import org.primefaces.event.ToggleEvent;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
@@ -29,7 +26,7 @@ import at.fhj.swd14.pse.user.UserService;
 @Named
 @SessionScoped
 
-public class CommunityMessageBean implements Serializable{
+public class CommunityMessageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -38,10 +35,10 @@ public class CommunityMessageBean implements Serializable{
 	private static final Logger LOGGER = LogManager.getLogger(CommunityBean.class);
 
 	@EJB(name = "ejb/CommunityService")
-	private CommunityService communityService;
+	private transient CommunityService communityService;
 	
 	@EJB(name = "ejb/UserService")
-	private UserService userService;
+	private transient UserService userService;
 
 	
 
@@ -81,13 +78,13 @@ public class CommunityMessageBean implements Serializable{
 		LOGGER.error("Initialising the CommunityBean");
 		
 		// Get logged in user
-		long currentUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();;
-		
+		long currentUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
+
 		UserDto testUser = userService.find(currentUserId);
 		
-		this.createdCommunities = new ArrayList<CommunityDto>();
-		this.joinedCommunities = new ArrayList<CommunityDto>();
-		this.publicCommunities = new ArrayList<CommunityDto>();
+		this.createdCommunities = new ArrayList<>();
+		this.joinedCommunities = new ArrayList<>();
+		this.publicCommunities = new ArrayList<>();
 		
 		this.createdCommunities = communityService.findByAuthorId(currentUserId);
 		this.joinedCommunities = communityService.findUserRelated(currentUserId);

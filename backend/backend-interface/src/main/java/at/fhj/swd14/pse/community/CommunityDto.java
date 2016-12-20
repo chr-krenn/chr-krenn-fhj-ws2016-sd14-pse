@@ -78,7 +78,7 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
     	this.createTime = createDate;
     }
     
-    private List<UserDto> allowedUsers = new ArrayList<UserDto>();
+    private List<UserDto> allowedUsers = new ArrayList<>();
     
     public List<UserDto> getAllowedUsers(){
     	
@@ -97,7 +97,7 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
     	this.allowedUsers.removeIf(user -> user.getId() == userId);
     }
     
-    private List<UserDto> pendingUsers = new ArrayList<UserDto>();
+    private List<UserDto> pendingUsers = new ArrayList<>();
 	
 	public List<UserDto> getPendingUsers() {
 		return pendingUsers;

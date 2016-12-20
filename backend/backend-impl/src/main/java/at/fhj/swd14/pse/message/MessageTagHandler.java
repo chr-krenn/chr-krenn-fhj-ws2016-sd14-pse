@@ -2,11 +2,10 @@ package at.fhj.swd14.pse.message;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.ejb.EJB;
-
-import java.util.regex.Matcher;
 
 import at.fhj.swd14.pse.converter.MessageConverter;
 import at.fhj.swd14.pse.converter.TagConverter;

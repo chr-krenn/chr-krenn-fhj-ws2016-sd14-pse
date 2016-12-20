@@ -25,7 +25,6 @@ public class Mailaddress extends AbstractPersonInformation {
 
 	public Mailaddress(String value) {
 		super(value);
-		// TODO Auto-generated constructor stub
 	}
 	
 }

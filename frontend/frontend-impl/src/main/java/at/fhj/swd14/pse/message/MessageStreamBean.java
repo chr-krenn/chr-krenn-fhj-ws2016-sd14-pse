@@ -1,28 +1,20 @@
 package at.fhj.swd14.pse.message;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.community.CommunityDto;
 import at.fhj.swd14.pse.community.CommunityService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.*;
 
 @Named
-@Stateful
 @ViewScoped
 public class MessageStreamBean implements Serializable {
 	// ---------- Member including Get/Set ------------
@@ -34,10 +26,10 @@ public class MessageStreamBean implements Serializable {
 	private static final Logger LOGGER = LogManager.getLogger(MessageStreamBean.class);
 
 	@EJB(name = "ejb/MessageService")
-	private MessageService messageService;
+	private transient MessageService messageService;
 
 	@EJB(name = "ejb/CommunityService")
-	private CommunityService communityService;
+	private transient CommunityService communityService;
 
 	/**
 	 * Maps to a GET Parameter of the xhtml file
@@ -214,7 +206,7 @@ public class MessageStreamBean implements Serializable {
 			return message.getChilds();
 		}
 
-		return new ArrayList<CommentDto>();
+		return new ArrayList<>();
 	}
 
 	/**
@@ -268,7 +260,7 @@ public class MessageStreamBean implements Serializable {
 		} else if (currentCommunity.getId() > 0) { // Community Messages
 			setMessages(getCommunityMessages(currentCommunity.getId()));
 		} else {
-			setMessages(new ArrayList<MessageDto>()); // Default
+			setMessages(new ArrayList<>()); // Default
 		}
 	}
 
@@ -280,10 +272,10 @@ public class MessageStreamBean implements Serializable {
 	private void initAvailableCommunities() {
 		LOGGER.debug("Initialising the Communities for the Selectbox");
 		if (getParameterCommunityId() != null) {
-			availableCommunities = new ArrayList<CommunityDto>();
+			availableCommunities = new ArrayList<>();
 			availableCommunities.add(communityService.find(getParameterCommunityId()));
 		} else {
-			availableCommunities = new ArrayList<CommunityDto>();
+			availableCommunities = new ArrayList<>();
 			CommunityDto c = new CommunityDto(-3L);
 			c.setName("Alle");
 			CommunityDto c2 = new CommunityDto(-2L);
@@ -341,7 +333,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return A map of Messages
 	 */
 	private Map<Long, MessageDto> mapMessages(List<MessageDto> messageList) {
-		Map<Long, MessageDto> mappedMessages = new HashMap<Long, MessageDto>();
+		Map<Long, MessageDto> mappedMessages = new HashMap<>();
 		for (MessageDto message : messageList) {
 			mappedMessages.put(message.getId(), message);
 		}

@@ -11,6 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+/**
+ * PersonImage Entity
+ * @author Patrick Kainz
+ *
+ */
 @Entity
 @Table(name="person_image")
 @NamedQuery(name="PersonImage.findByPerson", query="SELECT p FROM PersonImage p WHERE p.person.id = :personid")
@@ -30,6 +35,14 @@ public class PersonImage implements Serializable{
 	@ManyToOne(optional=false)
 	private Person person;
 
+	public PersonImage() {
+		super();
+	}
+
+	public PersonImage(Long id) {
+		setId(id);
+	}
+	
 	public String getContentType() {
 		return contentType;
 	}
@@ -62,13 +75,6 @@ public class PersonImage implements Serializable{
 		this.data = data;
 	}
 
-	public PersonImage() {
-		super();
-	}
-
-	public PersonImage(Long id) {
-		setId(id);
-	}
 	
 	
 }

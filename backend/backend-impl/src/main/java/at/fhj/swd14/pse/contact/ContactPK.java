@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.contact;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -59,10 +60,7 @@ public class ContactPK implements Serializable {
         if (this.person1Id != other.person1Id) {
             return false;
         }
-        if (this.person2Id != other.person2Id) {
-            return false;
-        }
-        return true;
+        return this.person2Id == other.person2Id;
     }
 
     @Override

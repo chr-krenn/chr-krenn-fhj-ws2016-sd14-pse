@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -66,7 +67,7 @@ public class CommunityServiceImpl implements CommunityService{
 		Map<String, Object> parameter = new HashMap<>();
 		List<CommunityDto> comDtos = executeNamedQuery("Community.findUserRelated",parameter);
 		
-		List<CommunityDto> relatedDtos = new ArrayList<CommunityDto>();
+		List<CommunityDto> relatedDtos = new ArrayList<>();
 		
 		comDtos.forEach(dto -> dto.getAllowedUsers().forEach(user -> {
 			if(user.getId() == userId)

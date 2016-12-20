@@ -4,6 +4,11 @@ import org.junit.Assert;
 
 public class PersonImageDtoTester {
 
+	private PersonImageDtoTester()
+	{
+		//gets rid of the default constructor
+	}
+	
     public static void assertEquals(PersonImageDto expected, PersonImageDto actual) {
         Assert.assertEquals(expected.getId(), actual.getId());
         Assert.assertArrayEquals(expected.getData(), actual.getData());

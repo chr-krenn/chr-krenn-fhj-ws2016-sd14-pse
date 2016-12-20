@@ -8,6 +8,7 @@ import java.util.List;
 
 import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.community.CommunityDto;
+import at.fhj.swd14.pse.tag.TagDto;
 import at.fhj.swd14.pse.user.UserDto;
 
 public class MessageDto implements Serializable, Comparable<MessageDto> {
@@ -20,7 +21,9 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
 	private UserDto author;
 	private UserDto recipient;
 	
-	private CommunityDto community; 
+	private CommunityDto community;
+
+	private List<TagDto> tags;
 
 	private String title;
 	private String content;
@@ -105,6 +108,14 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
 	public Instant getCreated() {
         return created;
     }
+
+    public List<TagDto> getTags() { return tags; }
+    public void setTags(List<TagDto> tags) { this.tags = tags; }
+    public void addTag(TagDto tag){
+        if(tags == null)
+            tags = new ArrayList<>();
+        tags.add(tag);
+    }
 	
 	/**
 	 * do not use this setter on frontend site. It will be automatically set as
@@ -131,8 +142,8 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
 	public String toString(){
 		return "MessageDto{" +
                 "id=" + getId() +
-                "recipientId=" + getRecipient() +
-                ", userId='" + getAuthor().getId() + '\'' +
+                ", recipientId=" + getRecipient() +
+                ", userId='" + getAuthor() + '\'' +
                 ", communityId='" + getCommunity() + '\'' +
                 ", title='" + getTitle() + '\'' +
                 '}';

@@ -1,13 +1,17 @@
 package at.fhj.swd14.pse.news;
 
-import at.fhj.swd14.pse.converter.NewsConverter;
-import at.fhj.swd14.pse.repository.NewsRepository;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.util.*;
+
+import at.fhj.swd14.pse.converter.NewsConverter;
+import at.fhj.swd14.pse.repository.NewsRepository;
 
 @Stateless
 public class NewsServiceImpl implements NewsService {

@@ -21,16 +21,14 @@ public class StatusConverter {
         if (status == null) {
             return null;
         }
-        StatusDto dto = new StatusDto(status.getName());
-        return dto;
+        return new StatusDto(status.getName());
     }
 
     public static Status convert(StatusDto status) {
         if (status == null) {
             return null;
         }
-        Status stat =  new Status(status.getName());
-        return stat;
+        return new Status(status.getName());
     }
 
     public static Collection<StatusDto> convertToDtoList(Collection<Status> status) {

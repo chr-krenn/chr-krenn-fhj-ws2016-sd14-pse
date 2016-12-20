@@ -99,13 +99,7 @@ public class CommunityBean implements Serializable{
 	private List<CommunityDto> otherCommunities;
 	private List<CommunityDto> communitiesToActivate;
 	
-	/*
-	private CommunityDto community;
-	public CommunityBean() {
-    	LOGGER.debug("Create: " + CommunityBean.class.getSimpleName());
-    	this.community = new CommunityDto();
-    }
-    */
+	
 	
 	public List<CommunityDto> getCommunitiesToActivate() {
 		return communitiesToActivate;

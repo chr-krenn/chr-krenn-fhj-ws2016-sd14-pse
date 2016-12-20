@@ -33,6 +33,8 @@ public class CommunityConverter {
 		Community community = new Community();
 		community.setId(dto.getId());
 		community.setAllowedUsers(dto.getAllowedUsers());
+		
+		
 		community.setName(dto.getName());
 		community.setAuthor(UserConverter.convert(dto.getAuthor()));
 		community.setActiveState(dto.getActiveState());

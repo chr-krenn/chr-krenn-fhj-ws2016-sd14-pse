@@ -19,6 +19,20 @@
     <div class="main clearfix">
         <section class="content-lft">
         </section>
+        <section class="content-lft">
+        <ul class="about sidebarlink">
+			<h:form>
+    			<p:growl autoUpdate="true"/>
+    			<p:menu toggleable="true" >	
+					<p:submenu label="Ajax">  			
+	    			<ui:repeat var="item" value="#{communityMessageBean.joinedCommunities}">
+						<p:menuitem value="Update" actionListener="#{communityMessageBean.test(item.id)}" />
+				    </ui:repeat> 
+				  </p:submenu>  
+			    </p:menu>
+			</h:form>
+			</ul> 
+        </section>
         <section class="content-ctr">
             <ui:include src="community.xhtml"/>
         </section>

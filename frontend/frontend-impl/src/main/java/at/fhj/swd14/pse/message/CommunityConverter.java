@@ -1,5 +1,10 @@
 package at.fhj.swd14.pse.message;
 
+import at.fhj.swd14.pse.community.CommunityDto;
+import at.fhj.swd14.pse.community.CommunityService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;
@@ -7,18 +12,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import at.fhj.swd14.pse.community.CommunityDto;
-import at.fhj.swd14.pse.community.CommunityService;
-
 @Named
 @ApplicationScoped
 public class CommunityConverter implements Converter {
-	/**
-	 * The LOGGER to use
-	 */
 	private static final Logger LOGGER = LogManager.getLogger(CommunityConverter.class);
 	
 	@EJB(name = "ejb/CommunityService")
@@ -41,7 +37,7 @@ public class CommunityConverter implements Converter {
 			return null;
 		}
 		Long id = Long.parseLong(value);
-		CommunityDto c = null;
+		final CommunityDto c;
 		
 		if(id > 0) {
 			c = communityService.find(id);

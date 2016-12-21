@@ -77,13 +77,10 @@ public class PersonServiceImpl implements PersonService {
         Collection<PersonDto> resultList = PersonConverter.convertToDtoList(repository.findAll());
 
         Person loggedInPerson = repository.findByUserId(loggedInUserID);
-        Collection<Contact> contacts = new ArrayList<>();
-        if (loggedInPerson != null) {
-            contacts = contactRepository.findByPersonId(loggedInPerson.getId());
-        }
+        Collection<Contact> contacts = contactRepository.findByPersonId(loggedInPerson.getId());
         //remove logged in person from friend view
         for (PersonDto p : new ArrayList<>(resultList)) {
-            if (Objects.equals(PersonConverter.convert(p).getId(), loggedInPerson.getId())) {
+            if (Objects.equals(p.getId(), loggedInPerson.getId())) {
                 resultList.remove(p);
             }
         }
@@ -95,7 +92,11 @@ public class PersonServiceImpl implements PersonService {
                 otherPersonID = contact.getContactPK().getPerson2Id();
             }
             final long fOtherPersonID = otherPersonID;
-            resultList.stream().filter(p -> p.getId() == fOtherPersonID).findFirst().get().setFriendState("Entfernen");
+            resultList.stream()
+                    .filter(p -> p.getId() == fOtherPersonID)
+                    .findFirst()
+                    .orElseThrow(AssertionError::new)
+                    .setFriendState("Entfernen");
         }
 
         return resultList;
@@ -107,12 +108,12 @@ public class PersonServiceImpl implements PersonService {
      */
     @Override
     public void changeFriendState(long loggedInUserID, long otherPersonID) {
-        Collection<PersonDto> resultList = PersonConverter.convertToDtoList(repository.findAll());
-
         Person loggedInPerson = repository.findByUserId(loggedInUserID);
 
         Collection<Contact> existingContacts = contactRepository.findByPersonId(loggedInPerson.getId());
-        Optional<Contact> contactOptional = existingContacts.stream().filter(c -> c.getContactPK().getPerson1Id() == otherPersonID || c.getContactPK().getPerson2Id() == otherPersonID).findFirst();
+        Optional<Contact> contactOptional = existingContacts.stream()
+                .filter(c -> c.getContactPK().getPerson1Id() == otherPersonID || c.getContactPK().getPerson2Id() == otherPersonID)
+                .findFirst();
         if (contactOptional.isPresent()) {
             //contact exists -> remove
             contactRepository.remove(contactOptional.get());

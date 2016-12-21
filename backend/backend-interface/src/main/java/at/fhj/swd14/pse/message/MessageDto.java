@@ -152,11 +152,16 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
     @Override
     public String toString() {
         return "MessageDto{" +
-                "id=" + getId() +
-                ", recipientId=" + getRecipient() +
-                ", userId='" + getAuthor() + '\'' +
-                ", communityId='" + getCommunity() + '\'' +
-                ", title='" + getTitle() + '\'' +
+                "id=" + id +
+                ", childs=" + childs +
+                ", author=" + author +
+                ", recipient=" + recipient +
+                ", community=" + community +
+                ", tags=" + tags +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", created=" + created +
+                ", modified=" + modified +
                 '}';
     }
 
@@ -170,4 +175,37 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
         return 0;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MessageDto)) return false;
+
+        MessageDto that = (MessageDto) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (childs != null ? !childs.equals(that.childs) : that.childs != null) return false;
+        if (author != null ? !author.equals(that.author) : that.author != null) return false;
+        if (recipient != null ? !recipient.equals(that.recipient) : that.recipient != null) return false;
+        if (community != null ? !community.equals(that.community) : that.community != null) return false;
+        if (tags != null ? !tags.equals(that.tags) : that.tags != null) return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (content != null ? !content.equals(that.content) : that.content != null) return false;
+        if (created != null ? !created.equals(that.created) : that.created != null) return false;
+        return modified != null ? modified.equals(that.modified) : that.modified == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (childs != null ? childs.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (recipient != null ? recipient.hashCode() : 0);
+        result = 31 * result + (community != null ? community.hashCode() : 0);
+        result = 31 * result + (tags != null ? tags.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (created != null ? created.hashCode() : 0);
+        result = 31 * result + (modified != null ? modified.hashCode() : 0);
+        return result;
+    }
 }

@@ -1,9 +1,9 @@
 package at.fhj.swd14.pse.like;
 
-import java.io.Serializable;
-
 import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.user.UserDto;
+
+import java.io.Serializable;
 
 /**
  * DTO for a like of a comment.

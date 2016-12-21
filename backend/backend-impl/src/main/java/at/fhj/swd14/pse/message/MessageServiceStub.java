@@ -1,14 +1,12 @@
 package at.fhj.swd14.pse.message;
 
-import java.util.ArrayList;
-import java.util.List;
+import at.fhj.swd14.pse.comment.CommentDto;
+import at.fhj.swd14.pse.user.UserDto;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
-import at.fhj.swd14.pse.comment.CommentDto;
-import at.fhj.swd14.pse.repository.MessageRepository;
-import at.fhj.swd14.pse.user.UserDto;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class MessageServiceStub implements MessageService {

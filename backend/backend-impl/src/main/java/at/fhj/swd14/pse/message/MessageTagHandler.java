@@ -1,17 +1,15 @@
 package at.fhj.swd14.pse.message;
 
+import at.fhj.swd14.pse.tag.Tag;
+import at.fhj.swd14.pse.tag.TagConverter;
+import at.fhj.swd14.pse.tag.TagDto;
+import at.fhj.swd14.pse.tag.TagService;
+
+import javax.ejb.EJB;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.ejb.EJB;
-
-import at.fhj.swd14.pse.converter.MessageConverter;
-import at.fhj.swd14.pse.converter.TagConverter;
-import at.fhj.swd14.pse.tag.Tag;
-import at.fhj.swd14.pse.tag.TagDto;
-import at.fhj.swd14.pse.tag.TagService;
 
 public class MessageTagHandler {
 
@@ -59,7 +57,7 @@ public class MessageTagHandler {
         Matcher matcher = p.matcher(text);
 
         while (matcher.find()) {
-        	tagSet.add(matcher.group(0).substring(1).toLowerCase());
+            tagSet.add(matcher.group(0).substring(1).toLowerCase());
         }
 
         return tagSet;

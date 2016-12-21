@@ -1,16 +1,14 @@
 package at.fhj.swd14.pse.person;
 
-import org.junit.Assert;
-
 import at.fhj.swd14.pse.user.UserDtoTester;
+import org.junit.Assert;
 
 public class PersonDtoTester {
 
-	private PersonDtoTester()
-	{
-		//gets rid of the default constructor
-	}
-	
+    private PersonDtoTester() {
+        //gets rid of the default constructor
+    }
+
     public static void assertEquals(PersonDto expected, PersonDto actual) {
         Assert.assertEquals(expected.getId(), actual.getId());
         Assert.assertEquals(expected.getFirstname(), actual.getFirstname());

@@ -1,8 +1,7 @@
 package at.fhj.swd14.pse.comment;
 
-import java.util.List;
-
 import javax.ejb.Remote;
+import java.util.List;
 
 @Remote
 public interface CommentService {

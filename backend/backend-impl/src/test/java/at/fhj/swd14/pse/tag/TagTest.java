@@ -7,12 +7,12 @@ import org.junit.Test;
 public class TagTest {
 
     @Test
-    public void testConstructor(){
+    public void testConstructor() {
         Tag t = new Tag();
     }
 
     @Test
-    public void testToString(){
+    public void testToString() {
 
         Tag t = new Tag(1L, "valid");
         Assert.assertEquals("Tag{id=1, name='valid'}", t.toString());

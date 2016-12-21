@@ -1,34 +1,23 @@
 package at.fhj.swd14.pse.tag;
 
+import at.fhj.swd14.pse.message.Message;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
-import at.fhj.swd14.pse.message.Message;
-
 @Entity
 @Table(name = "tag")
-@NamedQueries({
-	@NamedQuery(name="Tag.findByName", query="SELECT t FROM Tag t WHERE t.name = LOWER(:name)"),
-})
-public class Tag implements Serializable{
+@NamedQueries(@NamedQuery(name = "Tag.findByName", query = "SELECT t FROM Tag t WHERE t.name = LOWER(:name)"))
+public class Tag implements Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5190605103970326377L;
+     *
+     */
+    private static final long serialVersionUID = 5190605103970326377L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -37,14 +26,15 @@ public class Tag implements Serializable{
     @ManyToMany(mappedBy = "tags")
     private Collection<Message> messages;
 
-    public Tag(){}
+    public Tag() {
+    }
 
-    public Tag(Long id){
+    public Tag(Long id) {
 
         setId(id);
     }
 
-    public Tag(Long id, String name){
+    public Tag(Long id, String name) {
 
         setId(id);
         setName(name);
@@ -76,7 +66,15 @@ public class Tag implements Serializable{
         this.name = name;
     }
 
-    public Collection<Message> getMessages(){return this.messages;}
-    public void setMessages(Collection<Message> messages){this.messages = messages;}
-    public void addMessage(Message message){this.messages.add(message);}
+    public Collection<Message> getMessages() {
+        return this.messages;
+    }
+
+    public void setMessages(Collection<Message> messages) {
+        this.messages = messages;
+    }
+
+    public void addMessage(Message message) {
+        this.messages.add(message);
+    }
 }

@@ -6,25 +6,25 @@ import javax.persistence.Table;
 
 /**
  * Mailaddress entity
- * @author Patrick Kainz
  *
+ * @author Patrick Kainz
  */
 @Entity
-@Table(name="mailaddress")
-@NamedQuery(name="Mailaddress.findByValue", query="SELECT i FROM Mailaddress i WHERE i.person.id = :personid AND i.value=:value")
+@Table(name = "mailaddress")
+@NamedQuery(name = "Mailaddress.findByValue", query = "SELECT i FROM Mailaddress i WHERE i.person.id = :personid AND i.value=:value")
 public class Mailaddress extends AbstractPersonInformation {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public Mailaddress() {
-		super();
-	}
+    public Mailaddress() {
+        super();
+    }
 
-	public Mailaddress(Long id) {
-		super(id);
-	}
+    public Mailaddress(Long id) {
+        super(id);
+    }
 
-	public Mailaddress(String value) {
-		super(value);
-	}
-	
+    public Mailaddress(String value) {
+        super(value);
+    }
+
 }

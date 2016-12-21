@@ -1,14 +1,14 @@
 package at.fhj.swd14.pse.person;
 
-import static org.mockito.Mockito.times;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.naming.NamingException;
-
+import at.fhj.swd14.pse.contact.Contact;
+import at.fhj.swd14.pse.repository.internal.ContactRepositoryImpl;
+import at.fhj.swd14.pse.repository.internal.PersonImageRepositoryImpl;
+import at.fhj.swd14.pse.repository.internal.PersonRepositoryImpl;
+import at.fhj.swd14.pse.repository.internal.PersonStatusRepositoryImpl;
+import at.fhj.swd14.pse.user.User;
+import at.fhj.swd14.pse.user.UserConverter;
+import at.fhj.swd14.pse.user.UserDto;
+import at.fhj.swd14.pse.user.UserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,18 +18,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import at.fhj.swd14.pse.contact.Contact;
-import at.fhj.swd14.pse.converter.PersonConverter;
-import at.fhj.swd14.pse.converter.PersonImageConverter;
-import at.fhj.swd14.pse.converter.StatusConverter;
-import at.fhj.swd14.pse.converter.UserConverter;
-import at.fhj.swd14.pse.repository.ContactRepository;
-import at.fhj.swd14.pse.repository.PersonImageRepository;
-import at.fhj.swd14.pse.repository.PersonRepository;
-import at.fhj.swd14.pse.repository.PersonStatusRepository;
-import at.fhj.swd14.pse.user.User;
-import at.fhj.swd14.pse.user.UserDto;
-import at.fhj.swd14.pse.user.UserService;
+import javax.naming.NamingException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PersonServiceImplTest {
@@ -38,22 +33,22 @@ public class PersonServiceImplTest {
     private PersonServiceImpl service;
 
     @Mock
-    private PersonRepository personRepo;
+    private PersonRepositoryImpl personRepo;
 
     @Mock
-    private PersonImageRepository imgRepo;
+    private PersonImageRepositoryImpl imgRepo;
 
     @Mock
     private UserService userService;
 
     @Mock
-    private PersonStatusRepository statusRepo;
+    private PersonStatusRepositoryImpl statusRepo;
 
     @Mock
     private PersonVerifier verifier;
 
     @Mock
-    private ContactRepository contactRepo;
+    private ContactRepositoryImpl contactRepo;
 
     private User user;
     private User user2;

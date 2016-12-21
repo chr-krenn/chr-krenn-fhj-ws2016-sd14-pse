@@ -1,60 +1,53 @@
 package at.fhj.swd14.pse.department;
 
+import at.fhj.swd14.pse.person.Person;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import at.fhj.swd14.pse.person.Person;
-
 /**
  * Department Entity
- * @author Patrick Kainz
  *
+ * @author Patrick Kainz
  */
 @Entity
-@Table(name="department")
+@Table(name = "department")
 public class Department implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-	@Column
-	private String name;
-	
-	@OneToMany(mappedBy="department")
-	private List<Person> members;
-	
-	public Department(Long id) {
-		this.id = id;
-	}
-	
-	public Department()
-	{
-		//do nothing, its just here so that you can instanciate it without a parameter
-	}
+    @Column
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    @OneToMany(mappedBy = "department")
+    private List<Person> members;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Department(Long id) {
+        this.id = id;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Department() {
+        //do nothing, its just here so that you can instanciate it without a parameter
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 }

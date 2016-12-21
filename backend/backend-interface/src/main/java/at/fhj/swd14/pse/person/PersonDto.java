@@ -1,11 +1,11 @@
 package at.fhj.swd14.pse.person;
 
+import at.fhj.swd14.pse.department.DepartmentDto;
+import at.fhj.swd14.pse.user.UserDto;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-
-import at.fhj.swd14.pse.department.DepartmentDto;
-import at.fhj.swd14.pse.user.UserDto;
 
 /**
  * Data transfer object for person

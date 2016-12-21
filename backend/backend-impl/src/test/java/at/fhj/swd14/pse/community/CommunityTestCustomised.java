@@ -1,6 +1,6 @@
 /**
  * Customised User Tests
- * 
+ *
  * @autor Michael W. Koch
  */
 

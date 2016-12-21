@@ -1,9 +1,9 @@
 package at.fhj.swd14.pse.news;
 
+import at.fhj.swd14.pse.person.PersonDto;
+
 import java.io.Serializable;
 import java.time.Instant;
-
-import at.fhj.swd14.pse.person.PersonDto;
 
 public class NewsDto implements Serializable {
 

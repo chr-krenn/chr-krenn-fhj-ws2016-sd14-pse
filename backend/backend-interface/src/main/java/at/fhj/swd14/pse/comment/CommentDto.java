@@ -1,9 +1,9 @@
 package at.fhj.swd14.pse.comment;
 
-import java.io.Serializable;
-
 import at.fhj.swd14.pse.message.MessageDto;
 import at.fhj.swd14.pse.user.UserDto;
+
+import java.io.Serializable;
 
 public class CommentDto implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -13,13 +13,14 @@ public class CommentDto implements Serializable {
     private UserDto author;
     private MessageDto parentMessage;
 
-    public CommentDto(){
-    	
+    public CommentDto() {
+
     }
-    public CommentDto(Long id){
-    	setId(id);
+
+    public CommentDto(Long id) {
+        setId(id);
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -51,13 +52,13 @@ public class CommentDto implements Serializable {
     public void setParentMessage(MessageDto parentMessage) {
         this.parentMessage = parentMessage;
     }
-    
+
     @Override
-	public String toString(){
-		return "CommentDto{" +
+    public String toString() {
+        return "CommentDto{" +
                 "id=" + getId() +
                 ", userId='" + getAuthor() + '\'' +
                 ", messageId='" + getParentMessage().getId() + '\'' +
                 '}';
-	}
+    }
 }

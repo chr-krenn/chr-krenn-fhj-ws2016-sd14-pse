@@ -3,26 +3,24 @@ package at.fhj.swd14.pse.person;
 
 /**
  * Dto for phone number
- * @author Patrick Kainz
  *
+ * @author Patrick Kainz
  */
 public class PhonenumberDto extends AbstractPersonInformationDto {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public PhonenumberDto() {
-		//just here for instantiation
-	}
+    public PhonenumberDto() {
+        //just here for instantiation
+    }
 
-	public PhonenumberDto(Long id) {
-		super(id);
-	}
+    public PhonenumberDto(Long id) {
+        super(id);
+    }
 
-	public PhonenumberDto(Long id, String value) {
-		super(id, value);
-	}
-	
-	
-	
+    public PhonenumberDto(Long id, String value) {
+        super(id, value);
+    }
+
 
 }

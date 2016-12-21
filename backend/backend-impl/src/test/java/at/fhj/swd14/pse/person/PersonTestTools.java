@@ -1,32 +1,30 @@
 package at.fhj.swd14.pse.person;
 
-import java.util.LinkedList;
-
 import at.fhj.swd14.pse.department.Department;
 import at.fhj.swd14.pse.user.User;
 
+import java.util.LinkedList;
+
 public class PersonTestTools {
-	
-	public static Person getDummyPerson()
-	{
+
+    public static Person getDummyPerson() {
         return createUser(1L, "test@test.de");
-	}
-	
-	public static Person getAnotherDummyPerson()
-	{
+    }
+
+    public static Person getAnotherDummyPerson() {
         return createUser(2L, "test2@test.de");
-	}
-	
-	private static Person createUser(long id, String mail) {
-		User myuser = new User(id);
-		myuser.setMail(mail);
+    }
+
+    private static Person createUser(long id, String mail) {
+        User myuser = new User(id);
+        myuser.setMail(mail);
         myuser.setPassword("testpassword");
         myuser.setSalt("12345");
-        
+
         Department department = new Department(1L);
         department.setName("testdepartment");
-        
-        Person myperson = new Person(1L,myuser);
+
+        Person myperson = new Person(1L, myuser);
         myperson.setAdditionalMails(new LinkedList<>());
         myperson.getAdditionalMails().add(new Mailaddress("test2@test.de"));
         myperson.setAddress("testaddress");
@@ -43,5 +41,5 @@ public class PersonTestTools {
         myperson.setPlace("testplace");
         myperson.setStatus(new Status("online"));
         return myperson;
-	}
+    }
 }

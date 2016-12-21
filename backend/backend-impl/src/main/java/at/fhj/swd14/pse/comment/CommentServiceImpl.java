@@ -1,15 +1,11 @@
 package at.fhj.swd14.pse.comment;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-
-import at.fhj.swd14.pse.converter.CommentConverter;
-import at.fhj.swd14.pse.repository.CommentRepository;
 
 @Stateless
 public class CommentServiceImpl implements CommentService {

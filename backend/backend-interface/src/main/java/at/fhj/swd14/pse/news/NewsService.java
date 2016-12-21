@@ -1,9 +1,8 @@
 package at.fhj.swd14.pse.news;
 
+import javax.ejb.Remote;
 import java.time.Instant;
 import java.util.Collection;
-
-import javax.ejb.Remote;
 
 /**
  * This class is intended to provide management and retrieval methods regarding {@link NewsDto}.

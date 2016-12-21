@@ -1,12 +1,12 @@
 package at.fhj.swd14.pse.tag;
 
+import at.fhj.swd14.pse.message.MessageDto;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import at.fhj.swd14.pse.message.MessageDto;
-
-public class TagDto implements Serializable{
+public class TagDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -14,14 +14,15 @@ public class TagDto implements Serializable{
     private String name;
     private Collection<MessageDto> messages;
 
-    public TagDto(){}
+    public TagDto() {
+    }
 
-    public TagDto(Long id){
+    public TagDto(Long id) {
 
         setId(id);
     }
 
-    public TagDto(Long id, String name){
+    public TagDto(Long id, String name) {
 
         setId(id);
         setName(name);
@@ -53,10 +54,16 @@ public class TagDto implements Serializable{
         this.name = name;
     }
 
-    public Collection<MessageDto> getMessages(){return this.messages;}
-    public void setMessages(Collection<MessageDto> messages){this.messages = messages;}
-    public void addMessage(MessageDto message){
-        if(messages == null){
+    public Collection<MessageDto> getMessages() {
+        return this.messages;
+    }
+
+    public void setMessages(Collection<MessageDto> messages) {
+        this.messages = messages;
+    }
+
+    public void addMessage(MessageDto message) {
+        if (messages == null) {
             messages = new ArrayList<>();
         }
         this.messages.add(message);

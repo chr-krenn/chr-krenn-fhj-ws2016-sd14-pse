@@ -1,23 +1,16 @@
 package at.fhj.swd14.pse.person;
 
-import java.util.List;
+import at.fhj.swd14.pse.department.Department;
+import at.fhj.swd14.pse.department.DepartmentRepository;
+import at.fhj.swd14.pse.exception.VerificationException;
+import at.fhj.swd14.pse.repository.AbstractPersonInformationRepository;
+import at.fhj.swd14.pse.user.User;
+import at.fhj.swd14.pse.user.UserRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Singleton;
-
-import at.fhj.swd14.pse.department.Department;
-import at.fhj.swd14.pse.exception.VerificationException;
-import at.fhj.swd14.pse.repository.AbstractPersonInformationRepository;
-import at.fhj.swd14.pse.repository.DepartmentRepository;
-import at.fhj.swd14.pse.repository.HobbyRepository;
-import at.fhj.swd14.pse.repository.KnowledgeRepository;
-import at.fhj.swd14.pse.repository.MailaddressRepository;
-import at.fhj.swd14.pse.repository.PersonRepository;
-import at.fhj.swd14.pse.repository.PersonStatusRepository;
-import at.fhj.swd14.pse.repository.PhonenumberRepository;
-import at.fhj.swd14.pse.repository.UserRepository;
-import at.fhj.swd14.pse.user.User;
+import java.util.List;
 
 /**
  * Verification class for persondtos
@@ -78,8 +71,8 @@ public class PersonVerifier {
      * @param person PersonDto for which to verify the name
      */
     public void verifyNotNull(PersonDto person) {
-        if (person.getFirstname() == null || person.getFirstname().length() == 0
-                || person.getLastname() == null || person.getLastname().length() == 0)
+        if (person.getFirstname() == null || person.getFirstname().isEmpty()
+                || person.getLastname() == null || person.getLastname().isEmpty())
             throw new VerificationException("No first and lastname given");
     }
 
@@ -91,7 +84,7 @@ public class PersonVerifier {
     public void verifyDepartment(PersonDto person) {
         //department may be null
         if (person.getDepartment() != null && person.getDepartment().getId() != null) {
-            Department department = departmentRepo.find(person.getDepartment().getId());
+            final Department department = departmentRepo.find(person.getDepartment().getId());
             if (department == null)
                 throw new VerificationException("Department not found in database");
         }
@@ -110,7 +103,7 @@ public class PersonVerifier {
     private <T extends AbstractPersonInformation, K extends AbstractPersonInformationDto>
     void correlatePersonInformation(PersonDto person, List<K> infos,
                                     AbstractPersonInformationRepository<T> repo) {
-        for (AbstractPersonInformationDto info : infos) {
+        for (final AbstractPersonInformationDto info : infos) {
             verifyPersonInformation(person, repo, info);
         }
     }
@@ -149,8 +142,7 @@ public class PersonVerifier {
      * @param person PersonDto to do the check for
      */
     public void correlateNumbers(PersonDto person) {
-        this.correlatePersonInformation
-                (person, person.getPhonenumbers(), phonenumberRepo);
+        this.correlatePersonInformation(person, person.getPhonenumbers(), phonenumberRepo);
     }
 
     /**
@@ -160,8 +152,7 @@ public class PersonVerifier {
      * @param person PersonDto to do the check for
      */
     public void correlateMails(PersonDto person) {
-        this.correlatePersonInformation
-                (person, person.getAdditionalMails(), mailaddressRepo);
+        this.correlatePersonInformation(person, person.getAdditionalMails(), mailaddressRepo);
     }
 
     /**
@@ -171,8 +162,7 @@ public class PersonVerifier {
      * @param person PersonDto to do the check for
      */
     public void correlateKnowledges(PersonDto person) {
-        this.correlatePersonInformation
-                (person, person.getKnowledges(), knowledgeRepo);
+        this.correlatePersonInformation(person, person.getKnowledges(), knowledgeRepo);
     }
 
     /**
@@ -182,8 +172,7 @@ public class PersonVerifier {
      * @param person PersonDto to do the check for
      */
     public void correlateHobbies(PersonDto person) {
-        this.correlatePersonInformation
-                (person, person.getHobbies(), hobbyRepo);
+        this.correlatePersonInformation(person, person.getHobbies(), hobbyRepo);
     }
 
 

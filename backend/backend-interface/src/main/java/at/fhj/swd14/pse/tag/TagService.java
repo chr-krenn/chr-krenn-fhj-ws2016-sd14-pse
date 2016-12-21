@@ -7,6 +7,7 @@ public interface TagService {
 
     /**
      * saves a tag to the database if it's not existing yet, otherwise just returns the id
+     *
      * @param tag
      * @return tagId
      */
@@ -14,6 +15,7 @@ public interface TagService {
 
     /**
      * returns Tag with given id
+     *
      * @param id
      * @return tagDto
      */
@@ -21,6 +23,7 @@ public interface TagService {
 
     /**
      * returns Tag with given name
+     *
      * @param name
      * @return tagDto
      */

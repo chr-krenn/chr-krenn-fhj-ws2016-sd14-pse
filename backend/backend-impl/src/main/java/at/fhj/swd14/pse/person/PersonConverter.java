@@ -81,7 +81,7 @@ public final class PersonConverter {
      * @param persons Collection of Person Objects
      * @return Collection (internal type: List) of PersonDto Objects
      */
-    public static Collection<PersonDto> convertToDtoList(Collection<Person> persons) {
+    public static List<PersonDto> convertToDtoList(Collection<Person> persons) {
         if (persons == null) {
             return null;
         }
@@ -95,7 +95,7 @@ public final class PersonConverter {
      * @param persons Collection of PersonDto Objects
      * @return Collection (internal type: List) of Person Objects
      */
-    public static Collection<Person> convertToDoList(Collection<PersonDto> persons) {
+    public static List<Person> convertToDoList(Collection<PersonDto> persons) {
         if (persons == null) {
             return null;
         }

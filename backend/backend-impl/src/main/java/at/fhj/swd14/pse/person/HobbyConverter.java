@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.person;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Converter between Hobby and HobbyDto
@@ -56,7 +57,7 @@ public final class HobbyConverter {
      * @param person As a Hobby cannot exist without a person, the PersonDto object to assign it to
      * @return Collection (internal type: List) of HobbyDto Objects
      */
-    public static Collection<HobbyDto> convertToDtoList(Collection<Hobby> hobbys, PersonDto person) {
+    public static List<HobbyDto> convertToDtoList(Collection<Hobby> hobbys, PersonDto person) {
         if (hobbys == null) {
             return null;
         }
@@ -74,7 +75,7 @@ public final class HobbyConverter {
      * @param person As a Hobby cannot exist without a person, the Person object to assign it to
      * @return Collection (internal type: List) of HobbyDto Objects
      */
-    public static Collection<Hobby> convertToDoList(Collection<HobbyDto> hobbys, Person person) {
+    public static List<Hobby> convertToDoList(Collection<HobbyDto> hobbys, Person person) {
         if (hobbys == null) {
             return null;
         }

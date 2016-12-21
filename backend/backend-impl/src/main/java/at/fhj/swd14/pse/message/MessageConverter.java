@@ -6,6 +6,7 @@ import at.fhj.swd14.pse.user.UserConverter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public final class MessageConverter {
@@ -47,14 +48,14 @@ public final class MessageConverter {
         return message;
     }
 
-    public static Collection<MessageDto> convertToDtoList(final Collection<Message> messages) {
+    public static List<MessageDto> convertToDtoList(final Collection<Message> messages) {
         if (messages == null) {
             return null;
         }
         return messages.stream().map(MessageConverter::convert).collect(Collectors.toList());
     }
 
-    public static Collection<Message> convertToDoList(final Collection<MessageDto> messages) {
+    public static List<Message> convertToDoList(final Collection<MessageDto> messages) {
         if (messages == null) {
             return null;
         }

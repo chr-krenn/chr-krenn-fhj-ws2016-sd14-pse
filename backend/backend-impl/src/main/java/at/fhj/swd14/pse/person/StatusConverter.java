@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.person;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -28,14 +29,14 @@ public final class StatusConverter {
         return new Status(status.getName());
     }
 
-    public static Collection<StatusDto> convertToDtoList(Collection<Status> status) {
+    public static List<StatusDto> convertToDtoList(Collection<Status> status) {
         if (status == null) {
             return null;
         }
         return status.stream().map(StatusConverter::convert).collect(Collectors.toList());
     }
 
-    public static Collection<Status> convertToDoList(Collection<StatusDto> status) {
+    public static List<Status> convertToDoList(Collection<StatusDto> status) {
         if (status == null) {
             return null;
         }

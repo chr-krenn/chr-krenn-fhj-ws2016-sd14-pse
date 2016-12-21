@@ -4,6 +4,7 @@ import at.fhj.swd14.pse.message.MessageConverter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public final class TagConverter {
@@ -47,7 +48,7 @@ public final class TagConverter {
      * @param tags
      * @return tagDtos
      */
-    public static Collection<TagDto> convertToDtoList(Collection<Tag> tags) {
+    public static List<TagDto> convertToDtoList(Collection<Tag> tags) {
         if (tags == null || tags.isEmpty()) {
             return new ArrayList<>();
         }
@@ -60,7 +61,7 @@ public final class TagConverter {
      * @param tagDtos
      * @return tags
      */
-    public static Collection<Tag> convertToList(Collection<TagDto> tagDtos) {
+    public static List<Tag> convertToList(Collection<TagDto> tagDtos) {
         if (tagDtos == null || tagDtos.isEmpty()) {
             return new ArrayList<>();
         }

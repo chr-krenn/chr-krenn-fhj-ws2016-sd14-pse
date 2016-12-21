@@ -1,7 +1,6 @@
 package at.fhj.swd14.pse.community;
 
 import at.fhj.swd14.pse.user.User;
-import at.fhj.swd14.pse.user.UserConverter;
 import at.fhj.swd14.pse.user.UserDto;
 
 import javax.persistence.*;
@@ -9,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "community")
@@ -90,18 +90,11 @@ public class Community implements Serializable {
         this.userCommunities = userCommunities;
     }
 
-    public List<UserDto> getAllowedUsers() {
-        List<User> allUsers = new ArrayList<>();
-
-        userCommunities.forEach(userComm -> allUsers.add(userComm.getUser()));
-
-        List<UserDto> allUsersDtos = (List<UserDto>) UserConverter.convertToDtoList((Collection) (allUsers));
-        if ((allUsersDtos) instanceof List) {
-            return allUsersDtos;
-        }
-
-        return new ArrayList<UserDto>();
-
+    public Collection<User> getAllowedUsers() {
+        return userCommunities.
+                stream()
+                .map(UserCommunity::getUser)
+                .collect(Collectors.toList());
     }
 
     public void setAllowedUsers(List<UserDto> allowedUsers) {

@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.department;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -51,7 +52,7 @@ public final class DepartmentConverter {
      * @param departments Collection of Department Objects
      * @return Collection (internal type: List) of DepartmentDto Objects
      */
-    public static Collection<DepartmentDto> convertToDtoList(Collection<Department> departments) {
+    public static List<DepartmentDto> convertToDtoList(Collection<Department> departments) {
         if (departments == null) {
             return null;
         }
@@ -65,7 +66,7 @@ public final class DepartmentConverter {
      * @param departments Collection of DepartmentDto Objects
      * @return Collection (internal type: List) of Department Objects
      */
-    public static Collection<Department> convertToDoList(Collection<DepartmentDto> departments) {
+    public static List<Department> convertToDoList(Collection<DepartmentDto> departments) {
         if (departments == null) {
             return null;
         }

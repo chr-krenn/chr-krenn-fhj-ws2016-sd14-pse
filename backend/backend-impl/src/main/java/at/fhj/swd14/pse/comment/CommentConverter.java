@@ -6,6 +6,7 @@ import at.fhj.swd14.pse.message.MessageDto;
 import at.fhj.swd14.pse.user.UserConverter;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public final class CommentConverter {
@@ -52,14 +53,14 @@ public final class CommentConverter {
         return convertToDoList(comments, null);
     }
 
-    public static Collection<Comment> convertToDoList(final Collection<CommentDto> comments, final Message parentMessage) {
+    public static List<Comment> convertToDoList(final Collection<CommentDto> comments, final Message parentMessage) {
         if (comments == null) {
             return null;
         }
         return comments.stream().map(c -> convert(c, parentMessage)).collect(Collectors.toList());
     }
 
-    public static Collection<CommentDto> convertToDtoList(final Collection<Comment> comments, final MessageDto parentMessage) {
+    public static List<CommentDto> convertToDtoList(final Collection<Comment> comments, final MessageDto parentMessage) {
         if (comments == null) {
             return null;
         }

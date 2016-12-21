@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.person;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Converter between Phonenumber and PhonenumberDto
@@ -56,7 +57,7 @@ public final class PhonenumberConverter {
      * @param person       As a Phonenumber cannot exist without a person, the PersonDto object to assign it to
      * @return Collection (internal type: List) of PhonenumberDto Objects
      */
-    public static Collection<PhonenumberDto> convertToDtoList(Collection<Phonenumber> phonenumbers, PersonDto person) {
+    public static List<PhonenumberDto> convertToDtoList(Collection<Phonenumber> phonenumbers, PersonDto person) {
         if (phonenumbers == null) {
             return null;
         }
@@ -74,7 +75,7 @@ public final class PhonenumberConverter {
      * @param person       As a Phonenumber cannot exist without a person, the Person object to assign it to
      * @return Collection (internal type: List) of PhonenumberDto Objects
      */
-    public static Collection<Phonenumber> convertToDoList(Collection<PhonenumberDto> phonenumbers, Person person) {
+    public static List<Phonenumber> convertToDoList(Collection<PhonenumberDto> phonenumbers, Person person) {
         if (phonenumbers == null) {
             return null;
         }

@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.person;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Converter between Mailaddress and MailaddressDto
@@ -56,7 +57,7 @@ public final class MailaddressConverter {
      * @param person       As a Mailaddress cannot exist without a person, the PersonDto object to assign it to
      * @return Collection (internal type: List) of MailaddressDto Objects
      */
-    public static Collection<MailaddressDto> convertToDtoList(Collection<Mailaddress> mailaddresss, PersonDto person) {
+    public static List<MailaddressDto> convertToDtoList(Collection<Mailaddress> mailaddresss, PersonDto person) {
         if (mailaddresss == null) {
             return null;
         }
@@ -74,7 +75,7 @@ public final class MailaddressConverter {
      * @param person       As a Mailaddress cannot exist without a person, the Person object to assign it to
      * @return Collection (internal type: List) of MailaddressDto Objects
      */
-    public static Collection<Mailaddress> convertToDoList(Collection<MailaddressDto> mailaddresss, Person person) {
+    public static List<Mailaddress> convertToDoList(Collection<MailaddressDto> mailaddresss, Person person) {
         if (mailaddresss == null) {
             return null;
         }

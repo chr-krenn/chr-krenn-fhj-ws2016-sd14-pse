@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.person;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public final class PersonImageConverter {
@@ -50,7 +51,7 @@ public final class PersonImageConverter {
      * @param imgs Collection of PersonImage Objects
      * @return Collection (internal type: List) of PersonImageDto Objects
      */
-    public static Collection<PersonImageDto> convertToDtoList(Collection<PersonImage> imgs) {
+    public static List<PersonImageDto> convertToDtoList(Collection<PersonImage> imgs) {
         if (imgs == null) {
             return null;
         }
@@ -64,7 +65,7 @@ public final class PersonImageConverter {
      * @param dtos Collection of PersonImageDto Objects
      * @return Collection (internal type: List) of PersonImage Objects
      */
-    public static Collection<PersonImage> convertToDoList(Collection<PersonImageDto> dtos) {
+    public static List<PersonImage> convertToDoList(Collection<PersonImageDto> dtos) {
         if (dtos == null) {
             return null;
         }

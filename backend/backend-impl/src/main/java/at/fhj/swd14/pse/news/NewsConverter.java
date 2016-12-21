@@ -3,6 +3,7 @@ package at.fhj.swd14.pse.news;
 import at.fhj.swd14.pse.person.PersonConverter;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public final class NewsConverter {
@@ -42,14 +43,14 @@ public final class NewsConverter {
         return entity;
     }
 
-    public static Collection<NewsDto> convertToDtoList(Collection<News> news) {
+    public static List<NewsDto> convertToDtoList(Collection<News> news) {
         if (news == null) {
             return null;
         }
         return news.stream().map(NewsConverter::convert).collect(Collectors.toList());
     }
 
-    public static Collection<News> convertToDoList(Collection<NewsDto> news) {
+    public static List<News> convertToDoList(Collection<NewsDto> news) {
         if (news == null) {
             return null;
         }

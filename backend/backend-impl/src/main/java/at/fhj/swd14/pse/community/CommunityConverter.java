@@ -3,6 +3,7 @@ package at.fhj.swd14.pse.community;
 import at.fhj.swd14.pse.user.UserConverter;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public final class CommunityConverter {
@@ -17,7 +18,7 @@ public final class CommunityConverter {
         }
         CommunityDto dto = new CommunityDto(community.getId());
         dto.setId(community.getId());
-        dto.setAllowedUsers(community.getAllowedUsers());
+        dto.setAllowedUsers(UserConverter.convertToDtoList(community.getAllowedUsers()));
 //		
 //		List<>
 //		dto.setPendingUsers();
@@ -47,14 +48,14 @@ public final class CommunityConverter {
         return community;
     }
 
-    public static Collection<CommunityDto> convertToDtoList(Collection<Community> communities) {
+    public static List<CommunityDto> convertToDtoList(Collection<Community> communities) {
         if (communities == null) {
             return null;
         }
         return communities.stream().map(CommunityConverter::convert).collect(Collectors.toList());
     }
 
-    public static Collection<Community> convertToDoList(Collection<CommunityDto> communities) {
+    public static List<Community> convertToDoList(Collection<CommunityDto> communities) {
         if (communities == null) {
             return null;
         }

@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.person;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Converter between Knowledge and KnowledgeDto
@@ -56,7 +57,7 @@ public final class KnowledgeConverter {
      * @param person     As a Knowledge cannot exist without a person, the PersonDto object to assign it to
      * @return Collection (internal type: List) of KnowledgeDto Objects
      */
-    public static Collection<KnowledgeDto> convertToDtoList(Collection<Knowledge> knowledges, PersonDto person) {
+    public static List<KnowledgeDto> convertToDtoList(Collection<Knowledge> knowledges, PersonDto person) {
         if (knowledges == null) {
             return null;
         }
@@ -74,7 +75,7 @@ public final class KnowledgeConverter {
      * @param person     As a Knowledge cannot exist without a person, the Person object to assign it to
      * @return Collection (internal type: List) of KnowledgeDto Objects
      */
-    public static Collection<Knowledge> convertToDoList(Collection<KnowledgeDto> knowledges, Person person) {
+    public static List<Knowledge> convertToDoList(Collection<KnowledgeDto> knowledges, Person person) {
         if (knowledges == null) {
             return null;
         }

@@ -118,7 +118,7 @@ public class Message implements Serializable {
 
     public void addChild(Comment child) {
         if (childs == null)
-            childs = new ArrayList<>();
+            childs = new LinkedList<Comment>();
         child.setParentMessage(this);
         childs.add(child);
     }
@@ -169,16 +169,10 @@ public class Message implements Serializable {
         this.content = content;
     }
     
-    public void setCreated(Timestamp created){
-    	this.created = created;
-    }
     public Timestamp getCreated() {
         return created;
     }
     
-    public void setModified(Timestamp modified){
-    	this.modified=modified;
-    }
     public Timestamp getModified() {
         return modified;
     }

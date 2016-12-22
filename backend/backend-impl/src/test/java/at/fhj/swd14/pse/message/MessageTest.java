@@ -7,9 +7,6 @@ import at.fhj.swd14.pse.comment.Comment;
 
 public class MessageTest {
 
-	
-	
-	
 	@Test
     public void testConstructor() {
 		
@@ -30,22 +27,21 @@ public class MessageTest {
     @Test
     public void testAddChild(){
     	Message message = new Message(1L);
-    	Comment comment = new Comment(100L);
-    	message.addChild(comment);
     	
-    	testAddChildToMessage(message, comment);
+    	testAddChildToMessage(message);
     }
     
+    @Test
     public void testAddChildToNullList(){
     	Message message = new Message(1L);
-    	Comment comment = new Comment(100L);
     	message.setChilds(null);
-    	message.addChild(comment);
-    	testAddChildToMessage(message, comment);
+    	
+    	testAddChildToMessage(message);
     }
     
-    private void testAddChildToMessage(Message message, Comment comment){
-    	
+    private void testAddChildToMessage(Message message){
+    	Comment comment = new Comment(100L);
+    	message.addChild(comment);
     	Assert.assertEquals(1, message.getChilds().size());
     	Assert.assertEquals(comment, message.getChilds().get(0));
     	Assert.assertEquals(message, message.getChilds().get(0).getParentMessage());

@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse;
 
 import at.fhj.swd14.pse.department.DepartmentConverter;
+import at.fhj.swd14.pse.message.MessageConverter;
 import at.fhj.swd14.pse.person.*;
 import org.junit.Test;
 
@@ -26,5 +27,6 @@ public class ConverterCoverageTest {
         initantiate(PersonConverter.class);
         initantiate(PersonImageConverter.class);
         initantiate(PhonenumberConverter.class);
+        initantiate(MessageConverter.class);
     }
 }

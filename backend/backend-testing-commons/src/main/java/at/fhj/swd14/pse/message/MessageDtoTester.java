@@ -26,8 +26,25 @@ public class MessageDtoTester {
             Assert.assertNull(actual.getCommunity());
         }
 
+        if(expected.getCreated() != null){
+        	Assert.assertNotNull(actual.getCreated());
+        	Assert.assertEquals(expected.getCreated(), actual.getCreated());
+        }
+        else{
+        	Assert.assertNull(actual.getCreated());
+        }
+        
+        if(expected.getModified() != null){
+        	Assert.assertNotNull(actual.getModified());
+        	Assert.assertEquals(expected.getModified(), actual.getModified());
+        }
+        else{
+        	Assert.assertNull(actual.getModified());
+        }
+        
         Assert.assertEquals(expected.getTitle(), actual.getTitle());
         Assert.assertEquals(expected.getContent(), actual.getContent());
+        
         Assert.assertEquals(expected.getChilds().size(), actual.getChilds().size());
 
         for (int i = 0; i < expected.getChilds().size(); i++) {

@@ -13,8 +13,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 public class MessageConverterTest {
 
@@ -51,10 +50,22 @@ public class MessageConverterTest {
     }
 
     @Test
+    public void testConvertNullToDto(){
+    	MessageDto dto = MessageConverter.convert((Message)null);
+    	assertNull(dto);
+    }
+    
+    @Test
     public void testConvertToEntity() {
         MessageDto dto = createDto(1000L, "It's a title", "It's a content");
         Message m = MessageConverter.convert(dto);
         assertConverted(dto, m);
+    }
+    
+    @Test
+    public void testConvertNullToEntity(){
+    	Message msg = MessageConverter.convert((MessageDto)null);
+    	assertNull(msg);
     }
 
     @Test
@@ -70,6 +81,13 @@ public class MessageConverterTest {
             assertConverted((Message) messages.toArray()[i], (MessageDto) dtos.toArray()[i]);
         }
     }
+    
+    @Test
+    public void testConvertNullListToDto(){
+    	Collection<MessageDto> dtos = MessageConverter.convertToDtoList((Collection<Message>)null);
+    	assertNotNull(dtos);
+    	assertEquals(0, dtos.size());
+    }
 
     @Test
     public void testConvertListToEntity() {
@@ -83,6 +101,13 @@ public class MessageConverterTest {
         for (int i = 0; i < dtos.size(); i++) {
             assertConverted((MessageDto) dtos.toArray()[i], (Message) messages.toArray()[i]);
         }
+    }
+    
+    @Test
+    public void testConvertNullListToEntity(){
+    	Collection<Message> msgs = MessageConverter.convertToDoList((Collection<MessageDto>)null);
+    	assertNotNull(msgs);
+    	assertEquals(0, msgs.size());
     }
 
     private void assertConverted(Message expected, MessageDto actual) {

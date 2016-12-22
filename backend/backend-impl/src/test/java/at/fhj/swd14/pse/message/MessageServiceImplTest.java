@@ -5,6 +5,8 @@ import at.fhj.swd14.pse.repository.internal.MessageRepositoryImpl;
 import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserConverter;
 import at.fhj.swd14.pse.user.UserDto;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,6 +55,13 @@ public class MessageServiceImplTest {
         messages.add(MessageTestHelper.getCommunityMessageDummy(communityMessageId, author, community));
         messages.add(MessageTestHelper.getGlobalMessageDummy(globalMessageId, author));
         messages.add(MessageTestHelper.getPrivateMessageDummy(privateMessageId, author, recipient));
+    }
+    
+    @Test
+    public void saveTest(){
+    	Mockito.doNothing().when(messageRepository).save(messages.get(0));
+    	Long id = messageServiceImpl.save(MessageConverter.convert(messages.get(0)));
+    	Assert.assertEquals(communityMessageId, id);
     }
 
     @Test

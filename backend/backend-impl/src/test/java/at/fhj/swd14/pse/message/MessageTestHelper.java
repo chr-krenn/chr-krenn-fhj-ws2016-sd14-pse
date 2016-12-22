@@ -1,7 +1,5 @@
 package at.fhj.swd14.pse.message;
 
-import java.sql.Timestamp;
-
 import at.fhj.swd14.pse.community.Community;
 import at.fhj.swd14.pse.user.User;
 
@@ -30,8 +28,6 @@ public class MessageTestHelper {
         message.setAuthor(author);
         message.setTitle("dummy-title for message id '" + id + "'");
         message.setContent("dummy-content for message id '" + id + "'");
-        message.setCreated(new Timestamp(System.currentTimeMillis()));
-        message.setModified(new Timestamp(System.currentTimeMillis()));
         return message;
     }
 

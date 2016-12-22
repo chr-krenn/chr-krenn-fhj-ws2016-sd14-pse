@@ -9,6 +9,7 @@ import at.fhj.swd14.pse.user.UserDto;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,6 +43,15 @@ public class MessageConverterTest {
         communityDto = new CommunityDto(300L);
     }
 
+    @Test
+    public void testTimestampConditions(){
+    	Message m = createEntity(1000L, "It's a title", "It's a content");
+    	m.setCreated(new Timestamp(System.currentTimeMillis()));
+    	m.setModified(new Timestamp(System.currentTimeMillis()));
+        MessageDto dto = MessageConverter.convert(m);
+        assertConverted(m, dto);
+    }
+    
     @Test
     public void testConvertToDto() {
         Message m = createEntity(1000L, "It's a title", "It's a content");
@@ -117,6 +127,21 @@ public class MessageConverterTest {
         assertEquals(expected.getCommunity().getId(), actual.getCommunity().getId());
         assertEquals(expected.getTitle(), actual.getTitle());
         assertEquals(expected.getContent(), actual.getContent());
+        
+        if(expected.getCreated() !=null){
+        	assertNotNull(actual.getCreated());
+        	assertEquals(expected.getCreated().toInstant(), actual.getCreated());
+        }
+        else
+        	assertNull(actual.getCreated());
+        
+        if(expected.getModified() !=null){
+        	assertNotNull(actual.getModified());
+        	assertEquals(expected.getModified().toInstant(), actual.getModified());
+        }
+        else
+        	assertNull(actual.getModified());
+        
         assertEquals(expected.getChilds().size(), actual.getChilds().size());
 
         for (int i = 0; i < expected.getChilds().size(); i++) {

@@ -169,10 +169,16 @@ public class Message implements Serializable {
         this.content = content;
     }
     
+    public void setCreated(Timestamp created){
+    	this.created = created;
+    }
     public Timestamp getCreated() {
         return created;
     }
     
+    public void setModified(Timestamp modified){
+    	this.modified = modified;
+    }
     public Timestamp getModified() {
         return modified;
     }

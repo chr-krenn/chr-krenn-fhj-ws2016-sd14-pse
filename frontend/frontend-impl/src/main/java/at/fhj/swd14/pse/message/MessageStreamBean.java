@@ -256,6 +256,10 @@ public class MessageStreamBean implements Serializable {
 	public int getLikeCountForMessage(Long messageId) {
 		return this.messageLikeService.getLikeCountForMessage(messageId);
 	}
+	
+	public int getLikeCountForComment(Long commentId) {
+		return this.commentLikeService.getLikeCountForComment(commentId);
+	}
 
 	/**
 	 * Changes the currentCommunity to the selected value (called by Server)

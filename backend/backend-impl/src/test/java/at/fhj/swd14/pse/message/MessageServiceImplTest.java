@@ -72,17 +72,17 @@ public class MessageServiceImplTest {
         MessageDtoTester.assertEquals(MessageConverter.convert(messages.get(0)), dto);
     }
 
-    @Test
-    public void findByAuthorTest() {
-
-        Map<String, Object> parameter = new HashMap<>();
-        parameter.put("userId", author.getId());
-
-        Mockito.when(messageRepository.executeNamedQuery("Message.findByAuthorId", parameter)).thenReturn(messages);
-
-        List<MessageDto> dtoList = messageServiceImpl.findByAuthorId(author.getId());
-        MessageDtoTester.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(messages)), dtoList);
-    }
+//    @Test
+//    public void findByAuthorTest() {
+//
+//        Map<String, Object> parameter = new HashMap<>();
+//        parameter.put("userId", author.getId());
+//
+//        Mockito.when(messageRepository.executeNamedQuery("Message.findByAuthorId", parameter)).thenReturn(messages);
+//
+//        List<MessageDto> dtoList = messageServiceImpl.findByAuthorId(author.getId());
+//        MessageDtoTester.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(messages)), dtoList);
+//    }
 
     @Test
     public void findByCommunityTest() {

@@ -78,6 +78,13 @@ public class MessageTest {
 	}
 
 	@Test
+	public void testTitle(){
+		Message m = new Message();
+		m.setTitle("title-value");
+		Assert.assertEquals("title-value", m.getTitle());
+	}
+	
+	@Test
 	public void testContent() {
 		Message m = new Message();
 		m.setContent("content-value");

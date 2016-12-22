@@ -49,7 +49,7 @@ public class MessageServiceImplTest {
         List<UserDto> userList = new ArrayList<>();
         userList.add(UserConverter.convert(recipient));
 
-        community.setAllowedUsers(userList);
+        community.setAllowedUsers(UserConverter.convertToDoList(userList));
         community.setAuthor(author);
 
         messages.add(MessageTestHelper.getCommunityMessageDummy(communityMessageId, author, community));
@@ -76,7 +76,7 @@ public class MessageServiceImplTest {
     public void findByAuthorTest() {
 
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("authorUserId", author.getId());
+        parameter.put("userId", author.getId());
 
         Mockito.when(messageRepository.executeNamedQuery("Message.findByAuthorId", parameter)).thenReturn(messages);
 

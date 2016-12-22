@@ -47,7 +47,7 @@ public class CommunityTestHelper {
         community.setName("Test Community");
 //		community.setCreateTime(today);
         community.setPublicState(true);
-        community.setAllowedUsers(users);
+        community.setAllowedUsers(UserConverter.convertToDoList(users));
 
 
         return community;

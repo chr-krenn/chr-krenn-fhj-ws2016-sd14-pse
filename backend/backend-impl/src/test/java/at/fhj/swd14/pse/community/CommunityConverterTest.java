@@ -52,12 +52,12 @@ public class CommunityConverterTest {
     }
 
     private void createCommunity() {
-        this.community = new Community();
-        this.community.setId((long) 1);
-        this.community.setAllowedUsers(this.getUserDtoList());
-        this.community.setAuthor(this.user_author);
-        this.community.setName(this.name);
-        this.community.setPublicState(this.state);
+//        this.community = new Community();
+//        this.community.setId((long) 1);
+//        this.community.setAllowedUsers(this.getUserDtoList());
+//        this.community.setAuthor(this.user_author);
+//        this.community.setName(this.name);
+//        this.community.setPublicState(this.state);
 
     }
 

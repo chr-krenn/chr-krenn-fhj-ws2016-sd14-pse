@@ -241,7 +241,7 @@ public class CommunityBean implements Serializable {
 		if(community != null) {
 			LOGGER.debug("User {} Joining the Comunity: {}", this.loggedInUser, community.getName());
 			if (community.getPublicState()) {
-				//CommunityDto communityToJoin = communityService.find(community.getId());
+				
 				community.addUser(this.loggedInUser);
 				LOGGER.error("adding user {} to community {}",
 						this.loggedInUser, community.getName());
@@ -256,23 +256,32 @@ public class CommunityBean implements Serializable {
 			LOGGER.error("saved user {} to community {}",
 					this.loggedInUser, community.getName());
 
+			
 			refresh();
 		}
 	}
 
+	
+	
+	
 	/**
 	 * leave a community
 	 *
 	 */
-	public void leave(CommunityDto community) {
-		if(community != null) {
-			LOGGER.debug("User {} leaves the Comunity: {}", this.loggedInUser, community.getName());
-			community.deleteUser(this.loggedInUser.getId());
-
-			this.communityService.save(community);
+	public void leave(CommunityDto communityDto) {
+		if(communityDto != null) {
+			LOGGER.debug("User {} leaves the Comunity: {}", this.loggedInUser, communityDto.getName());
+			
+		
+			List<UserDto> allowedUsers = communityDto.getAllowedUsers();
+			if(	allowedUsers.removeIf(user -> user.getId() == this.loggedInUser.getId())) {
+				communityDto.setAllowedUsers(allowedUsers);
+			}
+			
+			this.communityService.save(communityDto);
 
 			LOGGER.error("removed user {} from community {}",
-					this.loggedInUser, community.getName());
+					this.loggedInUser, communityDto.getName());
 
 			refresh();
 		}

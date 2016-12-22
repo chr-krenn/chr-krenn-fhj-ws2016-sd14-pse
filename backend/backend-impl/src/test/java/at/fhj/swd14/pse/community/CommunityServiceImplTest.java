@@ -32,7 +32,6 @@ public class CommunityServiceImplTest {
 
         community = CommunityTestHelper.getTestCommunity();
         communityWithData = CommunityTestHelper.getTestCommunityWithData();
-
     }
 
     @Test
@@ -40,17 +39,9 @@ public class CommunityServiceImplTest {
         Mockito.when(communityRepo.find(1L)).thenReturn(community);
         CommunityDto expectedCommunity = service.find(1L);
 
-
     }
 
-    @Test
-    public void testSaveCommunity() {
-        CommunityDto dummyCommDto = CommunityConverter.convert(communityWithData);
-        service.save(dummyCommDto);
-
-        Mockito.verify(communityRepo, Mockito.times(1)).update(Mockito.any(Community.class));
-    }
-
+    
 
     @Test
     public void testFindByAuthorId() {

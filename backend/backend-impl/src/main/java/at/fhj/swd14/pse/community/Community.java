@@ -5,8 +5,14 @@ import at.fhj.swd14.pse.user.UserConverter;
 import at.fhj.swd14.pse.user.UserDto;
 
 import javax.persistence.*;
+
+import org.eclipse.persistence.platform.database.oracle.ucp.UCPDataPartitioningCallback;
+
+import com.mysql.cj.mysqlx.protobuf.MysqlxDatatypes.Array;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -91,21 +97,70 @@ public class Community implements Serializable {
         this.userCommunities = userCommunities;
     }
 
-    public Collection<User> getAllowedUsers() {
-        return userCommunities.
-                stream()
-                .map(UserCommunity::getUser)
-                .collect(Collectors.toList());
-    }
-
-    public void setAllowedUsers(List<UserDto> allowedUsers) {
-
-    	for (UserDto allowedUserDto : allowedUsers) {
-			User user = UserConverter.convert(allowedUserDto);
-			UserCommunity userCom = new UserCommunity(user, this, true);
-			this.userCommunities.add(userCom);
+    public List<User> getAllowedUsers() {
+    	
+    	List<User> users = new ArrayList<>();
+    	for (UserCommunity userCommunity : userCommunities) {
+    		if(userCommunity.getActivated())
+    			users.add(userCommunity.getUser());					
 		}
+    	
+       return users;        
     }
 
+    public void setAllowedUsers(List<User> allowedUsers) {
+
+    	this.userCommunities.forEach(uc -> uc.setActivated(false));
+   	 	
+    	for (User user : allowedUsers) {
+			
+			if(containsSuchUser(user)){
+				activateUserInUserCommunities(user);
+				continue;
+			} else {
+				UserCommunity userCom = new UserCommunity(user, this, true);
+				this.userCommunities.add(userCom);
+			}			
+		}   	
+    }
+    
+    private boolean containsSuchUser(User user){
+    for (UserCommunity userCommunity : this.userCommunities) {
+		if(userCommunity.getUser().getId() == user.getId()){
+			return true;
+		} 
+	}
+    return false;
+    }
+    
+    private boolean activateUserInUserCommunities(User user){
+        for (UserCommunity userCommunity : this.userCommunities) {
+    		if(userCommunity.getUser().getId() == user.getId()){
+    			userCommunity.setActivated(true);
+    			return true;
+    		} 
+    	}
+    return false;
+     
+    }
+    
+
+	public void setAllowedUsersInactive(UserDto allowedUsers) {
+
+			User user = UserConverter.convert(allowedUsers);
+			UserCommunity userCom = new UserCommunity(user, this, false);
+			
+			int index = -1;
+			
+			for (int i = 0; i <  userCommunities.size(); i++) {
+				if(userCommunities.get(i).getCommunity().getId() == this.getId() && userCommunities.get(i).getUser().getId() == user.getId()){
+					index = i;
+					break;
+				}
+			}
+			
+			this.userCommunities.get(index).setActivated(false);
+    }
+    
 
 }

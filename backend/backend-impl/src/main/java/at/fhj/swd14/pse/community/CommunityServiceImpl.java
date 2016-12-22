@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.community;
 
+import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserRepository;
 
 import javax.ejb.EJB;
@@ -17,14 +18,29 @@ public class CommunityServiceImpl implements CommunityService {
     private UserRepository userRepository;
 
     @Override
-    public long save(CommunityDto community) {
-        Community dtoComm = CommunityConverter.convert(community);
-        communityRepository.update(dtoComm);
-        Community expected = communityRepository.find(dtoComm.getId());
+    public long save(CommunityDto communityDto) {
+
+        Community community = CommunityConverter.convert(communityDto);
+
+        Community foundCom = communityRepository.find(community.getId());
+        mapDtoToDo(community,foundCom);
+        
+        communityRepository.update(foundCom);
+
+        Community expected = communityRepository.find(foundCom.getId());
         if (expected != null) {
             return expected.getId();
         }
         return 0;
+    }
+    
+    private Community mapDtoToDo(Community commHmi, Community com) { 
+    	com.setActiveState(commHmi.geActiveState());
+    	com.setAllowedUsers(commHmi.getAllowedUsers());
+    	com.setAuthor(commHmi.getAuthor());
+    	com.setPublicState(commHmi.getPublicState());
+    
+    	return com;
     }
 
     @Override

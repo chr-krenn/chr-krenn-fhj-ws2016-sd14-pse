@@ -19,9 +19,7 @@ public final class CommunityConverter {
         CommunityDto dto = new CommunityDto(community.getId());
         dto.setId(community.getId());
         dto.setAllowedUsers(UserConverter.convertToDtoList(community.getAllowedUsers()));
-//		
-//		List<>
-//		dto.setPendingUsers();
+
         dto.setName(community.getName());
         dto.setAuthor(UserConverter.convert(community.getAuthor()));
         dto.setActiveState(community.geActiveState());
@@ -36,7 +34,7 @@ public final class CommunityConverter {
         }
         Community community = new Community();
         community.setId(dto.getId());
-        community.setAllowedUsers(dto.getAllowedUsers());
+        community.setAllowedUsers(UserConverter.convertToDoList( dto.getAllowedUsers()));
 
 
         community.setName(dto.getName());

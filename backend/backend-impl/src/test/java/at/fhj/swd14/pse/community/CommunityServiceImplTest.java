@@ -48,7 +48,7 @@ public class CommunityServiceImplTest {
         CommunityDto dummyCommDto = CommunityConverter.convert(communityWithData);
         service.save(dummyCommDto);
 
-        Mockito.verify(communityRepo, Mockito.times(1)).save(Mockito.any(Community.class));
+        Mockito.verify(communityRepo, Mockito.times(1)).update(Mockito.any(Community.class));
     }
 
 

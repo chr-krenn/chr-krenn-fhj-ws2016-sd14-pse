@@ -19,7 +19,7 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public long save(CommunityDto community) {
         Community dtoComm = CommunityConverter.convert(community);
-        communityRepository.save(dtoComm);
+        communityRepository.update(dtoComm);
         Community expected = communityRepository.find(dtoComm.getId());
         if (expected != null) {
             return expected.getId();

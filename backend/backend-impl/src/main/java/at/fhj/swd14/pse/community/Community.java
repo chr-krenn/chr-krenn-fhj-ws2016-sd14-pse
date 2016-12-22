@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.community;
 
 import at.fhj.swd14.pse.user.User;
+import at.fhj.swd14.pse.user.UserConverter;
 import at.fhj.swd14.pse.user.UserDto;
 
 import javax.persistence.*;
@@ -99,7 +100,11 @@ public class Community implements Serializable {
 
     public void setAllowedUsers(List<UserDto> allowedUsers) {
 
-        //       this.allowedUsers = (List)UserConverter.convertToDoList(allowedUsers);
+    	for (UserDto allowedUserDto : allowedUsers) {
+			User user = UserConverter.convert(allowedUserDto);
+			UserCommunity userCom = new UserCommunity(user, this, true);
+			this.userCommunities.add(userCom);
+		}
     }
 
 

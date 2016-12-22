@@ -19,6 +19,7 @@ public class RepositoryCoverageTest {
         new PersonStatusRepositoryImpl();
         new PhonenumberRepositoryImpl();
         new HobbyRepositoryImpl();
+        new MessageRepositoryImpl();
     }
 
 }

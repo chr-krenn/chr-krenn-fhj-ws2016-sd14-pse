@@ -1,19 +1,33 @@
 package at.fhj.swd14.pse.message;
 
 
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import at.fhj.swd14.pse.comment.Comment;
 import at.fhj.swd14.pse.community.Community;
 import at.fhj.swd14.pse.tag.Tag;
 import at.fhj.swd14.pse.user.User;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 @Entity
 @Table(name = "message")
@@ -62,13 +76,13 @@ public class Message implements Serializable {
     private String content;
 
     @Column(insertable = false, updatable = false)
-    private Instant created;
+    private Timestamp created;
 
     @Column(insertable = false, updatable = false)
-    private Instant modified;
+    private Timestamp modified;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "like_for_message", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "like_for_message", joinColumns = @JoinColumn(name = "message_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
     public Message() {
@@ -154,12 +168,12 @@ public class Message implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
-
-    public Instant getCreated() {
+    
+    public Timestamp getCreated() {
         return created;
     }
-
-    public Instant getModified() {
+    
+    public Timestamp getModified() {
         return modified;
     }
 

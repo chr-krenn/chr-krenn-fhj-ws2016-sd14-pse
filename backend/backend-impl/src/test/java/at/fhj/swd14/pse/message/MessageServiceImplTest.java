@@ -76,7 +76,7 @@ public class MessageServiceImplTest {
     public void findByAuthorTest() {
 
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("authorUserId", author.getId());
+        parameter.put("userId", author.getId());
 
         Mockito.when(messageRepository.executeNamedQuery("Message.findByAuthorId", parameter)).thenReturn(messages);
 

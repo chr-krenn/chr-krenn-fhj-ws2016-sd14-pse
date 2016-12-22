@@ -160,6 +160,19 @@
             java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/DepartmentServiceImpl!at.fhj.swd14.pse.department.DepartmentService
         </lookup-name>
     </ejb-ref>
-
+	<ejb-ref>
+        <ejb-ref-name>ejb/CommentLikeService</ejb-ref-name>
+        <remote>at.fhj.swd14.pse.like.CommentLikeService</remote>
+        <lookup-name>
+            java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/CommentLikeServiceImpl!at.fhj.swd14.pse.like.CommentLikeService
+        </lookup-name>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>ejb/MessageLikeService</ejb-ref-name>
+        <remote>at.fhj.swd14.pse.like.MessageLikeService</remote>
+        <lookup-name>
+            java:global/backend-assembly-1.1-SNAPSHOT/backend-impl-1.1-SNAPSHOT/MessageLikeServiceImpl!at.fhj.swd14.pse.like.MessageLikeService
+        </lookup-name>
+    </ejb-ref>
 
 </web-app>

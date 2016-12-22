@@ -3,6 +3,9 @@ package at.fhj.swd14.pse.message;
 import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.community.CommunityDto;
 import at.fhj.swd14.pse.community.CommunityService;
+import at.fhj.swd14.pse.like.CommentLikeService;
+import at.fhj.swd14.pse.like.MessageLikeService;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,6 +33,12 @@ public class MessageStreamBean implements Serializable {
 
 	@EJB(name = "ejb/CommunityService")
 	private transient CommunityService communityService;
+	
+	@EJB(name = "ejb/CommentLikeService")
+	private transient CommentLikeService commentLikeService;
+	
+	@EJB(name = "ejb/MessageLikeService")
+	private transient MessageLikeService messageLikeService;
 
 	/**
 	 * Maps to a GET Parameter of the xhtml file
@@ -242,6 +251,10 @@ public class MessageStreamBean implements Serializable {
 	public void likeComment(Long id) {
 		LOGGER.debug("likeComment: " + id);
 		// TODO: Implement
+	}
+	
+	public int getLikeCountForMessage(Long messageId) {
+		return this.messageLikeService.getLikeCountForMessage(messageId);
 	}
 
 	/**

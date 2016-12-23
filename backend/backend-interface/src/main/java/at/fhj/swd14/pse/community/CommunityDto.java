@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CommunityDto implements Serializable, Comparable<CommunityDto> {
 
@@ -105,7 +106,7 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
     }
 
     public void deleteUser(Long userId) {
-        this.allowedUsers.removeIf(user -> user.getId() == userId);
+        this.allowedUsers.removeIf(user -> Objects.equals(user.getId(), userId));
     }
 
     private List<UserDto> pendingUsers = new ArrayList<>();
@@ -123,7 +124,7 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
     }
 
     public void deletePendingUser(Long userId) {
-        this.pendingUsers.removeIf(user -> user.getId() == userId);
+        this.pendingUsers.removeIf(user -> Objects.equals(user.getId(), userId));
     }
 
     @Override

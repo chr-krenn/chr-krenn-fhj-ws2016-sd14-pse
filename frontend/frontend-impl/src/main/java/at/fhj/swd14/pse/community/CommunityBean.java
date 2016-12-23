@@ -3,22 +3,20 @@
  */
 package at.fhj.swd14.pse.community;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import at.fhj.swd14.pse.user.UserDto;
+import at.fhj.swd14.pse.user.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import at.fhj.swd14.pse.user.UserDto;
-import at.fhj.swd14.pse.user.UserService;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 /**
  * @author schoeneg14, purkart
  *
@@ -275,7 +273,7 @@ public class CommunityBean implements Serializable {
 			
 		
 			List<UserDto> allowedUsers = communityDto.getAllowedUsers();
-			if(	allowedUsers.removeIf(user -> user.getId() == this.loggedInUser.getId())) {
+			if(	allowedUsers.removeIf(user -> Objects.equals(user.getId(), this.loggedInUser.getId()))) {
 				communityDto.setAllowedUsers(allowedUsers);
 			}
 			

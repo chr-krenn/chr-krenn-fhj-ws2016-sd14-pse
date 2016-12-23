@@ -26,16 +26,56 @@ public class MessageLikeServiceImpl implements MessageLikeService {
     @Override
     public void save(MessageLikeDto messageLike) {
         MessageDto messageDTO = messageLike.getLikedMessage();
+        long messageId = MessageConverter.convert(messageDTO).getId();
+        Message message = messageRepository.find(messageId);
         UserDto userDTO = messageLike.getLiker();
-        messageRepository.save(MessageConverter.convert(messageDTO));
-        userRepository.save(UserConverter.convert(userDTO));
-
+        long id = userDTO.getId();
+        List<User> users = message.getUsers();
+        boolean isUserInList = false;
+        int positionInList = 0;
+        for (int i = 0; i < users.size(); i++)
+        {
+        	User user = users.get(i);
+        	long userId = user.getId();
+        	if (id == userId)
+        	{
+        		isUserInList = true; // user has already liked the message
+        		positionInList = i;
+        	}
+        }
+        if (isUserInList == true) // remove user from list
+        {
+        	users.remove(positionInList);
+        }
+        else // insert user in list
+        {
+        	User user = userRepository.find(id); // find user in database
+        	users.add(user);
+        }
+        message.setUsers(users);
+        messageRepository.save(message);
     }
 
     @Override
     public MessageLikeDto getMessageLike(long userId, long messageId) {
         MessageDto messageDTO = MessageConverter.convert(messageRepository.find(messageId));
-        UserDto userDTO = UserConverter.convert(userRepository.find(userId));
+        Message message = messageRepository.find(messageId);
+        UserDto userDTO = null;
+        List<User> users = message.getUsers();
+        User userAlreadyLiked = null;
+        for (int i = 0; i < users.size(); i++)
+        {
+        	User user = users.get(i);
+        	long id = user.getId();
+        	if (id == userId)
+        	{
+        		userAlreadyLiked = user;
+        	}
+        }
+        if (userAlreadyLiked != null)
+        {
+        	userDTO = UserConverter.convert(userAlreadyLiked);
+        }
         MessageLikeDto messageLike = new MessageLikeDto(userDTO, messageDTO);
 
         return messageLike;

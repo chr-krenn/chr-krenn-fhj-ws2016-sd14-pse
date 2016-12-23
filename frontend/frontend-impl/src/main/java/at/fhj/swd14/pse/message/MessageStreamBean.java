@@ -4,7 +4,9 @@ import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.community.CommunityDto;
 import at.fhj.swd14.pse.community.CommunityService;
 import at.fhj.swd14.pse.like.CommentLikeService;
+import at.fhj.swd14.pse.like.MessageLikeDto;
 import at.fhj.swd14.pse.like.MessageLikeService;
+import at.fhj.swd14.pse.user.UserDto;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -239,7 +241,14 @@ public class MessageStreamBean implements Serializable {
 	 */
 	public void likeMessage(Long id) {
 		LOGGER.debug("likeMessage: " + id);
-		// TODO: Implement
+		MessageLikeDto messageLike = this.messageLikeService.getMessageLike(this.currentUserId,id);
+		UserDto userDTO = messageLike.getLiker();
+		if (userDTO == null)
+		{
+			userDTO = new UserDto(this.currentUserId);
+		}
+		messageLike.setLiker(userDTO);
+		this.messageLikeService.save(messageLike);
 	}
 
 	/**

@@ -31,7 +31,7 @@
 						<p:outputPanel id="messageliking">
 							<h:form id="form_like_message">
 							    <h:outputText id="text_like_message" value="#{messageStreamBean.getLikeCountForMessage(message.id)}"/>
-							    <p:commandButton value="Like" action="#{messageStreamBean.likeMessage(message.id)}" process="@form"/>
+							    <p:commandButton value="Like" action="#{messageStreamBean.likeMessage(message.id)}" process="@form" update="text_like_message"/>
 							</h:form>
 						</p:outputPanel>
 						<p:dataScroller id="scroller_comment" value="#{messageStreamBean.getComments(message.id)}"

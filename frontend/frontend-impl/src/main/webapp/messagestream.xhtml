@@ -30,7 +30,7 @@
 						<p:outputPanel id="messagecontent">#{message.content}</p:outputPanel>
 						<p:outputPanel id="messageliking">
 							<h:form id="form_like_message">
-							    <h:outputText id="text_like_message" value="message.likecount"/>
+							    <h:outputText id="text_like_message" value="#{messageStreamBean.getLikeCountForMessage(message.id)}"/>
 							    <p:commandButton value="Like" action="#{messageStreamBean.likeMessage(message.id)}" process="@form"/>
 							</h:form>
 						</p:outputPanel>
@@ -44,7 +44,7 @@
 								<p:outputPanel id="text">#{comment.text}</p:outputPanel>
 								<p:outputPanel id="commentliking">
 									<h:form id="form_like_comment">
-									    <h:outputText id="text_like_comment" value="comment.likecount"/>
+									    <h:outputText id="text_like_comment" value="#{messageStreamBean.getLikeCountForComment(comment.id)}"/>
 									    <p:commandButton value="Like" action="#{messageStreamBean.likeComment(comment.id)}" process="@form"/>
 									</h:form>
 								</p:outputPanel>

@@ -10,9 +10,12 @@ import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserRepository;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
 public class CommentLikeServiceImpl implements CommentLikeService {
 
     @EJB

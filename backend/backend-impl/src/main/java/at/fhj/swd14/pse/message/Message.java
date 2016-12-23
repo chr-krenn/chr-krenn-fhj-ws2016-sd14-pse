@@ -32,7 +32,7 @@ import at.fhj.swd14.pse.user.User;
 @Entity
 @Table(name = "message")
 @NamedQueries({
-        @NamedQuery(name = "Message.findByAuthorId", query = "SELECT m FROM Message m WHERE m.author.id = :authorUserId"),
+        @NamedQuery(name = "Message.findByAuthorId", query = "SELECT m FROM Message m WHERE m.author.id = :userId"),
         @NamedQuery(name = "Message.findUsersPrivateMessage", query = "SELECT m FROM Message m WHERE m.recipient IS NOT NULL "
                 + "AND m.recipient.id = :userId"),
         @NamedQuery(name = "Message.findByCommunityId", query = "SELECt m FROM Message m WHERE m.community.id = :communityId"),
@@ -118,7 +118,7 @@ public class Message implements Serializable {
 
     public void addChild(Comment child) {
         if (childs == null)
-            childs = new LinkedList<Comment>();
+            childs = new LinkedList<>();
         child.setParentMessage(this);
         childs.add(child);
     }

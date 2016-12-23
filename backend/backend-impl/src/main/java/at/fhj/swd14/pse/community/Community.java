@@ -6,16 +6,9 @@ import at.fhj.swd14.pse.user.UserDto;
 
 import javax.persistence.*;
 
-import org.eclipse.persistence.platform.database.oracle.ucp.UCPDataPartitioningCallback;
-
-import com.mysql.cj.mysqlx.protobuf.MysqlxDatatypes.Array;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "community")

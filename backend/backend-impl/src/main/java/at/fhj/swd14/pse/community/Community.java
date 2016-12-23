@@ -117,6 +117,31 @@ public class Community implements Serializable {
 		}   	
     }
     
+    public List<User> getPendingUsers() {
+    	
+    	List<User> users = new ArrayList<>();
+    	for (UserCommunity userCommunity : userCommunities) {
+    		if(!userCommunity.getActivated())
+    			users.add(userCommunity.getUser());					
+		}
+    	
+       return users;        
+    }
+
+    public void setPendingUsers(List<User> pendingUsers) {
+
+    	for (User user : pendingUsers) {
+			
+			if(containsSuchUser(user)){
+				setAllowedUsersInactive(UserConverter.convert(user));
+				continue;
+			} else {
+				UserCommunity userCom = new UserCommunity(user, this, false);
+				this.userCommunities.add(userCom);
+			}			
+		}   	
+    }
+    
     private boolean containsSuchUser(User user){
     for (UserCommunity userCommunity : this.userCommunities) {
 		if(userCommunity.getUser().getId() == user.getId()){
@@ -138,9 +163,9 @@ public class Community implements Serializable {
     }
     
 
-	public void setAllowedUsersInactive(UserDto allowedUsers) {
+	public void setAllowedUsersInactive(UserDto allowedUser) {
 
-			User user = UserConverter.convert(allowedUsers);
+			User user = UserConverter.convert(allowedUser);
 			UserCommunity userCom = new UserCommunity(user, this, false);
 			
 			int index = -1;

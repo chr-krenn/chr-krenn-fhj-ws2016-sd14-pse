@@ -37,6 +37,7 @@ public class CommunityServiceImpl implements CommunityService {
     private Community mapDtoToDo(Community commHmi, Community com) { 
     	com.setActiveState(commHmi.geActiveState());
     	com.setAllowedUsers(commHmi.getAllowedUsers());
+    	com.setPendingUsers(commHmi.getPendingUsers());
     	com.setAuthor(commHmi.getAuthor());
     	com.setPublicState(commHmi.getPublicState());
     

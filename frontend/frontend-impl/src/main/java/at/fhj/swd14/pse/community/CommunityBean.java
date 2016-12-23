@@ -137,6 +137,7 @@ public class CommunityBean implements Serializable {
 		this.allCommunities = new ArrayList<>();
 		this.otherCommunities = new ArrayList<>();
 		this.communitiesToActivate = new ArrayList<>();
+		this.communitiesToActivate.clear();
 
 		this.createdCommunities = communityService.findByAuthorId(this.loggedInUser.getId());
 		this.joinedCommunities = communityService.findUserRelated(this.loggedInUser.getId());

@@ -130,8 +130,9 @@ public class Person implements Serializable {
     }
 
     public void setUser(User user) {
-        if (user == null)
+        if (user == null) {
             throw new IllegalArgumentException("User may not be null");
+        }
         this.user = user;
     }
 

@@ -18,7 +18,8 @@ public class TagDtoTester {
     public static void assertEquals(List<TagDto> expected, List<TagDto> actual) {
 
         Assert.assertEquals(expected.size(), actual.size());
-        for (int i = 0; i < expected.size(); i++)
+        for (int i = 0; i < expected.size(); i++) {
             assertEquals(expected.get(i), actual.get(i));
+        }
     }
 }

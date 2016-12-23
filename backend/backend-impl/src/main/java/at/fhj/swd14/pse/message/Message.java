@@ -117,8 +117,9 @@ public class Message implements Serializable {
     }
 
     public void addChild(Comment child) {
-        if (childs == null)
+        if (childs == null) {
             childs = new LinkedList<>();
+        }
         child.setParentMessage(this);
         childs.add(child);
     }
@@ -132,8 +133,9 @@ public class Message implements Serializable {
     }
 
     public void addTag(Tag tag) {
-        if (tags == null)
+        if (tags == null) {
             tags = new ArrayList<>();
+        }
         tags.add(tag);
     }
 

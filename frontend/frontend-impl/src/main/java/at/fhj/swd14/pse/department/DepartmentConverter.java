@@ -34,17 +34,20 @@ public class DepartmentConverter implements Converter {
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {
 		Long id = Long.parseLong(value);
 		
-		for(DepartmentDto dto : departments)
-			if(dto.getId()!=null&&dto.getId().equals(id))
-				return dto;
+		for(DepartmentDto dto : departments) {
+            if (dto.getId() != null && dto.getId().equals(id)) {
+                return dto;
+            }
+        }
 		return null;
 		
 	}
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
-		if(value==null)
-			return "";
+		if(value==null) {
+            return "";
+        }
 		return ((DepartmentDto)value).getId().toString();
 	}
 

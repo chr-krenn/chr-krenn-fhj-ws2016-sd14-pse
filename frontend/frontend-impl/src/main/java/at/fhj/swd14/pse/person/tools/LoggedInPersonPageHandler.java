@@ -47,8 +47,9 @@ public class LoggedInPersonPageHandler implements Serializable {
     private PersonVerifier verifier;
 
     public LoggedInPersonPageHandler(PersonBean bean) {
-        if (bean == null)
+        if (bean == null) {
             throw new IllegalArgumentException("bean may not be null");
+        }
         //as we are taking over responsibilities of the bean, we must use it as the sole datasource
         this.bean = bean;
         userService = bean.getUserService();
@@ -90,11 +91,13 @@ public class LoggedInPersonPageHandler implements Serializable {
                 //set empty person if nothing is found
                 person = new PersonDto();
                 LOGGER.trace("No person for logged in user " + loggedInUserId + " found");
-            } else
+            } else {
                 LOGGER.trace("Person for logged in user " + loggedInUserId + " found: " + person.getId());
+            }
             bean.setPerson(person);
-        } else
+        } else {
             LOGGER.trace("Logged in person already loaded");
+        }
         //load all stati and departments to bean
         loadStati();
         loadDepartments();
@@ -122,8 +125,9 @@ public class LoggedInPersonPageHandler implements Serializable {
             //store it
             personService.saveLoggedInPerson(bean.getPerson());
             LOGGER.debug("Person created for logged in user: " + loggedInUserId);
-        } else
+        } else {
             LOGGER.debug("Name could not be verified, person not created");
+        }
         return showLoggedInPerson();
     }
 
@@ -153,8 +157,9 @@ public class LoggedInPersonPageHandler implements Serializable {
         if (verifier.verifyPerson()) {
             personService.saveLoggedInPerson(bean.getPerson());
             LOGGER.debug("Person saved to backend");
-        } else
+        } else {
             LOGGER.debug("Person could not be verified");
+        }
         return "/user";
     }
 
@@ -181,8 +186,9 @@ public class LoggedInPersonPageHandler implements Serializable {
             LOGGER.trace("Mail added: " + bean.getNewMail());
             //empty the field
             bean.setNewMail(null);
-        } else
+        } else {
             LOGGER.trace("Mail could not be verified: " + bean.getNewMail());
+        }
     }
 
     /**
@@ -205,8 +211,9 @@ public class LoggedInPersonPageHandler implements Serializable {
             bean.getPerson().getKnowledges().add(knowledge);
             LOGGER.trace("Knowledge saved: " + bean.getNewKnowledge());
             bean.setNewKnowledge(null);
-        } else
+        } else {
             LOGGER.trace("Knowledge could not be verified: " + bean.getNewKnowledge());
+        }
     }
 
     /**
@@ -229,8 +236,9 @@ public class LoggedInPersonPageHandler implements Serializable {
             bean.getPerson().getHobbies().add(hobby);
             LOGGER.trace("Hobby saved: " + bean.getNewHobby());
             bean.setNewHobby(null);
-        } else
+        } else {
             LOGGER.trace("Hobby could not be verified: " + bean.getNewHobby());
+        }
     }
 
     /**
@@ -253,8 +261,9 @@ public class LoggedInPersonPageHandler implements Serializable {
             bean.getPerson().getPhonenumbers().add(number);
             LOGGER.trace("Number saved: " + bean.getNewNumber());
             bean.setNewNumber(null);
-        } else
+        } else {
             LOGGER.trace("Number could not be verified: " + bean.getNewNumber());
+        }
     }
 
     /**

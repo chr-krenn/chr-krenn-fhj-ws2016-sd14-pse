@@ -27,10 +27,12 @@ public final class MessageConverter {
         dto.setTitle(message.getTitle());
         dto.setContent(message.getContent());
         
-        if(message.getCreated() != null)
-        	dto.setCreated(message.getCreated().toInstant());
-        if(message.getModified() != null)
-        	dto.setModified(message.getModified().toInstant());
+        if(message.getCreated() != null) {
+            dto.setCreated(message.getCreated().toInstant());
+        }
+        if(message.getModified() != null) {
+            dto.setModified(message.getModified().toInstant());
+        }
 
         dto.setChilds(new ArrayList<>(CommentConverter.convertToDtoList(message.getChilds(), dto)));
         return dto;

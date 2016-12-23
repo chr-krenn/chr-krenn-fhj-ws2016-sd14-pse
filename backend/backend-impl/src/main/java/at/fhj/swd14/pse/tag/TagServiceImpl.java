@@ -30,10 +30,11 @@ public class TagServiceImpl implements TagService {
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("tagName", name);
         List<TagDto> tagList = executeNamedQuery("Tag.findByName", parameter);
-        if (!tagList.isEmpty())
+        if (!tagList.isEmpty()) {
             return tagList.get(0);
-        else
+        } else {
             return null;
+        }
     }
 
     public List<TagDto> findAll() {

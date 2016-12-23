@@ -62,8 +62,9 @@ public final class KnowledgeConverter {
             return null;
         }
         LinkedList<KnowledgeDto> newKnowledges = new LinkedList<>();
-        for (Knowledge val : knowledges)
+        for (Knowledge val : knowledges) {
             newKnowledges.add(convert(val, person));
+        }
         return newKnowledges;
     }
 
@@ -80,8 +81,9 @@ public final class KnowledgeConverter {
             return null;
         }
         LinkedList<Knowledge> newKnowledges = new LinkedList<>();
-        for (KnowledgeDto dto : knowledges)
+        for (KnowledgeDto dto : knowledges) {
             newKnowledges.add(convert(dto, person));
+        }
         return newKnowledges;
     }
 

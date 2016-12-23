@@ -62,8 +62,9 @@ public final class MailaddressConverter {
             return null;
         }
         LinkedList<MailaddressDto> newMailaddresss = new LinkedList<>();
-        for (Mailaddress val : mailaddresss)
+        for (Mailaddress val : mailaddresss) {
             newMailaddresss.add(convert(val, person));
+        }
         return newMailaddresss;
     }
 
@@ -80,8 +81,9 @@ public final class MailaddressConverter {
             return null;
         }
         LinkedList<Mailaddress> newMailaddresss = new LinkedList<>();
-        for (MailaddressDto dto : mailaddresss)
+        for (MailaddressDto dto : mailaddresss) {
             newMailaddresss.add(convert(dto, person));
+        }
         return newMailaddresss;
     }
 

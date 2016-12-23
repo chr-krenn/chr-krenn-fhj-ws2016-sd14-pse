@@ -21,8 +21,9 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
 
     @Override
     protected boolean validatePassword(String inputPassword, String expectedPassword) {
-        if (inputPassword == null || expectedPassword == null)
+        if (inputPassword == null || expectedPassword == null) {
             return false;
+        }
 
         DatabasePrincipal principle = (DatabasePrincipal) getIdentity();
         String encodedPassword = PasswordHasher.getInstance().hash(inputPassword, principle.getSalt());
@@ -43,8 +44,9 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
         if (suspendResume) {
             // tx = TransactionDemarcationSupport.suspendAnyTransaction();
             try {
-                if (tm == null)
+                if (tm == null) {
                     throw PicketBoxMessages.MESSAGES.invalidNullTransactionManager();
+                }
                 tx = tm.suspend();
             } catch (SystemException e) {
                 throw new UnsupportedOperationException(e);

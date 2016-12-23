@@ -1,8 +1,6 @@
 package at.fhj.swd14.pse.community;
 
 import at.fhj.swd14.pse.user.User;
-import at.fhj.swd14.pse.user.UserConverter;
-import at.fhj.swd14.pse.user.UserDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -94,8 +92,9 @@ public class Community implements Serializable {
 
         List<User> users = new ArrayList<>();
         for (UserCommunity userCommunity : userCommunities) {
-            if (userCommunity.getActivated())
+            if (userCommunity.getActivated()) {
                 users.add(userCommunity.getUser());
+            }
         }
 
         return users;
@@ -106,10 +105,8 @@ public class Community implements Serializable {
         this.userCommunities.forEach(uc -> uc.setActivated(false));
 
         for (User user : allowedUsers) {
-
             if (containsSuchUser(user)) {
                 activateUserInUserCommunities(user);
-                continue;
             } else {
                 UserCommunity userCom = new UserCommunity(user, this, true);
                 this.userCommunities.add(userCom);
@@ -121,8 +118,9 @@ public class Community implements Serializable {
 
         List<User> users = new ArrayList<>();
         for (UserCommunity userCommunity : userCommunities) {
-            if (!userCommunity.getActivated())
+            if (!userCommunity.getActivated()) {
                 users.add(userCommunity.getUser());
+            }
         }
 
         return users;
@@ -133,8 +131,7 @@ public class Community implements Serializable {
         for (User user : pendingUsers) {
 
             if (containsSuchUser(user)) {
-                setAllowedUsersInactive(UserConverter.convert(user));
-                continue;
+                setAllowedUsersInactive(user);
             } else {
                 UserCommunity userCom = new UserCommunity(user, this, false);
                 this.userCommunities.add(userCom);
@@ -163,16 +160,13 @@ public class Community implements Serializable {
     }
 
 
-    public void setAllowedUsersInactive(UserDto allowedUser) {
-
-        User user = UserConverter.convert(allowedUser);
-        UserCommunity userCom = new UserCommunity(user, this, false);
+    public void setAllowedUsersInactive(User allowedUser) {
 
         int index = -1;
 
         for (int i = 0; i < userCommunities.size(); i++) {
             if (Objects.equals(userCommunities.get(i).getCommunity().getId(), this.getId())
-                    && Objects.equals(userCommunities.get(i).getUser().getId(), user.getId())) {
+                    && Objects.equals(userCommunities.get(i).getUser().getId(), allowedUser.getId())) {
                 index = i;
                 break;
             }

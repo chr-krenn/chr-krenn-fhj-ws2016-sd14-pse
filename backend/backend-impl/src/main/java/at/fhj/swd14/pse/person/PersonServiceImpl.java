@@ -215,8 +215,9 @@ public class PersonServiceImpl implements PersonService {
             throw new PersonServiceException(ERR_INVALID_INPUT + ex.getMessage());
         } catch (Exception ex) {
             Long personid = 0L;
-            if (person != null)
+            if (person != null) {
                 personid = person.getId();
+            }
             LOGGER.error("Exception during saving of image for person " + personid, ex);
             throw new PersonServiceException("Person image for person " + personid + " could not be saved");
         }
@@ -226,10 +227,11 @@ public class PersonServiceImpl implements PersonService {
     public PersonImageDto getPersonImage(Long personid) {
         try {
             PersonImage img = imgRepo.getByPersonId(personid);
-            if (img != null)
+            if (img != null) {
                 LOGGER.trace(MSG_IMAGE_FOR_PERSON + personid + " was retrieved successfully");
-            else
+            } else {
                 LOGGER.trace("Could not retrieve image for person " + personid);
+            }
             return PersonImageConverter.convert(img);
         } catch (Exception ex) {
             LOGGER.error("Exception during retrieval of image for person " + personid, ex);

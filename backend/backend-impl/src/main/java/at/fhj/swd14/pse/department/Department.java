@@ -31,7 +31,6 @@ public class Department implements Serializable {
     }
 
     public Department() {
-        //do nothing, its just here so that you can instanciate it without a parameter
     }
 
     public String getName() {

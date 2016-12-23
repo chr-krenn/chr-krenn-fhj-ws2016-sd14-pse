@@ -44,11 +44,13 @@ public class PersonVerifier {
      * @param person PersonDto for which to verify the user
      */
     public void verifyUser(PersonDto person) {
-        if (person.getUser() == null || person.getUser().getId() == null)
+        if (person.getUser() == null || person.getUser().getId() == null) {
             throw new VerificationException("No user provided");
+        }
         User user = userRepo.find(person.getUser().getId());
-        if (user == null)
+        if (user == null) {
             throw new VerificationException("Given user not found in the database");
+        }
     }
 
     /**
@@ -61,8 +63,9 @@ public class PersonVerifier {
             throw new VerificationException("No status provided");
         }
         Status status = statusRepo.findByName(person.getStatus().getName());
-        if (status == null)
+        if (status == null) {
             throw new VerificationException("Status invalid");
+        }
     }
 
     /**
@@ -72,8 +75,9 @@ public class PersonVerifier {
      */
     public void verifyNotNull(PersonDto person) {
         if (person.getFirstname() == null || person.getFirstname().isEmpty()
-                || person.getLastname() == null || person.getLastname().isEmpty())
+                || person.getLastname() == null || person.getLastname().isEmpty()) {
             throw new VerificationException("No first and lastname given");
+        }
     }
 
     /**
@@ -85,8 +89,9 @@ public class PersonVerifier {
         //department may be null
         if (person.getDepartment() != null && person.getDepartment().getId() != null) {
             final Department department = departmentRepo.find(person.getDepartment().getId());
-            if (department == null)
+            if (department == null) {
                 throw new VerificationException("Department not found in database");
+            }
         }
     }
 

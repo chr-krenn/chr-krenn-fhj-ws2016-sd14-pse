@@ -39,8 +39,9 @@ public class MessageDtoTester {
     public static void assertEquals(List<MessageDto> expected, List<MessageDto> actual) {
 
         Assert.assertEquals(expected.size(), actual.size());
-        for (int i = 0; i < expected.size(); i++)
+        for (int i = 0; i < expected.size(); i++) {
             assertEquals(expected.get(i), actual.get(i));
+        }
     }
 
 }

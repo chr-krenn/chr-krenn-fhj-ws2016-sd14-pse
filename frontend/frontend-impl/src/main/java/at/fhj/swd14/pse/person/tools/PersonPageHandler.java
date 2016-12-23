@@ -31,8 +31,9 @@ public class PersonPageHandler implements Serializable{
 	
 	public PersonPageHandler(PersonBean bean)
 	{
-		if(bean==null)
-			throw new IllegalArgumentException("bean may not be null");
+		if(bean==null) {
+            throw new IllegalArgumentException("bean may not be null");
+        }
 		//we do this handling for the bean so use it as sole datasource
 		this.bean=bean;
 		userService = bean.getUserService();

@@ -20,8 +20,9 @@ public class PersonVerifier implements Serializable {
     private PersonBean bean;
 
     public PersonVerifier(PersonBean bean) {
-        if (bean == null)
+        if (bean == null) {
             throw new IllegalArgumentException("bean may not be null");
+        }
         this.bean = bean;
     }
 
@@ -112,23 +113,28 @@ public class PersonVerifier implements Serializable {
      * @return true on success, false on failure
      */
     public boolean verifyPerson() {
-        if (!verifyName())
+        if (!verifyName()) {
             return false;
+        }
         for (MailaddressDto mail : bean.getPerson().getAdditionalMails()) {
-            if (!verifyMail(mail))
+            if (!verifyMail(mail)) {
                 return false;
+            }
         }
         for (HobbyDto hobby : bean.getPerson().getHobbies()) {
-            if (!verifyHobby(hobby))
+            if (!verifyHobby(hobby)) {
                 return false;
+            }
         }
         for (KnowledgeDto knowledge : bean.getPerson().getKnowledges()) {
-            if (!verifyKnowledge(knowledge))
+            if (!verifyKnowledge(knowledge)) {
                 return false;
+            }
         }
         for (PhonenumberDto number : bean.getPerson().getPhonenumbers()) {
-            if (!verifyNumber(number))
+            if (!verifyNumber(number)) {
                 return false;
+            }
         }
         return true;
     }

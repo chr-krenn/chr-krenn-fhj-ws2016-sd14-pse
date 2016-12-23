@@ -14,7 +14,6 @@ public class UserCommunityPK implements Serializable {
     }
 
     public UserCommunityPK() {
-
     }
 
     private Long user_id;
@@ -22,20 +21,18 @@ public class UserCommunityPK implements Serializable {
 
     @Override
     public int hashCode() {
-
         return (int) (community_id + user_id);
     }
 
     @Override
     public boolean equals(Object obj) {
 
-        if (this == obj)
-
+        if (this == obj) {
             return true;
-
-        if (obj == null)
-
+        }
+        if (obj == null) {
             return false;
+        }
 
         return getClass() == obj.getClass();
 

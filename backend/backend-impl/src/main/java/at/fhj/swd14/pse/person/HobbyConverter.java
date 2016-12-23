@@ -62,8 +62,9 @@ public final class HobbyConverter {
             return null;
         }
         LinkedList<HobbyDto> newHobbys = new LinkedList<>();
-        for (Hobby val : hobbys)
+        for (Hobby val : hobbys) {
             newHobbys.add(convert(val, person));
+        }
         return newHobbys;
     }
 
@@ -80,8 +81,9 @@ public final class HobbyConverter {
             return null;
         }
         LinkedList<Hobby> newHobbys = new LinkedList<>();
-        for (HobbyDto dto : hobbys)
+        for (HobbyDto dto : hobbys) {
             newHobbys.add(convert(dto, person));
+        }
         return newHobbys;
     }
 

@@ -8,37 +8,29 @@ import java.io.Serializable;
 @Entity
 @Table(name = "user_community")
 public class UserCommunity implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     public UserCommunity(User user, Community community, boolean activated) {
-
         this.pk = new UserCommunityPK(user.getId(), community.getId());
-
         setCommunity(community);
-
         setUser(user);
-
         setActivated(activated);
-
     }
-
 
     public UserCommunity() {
-
     }
-
-    private static final long serialVersionUID = 1L;
 
     @EmbeddedId
     private UserCommunityPK pk;
 
     @MapsId("user_id")
     @ManyToOne
-    @JoinColumn(insertable = true, updatable = true)
+    @JoinColumn
     private User user;
 
     @MapsId("community_id")
     @ManyToOne
-    @JoinColumn(insertable = true, updatable = true)
+    @JoinColumn
     private Community community;
 
     @Override
@@ -55,83 +47,60 @@ public class UserCommunity implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-
-        if (this == obj)
-
+        if (this == obj) {
             return true;
-
-        if (obj == null)
-
+        }
+        if (obj == null) {
             return false;
+        }
 
-        if (getClass() != obj.getClass())
-
+        if (getClass() != obj.getClass()) {
             return false;
-
+        }
         UserCommunity other = (UserCommunity) obj;
-
         if (pk == null) {
-
-            if (other.pk != null)
-
+            if (other.pk != null) {
                 return false;
-
-        } else if (!pk.equals(other.pk))
-
+            }
+        } else if (!pk.equals(other.pk)) {
             return false;
-
+        }
         return true;
 
     }
 
     public UserCommunityPK getId() {
-
         return pk;
-
     }
 
     public void setId(UserCommunityPK id) {
-
         this.pk = id;
-
     }
 
     @Column(name = "activated")
     private boolean activated;
 
     public User getUser() {
-
         return user;
-
     }
 
     public void setUser(User user) {
-
         this.user = user;
-
     }
 
     public Community getCommunity() {
-
         return community;
-
     }
 
     public void setCommunity(Community community) {
-
         this.community = community;
-
     }
 
     public boolean getActivated() {
-
         return activated;
-
     }
 
     public void setActivated(boolean activated) {
-
         this.activated = activated;
-
     }
 }

@@ -10,6 +10,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class MessageDto implements Serializable, Comparable<MessageDto> {
 
@@ -63,8 +64,9 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
     }
 
     public void addChild(CommentDto comment) {
-        if (childs == null)
+        if (childs == null) {
             childs = new ArrayList<>();
+        }
         comment.setParentMessage(this);
         childs.add(comment);
     }
@@ -120,8 +122,9 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
     }
 
     public void addTag(TagDto tag) {
-        if (tags == null)
+        if (tags == null) {
             tags = new ArrayList<>();
+        }
         tags.add(tag);
     }
 
@@ -179,33 +182,21 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof MessageDto)) return false;
-
         MessageDto that = (MessageDto) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (childs != null ? !childs.equals(that.childs) : that.childs != null) return false;
-        if (author != null ? !author.equals(that.author) : that.author != null) return false;
-        if (recipient != null ? !recipient.equals(that.recipient) : that.recipient != null) return false;
-        if (community != null ? !community.equals(that.community) : that.community != null) return false;
-        if (tags != null ? !tags.equals(that.tags) : that.tags != null) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (content != null ? !content.equals(that.content) : that.content != null) return false;
-        if (created != null ? !created.equals(that.created) : that.created != null) return false;
-        return modified != null ? modified.equals(that.modified) : that.modified == null;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(childs, that.childs) &&
+                Objects.equals(author, that.author) &&
+                Objects.equals(recipient, that.recipient) &&
+                Objects.equals(community, that.community) &&
+                Objects.equals(tags, that.tags) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(content, that.content) &&
+                Objects.equals(created, that.created) &&
+                Objects.equals(modified, that.modified);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (childs != null ? childs.hashCode() : 0);
-        result = 31 * result + (author != null ? author.hashCode() : 0);
-        result = 31 * result + (recipient != null ? recipient.hashCode() : 0);
-        result = 31 * result + (community != null ? community.hashCode() : 0);
-        result = 31 * result + (tags != null ? tags.hashCode() : 0);
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (created != null ? created.hashCode() : 0);
-        result = 31 * result + (modified != null ? modified.hashCode() : 0);
-        return result;
+        return Objects.hash(id, childs, author, recipient, community, tags, title, content, created, modified);
     }
 }

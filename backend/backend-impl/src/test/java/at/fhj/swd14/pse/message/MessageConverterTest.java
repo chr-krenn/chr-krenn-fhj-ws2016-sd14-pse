@@ -132,15 +132,17 @@ public class MessageConverterTest {
         	assertNotNull(actual.getCreated());
         	assertEquals(expected.getCreated().toInstant(), actual.getCreated());
         }
-        else
-        	assertNull(actual.getCreated());
+        else {
+            assertNull(actual.getCreated());
+        }
         
         if(expected.getModified() !=null){
         	assertNotNull(actual.getModified());
         	assertEquals(expected.getModified().toInstant(), actual.getModified());
         }
-        else
-        	assertNull(actual.getModified());
+        else {
+            assertNull(actual.getModified());
+        }
         
         assertEquals(expected.getChilds().size(), actual.getChilds().size());
 

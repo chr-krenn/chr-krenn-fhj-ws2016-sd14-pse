@@ -3,6 +3,7 @@ package at.fhj.swd14.pse.message;
 import at.fhj.swd14.pse.comment.CommentDto;
 import at.fhj.swd14.pse.community.CommunityDto;
 import at.fhj.swd14.pse.community.CommunityService;
+import at.fhj.swd14.pse.like.CommentLikeDto;
 import at.fhj.swd14.pse.like.CommentLikeService;
 import at.fhj.swd14.pse.like.MessageLikeDto;
 import at.fhj.swd14.pse.like.MessageLikeService;
@@ -259,7 +260,14 @@ public class MessageStreamBean implements Serializable {
 	 */
 	public void likeComment(Long id) {
 		LOGGER.debug("likeComment: " + id);
-		// TODO: Implement
+		CommentLikeDto commentLike = this.commentLikeService.getCommentLike(this.currentUserId,id);
+		UserDto userDTO = commentLike.getLiker();
+		if (userDTO == null)
+		{
+			userDTO = new UserDto(this.currentUserId);
+		}
+		commentLike.setLiker(userDTO);
+		this.commentLikeService.save(commentLike);
 	}
 	
 	public int getLikeCountForMessage(Long messageId) {

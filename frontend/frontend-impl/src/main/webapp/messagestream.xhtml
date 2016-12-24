@@ -45,7 +45,7 @@
 								<p:outputPanel id="commentliking">
 									<h:form id="form_like_comment">
 									    <h:outputText id="text_like_comment" value="#{messageStreamBean.getLikeCountForComment(comment.id)}"/>
-									    <p:commandButton value="Like" action="#{messageStreamBean.likeComment(comment.id)}" process="@form"/>
+									    <p:commandButton value="Like" action="#{messageStreamBean.likeComment(comment.id)}" process="@form" update="text_like_comment"/>
 									</h:form>
 								</p:outputPanel>
 							</p:outputPanel>

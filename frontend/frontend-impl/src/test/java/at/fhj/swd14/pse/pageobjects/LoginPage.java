@@ -5,16 +5,17 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends AbstractPage {
 
-	private final By usernameField = By.id("j_username");
-	private final By passwordField = By.id("j_password");
-	private final By loginButton = By.id("submit");
+    private static final String TITLE = "PSE Login";
+    private final By usernameField = By.id("j_username");
+    private final By passwordField = By.id("j_password");
+    private final By loginButton = By.id("submit");
 
-	public LoginPage(WebDriver webdriver) {
-		super(webdriver, "login");
-	}
+    public LoginPage(WebDriver webdriver) {
+        super(webdriver, TITLE);
+    }
 
     public WelcomePage loginValidUser(String username, String password) {
-    	webdriver.findElement(usernameField).sendKeys(username);
+        webdriver.findElement(usernameField).sendKeys(username);
         webdriver.findElement(passwordField).sendKeys(password);
         webdriver.findElement(loginButton).submit();
         return new WelcomePage(webdriver);

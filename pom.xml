@@ -50,6 +50,9 @@
         <sonar-maven-plugin.version>3.1.1</sonar-maven-plugin.version>
         <sonar.projectKey>pseswd14</sonar.projectKey>
         <sonar.moduleKey>${groupId}:${artifactId}</sonar.moduleKey>
+        <selenium-java.version>2.53.1</selenium-java.version>
+        <httpclient.version>4.5.2</httpclient.version>
+        <commons-codec.version>1.10</commons-codec.version>
     </properties>
 
     <dependencyManagement>
@@ -151,21 +154,43 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
                 <version>${mockito-all.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-driver.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.persistence</groupId>
                 <artifactId>eclipselink</artifactId>
                 <version>${eclipselink.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${selenium-java.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- These dependencies are required, due to version conflicts inside selenium-java -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -223,6 +248,7 @@
                     <configuration>
                         <excludes>
                             <exclude>*IntegrationTest.java</exclude>
+                            <exclude>*UITest.java</exclude>
                         </excludes>
                     </configuration>
                 </plugin>
@@ -241,6 +267,7 @@
                     <configuration>
                         <includes>
                             <include>*IntegrationTest.java</include>
+                            <include>*UITest.java</include>
                         </includes>
                     </configuration>
                 </plugin>

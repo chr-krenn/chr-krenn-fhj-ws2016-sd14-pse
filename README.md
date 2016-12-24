@@ -133,6 +133,7 @@ Take the following two artifacts and deploy them to Wildfly by copying them to `
 ## Integration tests
 
 The projects maven file includes integration tests inside the profile integration-tests, which is activated by default. Deactivate it via -P-integration-tests, if you do not want to run integration tests.
+All integration tests must have the naming suffix `IntegrationTest`.
 
 ###Database tests
 
@@ -151,12 +152,30 @@ Please note that during test setup a transaction is started, and during teardown
 
 ## UI tests with Selenium
 The UI tests can be found in the **frontend-impl/src/test** package. We are using version 2.53.1 at the moment.
+All UI Tests must have the naming suffix `UITest`.
 ### How to
 There's an BaseUITest from which you can derive from. You just need to call the login in your sub testclass in @BeforeClass with a default student or your own user login.
 To keep our tests clean we use the PageObjectPattern. You just need to derive from the AbstractPage class. 
 * There should be **no asserts** in the PageObject.
-* Prefered selector order: by id > name > css > xpath
+* Preferred selector order: by id > name > css > xpath
 * Avoid Thread.sleep and implicit waits
 * Prefer ExplicitWait or FluentWait
 * Use relative URLs
 
+### Configuration
+Currently the following drivers are supported and can be configured according to their respective documentation.
+
+- FIREFOX
+- HTML_UNIT
+- EDGE
+- INTERNET_EXPLORER
+- SAFARI
+- CHROME
+
+Configuration instructions can be found here [here](https://github.com/SeleniumHQ/selenium/wiki).
+
+To switch between the different drivers use the property `selenium.driver`. (e.g. `-Dselenium.driver=HTML_UNIT`)
+FIREFOX is used, when no explicit driver is specified.
+
+To change the entry URL for the tests use the property `selenium.url`. (e.g. `-Dselenium.url=https://<some-other-host>/swd14-fe/ `)
+`https://localhost:8443/swd14-fe/` is used, when no explicit URL is specified.

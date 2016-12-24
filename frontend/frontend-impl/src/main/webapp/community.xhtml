@@ -111,7 +111,9 @@
 				<p:column headerText="Members">
 					<p:commandButton value="show members" action="#{communityBean.showMembers(community)}" update="members" oncomplete="PF('members').show();"/>
 					<p:dialog id="members" header="Community Members" widgetVar="members" modal="true" height="100">
-    					<h:outputText value="#{communityBean.communityMembers}" />
+						<ui:repeat id="member" value="#{communityBean.communityMembers}" var="user" >
+							<h:outputText id="user" value="#{user.mail}" />
+						</ui:repeat>
 					</p:dialog> 				
 				</p:column>
 			</p:dataTable>

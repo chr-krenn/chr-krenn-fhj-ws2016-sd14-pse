@@ -94,11 +94,7 @@ public class CommunityBean implements Serializable {
 	private List<CommunityDto> allCommunities;
 	private List<CommunityDto> otherCommunities;
 	private List<CommunityDto> communitiesToActivate;
-	private List<String> communityMembers;
-
-	public List<String> getCommunityMembers() {
-		return communityMembers;
-	}
+	
 
 	public List<CommunityDto> getCommunitiesToActivate() {
 		return communitiesToActivate;
@@ -118,6 +114,12 @@ public class CommunityBean implements Serializable {
 	
 
 	private UserDto loggedInUser;
+	
+	private List<UserDto> communityMembers;
+
+	public List<UserDto> getCommunityMembers() {
+		return communityMembers;
+	}
 
 	/**
 	 * Initializes the bean for the view
@@ -333,18 +335,14 @@ public class CommunityBean implements Serializable {
 	/**
 	 * display a list of users of a community
 	 *
-	 */
+	 */	
 	public void showMembers(CommunityDto community) {
 		
-		this.communityMembers = new ArrayList<>();	
-		
-		if(community != null) {			
-			LOGGER.debug("request userlist of community: {}", community.getName());
+		this.communityMembers = new ArrayList<>();
+		if(community != null) {
 			
-			for(UserDto user : community.getAllowedUsers()) {
-				
-				this.communityMembers.add(user.getMail());
-			}
+			LOGGER.debug("request userlist of community: {}", community.getName());
+			communityMembers.addAll(community.getAllowedUsers());			
 		}
 	}
 }

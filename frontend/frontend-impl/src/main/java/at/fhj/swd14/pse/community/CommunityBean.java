@@ -94,6 +94,11 @@ public class CommunityBean implements Serializable {
 	private List<CommunityDto> allCommunities;
 	private List<CommunityDto> otherCommunities;
 	private List<CommunityDto> communitiesToActivate;
+	private List<String> communityMembers;
+
+	public List<String> getCommunityMembers() {
+		return communityMembers;
+	}
 
 	public List<CommunityDto> getCommunitiesToActivate() {
 		return communitiesToActivate;
@@ -109,7 +114,8 @@ public class CommunityBean implements Serializable {
 
 	public void setOtherCommunities(List<CommunityDto> otherCommunities) {
 		this.otherCommunities = otherCommunities;
-	}
+	}	
+	
 
 	private UserDto loggedInUser;
 
@@ -141,7 +147,8 @@ public class CommunityBean implements Serializable {
 		this.joinedCommunities = communityService.findUserRelated(this.loggedInUser.getId());
 		this.publicCommunities = communityService.findUserRelated(this.loggedInUser.getId());
 		this.allCommunities = communityService.findAll();
-
+		
+		
 		ArrayList<CommunityDto> dummy = new ArrayList<>();
 		allCommunities.forEach(dto -> {
 			if(!Objects.equals(dto.getAuthor().getId(), this.loggedInUser.getId()))
@@ -320,6 +327,24 @@ public class CommunityBean implements Serializable {
 					this.loggedInUser, community.getName());
 
 			refresh();
+		}
+	}
+	
+	/**
+	 * display a list of users of a community
+	 *
+	 */
+	public void showMembers(CommunityDto community) {
+		
+		this.communityMembers = new ArrayList<>();	
+		
+		if(community != null) {			
+			LOGGER.debug("request userlist of community: {}", community.getName());
+			
+			for(UserDto user : community.getAllowedUsers()) {
+				
+				this.communityMembers.add(user.getMail());
+			}
 		}
 	}
 }

@@ -25,19 +25,60 @@ public class CommentLikeServiceImpl implements CommentLikeService {
 
     @Override
     public void save(CommentLikeDto commentLike) {
-        CommentDto commentDTO = commentLike.getLikedComment();
+    	CommentDto commentDTO = commentLike.getLikedComment();
+        long commentId = CommentConverter.convert(commentDTO).getId();
+        Comment comment = commentRepository.find(commentId);
         UserDto userDTO = commentLike.getLiker();
-        commentRepository.save(CommentConverter.convert(commentDTO));
-        userRepository.save(UserConverter.convert(userDTO));
+        long id = userDTO.getId();
+        List<User> users = comment.getUsers();
+        boolean isUserInList = false;
+        int positionInList = 0;
+        for (int i = 0; i < users.size(); i++)
+        {
+        	User user = users.get(i);
+        	long userId = user.getId();
+        	if (id == userId)
+        	{
+        		isUserInList = true; // user has already liked the comment
+        		positionInList = i;
+        	}
+        }
+        if (isUserInList == true) // remove user from list
+        {
+        	users.remove(positionInList);
+        }
+        else // insert user in list
+        {
+        	User user = userRepository.find(id); // find user in database
+        	users.add(user);
+        }
+        comment.setUsers(users);
+        commentRepository.save(comment);
     }
 
     @Override
     public CommentLikeDto getCommentLike(long userId, long commentId) {
-        UserDto userDTO = UserConverter.convert(userRepository.find(userId));
-        CommentDto commentDTO = CommentConverter.convert(commentRepository.find(commentId));
-        CommentLikeDto commentLikeDTO = new CommentLikeDto(userDTO, commentDTO);
+    	CommentDto commentDTO = CommentConverter.convert(commentRepository.find(commentId));
+        Comment comment = commentRepository.find(commentId);
+        UserDto userDTO = null;
+        List<User> users = comment.getUsers();
+        User userAlreadyLiked = null;
+        for (int i = 0; i < users.size(); i++)
+        {
+        	User user = users.get(i);
+        	long id = user.getId();
+        	if (id == userId)
+        	{
+        		userAlreadyLiked = user;
+        	}
+        }
+        if (userAlreadyLiked != null)
+        {
+        	userDTO = UserConverter.convert(userAlreadyLiked);
+        }
+        CommentLikeDto commentLike = new CommentLikeDto(userDTO, commentDTO);
 
-        return commentLikeDTO;
+        return commentLike;
     }
 
     @Override

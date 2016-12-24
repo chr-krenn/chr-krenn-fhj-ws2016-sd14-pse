@@ -264,12 +264,6 @@
                             </goals>
                         </execution>
                     </executions>
-                    <configuration>
-                        <includes>
-                            <include>*IntegrationTest.java</include>
-                            <include>*UITest.java</include>
-                        </includes>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
@@ -304,6 +298,29 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
                             <systemProperties combine.children="append"/>
+                            <includes>
+                                <include>*IntegrationTest.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>selenium-tests</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <systemProperties combine.children="append"/>
+                            <includes>
+                                <include>*UITest.java</include>
+                            </includes>
                         </configuration>
                     </plugin>
                 </plugins>

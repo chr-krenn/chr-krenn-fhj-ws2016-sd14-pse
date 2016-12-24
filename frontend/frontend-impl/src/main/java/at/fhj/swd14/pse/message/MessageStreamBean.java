@@ -275,14 +275,12 @@ public class MessageStreamBean implements Serializable {
 	 */
 	public void onCommunityChange() {
 		LOGGER.debug("MessageStreamBean Community Changed: " + currentCommunity);
-		if (currentCommunity.getId() <= -3) { // All Messages
+		if (currentCommunity.getId() <= -3 || currentCommunity.getId() == 0) { // All Messages
 			setMessages(getAllMessages());
 		} else if (currentCommunity.getId() == -2) { // Private Messages
 			setMessages(getPrivateMessages());
 		} else if (currentCommunity.getId() == -1) { // Global Messages
 			setMessages(getGlobalMessages());
-		} else if (currentCommunity.getId() == 0) { // All Messages
-			setMessages(getAllMessages());
 		} else if (currentCommunity.getId() > 0) { // Community Messages
 			setMessages(getCommunityMessages(currentCommunity.getId()));
 		} else {

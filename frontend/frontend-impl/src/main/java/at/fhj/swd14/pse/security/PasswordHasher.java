@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * PasswordHasher uses SHA512 algorithm and makes 64007 iterations. //TODO @thomas.spitzer really? i don't see any iterations (rraumberger)
+ * PasswordHasher uses SHA512 algorithm.
  *
  * @author thomas.spitzer
  */
@@ -158,12 +158,10 @@ public final class PasswordHasher {
         // lower case character, a random 1-digit number and random character
         // into a random alphanumeric string
         StringBuilder s = new StringBuilder(pwd);
-        // LOG.debug("Before: " + s);
         s.replace(positionOfUpperCaseCharacter, positionOfUpperCaseCharacter + 1, generateRandomUpperCaseCharacter());
         s.replace(positionOfLowerCaseCharacter, positionOfLowerCaseCharacter + 1, generateRandomLowerCaseCharacter());
         s.replace(positionOfRandomNumber, positionOfRandomNumber + 1, generateRandomNumber());
         s.replace(positionOfSpecialCharacter, positionOfSpecialCharacter + 1, generateRandomSpecialCharacter());
-        // LOG.debug("After: " + s);
         return s.toString();
     }
 

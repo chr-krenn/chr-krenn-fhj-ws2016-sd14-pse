@@ -37,12 +37,12 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
      *
      * @return the valid password String
      */
+    @Override
     protected String getUsersPassword() throws LoginException {
         final String username = getUsername();
 
         Transaction tx = null;
         if (suspendResume) {
-            // tx = TransactionDemarcationSupport.suspendAnyTransaction();
             try {
                 if (tm == null) {
                     throw PicketBoxMessages.MESSAGES.invalidNullTransactionManager();
@@ -69,7 +69,6 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
             return retrievePasswordHash(ds, username);
         } finally {
             if (suspendResume) {
-                // TransactionDemarcationSupport.resumeAnyTransaction(tx);
                 try {
                     tm.resume(tx);
                 } catch (Exception e) {
@@ -105,7 +104,7 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
         final String password = rs.getString(2);
         final String salt = rs.getString(3);
 
-        // Set the tenant and user properties on the custom principal
+        // Set the user properties on the custom principal
         // there maybe a better place to do this, but this is the only place
         // I can see it working without having to hit the database with
         // another query.

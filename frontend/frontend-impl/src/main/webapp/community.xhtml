@@ -183,13 +183,49 @@
 				<p:column headerText="Community Name">
 					<h:outputText value="#{community.name}" />
 				</p:column>
-		
-		
-				<p:column headerText="Accept">
-					<p:commandButton value="accept"  />
-					<p:commandButton value="refuse"  />
-				</p:column>
-			</p:dataTable>
+
+
+			<p:column headerText="Accept">
+				<p:commandButton value="accept" />
+				<p:commandButton value="refuse" />
+			</p:column>
+			<p:column headerText="Requests">
+				<p:commandButton value="show requests"
+					action="#{communityBean.showRequests(community)}" update="requests"
+					oncomplete="PF('requests').show();" />
+				<p:dialog id="requests" header="Community Requests"
+					widgetVar="requests" modal="true" height="100">
+					<p:dataTable var="request" value="#{communityBean.communityRequests}">
+						<p:column headerText="Requests">
+							<h:outputText value="#{request.mail}" />
+						</p:column>
+						<p:column>
+							<p:commandButton value="Accept"
+								action="#{communityBean.acceptMember(community.id, member.id)}" />
+						</p:column>
+					</p:dataTable>
+
+				</p:dialog>
+			</p:column>
+			<p:column headerText="Members">
+				<p:commandButton value="show members"
+					action="#{communityBean.showMembers(community)}" update="members"
+					oncomplete="PF('members').show();" />
+				<p:dialog id="members" header="Community Members"
+					widgetVar="members" modal="true" height="100">
+					<p:dataTable var="member" value="#{communityBean.communityMembers}">
+						<p:column headerText="Members">
+							<h:outputText value="#{member.mail}" />
+						</p:column>
+						<p:column>
+							<p:commandButton value="Kick"
+								action="#{communityBean.kickMember(community.id, member.id)}" />
+						</p:column>
+					</p:dataTable>
+
+				</p:dialog>
+			</p:column>
+		</p:dataTable>
 		</h:form>
 	</h:body>
 	

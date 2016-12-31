@@ -148,7 +148,7 @@ public class Community implements Serializable {
         return false;
     }
 
-    private boolean activateUserInUserCommunities(User user) {
+    public  boolean activateUserInUserCommunities(User user) {
         for (UserCommunity userCommunity : this.userCommunities) {
             if (Objects.equals(userCommunity.getUser().getId(), user.getId())) {
                 userCommunity.setActivated(true);

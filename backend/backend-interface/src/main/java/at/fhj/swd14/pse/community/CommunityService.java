@@ -51,6 +51,9 @@ public interface CommunityService {
      * @return List of relevant communities
      */
     List<CommunityDto> findAll();
+    
+    boolean removeUserFromComunity(long communityId, long userId);
+    boolean addUserToComunity(long communityId, long userId);
 
 
 }

@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 /**
  * @author schoeneg14, purkart
  *
@@ -40,6 +41,7 @@ public class CommunityBean implements Serializable {
 	private String newName;
 	private String newDescription;
 	private boolean newPublicState;
+
 	public String getNewName() {
 		return newName;
 	}
@@ -94,7 +96,6 @@ public class CommunityBean implements Serializable {
 	private List<CommunityDto> allCommunities;
 	private List<CommunityDto> otherCommunities;
 	private List<CommunityDto> communitiesToActivate;
-	
 
 	public List<CommunityDto> getCommunitiesToActivate() {
 		return communitiesToActivate;
@@ -110,15 +111,20 @@ public class CommunityBean implements Serializable {
 
 	public void setOtherCommunities(List<CommunityDto> otherCommunities) {
 		this.otherCommunities = otherCommunities;
-	}	
-	
+	}
 
 	private UserDto loggedInUser;
-	
+
 	private List<UserDto> communityMembers;
 
 	public List<UserDto> getCommunityMembers() {
 		return communityMembers;
+	}
+	
+	private List<UserDto> communityRequests;
+
+	public List<UserDto> getCommunityRequests() {
+		return communityRequests;
 	}
 
 	/**
@@ -129,7 +135,8 @@ public class CommunityBean implements Serializable {
 		LOGGER.error("Initialising the CommunityBean");
 
 		// Get logged in user
-		long currentUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal)FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
+		long currentUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal) FacesContext.getCurrentInstance()
+				.getExternalContext().getUserPrincipal()).getUserId();
 
 		this.loggedInUser = userService.find(currentUserId);
 
@@ -149,26 +156,23 @@ public class CommunityBean implements Serializable {
 		this.joinedCommunities = communityService.findUserRelated(this.loggedInUser.getId());
 		this.publicCommunities = communityService.findUserRelated(this.loggedInUser.getId());
 		this.allCommunities = communityService.findAll();
-		
-		
+
 		ArrayList<CommunityDto> dummy = new ArrayList<>();
 		allCommunities.forEach(dto -> {
-			if(!Objects.equals(dto.getAuthor().getId(), this.loggedInUser.getId()))
-			{
+			if (!Objects.equals(dto.getAuthor().getId(), this.loggedInUser.getId())) {
 				dummy.add(dto);
 			}
 
-			if(!dto.getActiveState()) {
+			if (!dto.getActiveState()) {
 				this.communitiesToActivate.add(dto);
 			}
 		});
 
 		dummy.forEach(dto -> {
-			if(!dto.getAllowedUsers().contains(this.loggedInUser)) {
+			if (!dto.getAllowedUsers().contains(this.loggedInUser)) {
 				this.otherCommunities.add(dto);
 			}
 		});
-
 
 	}
 
@@ -179,14 +183,14 @@ public class CommunityBean implements Serializable {
 	public void createCommunity() {
 		LOGGER.debug("Creating new Community...");
 
-		if(this.newName != null) {
+		if (this.newName != null) {
 			CommunityDto community = new CommunityDto();
 			community.setAuthor(loggedInUser);
 			community.setPublicState(newPublicState);
 			community.setName(newName);
 
 			// If it is a private community, set it to active..
-			if(!newPublicState) {
+			if (!newPublicState) {
 				community.setActiveState(true);
 			} else {
 				community.setActiveState(false);
@@ -197,8 +201,8 @@ public class CommunityBean implements Serializable {
 
 			community = communityService.find(generatedId);
 
-			LOGGER.error("created new community author: {} desc: {} name: {} public: {}",
-					this.loggedInUser, this.newDescription, this.newName, this.newPublicState);
+			LOGGER.error("created new community author: {} desc: {} name: {} public: {}", this.loggedInUser,
+					this.newDescription, this.newName, this.newPublicState);
 
 			refresh();
 
@@ -212,7 +216,7 @@ public class CommunityBean implements Serializable {
 	 *
 	 */
 	public void activate(CommunityDto community) {
-		if(community != null) {
+		if (community != null) {
 			LOGGER.debug("activate Comunity: {}", community.getName());
 			community.setActiveState(true);
 
@@ -229,7 +233,7 @@ public class CommunityBean implements Serializable {
 	 *
 	 */
 	public void deactivate(CommunityDto community) {
-		if(community != null) {
+		if (community != null) {
 			LOGGER.debug("deactivate Comunity: {}", community.getName());
 			community.setActiveState(false);
 
@@ -246,50 +250,41 @@ public class CommunityBean implements Serializable {
 	 *
 	 */
 	public void join(CommunityDto community) {
-		if(community != null) {
+		if (community != null) {
 			LOGGER.debug("User {} Joining the Comunity: {}", this.loggedInUser, community.getName());
 			if (community.getPublicState()) {
-				
+
 				community.addUser(this.loggedInUser);
-				LOGGER.error("adding user {} to community {}",
-						this.loggedInUser, community.getName());
+				LOGGER.error("adding user {} to community {}", this.loggedInUser, community.getName());
 			} else {
 				community.addPendingUser(this.loggedInUser);
-				LOGGER.error("add join request for user {} and community {}",
-						this.loggedInUser, community.getName());
+				LOGGER.error("add join request for user {} and community {}", this.loggedInUser, community.getName());
 			}
 
 			this.communityService.save(community);
 
-			LOGGER.error("saved user {} to community {}",
-					this.loggedInUser, community.getName());
+			LOGGER.error("saved user {} to community {}", this.loggedInUser, community.getName());
 
-			
 			refresh();
 		}
 	}
 
-	
-	
-	
 	/**
 	 * leave a community
 	 *
 	 */
 	public void leave(CommunityDto communityDto) {
-		if(communityDto != null) {
+		if (communityDto != null) {
 			LOGGER.debug("User {} leaves the Comunity: {}", this.loggedInUser, communityDto.getName());
-			
-		
+
 			List<UserDto> allowedUsers = communityDto.getAllowedUsers();
-			if(	allowedUsers.removeIf(user -> Objects.equals(user.getId(), this.loggedInUser.getId()))) {
+			if (allowedUsers.removeIf(user -> Objects.equals(user.getId(), this.loggedInUser.getId()))) {
 				communityDto.setAllowedUsers(allowedUsers);
 			}
-			
+
 			this.communityService.save(communityDto);
 
-			LOGGER.error("removed user {} from community {}",
-					this.loggedInUser, communityDto.getName());
+			LOGGER.error("removed user {} from community {}", this.loggedInUser, communityDto.getName());
 
 			refresh();
 		}
@@ -300,15 +295,14 @@ public class CommunityBean implements Serializable {
 	 *
 	 */
 	public void accept(CommunityDto community) {
-		if(community != null) {
+		if (community != null) {
 			LOGGER.debug("accept User {} for Comunity: {}", this.loggedInUser, community.getName());
 			community.addUser(this.loggedInUser);
 			community.deletePendingUser(this.loggedInUser.getId());
 
 			this.communityService.save(community);
 
-			LOGGER.error("accepted user {} for community {}",
-					this.loggedInUser, community.getName());
+			LOGGER.error("accepted user {} for community {}", this.loggedInUser, community.getName());
 
 			refresh();
 		}
@@ -319,30 +313,55 @@ public class CommunityBean implements Serializable {
 	 *
 	 */
 	public void decline(CommunityDto community) {
-		if(community != null) {
+		if (community != null) {
 			LOGGER.debug("decline User {} lfor Comunity: {}", this.loggedInUser, community.getName());
 			community.deletePendingUser(this.loggedInUser.getId());
 
 			this.communityService.save(community);
 
-			LOGGER.error("acceptdesclined user {} for community {}",
-					this.loggedInUser, community.getName());
+			LOGGER.error("acceptdesclined user {} for community {}", this.loggedInUser, community.getName());
 
 			refresh();
 		}
 	}
-	
+
 	/**
 	 * display a list of users of a community
 	 *
-	 */	
+	 */
 	public void showMembers(CommunityDto community) {
-		
+
 		this.communityMembers = new ArrayList<>();
-		if(community != null) {
-			
+		if (community != null) {
+
 			LOGGER.debug("request userlist of community: {}", community.getName());
-			communityMembers.addAll(community.getAllowedUsers());			
+			communityMembers.addAll(community.getAllowedUsers());
 		}
+	}
+
+	public void kickMember(long communityId, long memberId) {
+		LOGGER.debug("request user kick of community: {}", communityId);
+		communityService.removeUserFromComunity(communityId, memberId);
+
+	}
+	
+	/**
+	 * display a list of pending users of a community
+	 *
+	 */
+	public void showRequests(CommunityDto community) {
+
+		this.communityRequests = new ArrayList<>();
+		if (community != null) {
+
+			LOGGER.debug("request userlist of community: {}", community.getName());
+			communityRequests.addAll(community.getPendingUsers());
+		}
+	}
+	
+	public void acceptMember(long communityId, long memberId) {
+		LOGGER.debug("request user kick of community: {}", communityId);
+		communityService.addUserToComunity(communityId, memberId);
+
 	}
 }

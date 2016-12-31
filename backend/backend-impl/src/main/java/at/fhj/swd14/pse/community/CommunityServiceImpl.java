@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.community;
 
+import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserRepository;
 
@@ -11,81 +12,101 @@ import java.util.stream.Collectors;
 @Stateless
 public class CommunityServiceImpl implements CommunityService {
 
-    @EJB
-    private CommunityRepository communityRepository;
+	@EJB
+	private CommunityRepository communityRepository;
 
-    @EJB
-    private UserRepository userRepository;
+	@EJB
+	private UserRepository userRepository;
 
-    @Override
-    public long save(CommunityDto communityDto) {
+	@Override
+	public long save(CommunityDto communityDto) {
 
-        Community community = CommunityConverter.convert(communityDto);
+		Community community = CommunityConverter.convert(communityDto);
 
-        Community foundCom = communityRepository.find(community.getId());
-        mapDtoToDo(community,foundCom);
-        
-        communityRepository.update(foundCom);
+		Community foundCom = communityRepository.find(community.getId());
+		mapDtoToDo(community, foundCom);
 
-        Community expected = communityRepository.find(foundCom.getId());
-        if (expected != null) {
-            return expected.getId();
-        }
-        return 0;
-    }
-    
-    private Community mapDtoToDo(Community commHmi, Community com) { 
-    	com.setActiveState(commHmi.geActiveState());
-    	com.setAllowedUsers(commHmi.getAllowedUsers());
-    	com.setPendingUsers(commHmi.getPendingUsers());
-    	com.setAuthor(commHmi.getAuthor());
-    	com.setPublicState(commHmi.getPublicState());
-    
-    	return com;
-    }
+		communityRepository.update(foundCom);
 
-    @Override
-    public long remove(CommunityDto community) {
-        communityRepository.remove(CommunityConverter.convert(community));
-        Community expected = communityRepository.find(community.getId());
-        if (expected != null) {
-            return expected.getId();
-        }
-        return 0;
-    }
+		Community expected = communityRepository.find(foundCom.getId());
+		if (expected != null) {
+			return expected.getId();
+		}
+		return 0;
+	}
 
-    @Override
-    public CommunityDto find(long id) {
-        return CommunityConverter.convert(communityRepository.find(id));
-    }
+	private Community mapDtoToDo(Community commHmi, Community com) {
+		com.setActiveState(commHmi.geActiveState());
+		com.setAllowedUsers(commHmi.getAllowedUsers());
+		com.setPendingUsers(commHmi.getPendingUsers());
+		com.setAuthor(commHmi.getAuthor());
+		com.setPublicState(commHmi.getPublicState());
 
-    @Override
-    public List<CommunityDto> findByAuthorId(Long creatorUserId) {
+		return com;
+	}
 
+	@Override
+	public long remove(CommunityDto community) {
+		communityRepository.remove(CommunityConverter.convert(community));
+		Community expected = communityRepository.find(community.getId());
+		if (expected != null) {
+			return expected.getId();
+		}
+		return 0;
+	}
 
-        Map<String, Object> parameter = new HashMap<>();
-        parameter.put("authorUserId", creatorUserId);
-        return executeNamedQuery("Community.findByAuthorId", parameter);
-    }
+	@Override
+	public CommunityDto find(long id) {
+		return CommunityConverter.convert(communityRepository.find(id));
+	}
 
-    @Override
-    public List<CommunityDto> findUserRelated(Long userId) {
-        final List<CommunityDto> communities = executeNamedQuery("Community.findUserRelated", new HashMap<>());
+	@Override
+	public List<CommunityDto> findByAuthorId(Long creatorUserId) {
 
-        return communities.stream()
-                .filter(dto -> dto.getAllowedUsers().stream().anyMatch(allowedUser -> Objects.equals(allowedUser.getId(), userId)))
-                .collect(Collectors.toList());
-    }
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("authorUserId", creatorUserId);
+		return executeNamedQuery("Community.findByAuthorId", parameter);
+	}
 
-    private List<CommunityDto> executeNamedQuery(String name, Map<String, Object> parameter) {
-        return new ArrayList<>(CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name, parameter)));
-    }
+	@Override
+	public List<CommunityDto> findUserRelated(Long userId) {
+		final List<CommunityDto> communities = executeNamedQuery("Community.findUserRelated", new HashMap<>());
 
-    @Override
-    public List<CommunityDto> findAll() {
+		return communities.stream()
+				.filter(dto -> dto.getAllowedUsers().stream()
+						.anyMatch(allowedUser -> Objects.equals(allowedUser.getId(), userId)))
+				.collect(Collectors.toList());
+	}
 
-        return new ArrayList<>(CommunityConverter.convertToDtoList(communityRepository.findAll()));
-    }
+	private List<CommunityDto> executeNamedQuery(String name, Map<String, Object> parameter) {
+		return new ArrayList<>(
+				CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name, parameter)));
+	}
 
+	@Override
+	public List<CommunityDto> findAll() {
+
+		return new ArrayList<>(CommunityConverter.convertToDtoList(communityRepository.findAll()));
+	}
+
+	@Override
+	public boolean removeUserFromComunity(long communityId, long userId) {
+		Community com = communityRepository.find(communityId);
+		User allowedUser = userRepository.find(userId);
+		if (com != null) {
+			com.setAllowedUsersInactive(allowedUser);
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean addUserToComunity(long communityId, long userId) {
+		Community com = communityRepository.find(communityId);
+		User allowedUser = userRepository.find(userId);
+		if (com != null) {
+			com.activateUserInUserCommunities(allowedUser);
+		}
+		return false;
+	}
 
 }

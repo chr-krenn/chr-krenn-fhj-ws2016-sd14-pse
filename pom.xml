@@ -53,6 +53,14 @@
         <selenium-java.version>2.53.1</selenium-java.version>
         <httpclient.version>4.5.2</httpclient.version>
         <commons-codec.version>1.10</commons-codec.version>
+        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+        <home.wildfly.maven.plugin>/home/student/install/wildfly-10.0.0.Final</home.wildfly.maven.plugin>
+        <port.wildfly.maven.plugin>9991</port.wildfly.maven.plugin>
+        <user.wildfly.maven.plugin>maven</user.wildfly.maven.plugin>
+        <password.wildfly.maven.plugin>maven</password.wildfly.maven.plugin>
+        <wildfly.ejb-client.version>10.1.0.Final</wildfly.ejb-client.version>
+        <xnio-nio.version>3.4.3.Final</xnio-nio.version>
+        <jboss-remote-naming.version>2.0.4.Final</jboss-remote-naming.version>
     </properties>
 
     <dependencyManagement>
@@ -77,6 +85,7 @@
                 <groupId>at.fhj.swd14.pse</groupId>
                 <artifactId>backend-assembly</artifactId>
                 <version>${project.version}</version>
+                <type>ear</type>
             </dependency>
 
             <dependency>
@@ -180,6 +189,22 @@
                 <version>${selenium-java.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.jboss.xnio</groupId>
+                <artifactId>xnio-nio</artifactId>
+                <version>${xnio-nio.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss</groupId>
+                <artifactId>jboss-remote-naming</artifactId>
+                <version>${jboss-remote-naming.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.jboss.xnio</groupId>
+                        <artifactId>xnio-nio</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
 
             <!-- These dependencies are required, due to version conflicts inside selenium-java -->
             <dependency>
@@ -191,6 +216,11 @@
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>${commons-codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wildfly</groupId>
+    			<artifactId>wildfly-client-all</artifactId>
+                <version>${wildfly.ejb-client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

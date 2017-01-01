@@ -135,6 +135,8 @@ Take the following two artifacts and deploy them to Wildfly by copying them to `
 The projects maven file includes integration tests inside the profile integration-tests, which is activated by default. Deactivate it via -P-integration-tests, if you do not want to run integration tests.
 All integration tests must have the naming suffix `IntegrationTest`.
 
+**In contrast to Mr. Teinikers example, maven will not start wildfly and deploy the artifacts before running UI and integration tests, therefore if you want to run those tests you will have to manually start wildfly and deploy the artifacts. Jenkins will also run both UI and integration tests after deployment.**
+
 ###Database tests
 
 The database tests are integration tests and can be based on the class AbstractRepositoryIntegrationTest in backend-impl/src/test/java/repository/. If the entity includes a numeric primary key, use AbstractRepositoryIDIntegrationTest instead. You will have to implement the abstract methods as well as additional tests required to test any repository functionality not included in AbstractRepository. For an example please see the class DepartmentRepositoryIntegrationTest.

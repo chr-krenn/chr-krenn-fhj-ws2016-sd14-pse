@@ -43,7 +43,7 @@ public final class IntegrationTestUtil {
         try {
             return new InitialContext(jndiProperties);
         } catch (NamingException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -65,7 +65,7 @@ public final class IntegrationTestUtil {
         try {
             return (T) getContext().lookup(lookupName);
         } catch (NamingException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 

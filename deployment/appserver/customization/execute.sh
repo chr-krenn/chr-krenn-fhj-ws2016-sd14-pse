@@ -53,6 +53,8 @@ data-source add --name=$MYSQL_DATABASE --driver-name=mysql --jndi-name=$JNDI_NAM
 # Enable proxying for confidential transport
 /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding, value=true)
 /subsystem=undertow/server=default-server/http-listener=default:undefine-attribute(name=redirect-socket)
+# Add security realm for http listener
+/subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=security-realm, value=ApplicationRealm)
 
 # Execute the batch
 run-batch

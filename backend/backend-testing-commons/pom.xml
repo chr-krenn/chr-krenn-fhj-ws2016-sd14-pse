@@ -26,6 +26,14 @@
             <groupId>at.fhj.swd14.pse</groupId>
             <artifactId>backend-interface</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.xnio</groupId>
+            <artifactId>xnio-nio</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-remote-naming</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

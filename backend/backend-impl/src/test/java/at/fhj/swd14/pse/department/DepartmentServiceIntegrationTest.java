@@ -4,7 +4,6 @@ import at.fhj.swd14.pse.base.IntegrationTestUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Ignore;
 
 import javax.naming.NamingException;
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ public class DepartmentServiceIntegrationTest {
     }
 
     @Test
-    @Ignore
     public void testFindAll() {
         Collection<DepartmentDto> dtos = service.findAll();
         Assert.assertNotNull(dtos);

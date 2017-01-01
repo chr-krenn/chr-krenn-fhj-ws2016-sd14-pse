@@ -31,8 +31,13 @@ public final class IntegrationTestUtil {
         jndiProperties.put("remote.connections", "default");
         jndiProperties.put("remote.connection.default.host", host);
         jndiProperties.put("remote.connection.default.port", port);
-        jndiProperties.put("remote.connection.default.username", System.getProperty("integration.provider.username"));
-        jndiProperties.put("remote.connection.default.password", System.getProperty("integration.provider.password"));
+
+        if (System.getProperty("integration.provider.username") != null) {
+            jndiProperties.put("remote.connection.default.username", System.getProperty("integration.provider.username"));
+        }
+        if (System.getProperty("integration.provider.password") != null) {
+            jndiProperties.put("remote.connection.default.password", System.getProperty("integration.provider.password"));
+        }
         jndiProperties.put("remote.connection.default.connect.options.org.xnio.Options.SASL_POLICY_NOANONYMOUS", "false");
         jndiProperties.put("jboss.naming.client.ejb.context", "true");
 

@@ -16,5 +16,6 @@
         <module>backend-interface</module>
         <module>backend-assembly</module>
         <module>backend-testing-commons</module>
+        <module>backend-integration-tests</module>
     </modules>
 </project>

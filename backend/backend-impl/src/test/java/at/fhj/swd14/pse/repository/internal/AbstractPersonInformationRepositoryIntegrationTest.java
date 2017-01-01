@@ -60,7 +60,6 @@ public abstract class AbstractPersonInformationRepositoryIntegrationTest<T exten
         destination.setId(source.getId());
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testFindByValue() {
         T dummy = createDummyEntity();

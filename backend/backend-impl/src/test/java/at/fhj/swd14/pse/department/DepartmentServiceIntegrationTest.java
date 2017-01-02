@@ -21,6 +21,7 @@ public class DepartmentServiceIntegrationTest {
     }
 
     @Test
+    @Ignore
     public void testFindAll() {
         Collection<DepartmentDto> dtos = service.findAll();
         Assert.assertNotNull(dtos);

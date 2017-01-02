@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import at.fhj.swd14.pse.database.DatabaseTestUtil;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -41,10 +43,7 @@ public abstract class AbstractRepositoryIntegrationTest<T> {
 
     @Before
     public void setup() throws ClassNotFoundException {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("SEP_TEST",
-                buildEntityManagerFactoryProperties()); // Properties must be passed to override default persitence.xml
-        manager = factory.createEntityManager();
-
+    	manager = DatabaseTestUtil.getEntityManager();
         repository = getRepository();
         repository.entityManager = manager;
 
@@ -54,12 +53,7 @@ public abstract class AbstractRepositoryIntegrationTest<T> {
         exec("DELETE FROM " + clazz.getSimpleName());
     }
 
-    private Properties buildEntityManagerFactoryProperties() {
-        final Properties properties = new Properties();
-        properties.putAll(System.getenv());
-        properties.putAll(System.getProperties());
-        return properties;
-    }
+
 
     @Test
     public void testUpdate() {

@@ -10,6 +10,8 @@ RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
 
 USER root
 
+RUN mkdir -p /opt/jboss/wildfly/customization/
+
 RUN curl -sL -o mysql-connector-java-$MYSQL_DRIVER_VERSION.zip http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-$MYSQL_DRIVER_VERSION.zip \
     && unzip -qq mysql-connector-java-$MYSQL_DRIVER_VERSION.zip \
     && mv mysql-connector-java-${MYSQL_DRIVER_VERSION}/mysql-connector-java-${MYSQL_DRIVER_VERSION}-bin.jar /opt/jboss/wildfly/customization/ \

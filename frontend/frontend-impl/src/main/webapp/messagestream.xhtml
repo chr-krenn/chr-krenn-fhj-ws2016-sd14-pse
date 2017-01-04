@@ -14,7 +14,7 @@
 	</h:head>
 
 	<h:body>
-		<h:form>
+		<h:form id="j_selectCommunity">
 			<p:selectOneMenu rendered="#{empty param.parameterCommunityId}" id="select_community" value="#{messageStreamBean.currentCommunity}" style="width:150px" converter="#{communityConverter}">
 				<f:selectItems value="#{messageStreamBean.availableCommunities}" var="community" itemValue="#{community}" itemLabel="#{community.name}" />
 				<p:ajax listener="#{messageStreamBean.onCommunityChange()}" update=":messagestream_scroller:scroller_message @this"/>
@@ -31,13 +31,13 @@
 						<p:outputPanel id="messageliking">
 							<h:form id="form_like_message">
 							    <h:outputText id="text_like_message" value="#{messageStreamBean.getLikeCountForMessage(message.id)}"/>
-							    <p:commandButton value="Like" action="#{messageStreamBean.likeMessage(message.id)}" process="@form" update="text_like_message"/>
+							    <h:commandButton id="btn_Like_message" value="Like" action="#{messageStreamBean.likeMessage(message.id)}" process="@form" update="text_like_message"/>
 							</h:form>
 						</p:outputPanel>
 						<p:dataScroller id="scroller_comment" value="#{messageStreamBean.getComments(message.id)}"
 							var="comment" chunkSize="10">
 					        <f:facet name="loader">
-					            <p:commandButton type="button" value="Weitere Kommentare laden" icon="ui-icon-circle-triangle-s"/>
+					            <p:commandButton id="scroller_load_more_comments" type="button" value="Weitere Kommentare laden" icon="ui-icon-circle-triangle-s"/>
 					        </f:facet>
 							<p:outputPanel id="commentitemdata">
 								<p:outputPanel id="author">#{comment.author.mail}</p:outputPanel>
@@ -45,7 +45,7 @@
 								<p:outputPanel id="commentliking">
 									<h:form id="form_like_comment">
 									    <h:outputText id="text_like_comment" value="#{messageStreamBean.getLikeCountForComment(comment.id)}"/>
-									    <p:commandButton value="Like" action="#{messageStreamBean.likeComment(comment.id)}" process="@form" update="text_like_comment"/>
+									    <p:commandButton id="submit_like_comment" value="Like" action="#{messageStreamBean.likeComment(comment.id)}" process="@form" update="text_like_comment"/>
 									</h:form>
 								</p:outputPanel>
 							</p:outputPanel>
@@ -54,7 +54,7 @@
 					<h:form id="form_newcomment" >
 						<h:inputText id="text_newcomment_content" value="#{commentBean.comment.text}">
 						</h:inputText>
-						<h:commandButton value="Post Comment" action="#{commentBean.createComment(message.id)}" process="@form">
+						<h:commandButton id="text_newcomment_submit" value="Post Comment" action="#{commentBean.createComment(message.id)}" process="@form">
 							<f:ajax execute="@form" render="@none" />
 						</h:commandButton>
 					</h:form>

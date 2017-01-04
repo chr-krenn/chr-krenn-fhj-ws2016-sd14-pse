@@ -10,15 +10,13 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "news")
-@NamedQueries({
-        @NamedQuery(name = "News.findSince", query = "SELECT n FROM News n WHERE n.created >= :sinceDate"),
-        @NamedQuery(name = "News.findByAuthorId", query = "SELECT n FROM News n WHERE n.author.id = :sinceDate"),
-        @NamedQuery(name = "News.findAllOnline", query = "SELECT n FROM News n WHERE :onlineDate >= n.activation" +
+@NamedQuery(name = News.FIND_ALL_ONLINE_QUERY,
+        query = "SELECT n FROM News n WHERE :onlineDate >= n.activation" +
                 " AND (n.termination IS NULL OR :onlineDate < n.termination)" +
                 " ORDER BY n.created DESC")
-})
 public class News implements Serializable {
     private static final long serialVersionUID = 1L;
+    public static final String FIND_ALL_ONLINE_QUERY = "News.findAllOnline";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

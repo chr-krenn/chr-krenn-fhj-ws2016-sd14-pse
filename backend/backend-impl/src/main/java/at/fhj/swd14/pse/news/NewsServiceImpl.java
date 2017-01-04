@@ -1,8 +1,10 @@
 package at.fhj.swd14.pse.news;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,52 +14,64 @@ import java.util.Objects;
 @Stateless
 public class NewsServiceImpl implements NewsService {
 
+    private static final Logger LOGGER = LogManager.getLogger(NewsServiceImpl.class);
+
     @EJB
     private NewsRepository newsRepository;
 
     @Override
     public long save(NewsDto news) {
-        final News converted = NewsConverter.convert(Objects.requireNonNull(news));
-        newsRepository.save(converted);
-        return converted.getId();
+        try {
+            final News converted = NewsConverter.convert(Objects.requireNonNull(news));
+            newsRepository.save(converted);
+            return converted.getId();
+        } catch (Exception e) {
+            LOGGER.warn(e);
+            throw new NewsServiceException("Failed to save news");
+        }
     }
 
     @Override
     public long update(NewsDto news) {
-        final News converted = NewsConverter.convert(Objects.requireNonNull(news));
-        newsRepository.update(converted);
-        return converted.getId();
+        try {
+            final News converted = NewsConverter.convert(Objects.requireNonNull(news));
+            newsRepository.update(converted);
+            return converted.getId();
+        } catch (Exception e) {
+            LOGGER.warn(e);
+            throw new NewsServiceException("Failed to update news");
+        }
     }
 
     @Override
     public NewsDto find(long id) {
-        return NewsConverter.convert(newsRepository.find(id));
+        try {
+            return NewsConverter.convert(newsRepository.find(id));
+        } catch (Exception e) {
+            LOGGER.info(e);
+            throw new NewsServiceException("Failed to find news");
+        }
     }
 
     @Override
     public Collection<NewsDto> findAll() {
-        return NewsConverter.convertToDtoList(newsRepository.findAll());
+        try {
+            return NewsConverter.convertToDtoList(newsRepository.findAll());
+        } catch (Exception e) {
+            LOGGER.info(e);
+            throw new NewsServiceException("Failed to find news");
+        }
     }
 
     @Override
     public Collection<NewsDto> findAllOnline() {
-        final Map<String, Object> parameters = new HashMap<>();
-        parameters.put("onlineDate", ZonedDateTime.now().toInstant());
-        return NewsConverter.convertToDtoList(newsRepository.executeNamedQuery("News.findAllOnline", parameters));
-
-    }
-
-    @Override
-    public Collection<NewsDto> findAllSince(Instant instant) {
-        final Map<String, Object> parameters = new HashMap<>();
-        parameters.put("dateSince", Objects.requireNonNull(instant));
-        return NewsConverter.convertToDtoList(newsRepository.executeNamedQuery("News.findSince", parameters));
-    }
-
-    @Override
-    public Collection<NewsDto> findByAuthorId(long author) {
-        final Map<String, Object> parameters = new HashMap<>();
-        parameters.put("authorId", author);
-        return NewsConverter.convertToDtoList(newsRepository.executeNamedQuery("News.findByAuthorId", parameters));
+        try {
+            final Map<String, Object> parameters = new HashMap<>();
+            parameters.put("onlineDate", ZonedDateTime.now().toInstant());
+            return NewsConverter.convertToDtoList(newsRepository.executeNamedQuery(News.FIND_ALL_ONLINE_QUERY, parameters));
+        } catch (Exception e) {
+            LOGGER.info(e);
+            throw new NewsServiceException("Failed to find news");
+        }
     }
 }

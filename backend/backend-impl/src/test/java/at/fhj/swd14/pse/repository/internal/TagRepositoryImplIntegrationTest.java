@@ -25,7 +25,8 @@ public class TagRepositoryImplIntegrationTest extends AbstractRepositoryIDIntegr
 
     @Override
     protected Tag createDummyEntity() {
-        Tag tag = new Tag(1L, "dummy");
+        final Tag tag = new Tag();
+        tag.setName("dummy");
         return tag;
     }
 

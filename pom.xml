@@ -219,7 +219,7 @@
             </dependency>
             <dependency>
                 <groupId>org.wildfly</groupId>
-    			<artifactId>wildfly-client-all</artifactId>
+                <artifactId>wildfly-client-all</artifactId>
                 <version>${wildfly.ejb-client.version}</version>
             </dependency>
         </dependencies>
@@ -286,14 +286,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>${maven-failsafe-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>integration-test</goal>
-                                <goal>verify</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
@@ -326,12 +318,22 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <configuration>
-                            <systemProperties combine.children="append"/>
-                            <includes>
-                                <include>*IntegrationTest.java</include>
-                            </includes>
-                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>integration-tests</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                                <configuration>
+                                    <systemProperties combine.children="append"/>
+                                    <includes>
+                                        <include>*IntegrationTest.java</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -346,12 +348,22 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <configuration>
-                            <systemProperties combine.children="append"/>
-                            <includes>
-                                <include>*UITest.java</include>
-                            </includes>
-                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>selenium-tests</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                                <configuration>
+                                    <systemProperties combine.children="append"/>
+                                    <includes>
+                                        <include>*UITest.java</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

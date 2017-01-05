@@ -40,6 +40,7 @@ public class MessageStreamUITest extends BaseUITest {
         Assert.assertEquals(0, welcomePage.GetFirstMessageCommentCount());
         welcomePage.AddCommentToFirstMessage(TestCommentContent);
         welcomePage.SubmitCommentToFirstMessage();
+        Wait();
         welcomePage = getWelcomePage();
         Assert.assertEquals(1, welcomePage.GetFirstMessageCommentCount());
     }
@@ -51,6 +52,7 @@ public class MessageStreamUITest extends BaseUITest {
         Assert.assertEquals(0, welcomePage.GetFirstMessageCommentCount());
         welcomePage.AddCommentToFirstMessage(TestCommentContent);
         welcomePage.SubmitCommentToFirstMessage();
+        Wait();
         welcomePage = getWelcomePage();
         Assert.assertEquals(1, welcomePage.GetFirstMessageCommentCount());
         
@@ -69,10 +71,12 @@ public class MessageStreamUITest extends BaseUITest {
         welcomePage.AddCommentToFirstMessage(TestCommentContent);
         for (int i = 0; i < 15; i++) {
         	welcomePage.SubmitCommentToFirstMessage();
+        	Wait();
 		}
         welcomePage = getWelcomePage();
         Assert.assertEquals(10, welcomePage.GetFirstMessageCommentCount());
         welcomePage.FirstMessageLoadMoreComments();
+        Wait();
         Assert.assertEquals(15, welcomePage.GetFirstMessageCommentCount());
     }
     
@@ -81,6 +85,7 @@ public class MessageStreamUITest extends BaseUITest {
         WelcomePage welcomePage = getWelcomePage();
         InsertNewMessage(welcomePage);
         welcomePage.CollapseCommunityDropdown();
+        Wait();
         WebElement privateCommunity = welcomePage.GetPrivateCommunity();
         Assert.assertEquals("Private", privateCommunity.getText());
         privateCommunity.click();

@@ -38,9 +38,10 @@ import at.fhj.swd14.pse.user.User;
         @NamedQuery(name = "Message.findByCommunityId", query = "SELECt m FROM Message m WHERE m.community.id = :communityId"),
         @NamedQuery(name = "Message.findGlobalMessages", query = "SELECT m FROM Message m WHERE m.community IS NULL AND "
                 + "m.recipient IS NULL"),
-
-        //TODO: finish query so that only relevant messages are returned (global, own, joined Community)
-        @NamedQuery(name = "Message.findUserRelated", query = "SELECT m FROM Message m WHERE m.recipient.id = :userId OR m.author.id = :userId")
+        @NamedQuery(name = "Message.findUserRelated", query = "SELECT m FROM Message m "
+        		+ "LEFT JOIN m.community c "
+        		+ "LEFT JOIN c.userCommunities cu "
+        		+ "WHERE m.recipient.id = :userId OR m.author.id = :userId OR c.author.id = :userId OR cu.user.id = :userId")
 })
 public class Message implements Serializable {
 

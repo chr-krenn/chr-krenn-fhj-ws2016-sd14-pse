@@ -1,16 +1,15 @@
 package at.fhj.swd14.pse.message;
 
-import at.fhj.swd14.pse.comment.CommentDto;
-import at.fhj.swd14.pse.community.CommunityDto;
-import at.fhj.swd14.pse.tag.TagDto;
-import at.fhj.swd14.pse.user.UserDto;
-
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
+
+import at.fhj.swd14.pse.comment.CommentDto;
+import at.fhj.swd14.pse.community.CommunityDto;
+import at.fhj.swd14.pse.tag.TagDto;
+import at.fhj.swd14.pse.user.UserDto;
 
 public class MessageDto implements Serializable, Comparable<MessageDto> {
 
@@ -176,25 +175,5 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
             return 1;
         }
         return 0;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MessageDto)) return false;
-        MessageDto that = (MessageDto) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(childs, that.childs) &&
-                Objects.equals(author, that.author) &&
-                Objects.equals(recipient, that.recipient) &&
-                Objects.equals(community, that.community) &&
-                Objects.equals(tags, that.tags) &&
-                Objects.equals(title, that.title) &&
-                Objects.equals(content, that.content);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, childs, author, recipient, community, tags, title, content, created, modified);
     }
 }

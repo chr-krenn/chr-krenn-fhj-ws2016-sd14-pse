@@ -190,9 +190,7 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
                 Objects.equals(community, that.community) &&
                 Objects.equals(tags, that.tags) &&
                 Objects.equals(title, that.title) &&
-                Objects.equals(content, that.content) &&
-                Objects.equals(created, that.created) &&
-                Objects.equals(modified, that.modified);
+                Objects.equals(content, that.content);
     }
 
     @Override

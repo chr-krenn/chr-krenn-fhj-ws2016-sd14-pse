@@ -27,78 +27,53 @@ public class MessageStreamUITest extends BaseUITest {
     public void testLikeMessage() {
         WelcomePage welcomePage = getWelcomePage();
         InsertNewMessage(welcomePage);
-        welcomePage.ToggleLikeFirstMessage();
-        Assert.assertEquals(1, welcomePage.GetFirstMessageLikeCount());
-        welcomePage.ToggleLikeFirstMessage();
-        Assert.assertEquals(0, welcomePage.GetFirstMessageLikeCount());
+        welcomePage.toggleLikeFirstMessage();
+        Assert.assertEquals(1, welcomePage.getFirstMessageLikeCount());
+        welcomePage.toggleLikeFirstMessage();
+        Assert.assertEquals(0, welcomePage.getFirstMessageLikeCount());
     }
     
     @Test
     public void testAddCommentToMessage() {
         WelcomePage welcomePage = getWelcomePage();
         InsertNewMessage(welcomePage);
-        Assert.assertEquals(0, welcomePage.GetFirstMessageCommentCount());
-        welcomePage.AddCommentToFirstMessage(TestCommentContent);
-        welcomePage.SubmitCommentToFirstMessage();
-        Wait();
+        Assert.assertEquals(0, welcomePage.getFirstMessageCommentCount());
+        welcomePage.addCommentToFirstMessage(TestCommentContent);
+        welcomePage.submitCommentToFirstMessage();
         welcomePage = getWelcomePage();
-        Assert.assertEquals(1, welcomePage.GetFirstMessageCommentCount());
+        Assert.assertEquals(1, welcomePage.getFirstMessageCommentCount());
     }
     
     @Test
     public void testLikeCommentOfMessage() {
         WelcomePage welcomePage = getWelcomePage();
         InsertNewMessage(welcomePage);
-        Assert.assertEquals(0, welcomePage.GetFirstMessageCommentCount());
-        welcomePage.AddCommentToFirstMessage(TestCommentContent);
-        welcomePage.SubmitCommentToFirstMessage();
-        Wait();
+        Assert.assertEquals(0, welcomePage.getFirstMessageCommentCount());
+        welcomePage.addCommentToFirstMessage(TestCommentContent);
+        welcomePage.submitCommentToFirstMessage();
         welcomePage = getWelcomePage();
-        Assert.assertEquals(1, welcomePage.GetFirstMessageCommentCount());
+        Assert.assertEquals(1, welcomePage.getFirstMessageCommentCount());
         
-        Assert.assertEquals(0, welcomePage.GetFirstMessageFirstCommentLikeCount());
-        welcomePage.ToggleLikeFirstMessageFirstComment();
-        Assert.assertEquals(1, welcomePage.GetFirstMessageFirstCommentLikeCount());
-        welcomePage.ToggleLikeFirstMessageFirstComment();
-        Assert.assertEquals(0, welcomePage.GetFirstMessageFirstCommentLikeCount());
+        Assert.assertEquals(0, welcomePage.getFirstMessageFirstCommentLikeCount());
+        welcomePage.toggleLikeFirstMessageFirstComment();
+        Assert.assertEquals(1, welcomePage.getFirstMessageFirstCommentLikeCount());
+        welcomePage.toggleLikeFirstMessageFirstComment();
+        Assert.assertEquals(0, welcomePage.getFirstMessageFirstCommentLikeCount());
     }
     
     @Test
     public void testAddManyCommentsAndLoadMoreToMessage() {
         WelcomePage welcomePage = getWelcomePage();
         InsertNewMessage(welcomePage);
-        Assert.assertEquals(0, welcomePage.GetFirstMessageCommentCount());
-        welcomePage.AddCommentToFirstMessage(TestCommentContent);
+        Assert.assertEquals(0, welcomePage.getFirstMessageCommentCount());
+        welcomePage.addCommentToFirstMessage(TestCommentContent);
         for (int i = 0; i < 15; i++) {
-        	welcomePage.SubmitCommentToFirstMessage();
-        	Wait();
+        	welcomePage.submitCommentToFirstMessage();
 		}
         welcomePage = getWelcomePage();
-        Assert.assertEquals(10, welcomePage.GetFirstMessageCommentCount());
-        welcomePage.FirstMessageLoadMoreComments();
-        Wait();
-        Assert.assertEquals(15, welcomePage.GetFirstMessageCommentCount());
-    }
-    
-    @Test
-    public void testChangeCommunityFilter() {
-        WelcomePage welcomePage = getWelcomePage();
-        InsertNewMessage(welcomePage);
-        welcomePage.CollapseCommunityDropdown();
-        Wait();
-        WebElement privateCommunity = welcomePage.GetPrivateCommunity();
-        Assert.assertEquals("Private", privateCommunity.getText());
-        privateCommunity.click();
-        Wait();
-        Assert.assertNotEquals(TestTitle, welcomePage.GetFirstMessageTitle());
-        Assert.assertNotEquals(TestContent, welcomePage.GetFirstMessageContent());
-        welcomePage.CollapseCommunityDropdown();
-        WebElement allCommunity = welcomePage.GetAllCommunity();
-        Assert.assertEquals("Alle", allCommunity.getText());
-        allCommunity.click();
-        Wait();
-        Assert.assertEquals(TestTitle, welcomePage.GetFirstMessageTitle());
-        Assert.assertEquals(TestContent, welcomePage.GetFirstMessageContent());
+        Assert.assertEquals(10, welcomePage.getFirstMessageCommentCount());
+        welcomePage.firstMessageLoadMoreComments();
+        Assert.assertEquals(15, welcomePage.getFirstMessageCommentCount());
     }
     
     private WelcomePage getWelcomePage(){
@@ -109,20 +84,11 @@ public class MessageStreamUITest extends BaseUITest {
     }
     
     private WelcomePage InsertNewMessage(WelcomePage welcomePage){
-    	welcomePage.InsertNewMessage(TestTitle, TestContent);
+    	welcomePage.insertNewMessage(TestTitle, TestContent);
         welcomePage = getWelcomePage();
-        Assert.assertEquals(TestTitle, welcomePage.GetFirstMessageTitle());
-        Assert.assertEquals(TestContent, welcomePage.GetFirstMessageContent());
-        Assert.assertEquals(0, welcomePage.GetFirstMessageLikeCount());
+        Assert.assertEquals(TestTitle, welcomePage.getFirstMessageTitle());
+        Assert.assertEquals(TestContent, welcomePage.getFirstMessageContent());
+        Assert.assertEquals(0, welcomePage.getFirstMessageLikeCount());
         return welcomePage;
-    }
-    
-    private void Wait(){
-    	//Sorry for this, but did not found anything to wait for.
-    	try {
-			Thread.sleep(200);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
     }
 }

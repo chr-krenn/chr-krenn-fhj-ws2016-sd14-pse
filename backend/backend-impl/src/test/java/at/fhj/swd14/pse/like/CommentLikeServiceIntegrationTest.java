@@ -60,12 +60,12 @@ public class CommentLikeServiceIntegrationTest extends BaseIntegrationTest {
 	
 	@Test
 	public void testGetCommentLikes(){
-		ArrayList<CommentLikeDto> likesBefore = (ArrayList)commentLikeService.getCommentLikes(comment.getId());
+		ArrayList<CommentLikeDto> likesBefore = (ArrayList<CommentLikeDto>) commentLikeService.getCommentLikes(comment.getId());
 		
 		CommentLikeDto cLike = new CommentLikeDto(user, comment);
 		commentLikeService.save(cLike);
 		
-		ArrayList<CommentLikeDto> likesAfter = (ArrayList)commentLikeService.getCommentLikes(comment.getId());
+		ArrayList<CommentLikeDto> likesAfter = (ArrayList<CommentLikeDto>) commentLikeService.getCommentLikes(comment.getId());
 		
 		Assert.assertEquals(likesBefore.size() + 1, likesAfter.size());
 	}

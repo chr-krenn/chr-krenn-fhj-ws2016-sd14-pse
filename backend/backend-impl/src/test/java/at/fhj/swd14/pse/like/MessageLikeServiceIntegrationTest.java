@@ -59,12 +59,12 @@ public class MessageLikeServiceIntegrationTest extends BaseIntegrationTest {
 	
 	@Test
 	public void testGetMessageLikes(){
-		ArrayList<MessageLikeDto> likesBefore = (ArrayList)messageLikeService.getMessageLikes(message.getId());
+		ArrayList<MessageLikeDto> likesBefore = (ArrayList<MessageLikeDto>) messageLikeService.getMessageLikes(message.getId());
 		
 		MessageLikeDto cLike = new MessageLikeDto(user, message);
 		messageLikeService.save(cLike);
 		
-		ArrayList<MessageLikeDto> likesAfter = (ArrayList)messageLikeService.getMessageLikes(message.getId());
+		ArrayList<MessageLikeDto> likesAfter = (ArrayList<MessageLikeDto>) messageLikeService.getMessageLikes(message.getId());
 		
 		Assert.assertEquals(likesBefore.size() + 1, likesAfter.size());
 	}

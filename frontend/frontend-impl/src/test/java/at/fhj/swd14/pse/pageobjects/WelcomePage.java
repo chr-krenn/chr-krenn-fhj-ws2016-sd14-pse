@@ -42,67 +42,80 @@ public class WelcomePage extends AbstractPage {
     	return new UsersPage(webdriver);
     }
     
-    public void InsertNewMessage(String title, String content){
+    public void insertNewMessage(String title, String content){
     	webdriver.findElement(addMessageTitle).sendKeys(title);
     	webdriver.findElement(addMessageContent).sendKeys(content);
     	webdriver.findElement(addMessageSubmit).click();
     }
     
-    public String GetFirstMessageTitle(){
+    public String getFirstMessageTitle(){
     	return webdriver.findElement(firstMessageTitle).getText();
     }
     
-    public String GetFirstMessageContent(){
+    public String getFirstMessageContent(){
     	return webdriver.findElement(firstMessageContent).getText();
     }
     
-    public int GetFirstMessageLikeCount(){
+    public int getFirstMessageLikeCount(){
     	return Integer.parseInt(webdriver.findElement(firstMessageLikeCount).getText());
     }
     
-    public void ToggleLikeFirstMessage(){
+    public void toggleLikeFirstMessage(){
     	webdriver.findElement(firstMessageLikeButton).click();
     }
     
-    public int GetFirstMessageCommentCount(){
+    public int getFirstMessageCommentCount(){
     	return webdriver.findElements(By.xpath(FIRSTMESSAGECOMMENTLISTSTRING)).size();
     }
     
-    public void AddCommentToFirstMessage(String content){
+    public void addCommentToFirstMessage(String content){
     	webdriver.findElement(firstMessageAddCommentText).sendKeys(content);
     }
     
-    public void SubmitCommentToFirstMessage(){
+    public void submitCommentToFirstMessage(){
     	webdriver.findElement(firstMessageAddCommentSubmit).click();
+    	threadWait();
+    	
     }
     
-    public void FirstMessageLoadMoreComments(){
+    public void firstMessageLoadMoreComments(){
     	webdriver.findElement(firstMessageLoadMoreComments).click();
-    	Wait();
+    	threadWait();
     }
     
-    public int GetFirstMessageFirstCommentLikeCount(){
+    public int getFirstMessageFirstCommentLikeCount(){
     	return Integer.parseInt(webdriver.findElement(firstMessageFirstCommentLikeCount).getText());
     }
     
-    public void ToggleLikeFirstMessageFirstComment(){
+    public void toggleLikeFirstMessageFirstComment(){
     	webdriver.findElement(firstMessageFirstCommentLikeButton).click();
-    	Wait();
+    	threadWait();
     }
     
-    public void CollapseCommunityDropdown(){
+    public void collapseCommunityDropdown(){
     	webdriver.findElement(communitySelect).click();
+    	threadWait();
     }
     
-    public WebElement GetPrivateCommunity(){
+    public WebElement getPrivateCommunity(){
     	return webdriver.findElement(communitySelectPrivate);
     }
     
-    public WebElement GetAllCommunity(){
+    public WebElement getAllCommunity(){
     	return webdriver.findElement(communitySelectAll);
     }
     
-    private void Wait(){
+    public void clickAllCommunity(){
+    	getAllCommunity().click();
+    	threadWait();
+    }
+    
+    public void clickPrivateCommunity(){
+    	getPrivateCommunity().click();
+    	threadWait();
+    }
+    
+    private void threadWait(){
     	//Sorry for this, but did not found anything to wait for.
     	try {
 			Thread.sleep(200);

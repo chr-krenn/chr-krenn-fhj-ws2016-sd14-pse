@@ -23,7 +23,7 @@ import java.util.List;
 public class CommentLikeServiceImpl implements CommentLikeService {
 
 	private static final Logger LOGGER = LogManager.getLogger(CommentLikeServiceImpl.class);
-	private static final String text_1 = " could not be retrieved.";
+	private static final String text1 = " could not be retrieved.";
 	
     @EJB
     private CommentRepository commentRepository;
@@ -102,7 +102,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
         return new CommentLikeDto(userDTO, commentDTO);
     	} catch(Exception e) {
     		LOGGER.error("An error occured while searching for comment like for: " + userId + " " + commentId, e);
-    		throw new CommentLikeServiceException("Comment like for " + userId + " " + commentId + text_1);
+    		throw new CommentLikeServiceException("Comment like for " + userId + " " + commentId + text1);
     	}
     }
 
@@ -122,7 +122,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
         return commentLikes;
     	} catch (Exception e){
     		LOGGER.error("An error occured while searching for comment likes for: " + commentId, e);
-    		throw new CommentLikeServiceException("Comment likes for " + commentId + text_1);
+    		throw new CommentLikeServiceException("Comment likes for " + commentId + text1);
     	}
     }
 
@@ -136,7 +136,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
         return users.size();
     	} catch (Exception e) {
     		LOGGER.error("An error occured while searching for like count for comment: " + commentId, e);
-    		throw new CommentLikeServiceException("Like count for comment " + commentId + text_1);
+    		throw new CommentLikeServiceException("Like count for comment " + commentId + text1);
     	}
     }
 
@@ -150,7 +150,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
         return comments.size();
     	} catch (Exception e) {
     		LOGGER.error("An error occured while searching for like count for comment for user: " + userId, e);
-    		throw new CommentLikeServiceException("Like count for comments for user: " + userId + text_1);
+    		throw new CommentLikeServiceException("Like count for comments for user: " + userId + text1);
     	}
     }
 

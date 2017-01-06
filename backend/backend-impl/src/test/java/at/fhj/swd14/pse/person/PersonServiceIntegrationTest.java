@@ -64,16 +64,19 @@ public class PersonServiceIntegrationTest {
 	@Test
 	public void testSaveLoggedInPerson()
 	{
+		EntityTransaction trans = manager.getTransaction();
+		trans.begin();
 		Person person = getAnyPerson();
 		//just modify a field in the person
 		String oldAddress = person.getAddress();
 		String expectedAddress = person.getAddress()!=null?person.getAddress()+"Test":"Test";
 		person.setAddress(expectedAddress);
 		service.saveLoggedInPerson(PersonConverter.convert(person));
+		trans.rollback();
 		
-		EntityTransaction trans = manager.getTransaction();
+		//manager.refresh(person);
+		person = manager.find(Person.class, person.getId());
 		trans.begin();
-		manager.refresh(person);
 		String actualAddress = person.getAddress();
 		person.setAddress(oldAddress);
 		manager.merge(person);

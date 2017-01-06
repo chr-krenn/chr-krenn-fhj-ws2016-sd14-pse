@@ -12,6 +12,7 @@ import at.fhj.swd14.pse.message.MessageDto;
 import at.fhj.swd14.pse.message.MessageService;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
+import at.fhj.swd14.pse.user.UserServiceHelper;
 
 public abstract class BaseIntegrationTest {
 	protected MessageService messageService;
@@ -31,14 +32,7 @@ public abstract class BaseIntegrationTest {
     }
     
     public void insertUser(){
-    	user = new UserDto();
-		user.setMail("user@test.com");
-		user.setPassword("user");
-		user.setSalt("salt");
-		long userId = userService.save(user);
-		user.setId(userId);
-		ArrayList<UserDto> userList = new ArrayList<UserDto>();
-		userList.add(user);
+    	user = UserServiceHelper.insertUser(userService);
     }
     
     public void getCommunity(){

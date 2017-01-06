@@ -37,6 +37,11 @@ public interface PersonService {
      */
     void saveLoggedInPerson(PersonDto person);
 
+    /**
+     * Finds all contacts for a given user
+     *
+     * @param loggedInUserId the id of the loggedin user
+     */
     Collection<PersonDto> findAllUser(long loggedInUserId);
 
     /**

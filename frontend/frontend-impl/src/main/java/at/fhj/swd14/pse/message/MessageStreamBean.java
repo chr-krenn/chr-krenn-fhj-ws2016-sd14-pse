@@ -32,6 +32,8 @@ public class MessageStreamBean implements Serializable {
 	 */
 	private static final Logger LOGGER = LogManager.getLogger(MessageStreamBean.class);
 
+	private static final String ERROR_LOG_TITLE = "Error occurred";
+	
 	@EJB(name = "ejb/MessageService")
 	private transient MessageService messageService;
 
@@ -206,7 +208,7 @@ public class MessageStreamBean implements Serializable {
 		
 			initAvailableCommunities();
 		} catch (Exception ex) {
-			growl("Error occured", ex);
+			growl(ERROR_LOG_TITLE, ex);
 		}
 	}
 
@@ -222,8 +224,8 @@ public class MessageStreamBean implements Serializable {
 		try {
 			return messageService.findUserRelated(getCurrentUserId());
 		} catch (Exception ex) {
-			growl("Error occured", ex);
-			return new ArrayList<MessageDto>();
+			growl(ERROR_LOG_TITLE, ex);
+			return new ArrayList<>();
 		}
 	}
 
@@ -242,10 +244,10 @@ public class MessageStreamBean implements Serializable {
 				return message.getChilds();
 			}
 
-			return new ArrayList<CommentDto>();
+			return new ArrayList<>();
 		} catch (Exception ex) {
-			growl("Error occured", ex);
-			return new ArrayList<CommentDto>();
+			growl(ERROR_LOG_TITLE, ex);
+			return new ArrayList<>();
 		}
 	}
 
@@ -279,7 +281,7 @@ public class MessageStreamBean implements Serializable {
 			messageLike.setLiker(userDTO);
 			this.messageLikeService.save(messageLike);
 		} catch (Exception ex) {
-			growl("Error occured", ex);
+			growl(ERROR_LOG_TITLE, ex);
 		}
 	}
 
@@ -300,7 +302,7 @@ public class MessageStreamBean implements Serializable {
 			commentLike.setLiker(userDTO);
 			this.commentLikeService.save(commentLike);
 		} catch (Exception ex) {
-			growl("Error occured", ex);
+			growl(ERROR_LOG_TITLE, ex);
 		}
 	}
 	
@@ -309,7 +311,7 @@ public class MessageStreamBean implements Serializable {
 		try {
 			return this.messageLikeService.getLikeCountForMessage(messageId);
 		} catch (Exception ex) {
-			growl("Error occured", ex);
+			growl(ERROR_LOG_TITLE, ex);
 			return 0;
 		}
 
@@ -320,7 +322,7 @@ public class MessageStreamBean implements Serializable {
 		try {
 			return this.commentLikeService.getLikeCountForComment(commentId);
 		} catch (Exception ex) {
-			growl("Error occured", ex);
+			growl(ERROR_LOG_TITLE, ex);
 			return 0;
 		}
 	}
@@ -344,7 +346,7 @@ public class MessageStreamBean implements Serializable {
 				setMessages(new ArrayList<>()); // Default
 			}
 		} catch (Exception ex) {
-			growl("Error occured", ex);
+			growl(ERROR_LOG_TITLE, ex);
 		}
 
 	}

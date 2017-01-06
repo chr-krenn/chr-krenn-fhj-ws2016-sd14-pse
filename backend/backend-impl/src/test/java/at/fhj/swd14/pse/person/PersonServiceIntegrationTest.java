@@ -41,7 +41,6 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testFind()
 	{
 		Person person = getAnyPerson();
@@ -53,7 +52,6 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testFindByUser()
 	{
 		Person person = getAnyPerson();
@@ -64,19 +62,21 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testSaveLoggedInPerson()
 	{
+		EntityTransaction trans = manager.getTransaction();
+		trans.begin();
 		Person person = getAnyPerson();
 		//just modify a field in the person
 		String oldAddress = person.getAddress();
 		String expectedAddress = person.getAddress()!=null?person.getAddress()+"Test":"Test";
 		person.setAddress(expectedAddress);
 		service.saveLoggedInPerson(PersonConverter.convert(person));
+		trans.rollback();
 		
-		EntityTransaction trans = manager.getTransaction();
+		//manager.refresh(person);
+		person = manager.find(Person.class, person.getId());
 		trans.begin();
-		manager.refresh(person);
 		String actualAddress = person.getAddress();
 		person.setAddress(oldAddress);
 		manager.merge(person);
@@ -89,7 +89,6 @@ public class PersonServiceIntegrationTest {
 	
 	
 	@Test
-	@Ignore
 	public void testFindAllStati()
 	{
 		final String[] stati = new String[]{"online","offline","abwesend"};
@@ -116,7 +115,6 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testPersonImage()
 	{
 		Person person = getAnyPerson();
@@ -156,7 +154,6 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testGetPersonImage()
 	{
 		Person person = getAnyPerson();

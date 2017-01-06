@@ -2,7 +2,7 @@
 
 [![Build Status](https://jenkins.almost-a-blog.net/buildStatus/icon?job=PSE-build)](https://jenkins.almost-a-blog.net/job/PSE-build) - Build
 
-[![Build Status](https://jenkins.almost-a-blog.net/buildStatus/icon?job=PSE-deploy)](https://jenkins.almost-a-blog.net/job/PSE-deploy) - Deployment
+[![Build Status](https://jenkins.almost-a-blog.net/buildStatus/icon?job=PSE-deploy-to-cluster)](https://jenkins.almost-a-blog.net/job/PSE-deploy-to-cluster) - Deployment
 
 ## Project Structure
 

@@ -15,7 +15,10 @@ public final class IntegrationTestUtil {
 
     private static final String JNDI_APP_NAME = "backend-assembly-1.1-SNAPSHOT";
     private static final String JNDI_MODULE_NAME = "backend-impl-1.1-SNAPSHOT";
-    private static InitialContext CONTEXT;
+    private static InitialContext context;
+
+    private IntegrationTestUtil() {
+    }
 
     private static InitialContext initContext() {
         final Properties jndiProperties = new Properties();
@@ -52,14 +55,11 @@ public final class IntegrationTestUtil {
         }
     }
 
-    private IntegrationTestUtil() {
-    }
-
     private static synchronized InitialContext getContext() {
-        if (CONTEXT == null) {
-            CONTEXT = initContext();
+        if (context == null) {
+            context = initContext();
         }
-        return CONTEXT;
+        return context;
     }
 
     public static <T> T getService(Class<T> serviceClass) {

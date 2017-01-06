@@ -1,7 +1,6 @@
 package at.fhj.swd14.pse.news;
 
 import javax.ejb.Remote;
-import java.time.Instant;
 import java.util.Collection;
 
 /**
@@ -52,22 +51,5 @@ public interface NewsService {
      * @return the news
      */
     Collection<NewsDto> findAllOnline();
-
-    /**
-     * Finds and returns all news since the given date.
-     *
-     * @param instant all news after this instant will be fetched; must not be null
-     * @return the fetched news, if none are found, an empty list is returned
-     * @throws NullPointerException if the instant is null
-     */
-    Collection<NewsDto> findAllSince(Instant instant);
-
-    /**
-     * Finds and returns all news which were created by the given author.
-     *
-     * @param author the author's id
-     * @return the fetched news, if none are found, an empty list is returned
-     */
-    Collection<NewsDto> findByAuthorId(long author);
 
 }

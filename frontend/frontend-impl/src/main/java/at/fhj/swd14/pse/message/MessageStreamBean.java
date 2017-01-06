@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -31,6 +32,8 @@ public class MessageStreamBean implements Serializable {
 	 */
 	private static final Logger LOGGER = LogManager.getLogger(MessageStreamBean.class);
 
+	private static final String ERROR_LOG_TITLE = "Error occurred";
+	
 	@EJB(name = "ejb/MessageService")
 	private transient MessageService messageService;
 
@@ -49,10 +52,12 @@ public class MessageStreamBean implements Serializable {
 	private Long parameterCommunityId;
 
 	public Long getParameterCommunityId() {
+		LOGGER.trace("MessageStreamBean::getParameterCommunityId()");
 		return parameterCommunityId;
 	}
 
 	public void setParameterCommunityId(Long parameterCommunityId) {
+		LOGGER.trace("MessageStreamBean::setParameterCommunityId(" + parameterCommunityId + ")");
 		this.parameterCommunityId = parameterCommunityId;
 	}
 
@@ -67,6 +72,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return The current communities DTO
 	 */
 	public CommunityDto getCurrentCommunity() {
+		LOGGER.trace("MessageStreamBean::getCurrentCommunity()");
 		return currentCommunity;
 	}
 
@@ -77,6 +83,7 @@ public class MessageStreamBean implements Serializable {
 	 *            The community to set as current community
 	 */
 	public void setCurrentCommunity(CommunityDto currentCommunity) {
+		LOGGER.trace("MessageStreamBean::setCurrentCommunity(" + currentCommunity.toString() + ")");
 		this.currentCommunity = currentCommunity;
 	}
 
@@ -91,6 +98,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return The available communities
 	 */
 	public List<CommunityDto> getAvailableCommunities() {
+		LOGGER.trace("MessageStreamBean::getAvailableCommunities()");
 		return availableCommunities;
 	}
 
@@ -101,6 +109,7 @@ public class MessageStreamBean implements Serializable {
 	 *            The available communities to set
 	 */
 	public void setAvailableCommunities(List<CommunityDto> availableCommunities) {
+		LOGGER.trace("MessageStreamBean::setAvailableCommunities(" + availableCommunities.toString() + ")");
 		this.availableCommunities = availableCommunities;
 	}
 
@@ -115,6 +124,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return
 	 */
 	public Map<Long, MessageDto> getMessageMap() {
+		LOGGER.trace("MessageStreamBean::getMessageMap()");
 		return messageMap;
 	}
 
@@ -125,6 +135,7 @@ public class MessageStreamBean implements Serializable {
 	 *            the messages to display in the view
 	 */
 	public void setMessageMap(Map<Long, MessageDto> messageMap) {
+		LOGGER.trace("MessageStreamBean::setMessageMap(" + messageMap.toString() + ")");
 		this.messageMap = messageMap;
 	}
 
@@ -134,10 +145,12 @@ public class MessageStreamBean implements Serializable {
 	private List<MessageDto> messages;
 
 	public List<MessageDto> getMessages() {
+		LOGGER.trace("MessageStreamBean::getMessages()");
 		return messages;
 	}
 
 	public void setMessages(List<MessageDto> messages) {
+		LOGGER.trace("MessageStreamBean::setMessages(" + messages.toString() + ")");
 		this.messages = messages;
 		Collections.sort(this.messages);
 		this.messageMap = mapMessages(this.messages);
@@ -154,6 +167,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return
 	 */
 	public long getCurrentUserId() {
+		LOGGER.trace("MessageStreamBean::getCurrentUserId()");
 		return currentUserId;
 	}
 
@@ -164,6 +178,7 @@ public class MessageStreamBean implements Serializable {
 	 *            the Id of the currently logged-in User
 	 */
 	public void setCurrentUserId(long id) {
+		LOGGER.trace("MessageStreamBean::setCurrentUserId(" + id + ")");
 		currentUserId = id;
 	}
 	// ---------- Constructor ------------
@@ -172,7 +187,7 @@ public class MessageStreamBean implements Serializable {
 	 * Constructor
 	 */
 	public MessageStreamBean() {
-		LOGGER.debug("Create: " + MessageStreamBean.class.getSimpleName());
+		LOGGER.trace("MessageStreamBean::MessageStreamBean()");
 	}
 
 	/**
@@ -180,17 +195,21 @@ public class MessageStreamBean implements Serializable {
 	 */
 	@PostConstruct
 	public void init() {
-		LOGGER.debug("Initialising the MessageStreamBean");
-		FacesContext context = FacesContext.getCurrentInstance();
-		setCurrentUserId(((at.fhj.swd14.pse.security.DatabasePrincipal) context.getExternalContext().getUserPrincipal()).getUserId());
+		LOGGER.trace("MessageStreamBean::init()");
+		try {
+			FacesContext context = FacesContext.getCurrentInstance();
+			setCurrentUserId(((at.fhj.swd14.pse.security.DatabasePrincipal) context.getExternalContext().getUserPrincipal()).getUserId());
 		
-		Map<String, String> requestMap = context.getExternalContext().getRequestParameterMap();
-		String communityId = requestMap.get("parameterCommunityId");
-		if(communityId != null) {
-			this.setParameterCommunityId(Long.parseLong(communityId));
+			Map<String, String> requestMap = context.getExternalContext().getRequestParameterMap();
+			String communityId = requestMap.get("parameterCommunityId");
+			if (communityId != null) {
+				this.setParameterCommunityId(Long.parseLong(communityId));
+			}
+		
+			initAvailableCommunities();
+		} catch (Exception ex) {
+			growl(ERROR_LOG_TITLE, ex);
 		}
-		
-		initAvailableCommunities();
 	}
 
 	// ---------- Public Methods ------------
@@ -201,8 +220,13 @@ public class MessageStreamBean implements Serializable {
 	 * @return
 	 */
 	public List<MessageDto> getAllMessages() {
-		LOGGER.debug("Getting all Messages");
-		return messageService.findUserRelated(getCurrentUserId());
+		LOGGER.trace("MessageStreamBean::getAllMessages()");
+		try {
+			return messageService.findUserRelated(getCurrentUserId());
+		} catch (Exception ex) {
+			growl(ERROR_LOG_TITLE, ex);
+			return new ArrayList<>();
+		}
 	}
 
 	/**
@@ -213,12 +237,18 @@ public class MessageStreamBean implements Serializable {
 	 * @return A list of the messages comments
 	 */
 	public List<CommentDto> getComments(Long messageId) {
-		MessageDto message = messageMap.get(messageId);
-		if (message != null) {
-			return message.getChilds();
-		}
+		LOGGER.trace("MessageStreamBean::createComment(" + messageId + ")");
+		try {
+			MessageDto message = messageMap.get(messageId);
+			if (message != null) {
+				return message.getChilds();
+			}
 
-		return new ArrayList<>();
+			return new ArrayList<>();
+		} catch (Exception ex) {
+			growl(ERROR_LOG_TITLE, ex);
+			return new ArrayList<>();
+		}
 	}
 
 	/**
@@ -230,7 +260,7 @@ public class MessageStreamBean implements Serializable {
 	 *            the text for the new comment
 	 */
 	public void createComment(Long messageId, String text) {
-		LOGGER.debug("createComment: " + messageId + " - " + text);
+		LOGGER.trace("MessageStreamBean::createComment(" + messageId + ", " + text + ")");
 		// TODO: Implement
 	}
 
@@ -241,15 +271,18 @@ public class MessageStreamBean implements Serializable {
 	 *            The id of the message to like
 	 */
 	public void likeMessage(Long id) {
-		LOGGER.debug("likeMessage: " + id);
-		MessageLikeDto messageLike = this.messageLikeService.getMessageLike(this.currentUserId,id);
-		UserDto userDTO = messageLike.getLiker();
-		if (userDTO == null)
-		{
-			userDTO = new UserDto(this.currentUserId);
+		LOGGER.trace("MessageStreamBean::likeMessage(" + id + ")");
+		try {
+			MessageLikeDto messageLike = this.messageLikeService.getMessageLike(this.currentUserId, id);
+			UserDto userDTO = messageLike.getLiker();
+			if (userDTO == null) {
+				userDTO = new UserDto(this.currentUserId);
+			}
+			messageLike.setLiker(userDTO);
+			this.messageLikeService.save(messageLike);
+		} catch (Exception ex) {
+			growl(ERROR_LOG_TITLE, ex);
 		}
-		messageLike.setLiker(userDTO);
-		this.messageLikeService.save(messageLike);
 	}
 
 	/**
@@ -259,41 +292,73 @@ public class MessageStreamBean implements Serializable {
 	 *            The id of the comment to like
 	 */
 	public void likeComment(Long id) {
-		LOGGER.debug("likeComment: " + id);
-		CommentLikeDto commentLike = this.commentLikeService.getCommentLike(this.currentUserId,id);
-		UserDto userDTO = commentLike.getLiker();
-		if (userDTO == null)
-		{
-			userDTO = new UserDto(this.currentUserId);
+		LOGGER.trace("MessageStreamBean::likeComment(" + id + ")");
+		try {
+			CommentLikeDto commentLike = this.commentLikeService.getCommentLike(this.currentUserId, id);
+			UserDto userDTO = commentLike.getLiker();
+			if (userDTO == null) {
+				userDTO = new UserDto(this.currentUserId);
+			}
+			commentLike.setLiker(userDTO);
+			this.commentLikeService.save(commentLike);
+		} catch (Exception ex) {
+			growl(ERROR_LOG_TITLE, ex);
 		}
-		commentLike.setLiker(userDTO);
-		this.commentLikeService.save(commentLike);
 	}
 	
 	public int getLikeCountForMessage(Long messageId) {
-		return this.messageLikeService.getLikeCountForMessage(messageId);
+		LOGGER.trace("MessageStreamBean::getLikeCountForMessage(" + messageId + ")");
+		try {
+			return this.messageLikeService.getLikeCountForMessage(messageId);
+		} catch (Exception ex) {
+			growl(ERROR_LOG_TITLE, ex);
+			return 0;
+		}
+
 	}
 	
 	public int getLikeCountForComment(Long commentId) {
-		return this.commentLikeService.getLikeCountForComment(commentId);
+		LOGGER.trace("MessageStreamBean::getLikeCountForComment(" + commentId + ")");
+		try {
+			return this.commentLikeService.getLikeCountForComment(commentId);
+		} catch (Exception ex) {
+			growl(ERROR_LOG_TITLE, ex);
+			return 0;
+		}
 	}
 
 	/**
 	 * Changes the currentCommunity to the selected value (called by Server)
 	 */
 	public void onCommunityChange() {
-		LOGGER.debug("MessageStreamBean Community Changed: " + currentCommunity);
-		if (currentCommunity.getId() <= -3 || currentCommunity.getId() == 0) { // All Messages
-			setMessages(getAllMessages());
-		} else if (currentCommunity.getId() == -2) { // Private Messages
-			setMessages(getPrivateMessages());
-		} else if (currentCommunity.getId() == -1) { // Global Messages
-			setMessages(getGlobalMessages());
-		} else if (currentCommunity.getId() > 0) { // Community Messages
-			setMessages(getCommunityMessages(currentCommunity.getId()));
-		} else {
-			setMessages(new ArrayList<>()); // Default
+		LOGGER.trace("MessageStreamBean::onCommunityChange()");
+		try {
+			if (currentCommunity.getId() <= -3 || currentCommunity.getId() == 0) { // All
+				// Messages
+				setMessages(getAllMessages());
+			} else if (currentCommunity.getId() == -2) { // Private Messages
+				setMessages(getPrivateMessages());
+			} else if (currentCommunity.getId() == -1) { // Global Messages
+				setMessages(getGlobalMessages());
+			} else if (currentCommunity.getId() > 0) { // Community Messages
+				setMessages(getCommunityMessages(currentCommunity.getId()));
+			} else {
+				setMessages(new ArrayList<>()); // Default
+			}
+		} catch (Exception ex) {
+			growl(ERROR_LOG_TITLE, ex);
 		}
+
+	}
+
+	public void growl(String summary, Exception ex) {
+		growl(summary, ex.getMessage());
+	}
+
+	public void growl(String summary, String message) {
+		LOGGER.error("MessageStreamBean::growl(" + summary + ", " + message + ")");
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage(summary, message));
 	}
 
 	// ---------- Private Methods ------------
@@ -302,7 +367,7 @@ public class MessageStreamBean implements Serializable {
 	 * Initialises the availableCommunities (called by Server)
 	 */
 	private void initAvailableCommunities() {
-		LOGGER.debug("Initialising the Communities for the Selectbox");
+		LOGGER.trace("MessageStreamBean::initAvailableCommunities()");
 		if (getParameterCommunityId() != null) {
 			availableCommunities = new ArrayList<>();
 			availableCommunities.add(communityService.find(getParameterCommunityId()));
@@ -335,6 +400,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return A map of Messages
 	 */
 	private List<MessageDto> getCommunityMessages(Long id) {
+		LOGGER.trace("MessageStreamBean::getCommunityMessages(" + id + ")");
 		return messageService.findByCommunityId(id);
 	}
 
@@ -344,6 +410,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return A map of Messages
 	 */
 	private List<MessageDto> getGlobalMessages() {
+		LOGGER.trace("MessageStreamBean::findGlobalMesssages()");
 		return messageService.findGlobalMesssages();
 	}
 
@@ -353,6 +420,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return A map of Messages
 	 */
 	private List<MessageDto> getPrivateMessages() {
+		LOGGER.trace("MessageStreamBean::getPrivateMessages()");
 		return messageService.findUsersPrivateMessages(getCurrentUserId());
 	}
 
@@ -365,6 +433,7 @@ public class MessageStreamBean implements Serializable {
 	 * @return A map of Messages
 	 */
 	private Map<Long, MessageDto> mapMessages(List<MessageDto> messageList) {
+		LOGGER.trace("MessageStreamBean::mapMessages(" + messageList.toString() + ")");
 		Map<Long, MessageDto> mappedMessages = new HashMap<>();
 		for (MessageDto message : messageList) {
 			mappedMessages.put(message.getId(), message);

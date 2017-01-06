@@ -11,10 +11,7 @@ import java.util.Collection;
 @NamedQueries(@NamedQuery(name = "Tag.findByName", query = "SELECT t FROM Tag t WHERE t.name = LOWER(:name)"))
 public class Tag implements Serializable {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 5190605103970326377L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +27,10 @@ public class Tag implements Serializable {
     }
 
     public Tag(Long id) {
-
         setId(id);
     }
 
     public Tag(Long id, String name) {
-
         setId(id);
         setName(name);
     }
@@ -47,8 +42,6 @@ public class Tag implements Serializable {
                 ", name='" + name + '\'' +
                 '}';
     }
-
-    //---Getters and Setters---
 
     public Long getId() {
         return id;

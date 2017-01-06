@@ -3,7 +3,6 @@ package at.fhj.swd14.pse.department;
 import at.fhj.swd14.pse.base.IntegrationTestUtil;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.naming.NamingException;

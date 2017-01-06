@@ -49,7 +49,9 @@ public abstract class BaseUITest {
             driver = Driver.valueOf(driverProperty);
         }
 
-        return driver.start(new DesiredCapabilities());
+        final DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setJavascriptEnabled(true);
+        return driver.start(capabilities);
     }
 
     @AfterClass

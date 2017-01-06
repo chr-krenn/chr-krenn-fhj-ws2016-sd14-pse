@@ -54,6 +54,9 @@ data-source add --name=$MYSQL_DATABASE --driver-name=mysql --jndi-name=$JNDI_NAM
 /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding, value=true)
 /subsystem=undertow/server=default-server/http-listener=default:undefine-attribute(name=redirect-socket)
 
+# Remove security-realm from http-remoting-connector
+/subsystem=remoting/http-connector=http-remoting-connector:undefine-attribute(name=security-realm)
+
 # Execute the batch
 run-batch
 EOF

@@ -20,6 +20,9 @@ public class RepositoryCoverageTest {
         new PhonenumberRepositoryImpl();
         new HobbyRepositoryImpl();
         new MessageRepositoryImpl();
+        new NewsRepositoryImpl();
+        new CommentRepositoryImpl();
+        new CommunityRepositoryImpl();
     }
 
 }

@@ -41,7 +41,6 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testFind()
 	{
 		Person person = getAnyPerson();
@@ -53,7 +52,6 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testFindByUser()
 	{
 		Person person = getAnyPerson();
@@ -64,7 +62,6 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testSaveLoggedInPerson()
 	{
 		Person person = getAnyPerson();
@@ -89,7 +86,6 @@ public class PersonServiceIntegrationTest {
 	
 	
 	@Test
-	@Ignore
 	public void testFindAllStati()
 	{
 		final String[] stati = new String[]{"online","offline","abwesend"};
@@ -116,7 +112,6 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testPersonImage()
 	{
 		Person person = getAnyPerson();
@@ -156,7 +151,6 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testGetPersonImage()
 	{
 		Person person = getAnyPerson();

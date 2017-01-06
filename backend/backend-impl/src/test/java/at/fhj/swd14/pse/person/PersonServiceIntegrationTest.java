@@ -1,19 +1,19 @@
 package at.fhj.swd14.pse.person;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-
 import at.fhj.swd14.pse.base.IntegrationTestUtil;
+import at.fhj.swd14.pse.contact.Contact;
 import at.fhj.swd14.pse.database.DatabaseTestUtil;
 import at.fhj.swd14.pse.user.UserConverter;
+import at.fhj.swd14.pse.user.UserDto;
 
 public class PersonServiceIntegrationTest {
 
@@ -25,19 +25,6 @@ public class PersonServiceIntegrationTest {
 	{
 		service = IntegrationTestUtil.getService(PersonService.class);
 		manager = DatabaseTestUtil.getEntityManager();
-	}
-	
-	private Person getAnyPerson()
-	{
-		List<Person> persons = manager.createQuery("SELECT p FROM Person p", Person.class).getResultList();
-		Assert.assertTrue(persons.size()>0);
-		return persons.get(0);
-	}
-	
-	private void validatePerson(Person expected, PersonDto actual)
-	{
-		Assert.assertNotNull(actual);
-		PersonDtoTester.assertEquals(PersonConverter.convert(expected), actual);
 	}
 	
 	@Test
@@ -87,6 +74,22 @@ public class PersonServiceIntegrationTest {
 		
 	}
 	
+	@Test
+	public void testFindAllUser() {
+		Collection<PersonDto> persons = getAllUserContacts(getLoggedInUser());
+		checkAllUserContacts(persons);
+	}
+	
+	@Test
+	public void testChangeFriendState() {
+		UserDto userDto = getLoggedInUser();
+		Collection<PersonDto> persons = getAllUserContacts(userDto);
+		checkAllUserContacts(persons);
+		Long userId = userDto.getId();
+		Long contactId = new ArrayList<PersonDto>(persons).get(0).getId();
+		checkChangedContact(userId, contactId, false);
+		checkChangedContact(userId, contactId, true);
+	}
 	
 	@Test
 	public void testFindAllStati()
@@ -115,6 +118,7 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testPersonImage()
 	{
 		EntityTransaction trans = manager.getTransaction();
@@ -202,5 +206,42 @@ public class PersonServiceIntegrationTest {
 		PersonDtoTester.assertEquals(PersonConverter.convert(person), dto.getPerson());
 		Assert.assertArrayEquals(img.getData(), dto.getData());
 		
+	}
+	
+	private Person getAnyPerson()
+	{
+		List<Person> persons = manager.createQuery("SELECT p FROM Person p", Person.class).getResultList();
+		Assert.assertTrue(persons.size()>0);
+		return persons.get(0);
+	}
+	
+	private void validatePerson(Person expected, PersonDto actual)
+	{
+		Assert.assertNotNull(actual);
+		PersonDtoTester.assertEquals(PersonConverter.convert(expected), actual);
+	}
+
+	private Collection<PersonDto> getAllUserContacts(UserDto userDto) {
+		return service.findAllUser(userDto.getId());
+	}
+	
+	private void checkAllUserContacts(Collection<PersonDto> persons) {
+		Assert.assertNotNull(persons);
+		Assert.assertFalse(persons.isEmpty());
+	}
+
+	private UserDto getLoggedInUser() {
+		Person person = getAnyPerson();
+		UserDto userDto = UserConverter.convert(person.getUser());
+		return userDto;
+	}
+	
+	private void checkChangedContact(Long userId, Long contactId, boolean isEmpty) {
+		service.changeFriendState(userId, contactId);
+		List<Contact> contacts = manager.createQuery("SELECT c FROM Contact c WHERE c.contactPK.person1Id=:id1 AND c.contactPK.person2Id=:id2", Contact.class)
+										.setParameter("id1", userId)
+										.setParameter("id2", contactId)
+										.getResultList();
+		Assert.assertTrue(contacts.isEmpty() == isEmpty);
 	}
 }

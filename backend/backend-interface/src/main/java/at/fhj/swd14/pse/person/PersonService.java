@@ -41,6 +41,7 @@ public interface PersonService {
      * Finds all contacts for a given user
      *
      * @param loggedInUserId the id of the loggedin user
+     * @return list of contacts
      */
     Collection<PersonDto> findAllUser(long loggedInUserId);
 
@@ -68,5 +69,11 @@ public interface PersonService {
      */
     PersonImageDto getPersonImage(Long personid);
 
+    /**
+     * Changes the friend state for another person for the loggedin user
+     *
+     * @param loggedInUserID the id of the loggedin user
+     * @param otherPersonID the id of the other person
+     */
     void changeFriendState(long loggedInUserID, long otherPersonID);
 }

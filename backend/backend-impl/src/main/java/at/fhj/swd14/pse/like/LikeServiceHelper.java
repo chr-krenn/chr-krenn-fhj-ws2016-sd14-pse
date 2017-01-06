@@ -18,7 +18,7 @@ public class LikeServiceHelper {
 		this.positionInList = 0;
 	}
 	
-	public boolean isUserInList(long id)
+	private boolean isUserInList(long id)
 	{
 		boolean isUserInList = false;
         this.positionInList = 0;
@@ -36,14 +36,27 @@ public class LikeServiceHelper {
         return isUserInList;
 	}
 	
-	public void removeUserFromList()
+	private void removeUserFromList()
 	{
 		users.remove(this.positionInList);
 	}
 	
-	public void insertUserInList(long id)
+	private void insertUserInList(long id)
 	{
 		User user = this.userRepository.find(id); // find user in database
     	users.add(user);
+	}
+	
+	public List<User> processUser(long id)
+	{
+		if (this.isUserInList(id))
+        {
+        	this.removeUserFromList();
+        }
+        else
+        {
+        	this.insertUserInList(id);
+        }
+		return this.users;
 	}
 }

@@ -23,7 +23,7 @@ import java.util.List;
 public class MessageLikeServiceImpl implements MessageLikeService {
 
 	private static final Logger LOGGER = LogManager.getLogger(MessageLikeServiceImpl.class);
-	private static final String text = " could not be retrieved.";
+	private static final String TEXT = " could not be retrieved.";
 	
     @EJB
     private MessageRepository messageRepository;
@@ -46,16 +46,7 @@ public class MessageLikeServiceImpl implements MessageLikeService {
         long id = userDTO.getId();
         List<User> users = message.getUsers();
         LikeServiceHelper helper = new LikeServiceHelper(users,userRepository);
-        if (helper.isUserInList(id))
-        {
-        	helper.removeUserFromList();
-        }
-        else
-        {
-        	helper.insertUserInList(id);
-        }
-        helper = null;
-        
+        users = helper.processUser(id);
         message.setUsers(users);
         messageRepository.save(message);
     	}
@@ -94,7 +85,7 @@ public class MessageLikeServiceImpl implements MessageLikeService {
         return new MessageLikeDto(userDTO, messageDTO);
     	} catch(Exception e){
     		LOGGER.error("An error occured while searching for message like: " + userId + " " + messageId, e);
-    		throw new MessageLikeServiceException("Message like for: " + userId + " " + messageId + text);
+    		throw new MessageLikeServiceException("Message like for: " + userId + " " + messageId + TEXT);
     	}
     }
 
@@ -116,7 +107,7 @@ public class MessageLikeServiceImpl implements MessageLikeService {
         return messageLikes;
     	} catch(Exception e){
     		LOGGER.error("An error occured while searching for message likes: " + messageId, e);
-    		throw new MessageLikeServiceException("Message likes for: " + messageId + text);
+    		throw new MessageLikeServiceException("Message likes for: " + messageId + TEXT);
     	}
     }
 
@@ -130,7 +121,7 @@ public class MessageLikeServiceImpl implements MessageLikeService {
         return users.size();
     	} catch(Exception e){
     		LOGGER.error("An error occured while searching for like count for message: " + messageId, e);
-    		throw new MessageLikeServiceException("Message like count for message: " + messageId + text);
+    		throw new MessageLikeServiceException("Message like count for message: " + messageId + TEXT);
     	}
     }
 
@@ -144,7 +135,7 @@ public class MessageLikeServiceImpl implements MessageLikeService {
         return messages.size();
     	} catch(Exception e){
     		LOGGER.error("An error occured while searching for like count for messages for user: " + userId, e);
-    		throw new MessageLikeServiceException("Like count for user: " + userId + " for messages" + text);
+    		throw new MessageLikeServiceException("Like count for user: " + userId + " for messages" + TEXT);
     	}
     }
 

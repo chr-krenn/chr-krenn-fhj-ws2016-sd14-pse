@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import at.fhj.swd14.pse.base.IntegrationTestUtil;
 import at.fhj.swd14.pse.contact.Contact;
@@ -118,7 +117,6 @@ public class PersonServiceIntegrationTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testPersonImage()
 	{
 		EntityTransaction trans = manager.getTransaction();

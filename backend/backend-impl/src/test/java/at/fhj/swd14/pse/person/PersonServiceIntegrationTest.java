@@ -117,6 +117,8 @@ public class PersonServiceIntegrationTest {
 	@Test
 	public void testPersonImage()
 	{
+		EntityTransaction trans = manager.getTransaction();
+		trans.begin();
 		Person person = getAnyPerson();
 		
 		//save any existing images
@@ -129,6 +131,8 @@ public class PersonServiceIntegrationTest {
 		
 		service.savePersonImage(PersonConverter.convert(person), data,"image/jpeg");
 		
+		trans.rollback();
+		
 		List<PersonImage> newImgs=null;
 		newImgs = manager.createQuery("SELECT i FROM PersonImage i "
 				+ "					   WHERE i.person.id=:personid",PersonImage.class)
@@ -138,7 +142,6 @@ public class PersonServiceIntegrationTest {
 		byte[] newData = newImgs.get(0).getData();
 		String newType = newImgs.get(0).getContentType();
 		
-		EntityTransaction trans = manager.getTransaction();
 		trans.begin();
 		//restore the state
 		if(newImgs.size()>0)

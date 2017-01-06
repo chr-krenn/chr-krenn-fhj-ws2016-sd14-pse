@@ -23,7 +23,7 @@ import java.util.List;
 public class CommentLikeServiceImpl implements CommentLikeService {
 
 	private static final Logger LOGGER = LogManager.getLogger(CommentLikeServiceImpl.class);
-	private static final String text1 = " could not be retrieved.";
+	private static final String text = " could not be retrieved.";
 	
     @EJB
     private CommentRepository commentRepository;
@@ -44,27 +44,17 @@ public class CommentLikeServiceImpl implements CommentLikeService {
         UserDto userDTO = commentLike.getLiker();
         long id = userDTO.getId();
         List<User> users = comment.getUsers();
-        boolean isUserInList = false;
-        int positionInList = 0;
-        for (int i = 0; i < users.size(); i++)
+        LikeServiceHelper helper = new LikeServiceHelper(users,userRepository);
+        if (helper.isUserInList(id))
         {
-        	User user = users.get(i);
-        	long userId = user.getId();
-        	if (id == userId)
-        	{
-        		isUserInList = true; // user has already liked the comment
-        		positionInList = i;
-        	}
+        	helper.removeUserFromList();
         }
-        if (isUserInList) // remove user from list
+        else
         {
-        	users.remove(positionInList);
+        	helper.insertUserInList(id);
         }
-        else // insert user in list
-        {
-        	User user = userRepository.find(id); // find user in database
-        	users.add(user);
-        }
+        helper = null;
+        
         comment.setUsers(users);
         commentRepository.save(comment);
     	} catch(VerificationException e){
@@ -102,7 +92,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
         return new CommentLikeDto(userDTO, commentDTO);
     	} catch(Exception e) {
     		LOGGER.error("An error occured while searching for comment like for: " + userId + " " + commentId, e);
-    		throw new CommentLikeServiceException("Comment like for " + userId + " " + commentId + text1);
+    		throw new CommentLikeServiceException("Comment like for " + userId + " " + commentId + text);
     	}
     }
 
@@ -122,7 +112,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
         return commentLikes;
     	} catch (Exception e){
     		LOGGER.error("An error occured while searching for comment likes for: " + commentId, e);
-    		throw new CommentLikeServiceException("Comment likes for " + commentId + text1);
+    		throw new CommentLikeServiceException("Comment likes for " + commentId + text);
     	}
     }
 
@@ -136,7 +126,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
         return users.size();
     	} catch (Exception e) {
     		LOGGER.error("An error occured while searching for like count for comment: " + commentId, e);
-    		throw new CommentLikeServiceException("Like count for comment " + commentId + text1);
+    		throw new CommentLikeServiceException("Like count for comment " + commentId + text);
     	}
     }
 
@@ -150,7 +140,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
         return comments.size();
     	} catch (Exception e) {
     		LOGGER.error("An error occured while searching for like count for comment for user: " + userId, e);
-    		throw new CommentLikeServiceException("Like count for comments for user: " + userId + text1);
+    		throw new CommentLikeServiceException("Like count for comments for user: " + userId + text);
     	}
     }
 

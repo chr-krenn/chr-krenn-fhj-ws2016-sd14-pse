@@ -1,7 +1,10 @@
 package at.fhj.swd14.pse.message;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
+import at.fhj.swd14.pse.tag.Tag;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -113,4 +116,28 @@ public class MessageTest {
 		Assert.assertEquals(comment, message.getChilds().get(0));
 		Assert.assertEquals(message, message.getChilds().get(0).getParentMessage());
 	}
+
+	@Test
+    public void testTag() {
+
+        List<Tag> tagList = new ArrayList();
+        tagList.add(new Tag(2L,"eins"));
+        tagList.add(new Tag(3L,"zwei"));
+        Message m = new Message();
+        m.setTags(tagList);
+        Assert.assertNotNull(m.getTags());
+        for (int i = 0; i<m.getTags().size(); i++) {
+            Assert.assertEquals(m.getTags().get(i).getId(), tagList.get(i).getId());
+        }
+    }
+
+    @Test
+    public void testAddTag() {
+        Tag t = new Tag(1L, "asdf");
+        Message m = new Message();
+        m.addTag(t);
+        Assert.assertNotNull(m.getTags());
+        Assert.assertEquals(t.getId(), m.getTags().get(0).getId());
+        Assert.assertEquals(t.getName(), m.getTags().get(0).getName());
+    }
 }

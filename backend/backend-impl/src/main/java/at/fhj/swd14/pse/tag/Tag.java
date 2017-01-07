@@ -4,7 +4,9 @@ import at.fhj.swd14.pse.message.Message;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "tag")
@@ -21,7 +23,7 @@ public class Tag implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "tags")
-    private Collection<Message> messages;
+    private List<Message> messages;
 
     public Tag() {
     }
@@ -59,15 +61,19 @@ public class Tag implements Serializable {
         this.name = name;
     }
 
-    public Collection<Message> getMessages() {
+    public List<Message> getMessages() {
         return this.messages;
     }
 
-    public void setMessages(Collection<Message> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 
     public void addMessage(Message message) {
+
+        if(this.messages==null){
+            messages = new ArrayList<Message>();
+        }
         this.messages.add(message);
     }
 }

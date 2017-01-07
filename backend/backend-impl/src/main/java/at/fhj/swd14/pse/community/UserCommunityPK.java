@@ -7,6 +7,9 @@ import java.io.Serializable;
 public class UserCommunityPK implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private Long user_id;
+    private Long community_id;
+
     public UserCommunityPK(Long userId, Long communityId) {
         user_id = userId;
         community_id = communityId;
@@ -14,10 +17,8 @@ public class UserCommunityPK implements Serializable {
     }
 
     public UserCommunityPK() {
+        // default public constructor
     }
-
-    private Long user_id;
-    private Long community_id;
 
     @Override
     public int hashCode() {

@@ -34,6 +34,12 @@ public class Comment implements Serializable {
     @JoinTable(name = "like_for_comment", joinColumns = @JoinColumn(name = "comment_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
 
+    @Column(insertable = false, updatable = false)
+    private Instant created;
+
+    @Column(insertable = false, updatable = false)
+    private Instant modified;
+
     public Comment() {
         // default public constructor
     }
@@ -82,15 +88,9 @@ public class Comment implements Serializable {
         this.users = users;
     }
 
-    @Column(insertable = false, updatable = false)
-    private Instant created;
-
     public Instant getCreated() {
         return created;
     }
-
-    @Column(insertable = false, updatable = false)
-    private Instant modified;
 
     public Instant getModified() {
         return modified;

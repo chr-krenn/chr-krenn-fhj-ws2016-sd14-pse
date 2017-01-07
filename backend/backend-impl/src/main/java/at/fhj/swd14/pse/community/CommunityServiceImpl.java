@@ -1,7 +1,6 @@
 package at.fhj.swd14.pse.community;
 
 import at.fhj.swd14.pse.user.User;
-import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserRepository;
 
 import javax.ejb.EJB;
@@ -98,7 +97,7 @@ public class CommunityServiceImpl implements CommunityService {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean addUserToComunity(long communityId, long userId) {
 		Community com = communityRepository.find(communityId);

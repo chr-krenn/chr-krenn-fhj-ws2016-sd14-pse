@@ -8,7 +8,7 @@ import javax.ejb.Singleton;
 import java.util.List;
 
 /**
- * Created by Dominik Groß on 11.11.2016.
+ * @author dominik.gross
  */
 @Local
 @Singleton
@@ -22,9 +22,8 @@ public class ContactRepositoryImpl
 
     @Override
     public List<Contact> findByPersonId(long id) {
-        List<Contact> results = entityManager.createNamedQuery("Contact.findByPersonID", Contact.class)
+        return entityManager.createNamedQuery("Contact.findByPersonID", Contact.class)
                 .setParameter("personID", id).getResultList();
-        return results;
     }
 
 }

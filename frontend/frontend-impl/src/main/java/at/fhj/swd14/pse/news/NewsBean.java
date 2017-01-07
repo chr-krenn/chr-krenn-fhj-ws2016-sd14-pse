@@ -1,23 +1,21 @@
 package at.fhj.swd14.pse.news;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
+import at.fhj.swd14.pse.person.PersonDto;
+import at.fhj.swd14.pse.person.PersonService;
+import at.fhj.swd14.pse.user.UserDto;
+import at.fhj.swd14.pse.user.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.primefaces.context.RequestContext;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.primefaces.context.RequestContext;
-
-import at.fhj.swd14.pse.person.PersonDto;
-import at.fhj.swd14.pse.person.PersonService;
-import at.fhj.swd14.pse.user.UserDto;
-import at.fhj.swd14.pse.user.UserService;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 
 @Named
 @SessionScoped
@@ -42,8 +40,8 @@ public class NewsBean implements Serializable {
   private transient UserService userService;
   private String buttonNewsText;
 
-  private final static String NEWS_ADD_TEXT = "News hinzufügen";
-  private final static String NEWS_EDIT_TEXT = "News editieren";
+  private static final String NEWS_ADD_TEXT = "News hinzufügen";
+  private static final String NEWS_EDIT_TEXT = "News editieren";
 
   /*
    *  Constructor
@@ -112,8 +110,8 @@ public class NewsBean implements Serializable {
     updateViewElementById("newsForm");
   }
 
-  private void updateViewElementById(String Id ) {
-    RequestContext.getCurrentInstance().update(Id);
+  private void updateViewElementById(String id ) {
+    RequestContext.getCurrentInstance().update(id);
   }
 
 

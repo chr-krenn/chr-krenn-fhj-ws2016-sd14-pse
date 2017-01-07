@@ -32,18 +32,18 @@ public class CommentBean
 
     private CommentDto comment;
 
+    public CommentBean() {
+        LOGGER.debug("Create: " + CommentBean.class.getSimpleName());
+        this.comment = new CommentDto();
+        this.comment.setText("");
+    }
+
     public void setComment(CommentDto comment) {
         this.comment = comment;
     }
 
     public CommentDto getComment() {
         return comment;
-    }
-
-    public CommentBean() {
-        LOGGER.debug("Create: " + CommentBean.class.getSimpleName());
-        this.comment = new CommentDto();
-        this.comment.setText("");
     }
 
     public void createComment(Long messageId) {
@@ -63,9 +63,9 @@ public class CommentBean
         comment.setParentMessage(message);
         comment.setAuthor(currentUser);
 
-        long id_inserted = commentService.save(comment);
+        long insertedId = commentService.save(comment);
 
-        LOGGER.debug("Inserted comment with ID " + id_inserted);
+        LOGGER.debug("Inserted comment with ID " + insertedId);
         this.comment = new CommentDto();
 
     }

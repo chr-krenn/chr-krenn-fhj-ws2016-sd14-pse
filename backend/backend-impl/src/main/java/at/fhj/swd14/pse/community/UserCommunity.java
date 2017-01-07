@@ -10,17 +10,6 @@ import java.io.Serializable;
 public class UserCommunity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public UserCommunity(User user, Community community, boolean activated) {
-        this.pk = new UserCommunityPK(user.getId(), community.getId());
-        setCommunity(community);
-        setUser(user);
-        setActivated(activated);
-    }
-
-    public UserCommunity() {
-        // default public constructor
-    }
-
     @EmbeddedId
     private UserCommunityPK pk;
 
@@ -34,9 +23,22 @@ public class UserCommunity implements Serializable {
     @JoinColumn
     private Community community;
 
+    @Column(name = "activated")
+    private boolean activated;
+
+    public UserCommunity(User user, Community community, boolean activated) {
+        this.pk = new UserCommunityPK(user.getId(), community.getId());
+        setCommunity(community);
+        setUser(user);
+        setActivated(activated);
+    }
+
+    public UserCommunity() {
+        // default public constructor
+    }
+
     @Override
     public int hashCode() {
-
         final int prime = 31;
 
         int result = 1;
@@ -77,9 +79,6 @@ public class UserCommunity implements Serializable {
     public void setId(UserCommunityPK id) {
         this.pk = id;
     }
-
-    @Column(name = "activated")
-    private boolean activated;
 
     public User getUser() {
         return user;

@@ -38,7 +38,7 @@ public class TagServiceImpl implements TagService {
     }
 
     public List<TagDto> findAll() {
-        return (List<TagDto>) TagConverter.convertToDtoList(tagRepository.findAll());
+        return TagConverter.convertToDtoList(tagRepository.findAll());
     }
 
     private List<TagDto> executeNamedQuery(String name, Map<String, Object> parameter) {

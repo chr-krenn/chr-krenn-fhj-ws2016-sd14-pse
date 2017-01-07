@@ -23,8 +23,11 @@ public class TagTest {
     public void testAddMessage(){
         Tag t = new Tag();
         Message m = new Message(2L);
+        Message m2 = new Message(3L);
         t.addMessage(m);
+        t.addMessage(m2);
         Assert.assertNotNull(t.getMessages());
         Assert.assertEquals(m.getId(), t.getMessages().get(0).getId());
+        Assert.assertEquals(m2.getId(), t.getMessages().get(1).getId());
     }
 }

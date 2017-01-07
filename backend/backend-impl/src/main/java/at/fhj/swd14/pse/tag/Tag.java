@@ -5,7 +5,6 @@ import at.fhj.swd14.pse.message.Message;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -72,7 +71,7 @@ public class Tag implements Serializable {
     public void addMessage(Message message) {
 
         if(this.messages==null){
-            messages = new ArrayList<Message>();
+            messages = new ArrayList<>();
         }
         this.messages.add(message);
     }

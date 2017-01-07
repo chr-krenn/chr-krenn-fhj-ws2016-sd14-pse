@@ -55,7 +55,17 @@ public class TagServiceImplTest {
         TagDto t = service.findByName("testtag1");
 
         TagAssert.assertEquals(TagConverter.convert(tags.get(0)), t);
+    }
 
+    @Test
+    public void testFindByNameNotFound(){
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("tagName", "testtag1");
+
+        Mockito.when(tagRepo.executeNamedQuery("Tag.findByName", parameter)).thenReturn(null);
+        TagDto t = service.findByName("gibtsned");
+
+        Assert.assertNull(t);
     }
 
     @Test
@@ -67,5 +77,12 @@ public class TagServiceImplTest {
         Assert.assertEquals(1, l.size());
         TagAssert.assertEquals(TagConverter.convert(tags.get(0)), l.get(0));
 
+    }
+
+    @Test
+    public void testSave(){
+        Mockito.doNothing().when(tagRepo).save(tags.get(0));
+        Long id = service.save(TagConverter.convert(tags.get(0)));
+        Assert.assertEquals((Long)1L, id);
     }
 }

@@ -134,10 +134,14 @@ public class MessageTest {
     @Test
     public void testAddTag() {
         Tag t = new Tag(1L, "asdf");
+        Tag t2 = new Tag(2L, "jklö");
         Message m = new Message();
         m.addTag(t);
+        m.addTag(t2);
         Assert.assertNotNull(m.getTags());
         Assert.assertEquals(t.getId(), m.getTags().get(0).getId());
         Assert.assertEquals(t.getName(), m.getTags().get(0).getName());
+        Assert.assertEquals(t2.getId(), m.getTags().get(1).getId());
+        Assert.assertEquals(t2.getName(), m.getTags().get(1).getName());
     }
 }

@@ -26,7 +26,7 @@ public class NewsServiceImpl implements NewsService {
             newsRepository.save(converted);
             return converted.getId();
         } catch (Exception e) {
-            LOGGER.warn(e);
+            LOGGER.warn(e.getMessage(), e);
             throw new NewsServiceException("Could not save news");
         }
     }
@@ -38,7 +38,7 @@ public class NewsServiceImpl implements NewsService {
             newsRepository.update(converted);
             return converted.getId();
         } catch (Exception e) {
-            LOGGER.warn(e);
+            LOGGER.warn(e.getMessage(), e);
             throw new NewsServiceException("Could not update news");
         }
     }
@@ -48,7 +48,7 @@ public class NewsServiceImpl implements NewsService {
         try {
             return NewsConverter.convert(newsRepository.find(id));
         } catch (Exception e) {
-            LOGGER.info(e);
+            LOGGER.info(e.getMessage(), e);
             throw new NewsServiceException("Could not find news");
         }
     }
@@ -58,7 +58,7 @@ public class NewsServiceImpl implements NewsService {
         try {
             return NewsConverter.convertToDtoList(newsRepository.findAll());
         } catch (Exception e) {
-            LOGGER.info(e);
+            LOGGER.info(e.getMessage(), e);
             throw new NewsServiceException("Could not find any news");
         }
     }
@@ -70,7 +70,7 @@ public class NewsServiceImpl implements NewsService {
             parameters.put("onlineDate", ZonedDateTime.now().toInstant());
             return NewsConverter.convertToDtoList(newsRepository.executeNamedQuery(News.FIND_ALL_ONLINE_QUERY, parameters));
         } catch (Exception e) {
-            LOGGER.info(e);
+            LOGGER.info(e.getMessage(), e);
             throw new NewsServiceException("Could not find online news");
         }
     }

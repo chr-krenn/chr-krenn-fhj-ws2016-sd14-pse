@@ -3,7 +3,7 @@ package at.fhj.swd14.pse.repository.internal;
 
 import at.fhj.swd14.pse.tag.Tag;
 import at.fhj.swd14.pse.tag.TagConverter;
-import at.fhj.swd14.pse.tag.TagDtoTester;
+import at.fhj.swd14.pse.tag.TagAssert;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class TagRepositoryImplIntegrationTest extends AbstractRepositoryIDIntegr
 
     @Override
     protected void assertEquals(Tag expected, Tag actual) {
-        TagDtoTester.assertEquals(TagConverter.convert(expected), TagConverter.convert(actual));
+        TagAssert.assertEquals(TagConverter.convert(expected), TagConverter.convert(actual));
     }
 
     @Override

@@ -185,14 +185,14 @@ public class PersonServiceIntegrationTest extends BaseIntegrationTest {
 
         Assert.assertNotNull(dto);
         Assert.assertEquals(img.getContentType(), dto.getContentType());
-        PersonDtoTester.assertEquals(PersonConverter.convert(person), dto.getPerson());
+        PersonAssert.assertEquals(PersonConverter.convert(person), dto.getPerson());
         Assert.assertArrayEquals(img.getData(), dto.getData());
 
     }
 
     private void validatePerson(Person expected, PersonDto actual) {
         Assert.assertNotNull(actual);
-        PersonDtoTester.assertEquals(PersonConverter.convert(expected), actual);
+        PersonAssert.assertEquals(PersonConverter.convert(expected), actual);
     }
 
     private Collection<PersonDto> getAllUserContacts(UserDto userDto) {

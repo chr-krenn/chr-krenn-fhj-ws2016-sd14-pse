@@ -42,7 +42,7 @@ public class NewsServiceImplTest {
         final ArgumentCaptor<News> newsCaptor = ArgumentCaptor.forClass(News.class);
         verify(newsRepository, times(1)).save(newsCaptor.capture());
 
-        assertEquals(NewsConverter.convert(news), newsCaptor.getValue());
+        NewsAssert.assertEquals(news, NewsConverter.convert(newsCaptor.getValue()));
     }
 
     @Test(expected = NewsServiceException.class)
@@ -58,7 +58,7 @@ public class NewsServiceImplTest {
         final ArgumentCaptor<News> newsCaptor = ArgumentCaptor.forClass(News.class);
         verify(newsRepository, times(1)).update(newsCaptor.capture());
 
-        assertEquals(NewsConverter.convert(news), newsCaptor.getValue());
+        NewsAssert.assertEquals(news, NewsConverter.convert(newsCaptor.getValue()));
     }
 
     @Test(expected = NewsServiceException.class)

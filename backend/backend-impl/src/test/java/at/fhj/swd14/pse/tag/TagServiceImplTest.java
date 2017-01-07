@@ -42,7 +42,7 @@ public class TagServiceImplTest {
         Mockito.when(tagRepo.find(1L)).thenReturn(tags.get(0));
         TagDto t = service.find(1);
 
-        TagDtoTester.assertEquals(TagConverter.convert(tags.get(0)), t);
+        TagAssert.assertEquals(TagConverter.convert(tags.get(0)), t);
 
     }
 
@@ -54,7 +54,7 @@ public class TagServiceImplTest {
         Mockito.when(tagRepo.executeNamedQuery("Tag.findByName", parameter)).thenReturn(tags);
         TagDto t = service.findByName("testtag1");
 
-        TagDtoTester.assertEquals(TagConverter.convert(tags.get(0)), t);
+        TagAssert.assertEquals(TagConverter.convert(tags.get(0)), t);
 
     }
 
@@ -65,7 +65,7 @@ public class TagServiceImplTest {
         List<TagDto> l = service.findAll();
 
         Assert.assertEquals(1, l.size());
-        TagDtoTester.assertEquals(TagConverter.convert(tags.get(0)), l.get(0));
+        TagAssert.assertEquals(TagConverter.convert(tags.get(0)), l.get(0));
 
     }
 }

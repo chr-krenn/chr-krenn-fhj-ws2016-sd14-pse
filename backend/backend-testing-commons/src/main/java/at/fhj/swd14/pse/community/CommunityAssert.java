@@ -6,9 +6,16 @@ import org.junit.Assert;
 import java.util.List;
 
 
-public class CommunityDtoTester {
+public final class CommunityAssert {
+
+    private CommunityAssert() {
+    }
 
     public static void assertEquals(CommunityDto expected, CommunityDto actual) {
+        if (expected == null) {
+            Assert.assertNull(actual);
+            return;
+        }
 
         Assert.assertEquals(expected.getAuthor().getId(), actual.getAuthor().getId());
         Assert.assertEquals(expected.getCreateTime(), actual.getCreateTime());

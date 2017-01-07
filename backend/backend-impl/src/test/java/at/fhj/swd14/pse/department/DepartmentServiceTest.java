@@ -1,6 +1,6 @@
 package at.fhj.swd14.pse.department;
 
-import at.fhj.swd14.pse.person.DepartmentDtoTester;
+import at.fhj.swd14.pse.person.DepartmentAssert;
 import at.fhj.swd14.pse.repository.internal.DepartmentRepositoryImpl;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class DepartmentServiceTest {
         Mockito.when(depRepo.findAll()).thenReturn(deps);
         List<DepartmentDto> dtos = (List<DepartmentDto>) service.findAll();
         Assert.assertEquals(1, dtos.size());
-        DepartmentDtoTester.assertEquals(DepartmentConverter.convert(dep), dtos.get(0));
+        DepartmentAssert.assertEquals(DepartmentConverter.convert(dep), dtos.get(0));
     }
 
     @Test(expected = DepartmentServiceException.class)

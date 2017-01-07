@@ -18,6 +18,7 @@ public class UserCommunity implements Serializable {
     }
 
     public UserCommunity() {
+        // default public constructor
     }
 
     @EmbeddedId

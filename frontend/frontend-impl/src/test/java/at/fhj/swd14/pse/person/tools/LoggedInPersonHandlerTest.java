@@ -30,7 +30,7 @@ import at.fhj.swd14.pse.person.PersonService;
 import at.fhj.swd14.pse.person.PhonenumberDto;
 import at.fhj.swd14.pse.person.StatusDto;
 import at.fhj.swd14.pse.user.UserDto;
-import at.fhj.swd14.pse.user.UserDtoTester;
+import at.fhj.swd14.pse.user.UserAssert;
 import at.fhj.swd14.pse.user.UserService;
 
 public class LoggedInPersonHandlerTest {
@@ -122,7 +122,7 @@ public class LoggedInPersonHandlerTest {
 		String path = handler.createLoggedInPerson();
 		Assert.assertEquals("/user", path);
 		Assert.assertNotNull(person.getUser());
-		UserDtoTester.assertEquals(user, person.getUser());
+		UserAssert.assertEquals(user, person.getUser());
 		Assert.assertNotNull(person.getStatus());
 		Assert.assertEquals("online", person.getStatus().getName());
 		Mockito.verify(personService,Mockito.times(1)).saveLoggedInPerson(person);

@@ -4,9 +4,17 @@ import org.junit.Assert;
 
 import java.util.List;
 
-public class MessageDtoTester {
+public final class MessageAssert {
+
+    private MessageAssert() {
+    }
 
     public static void assertEquals(MessageDto expected, MessageDto actual) {
+        if (expected == null) {
+            Assert.assertNull(actual);
+            return;
+        }
+
         Assert.assertEquals(expected.getId(), actual.getId());
         Assert.assertEquals(expected.getAuthor().getId(), actual.getAuthor().getId());
 
@@ -25,10 +33,10 @@ public class MessageDtoTester {
         } else {
             Assert.assertNull(actual.getCommunity());
         }
-        
+
         Assert.assertEquals(expected.getTitle(), actual.getTitle());
         Assert.assertEquals(expected.getContent(), actual.getContent());
-        
+
         Assert.assertEquals(expected.getChilds().size(), actual.getChilds().size());
 
         for (int i = 0; i < expected.getChilds().size(); i++) {
@@ -37,7 +45,6 @@ public class MessageDtoTester {
     }
 
     public static void assertEquals(List<MessageDto> expected, List<MessageDto> actual) {
-
         Assert.assertEquals(expected.size(), actual.size());
         for (int i = 0; i < expected.size(); i++) {
             assertEquals(expected.get(i), actual.get(i));

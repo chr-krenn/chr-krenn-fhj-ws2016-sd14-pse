@@ -15,6 +15,7 @@ public class UserDto implements Serializable {
     private String salt;
 
     public UserDto() {
+        // default public constructor
     }
 
     public UserDto(Long id) {
@@ -53,15 +54,15 @@ public class UserDto implements Serializable {
         this.salt = salt;
     }
 
+    public boolean matchesUserId(Long userId) {
+        return id != null && id.equals(userId);
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", mail='" + mail + '\'' +
                 '}';
-    }
-
-    public boolean matchesUserId(Long userId) {
-        return id != null && id.equals(userId);
     }
 }

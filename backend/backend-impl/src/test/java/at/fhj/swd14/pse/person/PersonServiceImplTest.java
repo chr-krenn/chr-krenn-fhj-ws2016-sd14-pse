@@ -80,14 +80,14 @@ public class PersonServiceImplTest {
     public void testFind() {
         Mockito.when(personRepo.find(1L)).thenReturn(person);
         PersonDto foundPerson = service.find(person.getId());
-        PersonDtoTester.assertEquals(PersonConverter.convert(person), foundPerson);
+        PersonAssert.assertEquals(PersonConverter.convert(person), foundPerson);
     }
 
     @Test
     public void testFindByUser() {
         Mockito.when(personRepo.findByUserId(1L)).thenReturn(person);
         PersonDto foundPerson = service.findByUser(UserConverter.convert(user));
-        PersonDtoTester.assertEquals(PersonConverter.convert(person), foundPerson);
+        PersonAssert.assertEquals(PersonConverter.convert(person), foundPerson);
     }
 
 
@@ -100,7 +100,7 @@ public class PersonServiceImplTest {
         Collection<PersonDto> persons = service.findAllUser(1L);
 
         for (PersonDto p : persons) {
-            PersonDtoTester.assertEquals(PersonConverter.convert(person2), p);
+            PersonAssert.assertEquals(PersonConverter.convert(person2), p);
         }
     }
 
@@ -123,7 +123,7 @@ public class PersonServiceImplTest {
         Mockito.when(statusRepo.findAll()).thenReturn(stati);
         Collection<StatusDto> result = service.findAllStati();
         Assert.assertEquals(1, result.size());
-        StatusDtoTester.assertEquals(StatusConverter.convert(stati.get(0)), ((List<StatusDto>) result).get(0));
+        StatusAssert.assertEquals(StatusConverter.convert(stati.get(0)), ((List<StatusDto>) result).get(0));
     }
 
     @Test
@@ -164,7 +164,7 @@ public class PersonServiceImplTest {
         img.setPerson(person);
         Mockito.when(imgRepo.getByPersonId(1L)).thenReturn(img);
         PersonImageDto dto = service.getPersonImage(1L);
-        PersonImageDtoTester.assertEquals(PersonImageConverter.convert(img), dto);
+        PersonImageAssert.assertEquals(PersonImageConverter.convert(img), dto);
     }
 
     @Test(expected = PersonServiceException.class)

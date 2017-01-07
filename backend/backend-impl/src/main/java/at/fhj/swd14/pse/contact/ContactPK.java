@@ -18,6 +18,7 @@ public class ContactPK implements Serializable {
     private long person2Id;
 
     public ContactPK() {
+        // default public constructor
     }
 
     public ContactPK(long person1Id, long person2Id) {
@@ -63,7 +64,9 @@ public class ContactPK implements Serializable {
 
     @Override
     public String toString() {
-        return "producer_consumer.ContactPK[ person1Id=" + person1Id + ", person2Id=" + person2Id + " ]";
+        return "ContactPK{" +
+                "person1Id=" + person1Id +
+                ", person2Id=" + person2Id +
+                '}';
     }
-
 }

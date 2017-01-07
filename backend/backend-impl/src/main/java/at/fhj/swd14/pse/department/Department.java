@@ -31,6 +31,7 @@ public class Department implements Serializable {
     }
 
     public Department() {
+        // default public constructor
     }
 
     public String getName() {

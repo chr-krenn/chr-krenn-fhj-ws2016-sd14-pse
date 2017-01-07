@@ -15,6 +15,7 @@ public class Contact implements Serializable {
     protected ContactPK contactPK;
 
     public Contact() {
+        // default public constructor
     }
 
     public Contact(ContactPK contactPK) {
@@ -51,7 +52,8 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        return "producer_consumer.Contact[ contactPK=" + contactPK + " ]";
+        return "Contact{" +
+                "contactPK=" + contactPK +
+                '}';
     }
-
 }

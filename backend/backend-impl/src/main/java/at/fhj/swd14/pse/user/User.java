@@ -27,13 +27,8 @@ public class User implements Serializable {
     @Column
     private String salt;
 
-
     @OneToMany(mappedBy = "user")
     private List<UserCommunity> userCommunities;
-
-    public List<UserCommunity> getCommunities() {
-        return userCommunities;
-    }
 
     @ManyToMany(mappedBy = "users")
     private List<Comment> comments;
@@ -46,6 +41,7 @@ public class User implements Serializable {
     }
 
     public User() {
+        // default public constructor
     }
 
     public Long getId() {
@@ -54,6 +50,10 @@ public class User implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<UserCommunity> getCommunities() {
+        return userCommunities;
     }
 
     public String getMail() {

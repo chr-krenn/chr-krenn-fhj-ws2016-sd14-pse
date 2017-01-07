@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.repository.internal;
 
 import at.fhj.swd14.pse.news.News;
 import at.fhj.swd14.pse.news.NewsAssert;
+import at.fhj.swd14.pse.news.NewsConverter;
 import at.fhj.swd14.pse.person.Person;
 import at.fhj.swd14.pse.person.Status;
 import at.fhj.swd14.pse.user.User;
@@ -59,7 +60,7 @@ public class NewsRepositoryImplIntegrationTest extends AbstractRepositoryIDInteg
 
     @Override
     protected void assertEquals(News expected, News actual) {
-        NewsAssert.assertEquals(expected, actual);
+        NewsAssert.assertEquals(NewsConverter.convert(expected), NewsConverter.convert(actual));
     }
 
     @Override

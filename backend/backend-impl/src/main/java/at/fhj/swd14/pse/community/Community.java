@@ -16,13 +16,24 @@ import java.util.Objects;
 public class Community implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
-    public Community() {
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private String name;
+
+    @ManyToOne
+    private User author;
+
+    @Column
+    private boolean isPublic;
+
+    @Column
+    private boolean isActive;
+
+    @OneToMany(mappedBy = "community", cascade = CascadeType.ALL)
+    private List<UserCommunity> userCommunities = new ArrayList<>();
 
     public Long getId() {
         return this.id;
@@ -32,9 +43,6 @@ public class Community implements Serializable {
         this.id = id;
     }
 
-    @Column
-    private String name;
-
     public String getName() {
         return name;
     }
@@ -42,9 +50,6 @@ public class Community implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    @ManyToOne
-    private User author;
 
     public User getAuthor() {
         return this.author;
@@ -54,9 +59,6 @@ public class Community implements Serializable {
         this.author = author;
     }
 
-    @Column
-    private boolean isPublic;
-
     public boolean getPublicState() {
         return this.isPublic;
     }
@@ -64,9 +66,6 @@ public class Community implements Serializable {
     public void setPublicState(boolean publicState) {
         this.isPublic = publicState;
     }
-
-    @Column
-    private boolean isActive;
 
 
     public boolean geActiveState() {
@@ -76,9 +75,6 @@ public class Community implements Serializable {
     public void setActiveState(boolean activeState) {
         this.isActive = activeState;
     }
-
-    @OneToMany(mappedBy = "community", cascade = CascadeType.ALL)
-    private List<UserCommunity> userCommunities = new ArrayList<>();
 
     public List<UserCommunity> getUserCommunities() {
         return userCommunities;
@@ -148,7 +144,7 @@ public class Community implements Serializable {
         return false;
     }
 
-    public  boolean activateUserInUserCommunities(User user) {
+    public boolean activateUserInUserCommunities(User user) {
         for (UserCommunity userCommunity : this.userCommunities) {
             if (Objects.equals(userCommunity.getUser().getId(), user.getId())) {
                 userCommunity.setActivated(true);

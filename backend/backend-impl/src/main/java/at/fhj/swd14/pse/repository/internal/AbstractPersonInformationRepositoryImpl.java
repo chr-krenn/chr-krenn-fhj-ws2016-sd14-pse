@@ -26,6 +26,7 @@ public abstract class AbstractPersonInformationRepositoryImpl<T extends Abstract
      * @param value    value to search for in the database
      * @return AbstractPersonInformation Object found, or null
      */
+    @Override
     public T findByValue(long personid, String value) {
         //the same query exists in all AbstractPersonInformation entitys, unfortunately there is no way to do it genericly
         final List<T> infos =

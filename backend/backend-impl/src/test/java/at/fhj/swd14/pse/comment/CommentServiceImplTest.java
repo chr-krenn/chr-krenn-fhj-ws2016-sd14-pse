@@ -42,7 +42,7 @@ public class CommentServiceImplTest {
         Mockito.when(commentRepository.find(1L)).thenReturn(comments.get(0));
         CommentDto c = commentServiceImpl.find(1);
 
-        CommentDtoTester.assertEquals(CommentConverter.convert(comments.get(0)), c);
+        CommentAssert.assertEquals(CommentConverter.convert(comments.get(0)), c);
     }
 
 }

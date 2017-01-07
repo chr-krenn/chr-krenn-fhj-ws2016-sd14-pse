@@ -1,8 +1,8 @@
 package at.fhj.swd14.pse.repository.internal;
 
 import at.fhj.swd14.pse.person.Person;
+import at.fhj.swd14.pse.person.PersonAssert;
 import at.fhj.swd14.pse.person.PersonConverter;
-import at.fhj.swd14.pse.person.PersonDtoTester;
 import at.fhj.swd14.pse.person.PersonTestTools;
 import org.junit.Assert;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class PersonRepositoryImplIntegrationTest extends AbstractRepositoryIDInt
 
     @Override
     protected void assertEquals(Person expected, Person actual) {
-        PersonDtoTester.assertEquals(PersonConverter.convert(expected), PersonConverter.convert(actual));
+        PersonAssert.assertEquals(PersonConverter.convert(expected), PersonConverter.convert(actual));
     }
 
     @Override

@@ -14,7 +14,7 @@ public class CommentDto implements Serializable {
     private MessageDto parentMessage;
 
     public CommentDto() {
-
+        // default public constructor
     }
 
     public CommentDto(Long id) {

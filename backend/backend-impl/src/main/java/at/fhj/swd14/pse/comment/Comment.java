@@ -35,7 +35,7 @@ public class Comment implements Serializable {
     private List<User> users;
 
     public Comment() {
-
+        // default public constructor
     }
 
     public Comment(Long id) {

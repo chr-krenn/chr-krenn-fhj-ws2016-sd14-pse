@@ -68,7 +68,7 @@ public class PersonBeanTest {
     	String path = unitUnderTest.showPersonByUserId();
     	Assert.assertEquals("/myprofile", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
-    	PersonDtoTester.assertEquals(person, unitUnderTest.getPerson());
+    	PersonAssert.assertEquals(person, unitUnderTest.getPerson());
     }
     
     @Test
@@ -77,11 +77,11 @@ public class PersonBeanTest {
     	String path = unitUnderTest.showLoggedInPerson();
     	Assert.assertEquals("/user", path);
     	Assert.assertNotNull(unitUnderTest.getPerson());
-    	PersonDtoTester.assertEquals(person, unitUnderTest.getPerson());
+    	PersonAssert.assertEquals(person, unitUnderTest.getPerson());
     	Assert.assertEquals(1, unitUnderTest.getStati().size());
-    	StatusDtoTester.assertEquals(stati.get(0), unitUnderTest.getStati().get(0));
+    	StatusAssert.assertEquals(stati.get(0), unitUnderTest.getStati().get(0));
     	Assert.assertEquals(1, unitUnderTest.getDepartments().size());
-    	DepartmentDtoTester.assertEquals(deps.get(0), unitUnderTest.getDepartments().get(0));
+    	DepartmentAssert.assertEquals(deps.get(0), unitUnderTest.getDepartments().get(0));
     }
     
     @Test

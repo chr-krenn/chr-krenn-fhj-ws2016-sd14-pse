@@ -3,7 +3,7 @@ package at.fhj.swd14.pse.repository.internal;
 
 import at.fhj.swd14.pse.message.Message;
 import at.fhj.swd14.pse.message.MessageConverter;
-import at.fhj.swd14.pse.message.MessageDtoTester;
+import at.fhj.swd14.pse.message.MessageAssert;
 import at.fhj.swd14.pse.user.User;
 
 public class MessageRepositoryImplIntegrationTest extends AbstractRepositoryIDIntegrationTest<Message> {
@@ -40,7 +40,7 @@ public class MessageRepositoryImplIntegrationTest extends AbstractRepositoryIDIn
 
     @Override
     protected void assertEquals(Message expected, Message actual) {
-        MessageDtoTester.assertEquals(MessageConverter.convert(expected), MessageConverter.convert(actual));
+        MessageAssert.assertEquals(MessageConverter.convert(expected), MessageConverter.convert(actual));
     }
 
     @Override

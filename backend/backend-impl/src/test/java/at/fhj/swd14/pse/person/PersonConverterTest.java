@@ -41,11 +41,11 @@ public class PersonConverterTest {
     }
 
     private void assertEquals(Person person, PersonDto dto) {
-        PersonDtoTester.assertEquals(convert(person), dto);
+        PersonAssert.assertEquals(convert(person), dto);
     }
 
     private void assertEquals(PersonDto dto, Person person) {
-        PersonDtoTester.assertEquals(dto, convert(person));
+        PersonAssert.assertEquals(dto, convert(person));
     }
 
     @Test

@@ -69,7 +69,7 @@ public class MessageServiceImplTest {
         Mockito.when(messageRepository.find(communityMessageId)).thenReturn(messages.get(0));
         MessageDto dto = messageServiceImpl.find(communityMessageId);
 
-        MessageDtoTester.assertEquals(MessageConverter.convert(messages.get(0)), dto);
+        MessageAssert.assertEquals(MessageConverter.convert(messages.get(0)), dto);
     }
 
 
@@ -82,7 +82,7 @@ public class MessageServiceImplTest {
         Mockito.when(messageRepository.executeNamedQuery("Message.findByAuthorId", parameter)).thenReturn(messages);
 
         List<MessageDto> dtoList = messageServiceImpl.findByAuthorId(author.getId());
-        MessageDtoTester.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(messages)), dtoList);
+        MessageAssert.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(messages)), dtoList);
     }
 
 
@@ -97,7 +97,7 @@ public class MessageServiceImplTest {
         Mockito.when(messageRepository.executeNamedQuery("Message.findByCommunityId", parameter)).thenReturn(expectedMessages);
 
         List<MessageDto> dtoList = messageServiceImpl.findByCommunityId(community.getId());
-        MessageDtoTester.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(expectedMessages)), dtoList);
+        MessageAssert.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(expectedMessages)), dtoList);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class MessageServiceImplTest {
         Mockito.when(messageRepository.executeNamedQuery("Message.findGlobalMessages")).thenReturn(expectedMessages);
 
         List<MessageDto> dtoList = messageServiceImpl.findGlobalMesssages();
-        MessageDtoTester.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(expectedMessages)), dtoList);
+        MessageAssert.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(expectedMessages)), dtoList);
     }
 
     @Test
@@ -121,7 +121,7 @@ public class MessageServiceImplTest {
         Mockito.when(messageRepository.executeNamedQuery("Message.findUsersPrivateMessage", parameter)).thenReturn(expectedMessages);
 
         List<MessageDto> dtoList = messageServiceImpl.findUsersPrivateMessages(recipient.getId());
-        MessageDtoTester.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(expectedMessages)), dtoList);
+        MessageAssert.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(expectedMessages)), dtoList);
     }
 
     @Test
@@ -133,7 +133,7 @@ public class MessageServiceImplTest {
         Mockito.when(messageRepository.executeNamedQuery("Message.findUserRelated", parameter)).thenReturn(messages);
 
         List<MessageDto> dtoList = messageServiceImpl.findUserRelated(recipient.getId());
-        MessageDtoTester.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(messages)), dtoList);
+        MessageAssert.assertEquals(new ArrayList<>(MessageConverter.convertToDtoList(messages)), dtoList);
     }
 
 }

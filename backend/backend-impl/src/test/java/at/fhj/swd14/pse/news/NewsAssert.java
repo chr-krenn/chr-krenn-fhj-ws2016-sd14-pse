@@ -9,6 +9,11 @@ public final class NewsAssert {
     }
 
     public static void assertEquals(final News expected, final News actual) {
+        if (expected == null) {
+            Assert.assertNull(actual);
+            return;
+        }
+
         Assert.assertEquals(expected.getMessage(), actual.getMessage());
         Assert.assertEquals(expected.getActivation(), actual.getActivation());
         Assert.assertEquals(expected.getTermination(), actual.getTermination());
@@ -19,6 +24,11 @@ public final class NewsAssert {
     }
 
     public static void assertEquals(final NewsDto expected, final NewsDto actual) {
+        if (expected == null) {
+            Assert.assertNull(actual);
+            return;
+        }
+
         Assert.assertEquals(expected.getMessage(), actual.getMessage());
         Assert.assertEquals(expected.getActivation(), actual.getActivation());
         Assert.assertEquals(expected.getTermination(), actual.getTermination());

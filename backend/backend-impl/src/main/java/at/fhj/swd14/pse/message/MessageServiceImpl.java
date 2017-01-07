@@ -24,15 +24,22 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public long save(MessageDto message) {
-		// TODO: call tag-handling function before saving the message
-		// not necessary at this position, however it has to be done
 
 		try {
 			if (message == null) {
 				LOGGER.error("Can not save NULL as message");
 				throw new VerificationException("Can not save NULL as message");
 			}
-
+			
+			MessageTagHandler msgTagHandler = new MessageTagHandler();
+			try {
+				msgTagHandler.handleTags(message);
+			}
+			catch (MessageTagHandlerException e) {
+				LOGGER.error(e.getMessage(), e);
+				throw new MessageServiceException("Error at tag-handling:" + e.getMessage());	
+			}
+			
 			final Message messageDo = MessageConverter.convert(message);
 			LOGGER.trace("MessageDTO-Input converted to message-entity");
 			messageRepository.save(messageDo);

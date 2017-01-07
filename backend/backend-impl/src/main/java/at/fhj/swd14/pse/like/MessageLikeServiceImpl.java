@@ -41,11 +41,17 @@ public class MessageLikeServiceImpl implements MessageLikeService {
             Message message = messageRepository.find(messageId);
             UserDto userDTO = messageLike.getLiker();
             long id = userDTO.getId();
-            List<User> users = message.getUsers();
-            LikeServiceHelper helper = new LikeServiceHelper(users, userRepository);
-            users = helper.processUser(id);
-            message.setUsers(users);
-            messageRepository.save(message);
+            if (message != null) {
+            	List<User> users = message.getUsers();
+            	LikeServiceHelper helper = new LikeServiceHelper(users, userRepository);
+            	users = helper.processUser(id);
+            	message.setUsers(users);
+            	messageRepository.save(message);
+            }
+            else
+            {
+            	throw new VerificationException("Message for given id not found in database.");
+            }
         } catch (VerificationException e) {
             LOGGER.error("Illegal input from frontend." + e.getMessage(), e);
             throw new MessageLikeServiceException("Illegal input from frontend." + e.getMessage());

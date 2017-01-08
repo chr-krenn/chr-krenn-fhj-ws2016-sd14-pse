@@ -3,11 +3,16 @@ package at.fhj.swd14.pse.message;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import at.fhj.swd14.pse.exception.VerificationException;
 import at.fhj.swd14.pse.repository.internal.MessageRepositoryImpl;
+import at.fhj.swd14.pse.tag.TagDto;
+import at.fhj.swd14.pse.tag.TagServiceException;
 import at.fhj.swd14.pse.user.User;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -19,6 +24,9 @@ public class MessageServiceImplExceptionTest {
 
     @Mock
     private MessageRepositoryImpl messageRepository;
+    
+    @Spy 
+    private MessageTagHandler msgTagHandler;
 
 
 	@Test(expected=MessageServiceException.class)
@@ -33,6 +41,18 @@ public class MessageServiceImplExceptionTest {
 		User author = new User(100L);
 		MessageDto messageDto = MessageConverter.convert(MessageTestHelper.getGlobalMessageDummy(1L, author));
 		messageServiceImpl.save(messageDto);
+	}
+	
+	@Test(expected=MessageServiceException.class)
+	public void testHandleMessageTagsException(){
+		
+		User author = new User(100L);
+		MessageDto messageDto = MessageConverter.convert(MessageTestHelper.getGlobalMessageDummy(1L, author));
+		Mockito.doThrow(new MessageTagHandlerException("Error tag handling")).when(msgTagHandler).handleTags(Mockito.any());
+//		Mockito.doThrow(new VerificationException("TagDto was null")).when(tagService).save(Matchers.any(TagDto.class));  
+
+		messageServiceImpl.save(messageDto); 
+		
 	}
 	
 	@Test(expected=MessageServiceException.class)
@@ -96,4 +116,5 @@ public class MessageServiceImplExceptionTest {
 		.executeNamedQuery(Mockito.anyString(), Mockito.anyMapOf(String.class, Object.class));
 		messageServiceImpl.findUsersPrivateMessages(1L);
 	}
+	
 }

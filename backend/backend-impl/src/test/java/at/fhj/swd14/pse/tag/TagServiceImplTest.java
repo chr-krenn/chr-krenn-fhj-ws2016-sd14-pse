@@ -105,4 +105,14 @@ public class TagServiceImplTest {
         Long id = service.save(TagConverter.convert(tags.get(0)));
         Assert.assertEquals((Long)1L, id);
     }
+
+    @Test
+    public void testSaveDuplicate(){
+    	
+    	Mockito.when(tagRepo.findByName("testtag1")).thenReturn(tags.get(0));
+    	Mockito.doNothing().when(tagRepo).save(tags.get(0));
+    	
+        Long id = service.save(TagConverter.convert(tags.get(0)));
+        Assert.assertEquals((Long)1L, id);
+    }
 }

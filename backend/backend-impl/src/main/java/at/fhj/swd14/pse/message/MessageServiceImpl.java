@@ -22,6 +22,8 @@ public class MessageServiceImpl implements MessageService {
 	@EJB
 	private MessageRepository messageRepository;
 
+	MessageTagHandler msgTagHandler = new MessageTagHandler();
+	
 	@Override
 	public long save(MessageDto message) {
 
@@ -48,7 +50,6 @@ public class MessageServiceImpl implements MessageService {
 	}
 	
 	private void handleMessageTags(MessageDto message) {
-		MessageTagHandler msgTagHandler = new MessageTagHandler();
 		try {
 			msgTagHandler.handleTags(message);
 		}

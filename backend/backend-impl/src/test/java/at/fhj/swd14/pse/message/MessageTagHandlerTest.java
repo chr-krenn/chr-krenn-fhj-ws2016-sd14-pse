@@ -1,6 +1,8 @@
 package at.fhj.swd14.pse.message;
 
 
+import static org.junit.Assert.assertNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,6 +150,21 @@ public class MessageTagHandlerTest {
 		Mockito.doThrow(new TagServiceException("timeout")).when(tagService).save(Matchers.any(TagDto.class));  
 		
     	msgTagHandler.handleTags(MessageConverter.convert(message));
+		
+    }
+	
+	@Test(expected=MessageTagHandlerException.class)
+    public void testExceptionTagIsNull() {
+	
+    	msgTagHandler.handleTags(null);
+		
+    }
+
+	@Test
+    public void testServiceStubCoverageAssert() {
+	
+		assertNull(tagService.find(1L));
+		assertNull(tagService.findByName("null"));
 		
     }
 	

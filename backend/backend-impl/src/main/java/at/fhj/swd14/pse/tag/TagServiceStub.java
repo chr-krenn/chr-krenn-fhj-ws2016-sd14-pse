@@ -17,10 +17,6 @@ public class TagServiceStub implements TagService {
 		return tags;
 	}
 
-	public void setTags(List<TagDto> tags) {
-		this.tags = tags;
-	}
-
     @Override
     public long save(TagDto tag) {
     	tag.setId(id++);

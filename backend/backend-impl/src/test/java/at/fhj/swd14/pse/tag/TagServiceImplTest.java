@@ -57,7 +57,7 @@ public class TagServiceImplTest {
     @Test
     public void testFindByName() {
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("tagName", "testtag1");
+        parameter.put("name", "testtag1");
 
         Mockito.when(tagRepo.executeNamedQuery("Tag.findByName", parameter)).thenReturn(tags);
         TagDto t = service.findByName("testtag1");
@@ -68,7 +68,7 @@ public class TagServiceImplTest {
     @Test
     public void testFindByNameNotFound(){
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("tagName", "testtag1");
+        parameter.put("name", "testtag1");
 
         Mockito.when(tagRepo.executeNamedQuery("Tag.findByName", parameter)).thenReturn(null);
         TagDto t = service.findByName("gibtsned");
@@ -79,7 +79,7 @@ public class TagServiceImplTest {
     @Test
     public void testFindByNameResultEmpty() {
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("tagName", "testtag1");
+        parameter.put("name", "testtag1");
 
         Mockito.when(tagRepo.executeNamedQuery("Tag.findByName", parameter)).thenReturn(tags);
         TagDto t = service.findByName("testnull");

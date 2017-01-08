@@ -63,7 +63,8 @@ public class Message implements Serializable {
     @ManyToOne(optional = true)
     private Community community;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "message_tag", joinColumns = @JoinColumn(name = "messages_id"), inverseJoinColumns = @JoinColumn(name = "tags_id"))
     private List<Tag> tags;
 
     @Size(max = 256)

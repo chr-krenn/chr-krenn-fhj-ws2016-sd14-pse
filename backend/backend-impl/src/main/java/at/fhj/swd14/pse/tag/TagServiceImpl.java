@@ -26,18 +26,25 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public long save(TagDto tag) {
-
+    	
 
         try {
             if (tag == null){
 
                 throw new VerificationException("TagDto was null");
             }
-
-            Tag doTag = TagConverter.convert(tag);
-            tagRepository.save(doTag);
-            LOGGER.info("Tag saved to DataBase.");
-            return doTag.getId();
+            
+            Tag find = TagConverter.convert(findByName(tag.getName()));
+            
+            if (find == null) {
+	            Tag doTag = TagConverter.convert(tag);
+	            tagRepository.save(doTag);
+	            LOGGER.info("Tag saved to DataBase.");
+	            return doTag.getId();
+            }
+            else {
+            	return find.getId();
+            }
         }
         catch(VerificationException e){
 
@@ -85,7 +92,7 @@ public class TagServiceImpl implements TagService {
             }
 
             Map<String, Object> parameter = new HashMap<>();
-            parameter.put("tagName", name);
+            parameter.put("name", name);
             List<TagDto> tagList = executeNamedQuery("Tag.findByName", parameter);
             if (!tagList.isEmpty()) {
                 return tagList.get(0);
@@ -105,11 +112,12 @@ public class TagServiceImpl implements TagService {
         }
         catch(Exception e){
 
-            LOGGER.error("Unexpected eroor finding Tag with Name '"+name+"': "+ e.getMessage(), e);
+            LOGGER.error("Unexpected error finding Tag with Name '"+name+"': "+ e.getMessage(), e);
             throw new TagServiceException("Unexpected eroor finding Tag with Name '"+name+"': "+ e.getMessage());
         }
     }
 
+      
     public List<TagDto> findAll() {
 
         try{

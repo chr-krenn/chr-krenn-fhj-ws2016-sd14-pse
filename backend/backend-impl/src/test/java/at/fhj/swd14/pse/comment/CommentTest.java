@@ -12,7 +12,7 @@ import at.fhj.swd14.pse.user.User;
 
 public class CommentTest
 {
-	public Comment c;
+	private Comment c;
 		
 	@Before
 	public void setup()

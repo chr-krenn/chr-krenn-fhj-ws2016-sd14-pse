@@ -41,11 +41,16 @@ public class CommentLikeServiceImpl implements CommentLikeService {
             Comment comment = commentRepository.find(commentId);
             UserDto userDTO = commentLike.getLiker();
             long id = userDTO.getId();
-            List<User> users = comment.getUsers();
-            LikeServiceHelper helper = new LikeServiceHelper(users, userRepository);
-            users = helper.processUser(id);
-            comment.setUsers(users);
-            commentRepository.save(comment);
+            if (comment != null) {
+            	List<User> users = comment.getUsers();
+            	LikeServiceHelper helper = new LikeServiceHelper(users, userRepository);
+            	users = helper.processUser(id);
+            	comment.setUsers(users);
+            	commentRepository.save(comment);
+            }
+            else {
+            	throw new VerificationException("Can not find comment in database."); 
+            }
         } catch (VerificationException e) {
             LOGGER.error("Illegal input from frontend." + e.getMessage(), e);
             throw new CommentLikeServiceException("Illegal input from frontend." + e.getMessage());

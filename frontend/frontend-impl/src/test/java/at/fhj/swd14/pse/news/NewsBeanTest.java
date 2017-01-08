@@ -1,7 +1,12 @@
 package at.fhj.swd14.pse.news;
 
-import static org.mockito.Matchers.any;
-
+import at.fhj.swd14.pse.general.ContextMocker;
+import at.fhj.swd14.pse.general.RequestContextMocker;
+import at.fhj.swd14.pse.person.PersonDto;
+import at.fhj.swd14.pse.person.PersonService;
+import at.fhj.swd14.pse.person.PersonUtil;
+import at.fhj.swd14.pse.user.UserDto;
+import at.fhj.swd14.pse.user.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,13 +16,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.primefaces.context.RequestContext;
 
-import at.fhj.swd14.pse.general.ContextMocker;
-import at.fhj.swd14.pse.general.RequestContextMocker;
-import at.fhj.swd14.pse.person.PersonUtil;
-import at.fhj.swd14.pse.person.PersonDto;
-import at.fhj.swd14.pse.person.PersonService;
-import at.fhj.swd14.pse.user.UserDto;
-import at.fhj.swd14.pse.user.UserService;
+import static org.mockito.Matchers.any;
 
 /**
  * Created by Alexander on 11.11.2016.
@@ -37,13 +36,12 @@ public class NewsBeanTest {
     private UserService userService;
 
 
-
     @Before
-    public void setUp(){
+    public void setUp() {
         RequestContext.setCurrentInstance(new RequestContextMocker(), ContextMocker.mockFacesContext());
     }
 
-    public NewsDto getDummyNews(){
+    public NewsDto getDummyNews() {
         PersonDto person = PersonUtil.getDummyPerson();
 
         NewsDto news = new NewsDto();
@@ -53,20 +51,29 @@ public class NewsBeanTest {
 
         return news;
     }
+
     @Test
-    public void testEditNews()
-    {
-        //TODO
+    public void testEditNews() {
+        // Given
+        NewsDto dummyNews = getDummyNews();
+        dummyNews.setId(4123L);
+        unitUnderTest.setCurrentUser(new UserDto());
+        unitUnderTest.setNews(dummyNews);
+
+        // When
+        unitUnderTest.addNews();
+
+        // Then
+        Mockito.verify(newsService, Mockito.times(1)).update(any(NewsDto.class));
     }
 
     //@Ignore("stubbing of RequestContext not done yet")
     @Test
-    public void testAddNews()
-    {
+    public void testAddNews() {
         unitUnderTest.setNews(getDummyNews());
         UserDto user = unitUnderTest.getNews().getAuthor().getUser();
         unitUnderTest.setCurrentUser(user);
         unitUnderTest.addNews();
-        Mockito.verify(newsService,Mockito.times(1)).save(any(NewsDto.class));
+        Mockito.verify(newsService, Mockito.times(1)).save(any(NewsDto.class));
     }
 }

@@ -31,9 +31,6 @@ public class CommentServiceImplTest {
         comments = new ArrayList<>();
         Comment comment = new Comment(1L);
         comment.setText("test-comment");
-        // TODO: check equals errors
-        // comment.setAuthor(user);
-        // comment.setParentMessage(new Message(1L));
         comments.add(comment);
     }
 

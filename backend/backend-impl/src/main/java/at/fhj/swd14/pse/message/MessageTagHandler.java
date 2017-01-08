@@ -44,22 +44,10 @@ public class MessageTagHandler {
 
                 if (tagDto == null) {
                 	LOGGER.debug("Tag '" + tag + "' not found in DB, add it");
-                    Tag t = new Tag();
-                    t.setName(tag);
-                    tagDto = TagConverter.convert(t);
-                    try {
-                        tagService.save(tagDto);
-                    }
-                    catch (VerificationException e) {
-                    	LOGGER.error(e.getMessage(), e);
-                    	throw new MessageTagHandlerException("Tag Service error: " + e.getMessage());
-                    	
-                    }
-                    catch (TagServiceException e) {
-                    	LOGGER.error(e.getMessage(), e);
-                    	throw new MessageTagHandlerException("Error saving tag to DB: " + e.getMessage());
-                    }
+                    tagDto = new TagDto();
+                    tagDto.setName(tag);
                     
+                    saveTag(tagDto);
                     LOGGER.info("saved tag to db: " + tag);
                 }
 
@@ -72,6 +60,21 @@ public class MessageTagHandler {
 
     }
 
+    private void saveTag(TagDto tagDto) {
+        try {
+            tagService.save(tagDto);
+        }
+        catch (VerificationException e) {
+        	LOGGER.error(e.getMessage(), e);
+        	throw new MessageTagHandlerException("Tag Service error: " + e.getMessage());
+        	
+        }
+        catch (TagServiceException e) {
+        	LOGGER.error(e.getMessage(), e);
+        	throw new MessageTagHandlerException("Error saving tag to DB: " + e.getMessage());
+        }
+    }
+    
     private Set<String> findTags(String text) {
         Set<String> tagSet = new HashSet<>();
 

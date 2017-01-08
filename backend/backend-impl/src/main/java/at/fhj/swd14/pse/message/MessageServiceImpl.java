@@ -31,14 +31,7 @@ public class MessageServiceImpl implements MessageService {
 				throw new VerificationException("Can not save NULL as message");
 			}
 			
-			MessageTagHandler msgTagHandler = new MessageTagHandler();
-			try {
-				msgTagHandler.handleTags(message);
-			}
-			catch (MessageTagHandlerException e) {
-				LOGGER.error(e.getMessage(), e);
-				throw new MessageServiceException("Error at tag-handling:" + e.getMessage());	
-			}
+			handleMessageTags(message);
 			
 			final Message messageDo = MessageConverter.convert(message);
 			LOGGER.trace("MessageDTO-Input converted to message-entity");
@@ -53,7 +46,19 @@ public class MessageServiceImpl implements MessageService {
 			throw new MessageServiceException("Message could not be saved");
 		}
 	}
+	
+	private void handleMessageTags(MessageDto message) {
+		MessageTagHandler msgTagHandler = new MessageTagHandler();
+		try {
+			msgTagHandler.handleTags(message);
+		}
+		catch (MessageTagHandlerException e) {
+			LOGGER.error(e.getMessage(), e);
+			throw new MessageServiceException("Error at tag-handling:" + e.getMessage());	
+		}
 
+	}
+	
 	@Override
 	public MessageDto find(long id) {
 		try {

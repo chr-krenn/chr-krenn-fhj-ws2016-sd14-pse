@@ -3,8 +3,6 @@ package at.fhj.swd14.pse.tag;
 
 import javax.ejb.Stateless;
 
-import at.fhj.swd14.pse.exception.VerificationException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,7 @@ public class TagServiceStub implements TagService {
 
 	private Long id = 1L;
 	
-	private List<TagDto> tags = new ArrayList<TagDto>();
+	private List<TagDto> tags = new ArrayList<>();
 	
 	public List<TagDto> getTags() {
 		return tags;

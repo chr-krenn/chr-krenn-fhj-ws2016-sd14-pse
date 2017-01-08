@@ -1,8 +1,6 @@
 package at.fhj.swd14.pse.message;
 
 import at.fhj.swd14.pse.exception.VerificationException;
-import at.fhj.swd14.pse.tag.Tag;
-import at.fhj.swd14.pse.tag.TagConverter;
 import at.fhj.swd14.pse.tag.TagDto;
 import at.fhj.swd14.pse.tag.TagService;
 import at.fhj.swd14.pse.tag.TagServiceException;

@@ -101,7 +101,7 @@ public class Comment implements Serializable {
         return "Comment{" +
                 "id=" + getId() +
                 ", userId='" + getAuthor() + '\'' +
-                ", messageId='" + getParentMessage().getId() + '\'' +
+                ", messageId='" + ((getParentMessage() != null) ? getParentMessage().getId() : null) + '\'' +
                 '}';
     }
 

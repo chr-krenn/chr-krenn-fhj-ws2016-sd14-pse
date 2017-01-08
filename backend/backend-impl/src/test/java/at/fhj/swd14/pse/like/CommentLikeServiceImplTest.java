@@ -103,6 +103,24 @@ public class CommentLikeServiceImplTest {
 	}
 	
 	@Test
+	public void getCommentLikeFourthTest() {
+		users.clear();
+		User user1 = new User(2L);
+		users.add(user1);
+		comment.setUsers(users);
+		Mockito.when(commentRepository.find(COMMENTID)).thenReturn(comment);
+		commentLikeDTO = commentLikeService.getCommentLike(USERID,COMMENTID);
+		Assert.assertNull(commentLikeDTO.getLiker());
+	}
+	
+	@Test
+	public void getCommentLikeFifthTest() {
+		Mockito.when(commentRepository.find(COMMENTID)).thenReturn(comment);
+		commentLikeDTO = commentLikeService.getCommentLike(USERID,COMMENTID);
+		Assert.assertEquals(commentLikeDTO.getLiker().getId(),USERID);
+	}
+	
+	@Test
 	public void getCommentLikesFirstTest() {
 		Mockito.when(commentRepository.find(COMMENTID)).thenReturn(comment);
 		List<CommentLikeDto> commentLikeDTOs = commentLikeService.getCommentLikes(COMMENTID);

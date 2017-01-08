@@ -97,9 +97,27 @@ public class MessageLikeServiceImplTest {
 	}
 	
 	@Test(expected = MessageLikeServiceException.class)
-	public void getMessagelikeThirdTest() {
+	public void getMessageLikeThirdTest() {
 		Mockito.doThrow(Exception.class).when(messageRepository).find(100L);
 		messageLikeDTO = messageLikeService.getMessageLike(USERID,100L);
+	}
+	
+	@Test
+	public void getMessageLikeFourthTest() {
+		users.clear();
+		User user1 = new User(3L);
+		users.add(user1);
+		message.setUsers(users);
+		Mockito.when(messageRepository.find(MESSAGEID)).thenReturn(message);
+		messageLikeDTO = messageLikeService.getMessageLike(USERID,MESSAGEID);
+		Assert.assertNull(messageLikeDTO.getLiker());
+	}
+	
+	@Test
+	public void getMessageLikeFifthTest() {
+		Mockito.when(messageRepository.find(MESSAGEID)).thenReturn(message);
+		messageLikeDTO = messageLikeService.getMessageLike(USERID,MESSAGEID);
+		Assert.assertEquals(messageLikeDTO.getLiker().getId(),USERID);
 	}
 	
 	@Test

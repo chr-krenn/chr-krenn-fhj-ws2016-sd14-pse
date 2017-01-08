@@ -77,6 +77,12 @@ public class MessageLikeServiceImplTest {
 		messageLikeService.save(messageLikeDTO);
 	}
 	
+	@Test(expected = MessageLikeServiceException.class)
+	public void saveFourthTest() {
+		Mockito.doThrow(Exception.class).when(messageRepository).find(MESSAGEID);
+		messageLikeService.save(messageLikeDTO);
+	}
+	
 	@Test
 	public void getMessageLikeFirstTest() {
 		Mockito.when(messageRepository.find(MESSAGEID)).thenReturn(message);

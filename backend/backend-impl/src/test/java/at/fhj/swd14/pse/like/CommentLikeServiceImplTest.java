@@ -77,6 +77,12 @@ public class CommentLikeServiceImplTest {
 		commentLikeService.save(commentLikeDTO);
 	}
 	
+	@Test(expected = CommentLikeServiceException.class)
+	public void saveFourthTest() {
+		Mockito.doThrow(Exception.class).when(commentRepository).find(COMMENTID);
+		commentLikeService.save(commentLikeDTO);
+	}
+	
 	@Test
 	public void getCommentLikeFirstTest() {
 		Mockito.when(commentRepository.find(COMMENTID)).thenReturn(comment);

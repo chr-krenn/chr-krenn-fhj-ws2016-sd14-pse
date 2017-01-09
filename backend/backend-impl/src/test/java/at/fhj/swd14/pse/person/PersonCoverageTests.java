@@ -1,5 +1,6 @@
 package at.fhj.swd14.pse.person;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -18,8 +19,10 @@ public class PersonCoverageTests {
         new Mailaddress();
         new Knowledge();
         Hobby hobby = new Hobby();
-        hobby.getPerson();
+        hobby.setPerson(person);
+        Assert.assertEquals(person,hobby.getPerson());
         hobby.setId(1L);
+        Assert.assertEquals((Long)1L, hobby.getId());
     }
 
 }

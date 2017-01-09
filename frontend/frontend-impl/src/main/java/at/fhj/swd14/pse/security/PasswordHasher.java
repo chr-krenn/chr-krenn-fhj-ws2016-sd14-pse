@@ -1,14 +1,14 @@
 package at.fhj.swd14.pse.security;
 
-import java.io.UnsupportedEncodingException;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.HashMap;
-
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * PasswordHasher uses SHA512 algorithm.
@@ -30,14 +30,14 @@ public final class PasswordHasher {
 
     private static final Logger LOG = LogManager.getLogger(PasswordHasher.class);
 
-    private static PasswordHasher instance = new PasswordHasher();
+    private static final PasswordHasher INSTANCE = new PasswordHasher();
 
     private PasswordHasher() {
         LOG.debug("PasswordHasher instantiated");
     }
 
     public static synchronized PasswordHasher getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     /**
@@ -52,11 +52,12 @@ public final class PasswordHasher {
     public String hash(String rawPass, String salt) {
         try {
             MessageDigest md = MessageDigest.getInstance(HASH_ALGORITHM);
-            md.update(salt.getBytes("UTF-8"));
-            byte[] bytes = md.digest(rawPass.getBytes("UTF-8"));
+            md.update(salt.getBytes(StandardCharsets.UTF_8));
+            byte[] bytes = md.digest(rawPass.getBytes(StandardCharsets.UTF_8));
             return convertToHex(bytes);
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+        } catch (NoSuchAlgorithmException e) {
             LOG.error("Could not enocde password", e);
+            // This block should never be reached, when using SHA-512 algorithm.
             throw new AssertionError(e);
         }
     }
@@ -112,7 +113,7 @@ public final class PasswordHasher {
             // MODULO operation
             position = Integer.parseInt(posString) % PASSWORD_LENGTH;
             // check if this position is already used
-            if (/** NOT */
+            if (/* NOT */
                     !excludePositions.containsKey(position)) {
                 found = true;
             } else {

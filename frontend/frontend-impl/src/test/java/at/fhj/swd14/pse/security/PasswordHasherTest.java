@@ -7,6 +7,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
+ * 
+ * Test Class PasswordHasher
+ * 
  * @author thomas.spitzer
  * 
  */

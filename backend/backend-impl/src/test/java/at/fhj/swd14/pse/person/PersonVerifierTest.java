@@ -159,6 +159,17 @@ public class PersonVerifierTest {
         verifier.correlateNumbers(dummyPersonDto);
         Assert.assertEquals(dummyNumber.getId(), dummyPersonDto.getPhonenumbers().get(0).getId());
     }
+    
+    @Test
+    public void testPhonenumberExistsId() {
+    	dummyPersonDto.getPhonenumbers().get(0).setId(1L);
+        Phonenumber dummyNumber = new Phonenumber(1L);
+        dummyNumber.setValue(dummyPersonDto.getPhonenumbers().get(0).getValue());
+        Mockito.when(phonenumberRepo.find(1L))
+                .thenReturn(dummyNumber);
+        verifier.correlateNumbers(dummyPersonDto);
+        Assert.assertEquals(dummyNumber.getId(), dummyPersonDto.getPhonenumbers().get(0).getId());
+    }
 
     @Test
     public void testPhonenumber() {
@@ -182,6 +193,17 @@ public class PersonVerifierTest {
     }
 
     @Test
+    public void testMailaddressExistsId() {
+    	dummyPersonDto.getAdditionalMails().get(0).setId(1L);
+        Mailaddress dummymail = new Mailaddress(1L);
+        dummymail.setValue(dummyPersonDto.getAdditionalMails().get(0).getValue());
+        Mockito.when(mailRepo.find(1L))
+                .thenReturn(dummymail);
+        verifier.correlateMails(dummyPersonDto);
+        Assert.assertEquals(dummymail.getId(), dummyPersonDto.getAdditionalMails().get(0).getId());
+    }
+    
+    @Test
     public void testMailaddress() {
         verifier.correlateMails(dummyPersonDto);
     }
@@ -197,6 +219,17 @@ public class PersonVerifierTest {
         Hobby dummyhobby = new Hobby(1L);
         dummyhobby.setValue(dummyPersonDto.getHobbies().get(0).getValue());
         Mockito.when(hobbyRepo.findByValue(dummyPersonDto.getId(), dummyPersonDto.getHobbies().get(0).getValue()))
+                .thenReturn(dummyhobby);
+        verifier.correlateHobbies(dummyPersonDto);
+        Assert.assertEquals(dummyhobby.getId(), dummyPersonDto.getHobbies().get(0).getId());
+    }
+    
+    @Test
+    public void testHobbyExistsId() {
+    	dummyPersonDto.getHobbies().get(0).setId(1L);
+        Hobby dummyhobby = new Hobby(1L);
+        dummyhobby.setValue(dummyPersonDto.getHobbies().get(0).getValue());
+        Mockito.when(hobbyRepo.find(1L))
                 .thenReturn(dummyhobby);
         verifier.correlateHobbies(dummyPersonDto);
         Assert.assertEquals(dummyhobby.getId(), dummyPersonDto.getHobbies().get(0).getId());
@@ -218,6 +251,17 @@ public class PersonVerifierTest {
         Knowledge dummyKnowledge = new Knowledge(1L);
         dummyKnowledge.setValue(dummyPersonDto.getKnowledges().get(0).getValue());
         Mockito.when(knowledgeRepo.findByValue(dummyPersonDto.getId(), dummyPersonDto.getKnowledges().get(0).getValue()))
+                .thenReturn(dummyKnowledge);
+        verifier.correlateKnowledges(dummyPersonDto);
+        Assert.assertEquals(dummyKnowledge.getId(), dummyPersonDto.getKnowledges().get(0).getId());
+    }
+    
+    @Test
+    public void testKnowledgeExistsId() {
+    	dummyPersonDto.getKnowledges().get(0).setId(1L);
+        Knowledge dummyKnowledge = new Knowledge(1L);
+        dummyKnowledge.setValue(dummyPersonDto.getKnowledges().get(0).getValue());
+        Mockito.when(knowledgeRepo.find(1L))
                 .thenReturn(dummyKnowledge);
         verifier.correlateKnowledges(dummyPersonDto);
         Assert.assertEquals(dummyKnowledge.getId(), dummyPersonDto.getKnowledges().get(0).getId());

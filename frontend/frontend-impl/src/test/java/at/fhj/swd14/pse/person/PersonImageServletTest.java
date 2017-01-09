@@ -72,4 +72,12 @@ public class PersonImageServletTest {
 		verifyProcess();
 	}
 	
+	@Test
+	public void testException() throws IOException, ServletException
+	{
+		setupProcess();
+		Mockito.when(service.getPersonImage(Mockito.anyLong())).thenThrow(new RuntimeException("test"));
+		servlet.doPost(request, response);
+	}
+	
 }

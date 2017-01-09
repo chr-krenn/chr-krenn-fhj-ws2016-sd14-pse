@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS message
   title        VARCHAR(256)  NOT NULL,
   content      VARCHAR(1024) NOT NULL,
   `created`    TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  community_id BIGINT		 NULL REFERENCES `community` (id), 
+  community_id BIGINT            NULL REFERENCES `community` (id), 
   `modified`   TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )
 ENGINE = INNODB;

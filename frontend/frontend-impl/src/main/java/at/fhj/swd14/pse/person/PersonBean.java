@@ -368,14 +368,12 @@ public class PersonBean implements Serializable {
     }
 
     public void changeFriendState(long personID) {
-        //TODO @pkainz: why not use field 'loggedInUserId' at this point?
-        Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal) FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
+        loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal) FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
         personService.changeFriendState(loggedInUserId, personID);
     }
 
     public Collection<PersonDto> showAllPersons() {
-        //TODO @pkainz: why not use field 'loggedInUserId' at this point?
-        final Long loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal) FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
+        loggedInUserId = ((at.fhj.swd14.pse.security.DatabasePrincipal) FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal()).getUserId();
         final List<PersonDto> allPersons = new ArrayList<>(personService.findAllUser(loggedInUserId));
         allPersons.sort(new PersonComparator());
         if (allPersons.isEmpty()) {

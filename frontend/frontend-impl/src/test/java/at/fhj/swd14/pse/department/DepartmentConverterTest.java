@@ -17,10 +17,12 @@ public class DepartmentConverterTest {
 	public void setup()
 	{
 		List<DepartmentDto> dtos = new ArrayList<DepartmentDto>();
-		 dto1 = new DepartmentDto(1L);
+		DepartmentDto dto0 = new DepartmentDto(null);
+		dto1 = new DepartmentDto(1L);
 		dto1.setName("test1");
 		DepartmentDto dto2 = new DepartmentDto(2L);
 		dto2.setName("test2");
+		dtos.add(dto0);
 		dtos.add(dto1);
 		dtos.add(dto2);
 		converter = new DepartmentConverter();

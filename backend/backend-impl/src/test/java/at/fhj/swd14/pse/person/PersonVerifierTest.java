@@ -138,6 +138,12 @@ public class PersonVerifierTest {
         dummyPersonDto.setDepartment(null);
         verifier.verifyDepartment(dummyPersonDto);
     }
+    
+    @Test
+    public void testDepartmentIdEmpty() {
+        dummyPersonDto.getDepartment().setId(null);
+        verifier.verifyDepartment(dummyPersonDto);
+    }
 
     @Test
     public void testDepartment() {
@@ -150,6 +156,11 @@ public class PersonVerifierTest {
         verifier.correlateNumbers(dummyPersonDto);
     }
 
+    @Test
+    public void testPersonNull() {
+        verifier.verifyPersonInformation(new PersonDto(), phonenumberRepo, new PhonenumberDto());
+    }
+    
     @Test
     public void testPhonenumberExists() {
         Phonenumber dummyNumber = new Phonenumber(1L);

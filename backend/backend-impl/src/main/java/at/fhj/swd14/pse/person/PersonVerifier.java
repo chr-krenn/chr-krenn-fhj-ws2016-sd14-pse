@@ -105,7 +105,7 @@ public class PersonVerifier {
      * @param infos  List of K Objects to verify
      * @param repo   Repository to use for database queries
      */
-    private <T extends AbstractPersonInformation, K extends AbstractPersonInformationDto>
+    public <T extends AbstractPersonInformation, K extends AbstractPersonInformationDto>
     void correlatePersonInformation(PersonDto person, List<K> infos,
                                     AbstractPersonInformationRepository<T> repo) {
         for (final AbstractPersonInformationDto info : infos) {
@@ -113,7 +113,7 @@ public class PersonVerifier {
         }
     }
 
-    private <T extends AbstractPersonInformation> void verifyPersonInformation(PersonDto person, AbstractPersonInformationRepository<T> repo, AbstractPersonInformationDto info) {
+    public <T extends AbstractPersonInformation> void verifyPersonInformation(PersonDto person, AbstractPersonInformationRepository<T> repo, AbstractPersonInformationDto info) {
         //check if the id is set, if so we just need to check if it exists in the database
         if (info.getId() != null) {
             verifyExistence(repo, info);

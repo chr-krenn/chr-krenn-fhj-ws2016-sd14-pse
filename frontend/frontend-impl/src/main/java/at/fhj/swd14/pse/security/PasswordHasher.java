@@ -134,8 +134,7 @@ public final class PasswordHasher {
     }
 
     /**
-     * Creates a new random password fulfilling all requirements of UNYCOM
-     * passwords.
+     * Creates a new random password
      * <p>
      * The new password must meet the following requirements: * Contains at
      * least 8 characters * Contains at least one upper-case letter * Contains

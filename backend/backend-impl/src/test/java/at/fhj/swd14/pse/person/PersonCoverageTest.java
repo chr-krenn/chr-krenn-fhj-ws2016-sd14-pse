@@ -4,11 +4,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This class exists just to increase code converage
+ * This class exists just to increase code coverage
  *
  * @author Patrick Kainz
  */
-public class PersonCoverageTests {
+public class PersonCoverageTest {
 
     @Test
     public void increateCoverage() {

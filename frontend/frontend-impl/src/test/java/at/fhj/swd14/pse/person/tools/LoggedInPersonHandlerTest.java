@@ -85,6 +85,18 @@ public class LoggedInPersonHandlerTest {
     }
 	
 	@Test
+    public void testLoggedOtherPerson()
+    {    	
+		Mockito.when(bean.getPerson()).thenReturn(person);
+		person.getUser().setId(2L);
+    	String path = handler.showLoggedInPerson();
+    	Assert.assertEquals("/user", path);
+    	Mockito.verify(bean,Mockito.times(1)).setPerson(person);
+    	Mockito.verify(bean,Mockito.times(1)).setStati(stati);
+    	Mockito.verify(bean,Mockito.times(1)). setDepartments(deps);
+    }
+	
+	@Test
 	public void testAlreadyLoaded()
 	{
 		Mockito.when(bean.getPerson()).thenReturn(person);

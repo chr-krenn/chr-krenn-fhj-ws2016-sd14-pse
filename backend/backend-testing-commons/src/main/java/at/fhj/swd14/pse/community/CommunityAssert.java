@@ -34,10 +34,12 @@ public final class CommunityAssert {
     
     public static void assertEquals(List<CommunityDto> expected, List<CommunityDto> actual){
     	
+    	Assert.assertEquals(expected.size(), actual.size());
+    	
     	int i = 0;
     	
-    	for (CommunityDto current : actual) {
-	    	CommunityAssert.assertEquals(expected.get(i), current);
+    	for (CommunityDto current : expected) {
+	    	CommunityAssert.assertEquals(actual.get(i), current);
 	    	i++;
 		}
     	

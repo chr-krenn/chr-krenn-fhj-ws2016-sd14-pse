@@ -57,7 +57,7 @@ public class CommunityServiceImplTest {
 
     @Test
     public void testFindByAuthorId() {
-    	List<Community> community = new ArrayList<>();
+    	List<Community> community = Arrays.asList(buildCommunity());
     	
     	   Map<String, Object> parameter = new HashMap<>();
            parameter.put("authorUserId", 1L);
@@ -71,8 +71,14 @@ public class CommunityServiceImplTest {
 
     @Test
     public void testFindUserRelated() {
-        //TODO anpassen bei der Implementierung, da sonnst error
-        //Assert.assertNull(service.findUserRelated(1L));
+    	List<Community> community = new ArrayList<>();
+        Mockito.when(communityRepo.executeNamedQuery("Community.findUserRelated")).thenReturn(community);
+       
+        List<CommunityDto> communityDtos = CommunityConverter.convertToDtoList(community);
+        List<CommunityDto> comDtos = service.findUserRelated(1L);
+
+        CommunityAssert.assertEquals(communityDtos, comDtos);
+    	  	
 
     }
     

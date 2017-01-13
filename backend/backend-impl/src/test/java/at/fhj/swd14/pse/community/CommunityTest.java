@@ -22,6 +22,8 @@ import at.fhj.swd14.pse.user.UserDto;
 @RunWith(MockitoJUnitRunner.class)
 public class CommunityTest {
 
+	private static final long ID = 1L;
+	
     @BeforeClass
     public static void beforeClass() {
         //drop table
@@ -45,40 +47,12 @@ public class CommunityTest {
     @InjectMocks
     private CommunityServiceImpl communityService;
     
-    @Test 
-    public void findAllCommunities(){
-    	 when(communityRepository.findAll()).thenReturn(Arrays.asList(buildCommunities(), buildCommunities(), buildCommunities()));
-         final Collection<CommunityDto> coms = communityService.findAll();
-
-         assertEquals(3, coms.size());
-         coms.forEach(newsDto -> assertEquals(buildCommunityDtos(), newsDto));
-    }
-
-    private Community buildCommunities(){
-    	 final Community com = new Community();
-    	 com.setActiveState(true);
-    	 com.setAllowedUsers(Arrays.asList(new User()));
-    	 com.setAllowedUsersInactive(new User());
-    	 com.setAuthor(new User());
-    	 com.setId(1L);
-    	 com.setName("TEST");
-    	 com.setPublicState(true);
-    	 com.setUserCommunities(Arrays.asList(new UserCommunity()));
-    	 
-    	 return com;
-    }
     
-    private CommunityDto buildCommunityDtos(){
-    	final CommunityDto com = new CommunityDto();
-    	com.setActiveState(true);
-   	 com.setAllowedUsers(Arrays.asList(new UserDto()));
-   	 com.setAuthor(new UserDto());
-   	 com.setId(1L);
-   	 com.setName("TEST");
-   	 com.setPublicState(true);
-   	 
-   	 return com;
-    }
+    
+  
+    
+    
+    
     
     
     @After

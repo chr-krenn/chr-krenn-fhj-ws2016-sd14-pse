@@ -3,6 +3,7 @@ package at.fhj.swd14.pse.community;
 import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserDto;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -31,11 +32,11 @@ public class CommunityConverterTest {
         this.createCommunityDto();
     }
 
-//	@Test
-//	public void testCommunityToCommunityDto(){
-////		CommunityDto c = CommunityConverter.convert(this.community);
-////		CommunityDtoTester.assertEquals(this.communityDto, c);
-//	}
+	@Test
+	public void testCommunityToCommunityDto(){
+		CommunityDto c = CommunityConverter.convert(this.community);
+		CommunityAssert.assertEquals(this.communityDto, c);
+	}
 
 
     private void createCommunityDto() {
@@ -52,12 +53,12 @@ public class CommunityConverterTest {
     }
 
     private void createCommunity() {
-//        this.community = new Community();
-//        this.community.setId((long) 1);
-//        this.community.setAllowedUsers(this.getUserDtoList());
-//        this.community.setAuthor(this.user_author);
-//        this.community.setName(this.name);
-//        this.community.setPublicState(this.state);
+        this.community = new Community();
+        this.community.setId((long) 1);
+        this.community.setAllowedUsers(this.getUser());
+        this.community.setAuthor(this.user_author);
+        this.community.setName(this.name);
+        this.community.setPublicState(this.state);
 
     }
 
@@ -70,6 +71,15 @@ public class CommunityConverterTest {
         return user;
     }
 
+    private List<User> getUser() {
+
+        List<User> userDto = new ArrayList<>();
+        userDto.add(this.createUse((long) 1, "mail_1@test.cu", "password_1", "salt"));
+        userDto.add(this.createUse((long) 2, "mail_2@test.cu", "password_2", "salt"));
+
+        return userDto;
+    }
+    
     private List<UserDto> getUserDtoList() {
 
         List<UserDto> userDto = new ArrayList<>();

@@ -6,7 +6,7 @@ import at.fhj.swd14.pse.tag.TagService;
 import at.fhj.swd14.pse.tag.TagServiceException;
 
 import javax.ejb.EJB;
-
+import javax.ejb.Stateless;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+@Stateless
 public class MessageTagHandler {
 
     @EJB

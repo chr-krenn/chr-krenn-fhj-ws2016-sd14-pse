@@ -41,6 +41,17 @@ public class CommunityBean implements Serializable {
 	private String newName;
 	private String newDescription;
 	private boolean newPublicState;
+	
+	private List<CommunityDto> createdCommunities;
+	private List<CommunityDto> joinedCommunities;
+	private List<CommunityDto> publicCommunities;
+	private List<CommunityDto> allCommunities;
+	private List<CommunityDto> otherCommunities;
+	private List<CommunityDto> communitiesToActivate;
+	
+	private UserDto loggedInUser;
+	private List<UserDto> communityMembers;
+	private List<UserDto> communityRequests;
 
 	public String getNewName() {
 		return newName;
@@ -90,13 +101,6 @@ public class CommunityBean implements Serializable {
 		this.publicCommunities = publicCommunities;
 	}
 
-	private List<CommunityDto> createdCommunities;
-	private List<CommunityDto> joinedCommunities;
-	private List<CommunityDto> publicCommunities;
-	private List<CommunityDto> allCommunities;
-	private List<CommunityDto> otherCommunities;
-	private List<CommunityDto> communitiesToActivate;
-
 	public List<CommunityDto> getCommunitiesToActivate() {
 		return communitiesToActivate;
 	}
@@ -113,15 +117,9 @@ public class CommunityBean implements Serializable {
 		this.otherCommunities = otherCommunities;
 	}
 
-	private UserDto loggedInUser;
-
-	private List<UserDto> communityMembers;
-
 	public List<UserDto> getCommunityMembers() {
 		return communityMembers;
 	}
-	
-	private List<UserDto> communityRequests;
 
 	public List<UserDto> getCommunityRequests() {
 		return communityRequests;
@@ -199,9 +197,7 @@ public class CommunityBean implements Serializable {
 			community.setDescription(newDescription);
 			long generatedId = this.communityService.save(community);
 
-			community = communityService.find(generatedId);
-
-			LOGGER.error("created new community author: {} desc: {} name: {} public: {}", this.loggedInUser,
+			LOGGER.error("created new community id: {} author: {} desc: {} name: {} public: {}", generatedId, this.loggedInUser,
 					this.newDescription, this.newName, this.newPublicState);
 
 			refresh();
@@ -255,6 +251,7 @@ public class CommunityBean implements Serializable {
 			if (community.getPublicState()) {
 
 				community.addUser(this.loggedInUser);
+				communityService.addUserToComunity(community.getId(), this.loggedInUser.getId());
 				LOGGER.error("adding user {} to community {}", this.loggedInUser, community.getName());
 			} else {
 				community.addPendingUser(this.loggedInUser);

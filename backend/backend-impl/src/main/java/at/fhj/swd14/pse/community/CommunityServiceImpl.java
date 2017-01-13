@@ -1,12 +1,17 @@
 package at.fhj.swd14.pse.community;
 
-import at.fhj.swd14.pse.user.User;
-import at.fhj.swd14.pse.user.UserRepository;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import java.util.*;
-import java.util.stream.Collectors;
+
+import at.fhj.swd14.pse.user.User;
+import at.fhj.swd14.pse.user.UserRepository;
 
 @Stateless
 public class CommunityServiceImpl implements CommunityService {
@@ -64,7 +69,8 @@ public class CommunityServiceImpl implements CommunityService {
 
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("authorUserId", creatorUserId);
-		return executeNamedQuery("Community.findByAuthorId", parameter);
+		List<CommunityDto> result = executeNamedQuery("Community.findByAuthorId", parameter);
+		return result;
 	}
 
 	@Override

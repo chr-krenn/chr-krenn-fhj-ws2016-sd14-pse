@@ -31,6 +31,17 @@ public final class CommunityAssert {
         Assert.assertEquals(expected.getName(), actual.getName());
         Assert.assertEquals(expected.getPublicState(), actual.getPublicState());
     }
+    
+    public static void assertEquals(List<CommunityDto> expected, List<CommunityDto> actual){
+    	
+    	int i = 0;
+    	
+    	for (CommunityDto current : actual) {
+	    	CommunityAssert.assertEquals(expected.get(i), current);
+	    	i++;
+		}
+    	
+    }
 
 
 }

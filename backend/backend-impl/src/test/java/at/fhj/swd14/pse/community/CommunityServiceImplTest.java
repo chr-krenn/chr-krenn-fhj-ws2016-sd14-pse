@@ -1,9 +1,17 @@
 package at.fhj.swd14.pse.community;
 
 
-import at.fhj.swd14.pse.repository.internal.CommunityRepositoryImpl;
-import at.fhj.swd14.pse.user.User;
-import at.fhj.swd14.pse.user.UserDto;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.naming.NamingException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,14 +21,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import javax.naming.NamingException;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import at.fhj.swd14.pse.repository.internal.CommunityRepositoryImpl;
+import at.fhj.swd14.pse.user.User;
+import at.fhj.swd14.pse.user.UserDto;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommunityServiceImplTest {
@@ -54,8 +57,16 @@ public class CommunityServiceImplTest {
 
     @Test
     public void testFindByAuthorId() {
-        //TODO anpassen bei der Implementierung, da sonnst error
-        //Assert.assertNull(service.findByAuthorId(1L));
+    	List<Community> community = new ArrayList<>();
+    	
+    	   Map<String, Object> parameter = new HashMap<>();
+           parameter.put("authorUserId", 1L);
+
+           Mockito.when(communityRepo.executeNamedQuery("Community.findByAuthorId", parameter)).thenReturn(community);
+
+           List<CommunityDto> communityDtos = CommunityConverter.convertToDtoList(community);
+           List<CommunityDto> dtoList = service.findByAuthorId(1L);
+           CommunityAssert.assertEquals(communityDtos, dtoList);
     }
 
     @Test
@@ -92,7 +103,7 @@ public class CommunityServiceImplTest {
     	final CommunityDto com = new CommunityDto();
     	 com.setActiveState(true);
 	   	 com.setAllowedUsers(Arrays.asList(new UserDto()));
-	   	 com.setAuthor(new UserDto());
+	   	 com.setAuthor(new UserDto(1L));
 	   	 com.setId(1L);
 	   	 com.setName("TEST");
 	   	 com.setPublicState(true);

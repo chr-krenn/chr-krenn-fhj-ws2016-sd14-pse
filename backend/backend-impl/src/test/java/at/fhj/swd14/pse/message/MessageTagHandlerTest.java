@@ -12,23 +12,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Matchers;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import at.fhj.swd14.pse.exception.VerificationException;
+import at.fhj.swd14.pse.tag.Tag;
 import at.fhj.swd14.pse.tag.TagDto;
-import at.fhj.swd14.pse.tag.TagService;
 import at.fhj.swd14.pse.tag.TagServiceException;
-import at.fhj.swd14.pse.tag.TagServiceStub;
+import at.fhj.swd14.pse.tag.TagServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MessageTagHandlerTest {
 	@InjectMocks
-	private MessageTagHandler msgTagHandler = new MessageTagHandler();
+	private MessageTagHandler msgTagHandler;
 
-	@Spy
-	private TagService tagService = new TagServiceStub();
+	@Mock
+	private TagServiceImpl tagService;
 	
 	private Message message;
 	private List<String> tags;
@@ -41,17 +41,17 @@ public class MessageTagHandlerTest {
 
     }
 	
-	public void assertEquals(List<String> expected, List<TagDto> actual) {
+	public void assertEquals(List<String> expected, List<String> actual) {
 		Assert.assertEquals(expected.size(), actual.size());
 		
 		for (int i = 0; i < expected.size(); i++) {
-			Assert.assertTrue(findInDtoList(expected.get(i), actual));
+			Assert.assertTrue(findInList(expected.get(i), actual));
 		}
 	}
 	
-	public Boolean findInDtoList(String search, List<TagDto> items) {
+	public Boolean findInList(String search, List<String> items) {
 		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i).getName().equals(search))
+			if (items.get(i).equals(search))
 				return true;
 		}
 		return false;
@@ -59,10 +59,13 @@ public class MessageTagHandlerTest {
 	
 	public void testOneTagInTitle(String title, String tag) {
     	message.setTitle(title);
-    	msgTagHandler.handleTags(MessageConverter.convert(message));
+    	Mockito.when(tagService.save(Mockito.any())).thenReturn(0L);
+    	MessageDto m = MessageConverter.convert(message);
+    	msgTagHandler.handleTags(m);
+
     	
-    	tags.add(tag);
-    	assertEquals(tags, ((TagServiceStub) tagService).getTags());
+    	Assert.assertEquals(1, m.getTags().size());
+    	Assert.assertEquals(tag, m.getTags().get(0).getName());
 	}
 	
     @Test
@@ -74,10 +77,13 @@ public class MessageTagHandlerTest {
 
 	public void testOneTagInContent(String content, String tag) {
     	message.setContent(content);
-    	msgTagHandler.handleTags(MessageConverter.convert(message));
     	
-    	tags.add(tag);
-    	assertEquals(tags, ((TagServiceStub) tagService).getTags());
+    	Mockito.when(tagService.save(Mockito.any())).thenReturn(0L);
+    	MessageDto m = MessageConverter.convert(message);
+    	msgTagHandler.handleTags(m);
+    	
+    	Assert.assertEquals(1, m.getTags().size());
+    	Assert.assertEquals(tag, m.getTags().get(0).getName());
 	}
 
 	@Test
@@ -90,9 +96,19 @@ public class MessageTagHandlerTest {
 	public void testTagsInMesage(String title, String content, List <String>tags) {
     	message.setTitle(title);
     	message.setContent(content);
-    	msgTagHandler.handleTags(MessageConverter.convert(message));
+
+    	Mockito.when(tagService.save(Mockito.any())).thenReturn(0L);
+    	MessageDto m = MessageConverter.convert(message);
+    	msgTagHandler.handleTags(m);
     
-    	assertEquals(tags, ((TagServiceStub) tagService).getTags());
+    	List<String> msgTags = new ArrayList<>();
+    	
+    	if (m.getTags() != null) {
+	    	for (TagDto t: m.getTags()) {
+	    	    msgTags.add(t.getName());
+	    	}
+    	}	
+    	assertEquals(tags, msgTags);
 	}
 
 	@Test

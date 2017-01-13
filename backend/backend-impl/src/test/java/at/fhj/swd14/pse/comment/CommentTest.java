@@ -13,13 +13,13 @@ import at.fhj.swd14.pse.user.User;
 public class CommentTest
 {
 	private Comment c;
-		
+
 	@Before
 	public void setup()
 	{
 		c = new Comment();
 	}
-	
+
 	@Test
 	public void testCommentConstructor()
 	{
@@ -76,12 +76,12 @@ public class CommentTest
 		User user1 = new User(id1);
 		Long id2 = 1L;
 		User user2 = new User(id2);
-		
+
 		users.add(user1);
 		users.add(user2);
-		
+
 		c.setUsers(users);
-		
+
 		Assert.assertTrue(c.getUsers().containsAll(users));
 	}
 
@@ -99,20 +99,33 @@ public class CommentTest
 
 	@Test
 	public void testToString()
-	{	
-		User author = new User(1L);
-		Message parentMessage = new Message(1L);
-		
+	{
+		User author = new User(2L);
+		Message parentMessage = new Message(3L);
+
 		c.setId(1L);
 		c.setAuthor(author);
 		c.setParentMessage(parentMessage);
+		author.setMail("office@nerdistan.io");
 
-		String s = "Comment{" +
-                "id=" + c.getId() +
-                ", userId='" + c.getAuthor() + '\'' +
-                ", messageId='" + c.getParentMessage().getId() + '\'' +
-                '}';
-		
+		String s = "Comment{id=1, userId='User{id=2, mail='office@nerdistan.io'}', messageId='3'}";
+
+		Assert.assertEquals(s, c.toString());
+	}
+
+	@Test
+	public void testToStringParentNull()
+	{
+		User author = new User(2L);
+		Message parentMessage = null;
+
+		c.setId(1L);
+		c.setAuthor(author);
+		c.setParentMessage(parentMessage);
+		author.setMail("office@nerdistan.io");
+
+		String s = "Comment{id=1, userId='User{id=2, mail='office@nerdistan.io'}', messageId='null'}";
+
 		Assert.assertEquals(s, c.toString());
 	}
 

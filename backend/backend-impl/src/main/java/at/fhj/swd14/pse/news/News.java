@@ -13,7 +13,7 @@ import java.time.Instant;
 @NamedQuery(name = News.FIND_ALL_ONLINE_QUERY,
         query = "SELECT n FROM News n WHERE :onlineDate >= n.activation" +
                 " AND (n.termination IS NULL OR :onlineDate < n.termination)" +
-                " ORDER BY n.created DESC")
+                " ORDER BY n.created DESC, n.title")
 public class News implements Serializable {
     private static final long serialVersionUID = 1L;
     public static final String FIND_ALL_ONLINE_QUERY = "News.findAllOnline";

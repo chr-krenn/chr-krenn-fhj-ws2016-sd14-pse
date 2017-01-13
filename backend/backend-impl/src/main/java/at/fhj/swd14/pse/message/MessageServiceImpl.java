@@ -22,7 +22,8 @@ public class MessageServiceImpl implements MessageService {
 	@EJB
 	private MessageRepository messageRepository;
 
-	MessageTagHandler msgTagHandler = new MessageTagHandler();
+	@EJB
+	private MessageTagHandler msgTagHandler;
 	
 	@Override
 	public long save(MessageDto message) {

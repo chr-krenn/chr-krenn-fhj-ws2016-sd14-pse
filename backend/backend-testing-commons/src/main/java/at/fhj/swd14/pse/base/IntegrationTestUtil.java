@@ -66,6 +66,7 @@ public final class IntegrationTestUtil {
         return getService(buildLookupName(serviceClass));
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> T getService(String lookupName) {
         try {
             return (T) getContext().lookup(lookupName);

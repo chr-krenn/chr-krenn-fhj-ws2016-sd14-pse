@@ -30,6 +30,9 @@ public class MessageServiceImplTest {
     @Mock
     private MessageRepositoryImpl messageRepository;
 
+    @Mock
+    private MessageTagHandler messageTagHandler;
+
     private final Long communityMessageId = 1L;
     private final Long globalMessageId = 2L;
     private final Long privateMessageId = 3L;
@@ -60,6 +63,7 @@ public class MessageServiceImplTest {
     @Test
     public void saveTest(){
     	Mockito.doNothing().when(messageRepository).save(messages.get(0));
+    	Mockito.doNothing().when(messageTagHandler).handleTags(Mockito.any());
     	Long id = messageServiceImpl.save(MessageConverter.convert(messages.get(0)));
     	Assert.assertEquals(communityMessageId, id);
     }

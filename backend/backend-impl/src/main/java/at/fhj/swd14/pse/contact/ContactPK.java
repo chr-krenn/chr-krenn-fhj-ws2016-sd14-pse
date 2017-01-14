@@ -61,12 +61,4 @@ public class ContactPK implements Serializable {
         }
         return this.person2Id == other.person2Id;
     }
-
-    @Override
-    public String toString() {
-        return "ContactPK{" +
-                "person1Id=" + person1Id +
-                ", person2Id=" + person2Id +
-                '}';
-    }
 }

@@ -18,10 +18,6 @@ public class Contact implements Serializable {
         // default public constructor
     }
 
-    public Contact(ContactPK contactPK) {
-        this.contactPK = contactPK;
-    }
-
     public Contact(long person1Id, long person2Id) {
         this.contactPK = new ContactPK(person1Id, person2Id);
     }
@@ -42,18 +38,19 @@ public class Contact implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Contact)) {
-            return false;
-        }
-        Contact other = (Contact) object;
-        return !((this.contactPK == null && other.contactPK != null) || (this.contactPK != null && !this.contactPK.equals(other.contactPK)));
-    }
-
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "contactPK=" + contactPK +
-                '}';
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contact other = (Contact) obj;
+		if (contactPK == null) {
+			if (other.contactPK != null)
+				return false;
+		} else if (!contactPK.equals(other.contactPK))
+			return false;
+		return true;
+	}
 }

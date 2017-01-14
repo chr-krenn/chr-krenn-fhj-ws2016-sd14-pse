@@ -370,7 +370,6 @@ public class CommunityBean implements Serializable {
 		if (community != null) {
 
 			LOGGER.debug("request userlist of community: {}", community.getName());
-			//communityRequests.addAll(community.getPendingUsers());
 			setCommunityRequests(community.getPendingUsers());
 		}
 	}

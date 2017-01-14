@@ -123,6 +123,20 @@ public class CommunityServiceImplTest {
 		return com;
 	}
 	
+	private Community buildNewTestCommunity(Long userId) {
+		final Community com = new Community();
+
+		com.setActiveState(true);
+		com.setAllowedUsers(Arrays.asList(new User(userId)));
+		com.setAllowedUsersInactive(new User(userId));
+		com.setAuthor(new User(userId));
+		com.setName("TEST");
+		com.setPublicState(true);
+		com.setUserCommunities(Arrays.asList(new UserCommunity()));
+
+		return com;
+	}
+	
 	private Community buildTestRequestedCommunity(Long userId) {
 		final Community com = new Community();
 
@@ -156,19 +170,27 @@ public class CommunityServiceImplTest {
 		return com;
 	}
 
-	private CommunityDto buildTestCommunityDto(Long userId) {
+	private CommunityDto buildNewTestCommunityDto(Long userId) {
 		final CommunityDto com = new CommunityDto();
 
 		com.setActiveState(true);
 		com.setAllowedUsers(Arrays.asList(new UserDto(userId)));
 		com.setAuthor(new UserDto(userId));
-		com.setId(userId);
 		com.setName("TEST");
 		com.setPublicState(true);
 
 		return com;
 	}
+	
+	private CommunityDto buildTestCommunityDto(Long userId) {
+		CommunityDto com = new CommunityDto();
 
+		com = buildNewTestCommunityDto(userId);
+		com.setId(userId);
+
+		return com;
+	}
+	
 	private CommunityDto buildTestCommunityDto(Long userId, Long userIdPend) {
 		final CommunityDto com = buildTestCommunityDto(userId);
 		com.setPendingUsers(Arrays.asList(new UserDto(userIdPend)));
@@ -177,6 +199,16 @@ public class CommunityServiceImplTest {
 	}
 
 	/* schoeneg Temp */
+	
+	@Test
+	public void test_save_new() {
+		Community com = buildNewTestCommunity(100L);
+		CommunityDto comDto = buildNewTestCommunityDto(100L);
+		
+		long result = service.save(comDto);
+		Long expected = 0L;
+		assertEquals(expected, (Long) result);
+	}
 
 	@Test
 	public void test_save_sucess() {
@@ -200,7 +232,7 @@ public class CommunityServiceImplTest {
 		Mockito.doNothing().when(communityRepo).update(Matchers.any(Community.class));
 
 		long result = service.save(comDto);
-		Long expected = 0L;
+		Long expected = -1L;
 		assertEquals(expected, (Long) result);
 	}
 

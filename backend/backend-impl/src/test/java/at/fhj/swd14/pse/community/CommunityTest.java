@@ -5,9 +5,11 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -42,13 +44,20 @@ public class CommunityTest {
     
     
     @Mock
-    private CommunityRepository communityRepository;
+    private Community community;
     
     @InjectMocks
     private CommunityServiceImpl communityService;
     
     
-    
+    @Test
+    public void testGetUserCommunities(){
+    	List<UserCommunity> usercommunities = Arrays.asList(new UserCommunity(), new UserCommunity());
+    	when(community.getUserCommunities()).thenReturn(usercommunities);
+    	
+    	List<UserCommunity> uc = community.getUserCommunities();
+    	Assert.assertEquals(2, uc.size());
+    }
   
     
     

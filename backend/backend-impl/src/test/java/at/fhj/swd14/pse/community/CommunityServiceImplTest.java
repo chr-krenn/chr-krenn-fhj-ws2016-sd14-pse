@@ -48,8 +48,12 @@ public class CommunityServiceImplTest {
 
     @Test
     public void testFind() {
-        Mockito.when(communityRepo.find(1L)).thenReturn(community);
-        CommunityDto expectedCommunity = service.find(1L);
+    	Community com = buildCommunity();
+        Mockito.when(communityRepo.find(1L)).thenReturn(com);
+        CommunityDto result = service.find(1L);
+        
+        CommunityDto expected = CommunityConverter.convert(buildCommunity());
+        CommunityAssert.assertEquals(expected, result);
 
     }
 
@@ -100,9 +104,9 @@ public class CommunityServiceImplTest {
     private Community buildCommunity(){
     	 final Community com = new Community();
     	 com.setActiveState(true);
-    	 com.setAllowedUsers(Arrays.asList(new User()));
-    	 com.setAllowedUsersInactive(new User());
-    	 com.setAuthor(new User());
+    	 com.setAllowedUsers(Arrays.asList(new User(1L)));
+    	 com.setAllowedUsersInactive(new User(1L));
+    	 com.setAuthor(new User(1L));
     	 com.setId(1L);
     	 com.setName("TEST");
     	 com.setPublicState(true);
@@ -110,6 +114,7 @@ public class CommunityServiceImplTest {
     	 
     	 return com;
     }
+   
     
     private CommunityDto buildCommunityDto(){
     	final CommunityDto com = new CommunityDto();

@@ -19,8 +19,9 @@ import org.openqa.selenium.safari.SafariDriver;
  */
 public abstract class BaseUITest {
 
-    private static final String STUDENT1_PW = "x";
+    private static final String DEFAULT_PASSWORD = "x";
     private static final String STUDENT1 = "student1";
+    private static final String ADMIN1 = "admin1";
     private static final String LINK;
 
     protected static WebDriver webdriver;
@@ -62,11 +63,19 @@ public abstract class BaseUITest {
     }
 
     /*
-     * Login with default account
+     * Login with student1 account
      * @throws IllegalArgumentException if login fails
      */
     protected static WelcomePage login() {
-        return login(STUDENT1, STUDENT1_PW);
+        return login(STUDENT1, DEFAULT_PASSWORD);
+    }
+
+    /*
+     * Login with admin account
+     * @throws IllegalArgumentException if login fails
+     */
+    protected static WelcomePage loginAdmin() {
+        return login(ADMIN1, DEFAULT_PASSWORD);
     }
 
     /*

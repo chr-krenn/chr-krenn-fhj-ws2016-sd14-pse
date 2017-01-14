@@ -15,6 +15,8 @@ INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`
 INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 3', 'Bernd', 'https://upload.wikimedia.org/wikipedia/commons/5/53/FrankieakaLogan.jpg', 'Maier', 'Kapfenberg', '2', 'Online', '3');
 INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 4', 'Johann', 'https://cdn.pixabay.com/photo/2016/04/07/07/22/koala-1313374_960_720.png', 'Müller', 'Seiersberg', '2', 'Abwesend', '4');
 
+INSERT INTO `pse`.`person` (`id`, `address`, `firstname`, `imageurl`, `lastname`, `place`, `department_id`, `status_name`, `user_id`) VALUES (NULL, 'teststraße 4', 'Johann', 'https://cdn.pixabay.com/photo/2016/04/07/07/22/koala-1313374_960_720.png', 'Müller', 'Seiersberg', '2', 'Abwesend', '6');
+
 #user_roles
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student1', 'user', 'Roles');
 INSERT INTO `user_roles` (`username`, `role`, `roleGroup`) VALUES ('student2', 'user', 'Roles');
@@ -50,7 +52,7 @@ INSERT INTO `message` (author_id, community_id, title, content)
 	VALUES (1, 4, 'Lorem communtiy', 'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.');
 INSERT INTO `message` (author_id, community_id, title, content)
 	VALUES (2, 4, 'Lorem communtiy', 'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.');
-	
+
 #private messages
 INSERT INTO `message` (author_id, recipient_id, title, content)
 	VALUES (2, 3, 'Important private message', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy...');

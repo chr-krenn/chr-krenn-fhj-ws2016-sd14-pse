@@ -1,8 +1,12 @@
 package at.fhj.swd14.pse.pageobjects;
 
+import com.google.common.base.Predicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class WelcomePage extends AbstractPage {
 
@@ -21,8 +25,12 @@ public class WelcomePage extends AbstractPage {
     private final By firstMessageFirstCommentLikeCount = By.id("messagestream_scroller:scroller_message:0:scroller_comment:0:form_like_comment:text_like_comment");
     private final By firstMessageFirstCommentLikeButton = By.id("messagestream_scroller:scroller_message:0:scroller_comment:0:form_like_comment:submit_like_comment");
     private final By communitySelect = By.id("j_selectCommunity:select_community");
-    private final By communitySelectPrivate = By.id("j_selectCommunity:select_community_1");
-    private final By communitySelectAll = By.id("j_selectCommunity:select_community_0");
+    private final By newsTitleTextField = By.id("newsForm:newsTitleField");
+    private final By newsContentTextField = By.id("newsForm:newsContentField");
+    private final By newsFormSubmitButton = By.id("newsForm:addNews");
+    private final By newsTerminationTextField = By.id("newsForm:termination_input");
+    private final By firstNewsTitle = By.cssSelector("#scroller\\:scroller_news [id^='scroller:scroller_news:0'] .newsTitle");
+    private final By firstNewsContent = By.cssSelector("#scroller\\:scroller_news [id^='scroller:scroller_news:0'] .newsContent");
 
     private static final String FIRSTMESSAGECOMMENTLISTSTRING = "//div[@id='messagestream_scroller:scroller_message:0:scroller_comment']/div/ul/li";
 
@@ -90,27 +98,21 @@ public class WelcomePage extends AbstractPage {
         threadWait();
     }
 
-    public void collapseCommunityDropdown() {
-        webdriver.findElement(communitySelect).click();
-        threadWait();
+    public void addNews(final String title, final String content, Instant termination) {
+        webdriver.findElement(newsTitleTextField).sendKeys(title);
+        webdriver.findElement(newsContentTextField).sendKeys(content);
+        webdriver.findElement(newsTerminationTextField).clear();
+        webdriver.findElement(newsTerminationTextField).sendKeys(DateTimeFormatter.ofPattern("dd.MM.yy").withZone(ZoneId.systemDefault()).format(termination));
+        webdriver.findElement(newsFormSubmitButton).click();
+        wait.until((Predicate<WebDriver>) input -> title.equals(getFirstNewsTitle()));
     }
 
-    public WebElement getPrivateCommunity() {
-        return webdriver.findElement(communitySelectPrivate);
+    public String getFirstNewsTitle() {
+        return webdriver.findElement(firstNewsTitle).getText();
     }
 
-    public WebElement getAllCommunity() {
-        return webdriver.findElement(communitySelectAll);
-    }
-
-    public void clickAllCommunity() {
-        getAllCommunity().click();
-        threadWait();
-    }
-
-    public void clickPrivateCommunity() {
-        getPrivateCommunity().click();
-        threadWait();
+    public String getFirstNewsContent() {
+        return webdriver.findElement(firstNewsContent).getText();
     }
 
     private void threadWait() {

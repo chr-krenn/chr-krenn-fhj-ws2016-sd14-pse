@@ -20,8 +20,8 @@ public final class TagConverter {
         if (tag == null) {
             return null;
         }
-        TagDto dto = new TagDto(tag.getId(), tag.getName());
-        return dto;
+    
+        return new TagDto(tag.getId(), tag.getName());
     }
 
     /**
@@ -34,8 +34,8 @@ public final class TagConverter {
         if (tagDto == null) {
             return null;
         }
-        Tag tag = new Tag(tagDto.getId(), tagDto.getName());
-        return tag;
+
+        return new Tag(tagDto.getId(), tagDto.getName());
     }
 
     /**

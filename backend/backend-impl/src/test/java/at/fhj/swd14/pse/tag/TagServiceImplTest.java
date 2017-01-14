@@ -108,9 +108,10 @@ public class TagServiceImplTest {
 
     @Test
     public void testSaveDuplicate(){
-    	
-    	Mockito.when(tagRepo.findByName(tags.get(0).getName())).thenReturn(tags.get(0));
-    	Mockito.doNothing().when(tagRepo).save(tags.get(0));
+        Map<String, Object> parameter = new HashMap<>();
+        parameter.put("name", "testtag1");
+
+        Mockito.when(tagRepo.executeNamedQuery("Tag.findByName", parameter)).thenReturn(tags);
     	
         Long id = service.save(TagConverter.convert(tags.get(0)));
         Assert.assertEquals((Long)1L, id);

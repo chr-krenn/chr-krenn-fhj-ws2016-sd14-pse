@@ -46,6 +46,7 @@ public class MessageTagHandler {
                     tagDto.setName(tag);
                     
                     saveTag(tagDto);
+                    
                     LOGGER.info("saved tag to db: " + tag);
                 }
 
@@ -60,7 +61,8 @@ public class MessageTagHandler {
 
     private void saveTag(TagDto tagDto) {
         try {
-            tagService.save(tagDto);
+            Long id = tagService.save(tagDto);
+            tagDto.setId(id);
         }
         catch (VerificationException e) {
         	LOGGER.error(e.getMessage(), e);

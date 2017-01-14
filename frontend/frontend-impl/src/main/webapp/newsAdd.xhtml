@@ -12,10 +12,12 @@
             <h:inputTextarea value="#{newsBean.news.message}" id="newsContentField"/>
 
             <h:outputText value="Gültig von:"/>
-            <p:calendar id="activation" value="#{newsBean.activationDate}" mindate="#{newsBean.currentDate}"/>
+            <p:calendar id="activation" value="#{newsBean.activationDate}" mindate="#{newsBean.currentDate}"
+                        pattern="dd.MM.yy"/>
 
             <h:outputText value="Gültig bis:"/>
-            <p:calendar id="termination" value="#{newsBean.terminationDate}" mindate="#{newsBean.activationDate}"/>
+            <p:calendar id="termination" value="#{newsBean.terminationDate}" mindate="#{newsBean.activationDate}"
+                        pattern="dd.MM.yy"/>
         </p:panelGrid>
 
         <p:commandButton value="#{newsBean.buttonNewsText}" action="#{newsBean.addNews()}" id="addNews"/>

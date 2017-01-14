@@ -1,7 +1,5 @@
 package at.fhj.swd14.pse.tag;
 
-import at.fhj.swd14.pse.message.MessageConverter;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +21,6 @@ public final class TagConverter {
             return null;
         }
         TagDto dto = new TagDto(tag.getId(), tag.getName());
-        dto.setMessages(MessageConverter.convertToDtoList(tag.getMessages()));
         return dto;
     }
 
@@ -38,7 +35,6 @@ public final class TagConverter {
             return null;
         }
         Tag tag = new Tag(tagDto.getId(), tagDto.getName());
-        tag.setMessages(MessageConverter.convertToDoList(tagDto.getMessages()));
         return tag;
     }
 
@@ -49,7 +45,7 @@ public final class TagConverter {
      * @return tagDtos
      */
     public static List<TagDto> convertToDtoList(Collection<Tag> tags) {
-        if (tags == null || tags.isEmpty()) {
+        if (tags == null) {
             return new ArrayList<>();
         }
         return tags.stream().map(TagConverter::convert).collect(Collectors.toList());
@@ -62,7 +58,7 @@ public final class TagConverter {
      * @return tags
      */
     public static List<Tag> convertToList(Collection<TagDto> tagDtos) {
-        if (tagDtos == null || tagDtos.isEmpty()) {
+        if (tagDtos == null) {
             return new ArrayList<>();
         }
         return tagDtos.stream().map(TagConverter::convert).collect(Collectors.toList());

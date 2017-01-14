@@ -93,7 +93,7 @@ public class CommentLikeServiceImpl implements CommentLikeService {
             CommentDto commentDTO = CommentConverter.convert(commentRepository.find(commentId));
             Comment comment = commentRepository.find(commentId);
             List<User> users = comment.getUsers();
-            List<CommentLikeDto> commentLikes = new ArrayList<CommentLikeDto>();
+            List<CommentLikeDto> commentLikes = new ArrayList<>();
             for (User user : users) {
                 CommentLikeDto commentLike = new CommentLikeDto(UserConverter.convert(user), commentDTO);
                 commentLikes.add(commentLike);

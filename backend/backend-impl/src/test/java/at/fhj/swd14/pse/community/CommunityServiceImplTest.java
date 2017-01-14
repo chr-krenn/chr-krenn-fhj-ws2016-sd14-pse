@@ -80,6 +80,20 @@ public class CommunityServiceImplTest {
 		List<CommunityDto> dtoList = service.findByAuthorId(1L);
 		CommunityAssert.assertEquals(communityDtos, dtoList);
 	}
+	
+	@Test
+	public void testFindRequestCommunities() {
+		List<Community> community = Arrays.asList(buildTestRequestedCommunity(1L));
+
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("authorUserId", 1L);
+
+		Mockito.when(communityRepo.executeNamedQuery("Community.findRequestedCommunities", parameter)).thenReturn(community);
+
+		List<CommunityDto> communityDtos = CommunityConverter.convertToDtoList(community);
+		List<CommunityDto> dtoList = service.findRequestedCommunities(1L);
+		CommunityAssert.assertEquals(communityDtos, dtoList);
+	}
 
 	@Test
 	public void findAllCommunities() {
@@ -105,6 +119,22 @@ public class CommunityServiceImplTest {
 		com.setName("TEST");
 		com.setPublicState(true);
 		com.setUserCommunities(Arrays.asList(new UserCommunity()));
+
+		return com;
+	}
+	
+	private Community buildTestRequestedCommunity(Long userId) {
+		final Community com = new Community();
+
+		com.setActiveState(true);
+		com.setAllowedUsers(Arrays.asList(new User(userId)));
+		com.setAllowedUsersInactive(new User(userId));
+		User user = new User(userId);
+		com.setAuthor(user);
+		com.setId(userId);
+		com.setName("TEST");
+		com.setPublicState(false);
+		com.setUserCommunities(Arrays.asList(new UserCommunity(user, com, false)));
 
 		return com;
 	}
@@ -196,6 +226,28 @@ public class CommunityServiceImplTest {
 		long result = service.remove(comDto);
 		Long expected = 0L;
 		assertEquals(expected, (Long) result);
+	}
+	
+	@Test
+	public void test_addUserToComunity_sucess() {
+		Mockito.when(communityRepo.find(1L)).thenReturn(communityWithData);
+		Mockito.when(userRepo.find(1L)).thenReturn(userA);
+		List<User> users = new ArrayList<User>();
+		users.add(userA);
+		
+		boolean result = service.addUserToComunity(1L, 1L);
+		assertTrue(result);
+	}
+
+	@Test
+	public void test_addUserToComunity_fail() {
+		Mockito.when(communityRepo.find(1L)).thenReturn(communityWithData);
+		Mockito.when(userRepo.find(1L)).thenReturn(userA);
+		List<User> users = new ArrayList<User>();
+		users.add(userA);
+		
+		boolean result = service.addUserToComunity(-1L, 1L);
+		assertFalse(result);
 	}
 
 	@Test

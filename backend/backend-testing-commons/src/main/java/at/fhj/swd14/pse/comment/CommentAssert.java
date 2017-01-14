@@ -13,7 +13,10 @@ public final class CommentAssert {
             return;
         }
 
-        Assert.assertEquals(expected.getAuthor(), actual.getAuthor());
+        Assert.assertEquals(expected.getAuthor().getId(), actual.getAuthor().getId());
+        Assert.assertEquals(expected.getAuthor().getMail(), actual.getAuthor().getMail());
+        Assert.assertEquals(expected.getAuthor().getPassword(), actual.getAuthor().getPassword());
+        Assert.assertEquals(expected.getAuthor().getSalt(), actual.getAuthor().getSalt());
         Assert.assertEquals(expected.getId(), actual.getId());
         Assert.assertEquals(expected.getParentMessage(), actual.getParentMessage());
         Assert.assertEquals(expected.getText(), actual.getText());

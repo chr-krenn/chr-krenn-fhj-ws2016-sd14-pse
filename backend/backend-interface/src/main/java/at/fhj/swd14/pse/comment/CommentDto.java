@@ -58,7 +58,7 @@ public class CommentDto implements Serializable {
         return "CommentDto{" +
                 "id=" + getId() +
                 ", userId='" + getAuthor() + '\'' +
-                ", messageId='" + getParentMessage().getId() + '\'' +
+                ", messageId='" + ((getParentMessage() != null ) ? getParentMessage().getId() : null ) + '\'' +
                 '}';
     }
 }

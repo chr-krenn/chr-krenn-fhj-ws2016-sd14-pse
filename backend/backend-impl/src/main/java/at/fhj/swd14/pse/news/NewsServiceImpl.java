@@ -22,8 +22,10 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public long save(NewsDto news) {
         try {
+            LOGGER.trace("Saving news");
             final News converted = NewsConverter.convert(Objects.requireNonNull(news));
             newsRepository.save(converted);
+            LOGGER.info("News {} saved", converted.getId());
             return converted.getId();
         } catch (Exception e) {
             LOGGER.warn(e.getMessage(), e);
@@ -34,8 +36,10 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public long update(NewsDto news) {
         try {
+            LOGGER.trace("Updating news");
             final News converted = NewsConverter.convert(Objects.requireNonNull(news));
             newsRepository.update(converted);
+            LOGGER.info("News {} updated", converted.getId());
             return converted.getId();
         } catch (Exception e) {
             LOGGER.warn(e.getMessage(), e);
@@ -46,6 +50,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public NewsDto find(long id) {
         try {
+            LOGGER.trace("Finding news with id {}", id);
             return NewsConverter.convert(newsRepository.find(id));
         } catch (Exception e) {
             LOGGER.info(e.getMessage(), e);
@@ -56,6 +61,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public Collection<NewsDto> findAll() {
         try {
+            LOGGER.trace("Finding all news");
             return NewsConverter.convertToDtoList(newsRepository.findAll());
         } catch (Exception e) {
             LOGGER.info(e.getMessage(), e);
@@ -66,6 +72,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public Collection<NewsDto> findAllOnline() {
         try {
+            LOGGER.trace("Finding all online news");
             final Map<String, Object> parameters = new HashMap<>();
             parameters.put("onlineDate", ZonedDateTime.now().toInstant());
             return NewsConverter.convertToDtoList(newsRepository.executeNamedQuery(News.FIND_ALL_ONLINE_QUERY, parameters));

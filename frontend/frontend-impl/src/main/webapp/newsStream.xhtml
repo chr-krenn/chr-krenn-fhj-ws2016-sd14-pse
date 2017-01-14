@@ -25,13 +25,13 @@
 				<p:outputPanel>
 					<p:commandButton value="Edit" action="#{newsBean.prepareNewsToEdit(news)}"/>
 					<h:outputText value="Titel:" />
-					<h:outputText value="#{news.title}" style="font-weight: bold"/>
+					<h:outputText value="#{news.title}" style="font-weight: bold" styleClass="newsTitle"/>
 
 					<h:outputText value="Gültig bis:" />
 					<h:outputText value="#{news.termination}" style="font-weight: bold"/>
 
 					<h:outputText value="Text:" />
-					<h:outputText value="#{news.message}" style="font-weight: bold"/>
+					<h:outputText value="#{news.message}" style="font-weight: bold" styleClass="newsContent"/>
 				</p:outputPanel>
 			</p:dataScroller>
 		</h:form>

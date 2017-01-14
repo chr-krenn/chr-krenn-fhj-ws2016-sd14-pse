@@ -1,8 +1,9 @@
-package at.fhj.swd14.pse.uitest;
+package at.fhj.swd14.pse.person;
 
 import at.fhj.swd14.pse.pageobjects.ProfilePage;
 import at.fhj.swd14.pse.pageobjects.UsersPage;
 import at.fhj.swd14.pse.pageobjects.WelcomePage;
+import at.fhj.swd14.pse.uitest.BaseUITest;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

@@ -11,12 +11,20 @@ import java.util.Objects;
 public class CommunityDto implements Serializable, Comparable<CommunityDto> {
 
     private static final long serialVersionUID = 1L;
+    
+    private Long id;
+    private String description;
+    private boolean publicState = false;
+    private boolean activeState = false;
+    private String name;
+    private UserDto author;
+    private Date createTime = new Date(0);
+    private List<UserDto> allowedUsers = new ArrayList<>();
+    private List<UserDto> pendingUsers = new ArrayList<>();
 
     public CommunityDto() {
         // default public constructor
     }
-
-    private Long id;
 
     public CommunityDto(Long id) {
         setId(id);
@@ -30,8 +38,6 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
         this.id = id;
     }
 
-    private String description;
-
     public String getDescription() {
         return description;
     }
@@ -39,8 +45,6 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    private boolean publicState = false;
 
     public boolean getPublicState() {
         return this.publicState;
@@ -50,8 +54,6 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
         this.publicState = publicState;
     }
 
-    private boolean activeState = false;
-
     public boolean getActiveState() {
         return this.activeState;
     }
@@ -59,8 +61,6 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
     public void setActiveState(boolean activeState) {
         this.activeState = activeState;
     }
-
-    private String name;
 
     public String getName() {
         return name;
@@ -70,8 +70,6 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
         this.name = name;
     }
 
-    private UserDto author;
-
     public UserDto getAuthor() {
         return author;
     }
@@ -80,8 +78,6 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
         this.author = author;
     }
 
-    private Date createTime = new Date(0);
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -89,8 +85,6 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
     public void setCreateTime(Date createDate) {
         this.createTime = createDate;
     }
-
-    private List<UserDto> allowedUsers = new ArrayList<>();
 
     public List<UserDto> getAllowedUsers() {
 
@@ -108,8 +102,6 @@ public class CommunityDto implements Serializable, Comparable<CommunityDto> {
     public void deleteUser(Long userId) {
         this.allowedUsers.removeIf(user -> Objects.equals(user.getId(), userId));
     }
-
-    private List<UserDto> pendingUsers = new ArrayList<>();
 
     public List<UserDto> getPendingUsers() {
         return pendingUsers;

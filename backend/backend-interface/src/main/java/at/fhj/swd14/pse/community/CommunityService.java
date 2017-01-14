@@ -1,10 +1,8 @@
 package at.fhj.swd14.pse.community;
 
-import javax.ejb.Remote;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.ejb.Remote;
 
 @Remote
 public interface CommunityService {

@@ -27,6 +27,12 @@ public class CommunityServiceImpl implements CommunityService {
 
 		Community community = CommunityConverter.convert(communityDto);
 
+		// new community
+		if (communityDto.getId() == null && communityDto.getAuthor() != null && communityDto.getName() != null) {
+			communityRepository.update(community);
+			return 0;
+		}
+		
 		Object foundElement = communityRepository.find(community.getId());
 		if (foundElement != null) {
 			Community foundCom = (Community) foundElement;
@@ -39,8 +45,7 @@ public class CommunityServiceImpl implements CommunityService {
 				return expected.getId();
 			}
 		}
-		return 0;
-
+		return -1;
 	}
 
 	private Community mapDtoToDo(Community commHmi, Community com) {
@@ -74,8 +79,7 @@ public class CommunityServiceImpl implements CommunityService {
 
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("authorUserId", creatorUserId);
-		List<CommunityDto> result = executeNamedQuery("Community.findByAuthorId", parameter);
-		return result;
+		return executeNamedQuery("Community.findByAuthorId", parameter);
 	}
 
 	@Override
@@ -92,17 +96,12 @@ public class CommunityServiceImpl implements CommunityService {
 	public List<CommunityDto> findRequestedCommunities(Long userId) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("authorUserId", userId);
-		List<CommunityDto> result = executeNamedQuery("Community.findRequestedCommunities", parameter);
-		return result;
+		return executeNamedQuery("Community.findRequestedCommunities", parameter);
 	}
 
 	private List<CommunityDto> executeNamedQuery(String name, Map<String, Object> parameter) {
 		return new ArrayList<>(
 				CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name, parameter)));
-	}
-
-	private List<CommunityDto> executeNamedQuery(String name) {
-		return new ArrayList<>(CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name)));
 	}
 
 	@Override

@@ -3,21 +3,23 @@
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:p="http://primefaces.org/ui"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-       <h:form id="newsForm" rendered="#{facesContext.externalContext.isUserInRole('admin')}">
-           <p:panelGrid columns="2">
-               <h:outputText value="Titel:" />
-               <h:inputText value="#{newsBean.news.title}"/>
+    <h:form id="newsForm" rendered="#{facesContext.externalContext.isUserInRole('admin')}">
+        <p:panelGrid columns="2">
+            <h:outputText value="Titel:"/>
+            <h:inputText value="#{newsBean.news.title}" id="newsTitleField"/>
 
-               <h:outputText value="Inhalt:" />
-               <h:inputTextarea value="#{newsBean.news.message}"/>
+            <h:outputText value="Inhalt:"/>
+            <h:inputTextarea value="#{newsBean.news.message}" id="newsContentField"/>
 
-               <h:outputText value="Gültig von:" />
-               <p:calendar id="activation" value="#{newsBean.activationDate}" mindate="#{newsBean.currentDate}" />
+            <h:outputText value="Gültig von:"/>
+            <p:calendar id="activation" value="#{newsBean.activationDate}" mindate="#{newsBean.currentDate}"
+                        pattern="dd.MM.yy"/>
 
-               <h:outputText value="Gültig bis:" />
-               <p:calendar  id="termination" value="#{newsBean.terminationDate}" mindate="#{newsBean.activationDate}" />
-           </p:panelGrid>
+            <h:outputText value="Gültig bis:"/>
+            <p:calendar id="termination" value="#{newsBean.terminationDate}" mindate="#{newsBean.activationDate}"
+                        pattern="dd.MM.yy"/>
+        </p:panelGrid>
 
-           <p:commandButton value="#{newsBean.buttonNewsText}" action="#{newsBean.addNews()}"/>
-       </h:form>
+        <p:commandButton value="#{newsBean.buttonNewsText}" action="#{newsBean.addNews()}" id="addNews"/>
+    </h:form>
 </ui:composition>

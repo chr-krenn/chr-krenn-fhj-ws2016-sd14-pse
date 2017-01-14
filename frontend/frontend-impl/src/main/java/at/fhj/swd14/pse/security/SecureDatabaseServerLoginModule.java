@@ -82,7 +82,7 @@ public class SecureDatabaseServerLoginModule extends DatabaseServerLoginModule {
         try (Connection connection = datasource.getConnection()) {
             // Get the password
             PicketBoxLogger.LOGGER.traceExecuteQuery(principalsQuery, username);
-            try (PreparedStatement ps = connection.prepareStatement(principalsQuery);) {
+            try (PreparedStatement ps = connection.prepareStatement(principalsQuery)) {
                 ps.setString(1, username);
                 try (ResultSet rs = ps.executeQuery()) {
                     return processUserQueryResultSet(rs);

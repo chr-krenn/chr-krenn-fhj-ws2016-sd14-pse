@@ -23,6 +23,7 @@ public class RepositoryCoverageTest {
         new NewsRepositoryImpl();
         new CommentRepositoryImpl();
         new CommunityRepositoryImpl();
+        new UserRepositoryImpl();
     }
 
 }

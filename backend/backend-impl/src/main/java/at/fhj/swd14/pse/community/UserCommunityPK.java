@@ -7,13 +7,12 @@ import java.io.Serializable;
 public class UserCommunityPK implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Long user_id;
-    private Long community_id;
+    private Long userId;
+    private Long communityId;
 
     public UserCommunityPK(Long userId, Long communityId) {
-        user_id = userId;
-        community_id = communityId;
-
+        this.userId = userId;
+        this.communityId = communityId;
     }
 
     public UserCommunityPK() {
@@ -22,7 +21,7 @@ public class UserCommunityPK implements Serializable {
 
     @Override
     public int hashCode() {
-        return (int) (community_id + user_id);
+        return (int) (communityId + userId);
     }
 
     @Override

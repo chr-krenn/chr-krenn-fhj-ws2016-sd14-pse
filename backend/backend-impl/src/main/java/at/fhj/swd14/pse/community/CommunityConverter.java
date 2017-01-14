@@ -8,10 +8,6 @@ import java.util.stream.Collectors;
 
 public final class CommunityConverter {
 
-    private CommunityConverter() {
-
-    }
-
     public static CommunityDto convert(Community community) {
         if (community == null) {
             return null;

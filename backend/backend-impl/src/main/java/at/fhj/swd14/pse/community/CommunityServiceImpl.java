@@ -40,7 +40,6 @@ public class CommunityServiceImpl implements CommunityService {
 			}
 		}
 		return 0;
-
 	}
 
 	private Community mapDtoToDo(Community commHmi, Community com) {
@@ -74,8 +73,7 @@ public class CommunityServiceImpl implements CommunityService {
 
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("authorUserId", creatorUserId);
-		List<CommunityDto> result = executeNamedQuery("Community.findByAuthorId", parameter);
-		return result;
+		return executeNamedQuery("Community.findByAuthorId", parameter);
 	}
 
 	@Override
@@ -92,17 +90,12 @@ public class CommunityServiceImpl implements CommunityService {
 	public List<CommunityDto> findRequestedCommunities(Long userId) {
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("authorUserId", userId);
-		List<CommunityDto> result = executeNamedQuery("Community.findRequestedCommunities", parameter);
-		return result;
+		return executeNamedQuery("Community.findRequestedCommunities", parameter);
 	}
 
 	private List<CommunityDto> executeNamedQuery(String name, Map<String, Object> parameter) {
 		return new ArrayList<>(
 				CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name, parameter)));
-	}
-
-	private List<CommunityDto> executeNamedQuery(String name) {
-		return new ArrayList<>(CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name)));
 	}
 
 	@Override

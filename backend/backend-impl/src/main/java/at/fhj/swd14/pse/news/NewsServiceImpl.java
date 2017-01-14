@@ -25,6 +25,7 @@ public class NewsServiceImpl implements NewsService {
             LOGGER.trace("Saving news");
             final News converted = NewsConverter.convert(Objects.requireNonNull(news));
             newsRepository.save(converted);
+            LOGGER.info("News {} saved", converted.getId());
             return converted.getId();
         } catch (Exception e) {
             LOGGER.warn(e.getMessage(), e);
@@ -38,6 +39,7 @@ public class NewsServiceImpl implements NewsService {
             LOGGER.trace("Updating news");
             final News converted = NewsConverter.convert(Objects.requireNonNull(news));
             newsRepository.update(converted);
+            LOGGER.info("News {} updated", converted.getId());
             return converted.getId();
         } catch (Exception e) {
             LOGGER.warn(e.getMessage(), e);

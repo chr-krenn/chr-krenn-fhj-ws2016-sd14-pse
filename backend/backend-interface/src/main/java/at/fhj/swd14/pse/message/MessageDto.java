@@ -187,12 +187,8 @@ public class MessageDto implements Serializable, Comparable<MessageDto> {
                 && Objects.equals(content, that.content);
 
         // UserDto uses object equals therefore we have to check the author by id
-        boolean sameAuthor = false;
-        if (author == null && that.author == null) {
-            sameAuthor = true;
-        } else if (author != null && that.author != null && author.getId().equals(that.author.getId())) {
-            sameAuthor = true;
-        }
+        boolean sameAuthor = (author == null && that.author == null) ||
+                (author != null && that.author != null && author.getId().equals(that.author.getId()));
         return sameParameters && sameAuthor;
     }
 

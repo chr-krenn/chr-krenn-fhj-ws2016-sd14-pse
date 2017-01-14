@@ -27,20 +27,25 @@ public class CommunityServiceImpl implements CommunityService {
 
 		Community community = CommunityConverter.convert(communityDto);
 
-		Community foundCom = communityRepository.find(community.getId());
-		mapDtoToDo(community, foundCom);
+		Object foundElement = communityRepository.find(community.getId());
+		if (foundElement != null) {
+			Community foundCom = (Community) foundElement;
+			mapDtoToDo(community, foundCom);
 
-		communityRepository.update(foundCom);
+			communityRepository.update(foundCom);
 
-		Community expected = communityRepository.find(foundCom.getId());
-		if (expected != null) {
-			return expected.getId();
+			Community expected = communityRepository.find(foundCom.getId());
+			if (expected != null) {
+				return expected.getId();
+			}
 		}
 		return 0;
+
 	}
 
 	private Community mapDtoToDo(Community commHmi, Community com) {
 		com.setActiveState(commHmi.geActiveState());
+		com.setUserCommunities(commHmi.getUserCommunities());
 		com.setAllowedUsers(commHmi.getAllowedUsers());
 		com.setPendingUsers(commHmi.getPendingUsers());
 		com.setAuthor(commHmi.getAuthor());
@@ -82,7 +87,7 @@ public class CommunityServiceImpl implements CommunityService {
 						.anyMatch(allowedUser -> Objects.equals(allowedUser.getId(), userId)))
 				.collect(Collectors.toList());
 	}
-	
+
 	@Override
 	public List<CommunityDto> findRequestedCommunities(Long userId) {
 		Map<String, Object> parameter = new HashMap<>();
@@ -95,10 +100,9 @@ public class CommunityServiceImpl implements CommunityService {
 		return new ArrayList<>(
 				CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name, parameter)));
 	}
-	
+
 	private List<CommunityDto> executeNamedQuery(String name) {
-		return new ArrayList<>(
-				CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name)));
+		return new ArrayList<>(CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name)));
 	}
 
 	@Override
@@ -113,6 +117,7 @@ public class CommunityServiceImpl implements CommunityService {
 		User allowedUser = userRepository.find(userId);
 		if (com != null) {
 			com.setAllowedUsersInactive(allowedUser);
+			return true;
 		}
 		return false;
 	}
@@ -123,6 +128,7 @@ public class CommunityServiceImpl implements CommunityService {
 		User allowedUser = userRepository.find(userId);
 		if (com != null) {
 			com.activateUserInUserCommunities(allowedUser);
+			return true;
 		}
 		return false;
 	}

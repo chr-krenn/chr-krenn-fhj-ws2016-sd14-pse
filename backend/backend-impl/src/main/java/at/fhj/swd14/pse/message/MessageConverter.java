@@ -2,6 +2,7 @@ package at.fhj.swd14.pse.message;
 
 import at.fhj.swd14.pse.comment.CommentConverter;
 import at.fhj.swd14.pse.community.CommunityConverter;
+import at.fhj.swd14.pse.tag.TagConverter;
 import at.fhj.swd14.pse.user.UserConverter;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public final class MessageConverter {
         dto.setCommunity(CommunityConverter.convert(message.getCommunity()));
         dto.setTitle(message.getTitle());
         dto.setContent(message.getContent());
+        dto.setTags(TagConverter.convertToDtoList(message.getTags()));
         
         if(message.getCreated() != null) {
             dto.setCreated(message.getCreated().toInstant());
@@ -48,7 +50,7 @@ public final class MessageConverter {
         message.setCommunity(CommunityConverter.convert(dto.getCommunity()));
         message.setTitle(dto.getTitle());
         message.setContent(dto.getContent());
-
+        message.setTags(TagConverter.convertToList(dto.getTags()));
         message.setChilds(new ArrayList<>(CommentConverter.convertToDoList(dto.getChilds(), message)));
         //no need to set creation or updating timestamp --> automatically set on DB-interaction
         return message;

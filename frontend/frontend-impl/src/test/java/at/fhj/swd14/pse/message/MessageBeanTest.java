@@ -1,43 +1,109 @@
 package at.fhj.swd14.pse.message;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import org.junit.Ignore;
+import at.fhj.swd14.pse.person.PersonService;
+import at.fhj.swd14.pse.user.UserDto;
+import at.fhj.swd14.pse.user.UserService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MessageBeanTest {
+public class MessageBeanTest
+        extends AbstractMessageTest {
 
     @InjectMocks
     private MessageBean unitUnderTest;
 
     @Mock
+    private UserService userService;
+
+    @Mock
     private MessageService messageService;
-	
-    /* more or less copied place holder test */
-    @Ignore
-	@Test
-	public void testSaving() {
+
+    @Before
+    public void setup() {
         when(messageService.save(any(MessageDto.class))).thenReturn(1L);
-        when(messageService.find(1L)).thenReturn(new MessageDto(1L));
+        when(userService.find(1L)).thenReturn(new UserDto(1L));
+    }
+
+    @Test
+    public void createMessageShouldSaveExpectedMessageDto() {
+        // GIVEN
+        unitUnderTest.getMessage().setContent("someContent");
+        unitUnderTest.getMessage().setTitle("someTitle");
+
+        // WHEN
         unitUnderTest.createMessage();
 
+        // THEN
+        MessageDto expectedMessageDto = new MessageDto();
+        expectedMessageDto.setAuthor(new UserDto(1L));
+        expectedMessageDto.setContent("someContent");
+        expectedMessageDto.setTitle("someTitle");
+
         assertNotNull(unitUnderTest.getMessage());
-        assertEquals(1L, (long) unitUnderTest.getMessage().getId());
+        assertNull(unitUnderTest.getMessage().getId());
 
-        verify(messageService, times(1)).save(any(MessageDto.class));
-        verify(messageService, times(1)).find(1L);
-		
-	}
+        verify(messageService, times(1)).save(Mockito.eq(expectedMessageDto));
+        verify(userService, times(1)).find(1L);
+    }
 
+    @Test
+    public void createMessageShouldNotSaveWhenContentIsEmpty() {
+        // GIVEN
+        unitUnderTest.getMessage().setTitle("someTitle");
+        unitUnderTest.getMessage().setRecipient(new UserDto(1L));
+
+        // WHEN
+        unitUnderTest.createMessage();
+
+        // THEN
+        assertNotNull(unitUnderTest.getMessage());
+        assertNull(unitUnderTest.getMessage().getId());
+
+        verify(messageService, times(0)).save(Mockito.any(MessageDto.class));
+        verify(userService, times(1)).find(1L);
+    }
+
+    @Test
+    public void createMessageShouldNotSaveWhenTitleIsEmpty() {
+        // GIVEN
+        unitUnderTest.getMessage().setContent("someContent");
+        unitUnderTest.getMessage().setRecipient(new UserDto(1L));
+
+        // WHEN
+        unitUnderTest.createMessage();
+
+        // THEN
+        assertNotNull(unitUnderTest.getMessage());
+        assertNull(unitUnderTest.getMessage().getId());
+
+        verify(messageService, times(0)).save(Mockito.any(MessageDto.class));
+        verify(userService, times(1)).find(1L);
+    }
+
+    @Test
+    public void createMessageShouldNotSaveWhenTitleAndContentAreEmpty() {
+        // GIVEN
+        unitUnderTest.getMessage().setRecipient(new UserDto(1L));
+
+        // WHEN
+        unitUnderTest.createMessage();
+
+        // THEN
+        assertNotNull(unitUnderTest.getMessage());
+        assertNull(unitUnderTest.getMessage().getId());
+
+        verify(messageService, times(0)).save(Mockito.any(MessageDto.class));
+        verify(userService, times(1)).find(1L);
+    }
 }

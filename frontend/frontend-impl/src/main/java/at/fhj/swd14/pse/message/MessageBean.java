@@ -70,11 +70,6 @@ public class MessageBean implements Serializable {
     		if(message.getContent() != null && message.getTitle() != null) {
     			message.setAuthor(currentUser);
     			
-    			// Field recipient shall be set from outside
-    			if(recipient.getId() != null) {
-    				message.setRecipient(recipient);
-    			}    			
-
     	    	final long generatedId = messageService.save(message);
     	    	LOGGER.info("Created new message with ID {}", generatedId);
     	    	this.message = new MessageDto();

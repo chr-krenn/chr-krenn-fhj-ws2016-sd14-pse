@@ -9,37 +9,7 @@
 	<h:head>
 	</h:head>
 	
-	<h:body>
-		<h:form>
-		    <p:growl id="messages" showDetail="true" />
-		 
-		    <p:toolbar>
-		        <f:facet name="left">
-		            <p:commandButton type="button" value="New" icon="ui-icon-document" />
-		 
-		            <span class="ui-separator">
-		                <span class="ui-icon ui-icon-grip-dotted-vertical" />
-		            </span>
-		 
-		            <p:commandButton id="saveCommunity" type="button" title="Save" icon="ui-icon-disk" />
-		            <p:tooltip id="toolTipSave" for="saveCommunity" showEvent="focus" hideEvent="blur" />
-		            <p:commandButton type="button" title="Delete" icon="ui-icon-trash" />
-		            <p:commandButton type="button" title="Print" icon="ui-icon-print" />
-		        </f:facet>
-		 
-		        <f:facet name="right">
-		            <p:menuButton value="Options">
-		                <p:menuitem value="Save" actionListener="#{toolbarView.save}" update="messages" icon="ui-icon-disk" />
-		                
-		                <p:menuitem value="Delete" actionListener="#{toolbarView.delete}" ajax="false" icon="ui-icon-close" />
-		                
-		            </p:menuButton>
-		        </f:facet>
-		 
-		    </p:toolbar>
-		</h:form>
-		
-		
+	<h:body>	
 		<h:form name="createCommunity">
 			<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
 				<h:outputLabel for="name" value="Community Name:" />
@@ -79,6 +49,24 @@
 				<p:column headerText="Action">
 					<p:commandButton value="deactivate" update="growl" action="#{communityBean.deactivate(community)}"/>
 				</p:column>
+				<p:column headerText="Members">
+				<p:commandButton value="show members"
+					action="#{communityBean.showMembers(community)}" update="members"
+					oncomplete="PF('members').show();" />
+				<p:dialog id="members" header="Community Members"
+					widgetVar="members" modal="true" height="100">
+					<p:dataTable var="member" value="#{communityBean.communityMembers}">
+						<p:column headerText="Members">
+							<h:outputText value="#{member.mail}" />
+						</p:column>
+						<p:column>
+							<p:commandButton value="Kick"
+								action="#{communityBean.kickMember(community.id, member.id)}" />
+						</p:column>
+					</p:dataTable>
+
+				</p:dialog>
+			</p:column>
 			</p:dataTable>
 		</h:form>
 		
@@ -179,50 +167,26 @@
 				<f:facet name="header">
 						Membership Request
 				</f:facet>
-		
 				<p:column headerText="Community Name">
 					<h:outputText value="#{community.name}" />
 				</p:column>
-
-
-			<p:column headerText="Accept">
-				<p:commandButton value="accept" />
-				<p:commandButton value="refuse" />
-			</p:column>
 			<p:column headerText="Requests">
 				<p:commandButton value="show requests"
 					action="#{communityBean.showRequests(community)}" update="requests"
 					oncomplete="PF('requests').show();" />
 				<p:dialog id="requests" header="Community Requests"
 					widgetVar="requests" modal="true" height="100">
-					<p:dataTable var="request" value="#{communityBean.communityRequests}">
-						<p:column headerText="Requests">
-							<h:outputText value="#{request.id}" />
+					<p:dataTable var="usercommunityrequest" value="#{communityBean.communityRequests}">
+						<p:column headerText="requesting user">
+							<h:outputText value="#{usercommunityrequest.id}" />
 						</p:column>
 						<p:column>
-							<p:commandButton value="Accept"
-								action="#{communityBean.acceptMember(community.id, request.id)}" />
-							<p:commandButton value="refuse" />	
+							<p:commandButton value="accept"
+								action="#{communityBean.acceptMember(community.id, usercommunityrequest.id)}" />
+							<p:commandButton value="refuse" 
+								action="#{communityBean.decline(community, usercommunityrequest.id)}"/>	
 						</p:column>
 					</p:dataTable>
-				</p:dialog>
-			</p:column>
-			<p:column headerText="Members">
-				<p:commandButton value="show members"
-					action="#{communityBean.showMembers(community)}" update="members"
-					oncomplete="PF('members').show();" />
-				<p:dialog id="members" header="Community Members"
-					widgetVar="members" modal="true" height="100">
-					<p:dataTable var="member" value="#{communityBean.communityMembers}">
-						<p:column headerText="Members">
-							<h:outputText value="#{member.mail}" />
-						</p:column>
-						<p:column>
-							<p:commandButton value="Kick"
-								action="#{communityBean.kickMember(community.id, member.id)}" />
-						</p:column>
-					</p:dataTable>
-
 				</p:dialog>
 			</p:column>
 		</p:dataTable>

@@ -7,6 +7,7 @@ import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.primefaces.context.RequestContext;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -166,7 +167,7 @@ public class CommunityBean implements Serializable {
 		this.createdCommunities = communityService.findByAuthorId(this.loggedInUser.getId());
 		this.joinedCommunities = communityService.findUserRelated(this.loggedInUser.getId());
 		this.publicCommunities = communityService.findUserRelated(this.loggedInUser.getId());
-		this.communitiesWithRequests = communityService.findRequestedCommunities();
+		this.communitiesWithRequests = communityService.findRequestedCommunities(this.loggedInUser.getId());
 		
 		this.allCommunities = communityService.findAll();
 
@@ -324,16 +325,19 @@ public class CommunityBean implements Serializable {
 	 * decline a user request
 	 *
 	 */
-	public void decline(CommunityDto community) {
+	public void decline(CommunityDto community, long userId) {
 		if (community != null) {
-			LOGGER.debug("decline User {} lfor Comunity: {}", this.loggedInUser, community.getName());
-			community.deletePendingUser(this.loggedInUser.getId());
+			LOGGER.debug("decline User {} lfor Comunity: {}", userId, community.getName());
+			community.deletePendingUser(userId);
 
 			this.communityService.save(community);
 
-			LOGGER.error("acceptdesclined user {} for community {}", this.loggedInUser, community.getName());
+			LOGGER.debug("declined request from user {} for community {}", userId, community.getName());
 
 			refresh();
+			
+			RequestContext context = RequestContext.getCurrentInstance();
+			context.execute("PF('requests').hide();");
 		}
 	}
 
@@ -354,7 +358,6 @@ public class CommunityBean implements Serializable {
 	public void kickMember(long communityId, long memberId) {
 		LOGGER.debug("request user kick of community: {}", communityId);
 		communityService.removeUserFromComunity(communityId, memberId);
-
 	}
 	
 	/**
@@ -373,8 +376,16 @@ public class CommunityBean implements Serializable {
 	}
 	
 	public void acceptMember(long communityId, long memberId) {
-		LOGGER.debug("request user kick of community: {}", communityId);
+		LOGGER.debug("accept request from user: {} for community: {}",memberId, communityId);
 		communityService.addUserToComunity(communityId, memberId);
+		
+		CommunityDto community = communityService.find(communityId);
+		community.deletePendingUser(this.loggedInUser.getId());
 
+		communityService.save(community);
+		refresh();
+		
+		RequestContext context = RequestContext.getCurrentInstance();
+		context.execute("PF('requests').hide();");
 	}
 }

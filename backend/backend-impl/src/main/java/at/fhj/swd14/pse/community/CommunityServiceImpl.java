@@ -84,8 +84,11 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-	public List<CommunityDto> findRequestedCommunities() {
-		return executeNamedQuery("Community.findRequestedCommunities");
+	public List<CommunityDto> findRequestedCommunities(Long userId) {
+		Map<String, Object> parameter = new HashMap<>();
+		parameter.put("authorUserId", userId);
+		List<CommunityDto> result = executeNamedQuery("Community.findRequestedCommunities", parameter);
+		return result;
 	}
 
 	private List<CommunityDto> executeNamedQuery(String name, Map<String, Object> parameter) {

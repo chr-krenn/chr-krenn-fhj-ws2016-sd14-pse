@@ -90,6 +90,20 @@ public class UserCommunityTest {
 
 	}
 	
+	
+	@Test
+	public void testEqualsOwnPkNull(){
+		
+		UserCommunity c1 = new UserCommunity(new User(1L), new Community(), true);
+		c1.setId(null);
+		UserCommunity c2 = new UserCommunity(new User(1L), new Community(), true);
+		
+		boolean invalid = c1.equals(c2);
+		
+		Assert.assertFalse(invalid);
+	}
+	
+	
 	@Test	
 	public void testEqualsOtherPKNull(){
 			
@@ -106,12 +120,14 @@ public class UserCommunityTest {
 	public void testEqualsSamePK(){
 		
 		UserCommunity c1 = new UserCommunity(new User(1L), new Community(), true);
-		UserCommunity c2 = new UserCommunity(new User(1L), new Community(), true);
-		c2.setId(null);
+		UserCommunity c2 = new UserCommunity(new User(2L), new Community(), true);
+		c1.setId(null);
 		
 		boolean invalid = c1.equals(c2);
 		
 		Assert.assertFalse(invalid);
 	}
 	
+	
+
 }

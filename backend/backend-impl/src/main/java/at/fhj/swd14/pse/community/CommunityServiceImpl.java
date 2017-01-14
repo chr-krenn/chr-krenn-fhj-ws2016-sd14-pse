@@ -82,10 +82,20 @@ public class CommunityServiceImpl implements CommunityService {
 						.anyMatch(allowedUser -> Objects.equals(allowedUser.getId(), userId)))
 				.collect(Collectors.toList());
 	}
+	
+	@Override
+	public List<CommunityDto> findRequestedCommunities() {
+		return executeNamedQuery("Community.findRequestedCommunities");
+	}
 
 	private List<CommunityDto> executeNamedQuery(String name, Map<String, Object> parameter) {
 		return new ArrayList<>(
 				CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name, parameter)));
+	}
+	
+	private List<CommunityDto> executeNamedQuery(String name) {
+		return new ArrayList<>(
+				CommunityConverter.convertToDtoList(communityRepository.executeNamedQuery(name)));
 	}
 
 	@Override

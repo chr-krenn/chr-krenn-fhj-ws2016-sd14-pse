@@ -1,7 +1,10 @@
 package at.fhj.swd14.pse.community;
 
 import javax.ejb.Remote;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Remote
 public interface CommunityService {
@@ -51,6 +54,8 @@ public interface CommunityService {
      * @return List of relevant communities
      */
     List<CommunityDto> findAll();
+    
+    List<CommunityDto> findRequestedCommunities();
     
     boolean removeUserFromComunity(long communityId, long userId);
     boolean addUserToComunity(long communityId, long userId);

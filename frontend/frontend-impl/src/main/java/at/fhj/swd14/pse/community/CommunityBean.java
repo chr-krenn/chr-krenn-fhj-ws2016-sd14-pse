@@ -48,11 +48,28 @@ public class CommunityBean implements Serializable {
 	private List<CommunityDto> allCommunities;
 	private List<CommunityDto> otherCommunities;
 	private List<CommunityDto> communitiesToActivate;
+	private List<CommunityDto> communitiesWithRequests;
 	
 	private UserDto loggedInUser;
 	private List<UserDto> communityMembers;
 	private List<UserDto> communityRequests;
 
+	public List<UserDto> getCommunityRequests() {
+		return communityRequests;
+	}
+
+	public void setCommunityRequests(List<UserDto> communityRequests) {
+		this.communityRequests = communityRequests;
+	}
+
+	public List<CommunityDto> getCommunitiesWithRequests() {
+		return communitiesWithRequests;
+	}
+
+	public void setCommunitiesWithRequests(List<CommunityDto> communitiesWithRequests) {
+		this.communitiesWithRequests = communitiesWithRequests;
+	}
+	
 	public String getNewName() {
 		return newName;
 	}
@@ -121,10 +138,6 @@ public class CommunityBean implements Serializable {
 		return communityMembers;
 	}
 
-	public List<UserDto> getCommunityRequests() {
-		return communityRequests;
-	}
-
 	/**
 	 * Initializes the bean for the view
 	 */
@@ -153,6 +166,8 @@ public class CommunityBean implements Serializable {
 		this.createdCommunities = communityService.findByAuthorId(this.loggedInUser.getId());
 		this.joinedCommunities = communityService.findUserRelated(this.loggedInUser.getId());
 		this.publicCommunities = communityService.findUserRelated(this.loggedInUser.getId());
+		this.communitiesWithRequests = communityService.findRequestedCommunities();
+		
 		this.allCommunities = communityService.findAll();
 
 		ArrayList<CommunityDto> dummy = new ArrayList<>();
@@ -352,7 +367,8 @@ public class CommunityBean implements Serializable {
 		if (community != null) {
 
 			LOGGER.debug("request userlist of community: {}", community.getName());
-			communityRequests.addAll(community.getPendingUsers());
+			//communityRequests.addAll(community.getPendingUsers());
+			setCommunityRequests(community.getPendingUsers());
 		}
 	}
 	

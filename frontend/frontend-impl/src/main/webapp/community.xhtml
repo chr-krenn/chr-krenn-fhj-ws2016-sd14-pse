@@ -174,7 +174,7 @@
 		</h:form>
 		
 		<h:form id="requestForm">
-			<p:dataTable var="community" value="#{communityBean.publicCommunities}">
+			<p:dataTable var="community" value="#{communityBean.communitiesWithRequests}">
 				<p:growl id="growl" life="2000" />
 				<f:facet name="header">
 						Membership Request
@@ -197,14 +197,14 @@
 					widgetVar="requests" modal="true" height="100">
 					<p:dataTable var="request" value="#{communityBean.communityRequests}">
 						<p:column headerText="Requests">
-							<h:outputText value="#{request.mail}" />
+							<h:outputText value="#{request.id}" />
 						</p:column>
 						<p:column>
 							<p:commandButton value="Accept"
-								action="#{communityBean.acceptMember(community.id, member.id)}" />
+								action="#{communityBean.acceptMember(community.id, request.id)}" />
+							<p:commandButton value="refuse" />	
 						</p:column>
 					</p:dataTable>
-
 				</p:dialog>
 			</p:column>
 			<p:column headerText="Members">

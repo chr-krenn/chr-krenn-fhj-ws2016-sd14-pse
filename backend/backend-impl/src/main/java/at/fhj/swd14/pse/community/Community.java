@@ -12,7 +12,8 @@ import java.util.Objects;
 @Table(name = "community")
 @NamedQueries({
         @NamedQuery(name = "Community.findByAuthorId", query = "SELECT c FROM Community c WHERE c.author.id = :authorUserId"),
-        @NamedQuery(name = "Community.findUserRelated", query = "SELECT c FROM Community c"),})
+        @NamedQuery(name = "Community.findUserRelated", query = "SELECT c FROM Community c"),
+        @NamedQuery(name = "Community.findRequestedCommunities", query = "SELECT c FROM Community c WHERE c.id IN (select distinct uc.community.id from UserCommunity uc where uc.activated = false)"),})
 public class Community implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -49,25 +49,69 @@ public class UserCommunityTest {
 		
 		UserCommunity c1 = new UserCommunity(new User(1L), new Community(), true);
 		UserCommunity c2 = new UserCommunity(new User(1L), new Community(), true);
-		
-		
+				
 		boolean valid = c1.equals(c2);
-		
 		Assert.assertTrue(valid);
 
 	}
 	
+	@Test
+	public void testEqualsIsSelf(){
+		UserCommunity c1 = new UserCommunity(new User(1L), new Community(), true);
+		
+		boolean valid = c1.equals(c1);
+		Assert.assertTrue(valid);
+	}
+	
+	@Test
+	public void testEqualsIsNull(){
+		UserCommunity c1 = new UserCommunity(new User(1L), new Community(), true);
+		
+		boolean invalid = c1.equals(null);
+		Assert.assertFalse(invalid);
+	}
+	
+	@Test
+	public void testEqualsInvalidClass(){
+		UserCommunity c1 = new UserCommunity(new User(1L), new Community(), true);
+		Community c2 = new Community();
+		boolean invalid = c1.equals(c2);
+		Assert.assertFalse(invalid);
+	}
 	
 	@Test
 	public void testEqualsInvalid(){
 		
-		Community c1 = new Community();
-		
-		boolean invalid = c1.equals(null);
+		UserCommunity c1 = new UserCommunity(new User(1L), new Community(), true);
+		UserCommunity c2 = null;
+		boolean invalid = c1.equals(c2);
 		
 		Assert.assertFalse(invalid);
 
 	}
 	
+	@Test	
+	public void testEqualsOtherPKNull(){
+			
+			UserCommunity c1 = new UserCommunity(new User(1L), new Community(), true);
+			UserCommunity c2 = new UserCommunity(new User(2L), new Community(), true);
+			c2.setId(null);
+			
+			boolean invalid = c1.equals(c2);
+			
+			Assert.assertFalse(invalid);
+		}
+	
+	@Test
+	public void testEqualsSamePK(){
+		
+		UserCommunity c1 = new UserCommunity(new User(1L), new Community(), true);
+		UserCommunity c2 = new UserCommunity(new User(1L), new Community(), true);
+		c2.setId(null);
+		
+		boolean invalid = c1.equals(c2);
+		
+		Assert.assertFalse(invalid);
+	}
 	
 }

@@ -16,9 +16,8 @@ public class UserCoverageTest {
 		User u = new User();
 		u.setPassword("1234");
 		u.setSalt("salt");
-		List<UserCommunity> comList = new ArrayList<>();
 		Assert.assertEquals("1234", u.getPassword());
 		Assert.assertEquals("salt", u.getSalt());
-		Assert.assertEquals(comList, u.getCommunities());
+		Assert.assertNull(u.getCommunities());
 	}
 }

@@ -1,12 +1,18 @@
 package at.fhj.swd14.pse.community;
 
+import at.fhj.swd14.pse.person.Status;
+import at.fhj.swd14.pse.person.StatusConverter;
+import at.fhj.swd14.pse.person.StatusDto;
 import at.fhj.swd14.pse.user.User;
 import at.fhj.swd14.pse.user.UserDto;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -38,7 +44,16 @@ public class CommunityConverterTest {
 		CommunityAssert.assertEquals(this.communityDto, c);
 	}
 
-
+	@Test
+    public void testDtoListNull() {
+        Collection<Community> values = CommunityConverter.convertToDoList(null);
+        Assert.assertNull(values);
+    }
+	@Test
+    public void testDoListNull() {
+        Collection<CommunityDto> values = CommunityConverter.convertToDtoList(null);
+        Assert.assertNull(values);
+    }
     private void createCommunityDto() {
         this.communityDto = new CommunityDto((long) 1);
         this.communityDto.setActiveState(this.state);

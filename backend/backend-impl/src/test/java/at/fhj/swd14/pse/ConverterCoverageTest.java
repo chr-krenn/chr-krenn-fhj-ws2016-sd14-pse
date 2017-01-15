@@ -1,7 +1,10 @@
 package at.fhj.swd14.pse;
 
+import at.fhj.swd14.pse.comment.CommentConverter;
+import at.fhj.swd14.pse.community.CommunityConverter;
 import at.fhj.swd14.pse.department.DepartmentConverter;
 import at.fhj.swd14.pse.message.MessageConverter;
+import at.fhj.swd14.pse.news.NewsConverter;
 import at.fhj.swd14.pse.person.*;
 import at.fhj.swd14.pse.tag.TagConverter;
 import at.fhj.swd14.pse.user.UserConverter;
@@ -33,5 +36,8 @@ public class ConverterCoverageTest {
         initantiate(MessageConverter.class);
         initantiate(TagConverter.class);
         initantiate(UserConverter.class);
+        initantiate(NewsConverter.class);
+        initantiate(CommentConverter.class);
+        initantiate(CommunityConverter.class);
     }
 }

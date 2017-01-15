@@ -70,6 +70,14 @@ public class MessageStreamBean implements Serializable {
      */
     private long currentUserId;
 
+
+    /**
+     * Constructor
+     */
+    public MessageStreamBean() {
+        LOGGER.trace("MessageStreamBean::MessageStreamBean()");
+    }
+
     public Long getParameterCommunityId() {
         LOGGER.trace("MessageStreamBean::getParameterCommunityId()");
         return parameterCommunityId;
@@ -170,13 +178,6 @@ public class MessageStreamBean implements Serializable {
     public void setCurrentUserId(long id) {
         LOGGER.trace("MessageStreamBean::setCurrentUserId(" + id + ")");
         currentUserId = id;
-    }
-
-    /**
-     * Constructor
-     */
-    public MessageStreamBean() {
-        LOGGER.trace("MessageStreamBean::MessageStreamBean()");
     }
 
     /**

@@ -143,6 +143,29 @@ public class MessageTagHandlerTest {
 		
 		testTagsInMesage("only text here", "only text here", tags);
     }
+
+    @Test
+    public void testExistingTagInMessage() {
+
+        tags.add("tag");
+        TagDto tagDto = new TagDto(0L, "tag");
+        message.setTitle("existing tag");
+        message.setContent("das ist ein existierender #tag");
+
+        Mockito.when(tagService.save(Mockito.any())).thenReturn(0L);
+        Mockito.when(tagService.findByName(Mockito.eq("tag"))).thenReturn(tagDto);
+        MessageDto m = MessageConverter.convert(message);
+        msgTagHandler.handleTags(m);
+
+        List<String> msgTags = new ArrayList<>();
+
+        if (m.getTags() != null) {
+            for (TagDto t: m.getTags()) {
+                msgTags.add(t.getName());
+            }
+        }
+        assertEquals(tags, msgTags);
+    }
 	
 	
 	@Test(expected=MessageTagHandlerException.class)

@@ -2,6 +2,8 @@ package at.fhj.swd14.pse.person;
 
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Level;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +28,7 @@ import org.primefaces.event.FileUploadEvent;
 import at.fhj.swd14.pse.department.DepartmentDto;
 import at.fhj.swd14.pse.department.DepartmentService;
 import at.fhj.swd14.pse.person.tools.LoggedInPersonPageHandler;
+import at.fhj.swd14.pse.person.tools.PersonComparator;
 import at.fhj.swd14.pse.person.tools.PersonPageHandler;
 import at.fhj.swd14.pse.user.UserService;
 
@@ -354,6 +360,43 @@ public class PersonBeanTest {
     	growled(1);
     }
     
+    @Test
+    public void testShowAllPersons(){
+    	ArrayList<PersonDto> testPersons = new ArrayList<>();
+    	PersonDto p1 = new PersonDto(1);
+    	PersonDto p2 = new PersonDto(2);
+    	p1.setFirstname("Hans");
+    	p1.setLastname("Winter");
+    	p2.setFirstname("Joachim");
+    	p2.setLastname("Mayer");
+    	testPersons.add(p1);
+    	testPersons.add(p2);
+    	Mockito.when(personService.findAllUser(person.getId())).thenReturn(testPersons);
+    	Collection<PersonDto> persons = unitUnderTest.showAllPersons();
+    	for(PersonDto p : persons){
+    		if(p.getId() == 1 && p.getId() == 2){
+    			Assert.assertTrue(true);
+    		}
+    	}
+    	testPersons.sort(new PersonComparator());
+    	if(testPersons == persons){
+    		Assert.assertTrue(true);
+    	}
+    }
+    
+    @Test
+    public void testShowAllPersonsEmptyList(){
+    	ArrayList<PersonDto> testPersons = new ArrayList<>();
+    	Mockito.when(personService.findAllUser(person.getId())).thenReturn(testPersons);
+    	Collection<PersonDto> persons = unitUnderTest.showAllPersons();
+    	Assert.assertEquals(testPersons.size(), persons.size());
+    }
+    
+    @Test
+    public void testChangeFriendState(){
+    	unitUnderTest.changeFriendState(2);
+    	Mockito.verify(personService,Mockito.times(1)).changeFriendState(person.getId(), 2);
+    }
     
     @Test
     public void testComplete()

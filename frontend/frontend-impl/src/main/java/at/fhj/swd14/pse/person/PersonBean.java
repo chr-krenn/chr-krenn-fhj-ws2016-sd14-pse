@@ -380,10 +380,8 @@ public class PersonBean implements Serializable {
             LOGGER.debug("Found no user in db");
         } else {
             LOGGER.debug("Found " + allPersons.size() + " person(s) in db");
-            if (LOGGER.isTraceEnabled()) {
-                for (PersonDto p : allPersons) {
-                    LOGGER.trace("Person: " + p.getFirstname() + " " + p.getLastname() + "\n");
-                }
+        	for (PersonDto p : allPersons) {
+                LOGGER.trace("Person: " + p.getFirstname() + " " + p.getLastname() + "\n");
             }
         }
         return allPersons;

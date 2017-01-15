@@ -18,7 +18,7 @@ public class CommunityConverter implements Converter {
     private static final Logger LOGGER = LogManager.getLogger(CommunityConverter.class);
 
     @EJB(name = "ejb/CommunityService")
-    private transient CommunityService communityService;
+    private CommunityService communityService;
 
     public CommunityService getCommunityService() {
         return communityService;
@@ -61,6 +61,8 @@ public class CommunityConverter implements Converter {
             case -1:
                 c.setName("Globale");
                 break;
+            default:
+                throw new UnsupportedOperationException("Unsupported community id");
         }
         return c;
     }

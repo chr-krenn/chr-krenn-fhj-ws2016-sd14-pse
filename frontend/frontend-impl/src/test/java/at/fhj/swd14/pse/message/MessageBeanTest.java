@@ -1,6 +1,5 @@
 package at.fhj.swd14.pse.message;
 
-import at.fhj.swd14.pse.person.PersonService;
 import at.fhj.swd14.pse.user.UserDto;
 import at.fhj.swd14.pse.user.UserService;
 import org.junit.Before;

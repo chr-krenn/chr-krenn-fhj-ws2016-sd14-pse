@@ -41,15 +41,9 @@ public class MessageBean implements Serializable {
      */
     private UserDto currentUser;
     
-    /**
-     * The recipient of the message
-     */
-    private UserDto recipient;
-	
     public MessageBean() {
     	LOGGER.debug("Create: " + MessageBean.class.getSimpleName());
     	this.message = new MessageDto();
-    	this.recipient = new UserDto();
     }
     
     public MessageDto getMessage() {
@@ -73,7 +67,6 @@ public class MessageBean implements Serializable {
     	    	final long generatedId = messageService.save(message);
     	    	LOGGER.info("Created new message with ID {}", generatedId);
     	    	this.message = new MessageDto();
-    	    	this.recipient = new UserDto();
     		}
     	
     	} else {

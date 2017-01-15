@@ -7,7 +7,7 @@
     <groupId>at.fhj.swd14.pse</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
 
     <licenses>
         <license>
@@ -306,7 +306,7 @@
         <profile>
             <id>integration-tests</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <build>
                 <plugins>

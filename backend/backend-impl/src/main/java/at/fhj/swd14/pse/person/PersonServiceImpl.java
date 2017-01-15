@@ -215,9 +215,7 @@ public class PersonServiceImpl implements PersonService {
             throw new PersonServiceException(ERR_INVALID_INPUT + ex.getMessage());
         } catch (Exception ex) {
             Long personid = 0L;
-            if (person != null) {
-                personid = person.getId();
-            }
+            personid = person.getId();
             LOGGER.error("Exception during saving of image for person " + personid, ex);
             throw new PersonServiceException("Person image for person " + personid + " could not be saved");
         }

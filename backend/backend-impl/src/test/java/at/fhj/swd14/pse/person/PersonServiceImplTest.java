@@ -1,6 +1,7 @@
 package at.fhj.swd14.pse.person;
 
 import at.fhj.swd14.pse.contact.Contact;
+import at.fhj.swd14.pse.contact.ContactTest;
 import at.fhj.swd14.pse.contact.ContactTestTools;
 import at.fhj.swd14.pse.repository.internal.ContactRepositoryImpl;
 import at.fhj.swd14.pse.repository.internal.PersonImageRepositoryImpl;
@@ -104,10 +105,45 @@ public class PersonServiceImplTest {
     }
     
     @Test
+    public void testFindAllUserReverse() {
+        Mockito.when(personRepo.findAll()).thenReturn(persons);
+        mockUserPerson();
+
+        Collection<PersonDto> persons = service.findAllUser(2L);
+
+        for (PersonDto p : persons) {
+            PersonAssert.assertEquals(PersonConverter.convert(person), p);
+        }
+    }
+    
+    @Test(expected=AssertionError.class)
+    public void testFindAllUserFail() {
+        contacts.add(ContactTestTools.createAnotherContact());
+        Mockito.when(personRepo.findAll()).thenReturn(persons);
+        mockUserPerson();
+
+        service.findAllUser(1L);
+    }
+    
+    @Test
     public void testChangeFriendState() {
         mockUserPerson();
         service.changeFriendState(1L, person2.getId());
         Mockito.verify(contactRepo, Mockito.times(1)).remove(Mockito.any(Contact.class));
+    }
+    
+    @Test
+    public void testChangeFriendStateReverse() {
+        mockUserPerson();
+        service.changeFriendState(person2.getId(),1L );
+        Mockito.verify(contactRepo, Mockito.times(1)).remove(Mockito.any(Contact.class));
+    }
+    
+    @Test
+    public void testChangeFriendStateNone() {
+        mockUserPerson();
+        service.changeFriendState(1L, 3L );
+        Mockito.verify(contactRepo, Mockito.times(0)).remove(Mockito.any(Contact.class));
     }
     
     @Test
@@ -120,7 +156,9 @@ public class PersonServiceImplTest {
 
 	private void mockUserPerson() {
 		Mockito.when(personRepo.findByUserId(1L)).thenReturn(person);
+        Mockito.when(personRepo.findByUserId(2L)).thenReturn(person2);
         Mockito.when(contactRepo.findByPersonId(1L)).thenReturn(contacts);
+        Mockito.when(contactRepo.findByPersonId(2L)).thenReturn(contacts);
 	}
 
     @Test(expected = PersonServiceException.class)

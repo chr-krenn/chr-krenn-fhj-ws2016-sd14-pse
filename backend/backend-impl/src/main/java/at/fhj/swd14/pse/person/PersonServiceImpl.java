@@ -176,7 +176,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void savePersonImage(PersonDto person, byte[] imageData, String contentType) {
-
+        Long personid=0L;
         try {
             if (imageData == null || imageData.length == 0) {
                 LOGGER.warn("Cannot save empty image");
@@ -187,6 +187,8 @@ public class PersonServiceImpl implements PersonService {
                 LOGGER.warn("Cannot store image for empty person");
                 throw new VerificationException("Cannot store image for empty person");
             }
+            
+            personid = person.getId();
 
             LOGGER.trace("Saving image for person " + person.getId());
             PersonImage existing = imgRepo.getByPersonId(person.getId());
@@ -214,7 +216,6 @@ public class PersonServiceImpl implements PersonService {
             LOGGER.debug(ERR_INVALID_INPUT + ex.getMessage(), ex);
             throw new PersonServiceException(ERR_INVALID_INPUT + ex.getMessage());
         } catch (Exception ex) {
-            final Long personid = person == null ? null : person.getId();
             LOGGER.warn("Exception during saving of image for person " + personid, ex);
             throw new PersonServiceException("Person image for person " + personid + " could not be saved");
         }

@@ -1,15 +1,13 @@
-package at.fhj.swd14.pse.person;
+package at.fhj.swd14.pse.contact;
 
 import org.junit.Assert;
 import org.junit.Test;
-import at.fhj.swd14.pse.contact.Contact;
-import at.fhj.swd14.pse.contact.ContactPK;
 
 public class ContactTest {
 
 	@Test
 	public void testConstructor() {
-		Contact contact = createContact();
+		Contact contact = ContactTestTools.createContact();
 		Assert.assertNotNull(contact.getContactPK());
 	}
 	
@@ -22,8 +20,8 @@ public class ContactTest {
 	
 	@Test
 	public void testEquals() {
-		Contact contact1 = createContact();
-		Contact contact2 = createContact();
+		Contact contact1 = ContactTestTools.createContact();
+		Contact contact2 = ContactTestTools.createContact();
 		Assert.assertEquals(contact1, contact2);
 		Assert.assertEquals(contact1.hashCode(), contact2.hashCode());
 	}
@@ -35,12 +33,12 @@ public class ContactTest {
 	
 	@Test
 	public void testNotEqualsNull() {
-		Assert.assertNotEquals(createContact(), null);
+		Assert.assertNotEquals(ContactTestTools.createContact(), null);
 	}
 	
 	@Test
 	public void testNotEqualsContactPKNull() {
-		Contact contact1 = createContact();
+		Contact contact1 = ContactTestTools.createContact();
 		Contact contact2 = new Contact();
 		Assert.assertNotEquals(contact1, contact2);
 		Assert.assertNotEquals(contact2, contact1);
@@ -48,29 +46,25 @@ public class ContactTest {
 	
 	@Test
 	public void testNotEqualsContactPK() {
-		Contact contact1 = createContact();
-		Contact contact2 = createContact();
+		Contact contact1 = ContactTestTools.createContact();
+		Contact contact2 = ContactTestTools.createContact();
 		contact2.getContactPK().setPerson1Id(3);
 		Assert.assertNotEquals(contact1, contact2);
 	}
 	
 	@Test
 	public void testEqualsSame() {
-		Contact contact = createContact();
+		Contact contact = ContactTestTools.createContact();
 		Assert.assertEquals(contact, contact);
 	}
 	
 	@Test
 	public void testNotEqualsString() {
-		Assert.assertNotEquals(createContact(), "");
+		Assert.assertNotEquals(ContactTestTools.createContact(), "");
 	}
 	
 	@Test
 	public void testEqualsBothContactPKNull() {
 		Assert.assertEquals(new Contact(), new Contact());
-	}
-	
-	private static Contact createContact() {
-		return new Contact(1L, 2L);
 	}
 }

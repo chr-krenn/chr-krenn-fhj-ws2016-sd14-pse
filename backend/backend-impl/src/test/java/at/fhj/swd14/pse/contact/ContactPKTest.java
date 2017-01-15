@@ -1,9 +1,7 @@
-package at.fhj.swd14.pse.person;
+package at.fhj.swd14.pse.contact;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import at.fhj.swd14.pse.contact.ContactPK;
 
 public class ContactPKTest {
 

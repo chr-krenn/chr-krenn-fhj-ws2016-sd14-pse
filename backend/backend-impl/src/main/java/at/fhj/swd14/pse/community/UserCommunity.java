@@ -11,14 +11,18 @@ public class UserCommunity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @EmbeddedId
+    @AttributeOverrides({
+            @AttributeOverride(name = "userId", column = @Column(name = "user_id")),
+            @AttributeOverride(name = "communityId", column = @Column(name = "community_id"))
+    })
     private UserCommunityPK pk;
 
-    @MapsId("user_id")
+    @MapsId("userId")
     @ManyToOne
     @JoinColumn
     private User user;
 
-    @MapsId("community_id")
+    @MapsId("communityId")
     @ManyToOne
     @JoinColumn
     private Community community;

@@ -13,8 +13,8 @@ import java.util.Properties;
 
 public final class IntegrationTestUtil {
 
-    private static final String JNDI_APP_NAME = "backend-assembly-1.1";
-    private static final String JNDI_MODULE_NAME = "backend-impl-1.1";
+    private static final String JNDI_APP_NAME = "backend-assembly-1.2-SNAPSHOT";
+    private static final String JNDI_MODULE_NAME = "backend-impl-1.2-SNAPSHOT";
     private static InitialContext context;
 
     private IntegrationTestUtil() {

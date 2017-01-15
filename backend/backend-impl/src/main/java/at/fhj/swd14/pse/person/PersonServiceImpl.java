@@ -179,12 +179,12 @@ public class PersonServiceImpl implements PersonService {
 
         try {
             if (imageData == null || imageData.length == 0) {
-                LOGGER.error("Cannot save empty image");
+                LOGGER.warn("Cannot save empty image");
                 throw new VerificationException("Cannot save empty image");
             }
 
             if (person == null || person.getId() == null) {
-                LOGGER.error("Cannot store image for empty person");
+                LOGGER.warn("Cannot store image for empty person");
                 throw new VerificationException("Cannot store image for empty person");
             }
 
@@ -203,7 +203,7 @@ public class PersonServiceImpl implements PersonService {
             //retrieve the person we have to assign the image to
             Person personEntity = repository.find(person.getId());
             if (personEntity == null) {
-                LOGGER.error("Cannot save image for nonexistent person " + person.getId());
+                LOGGER.warn("Cannot save image for nonexistent person " + person.getId());
                 throw new VerificationException("Person does not exists");
             }
             img.setPerson(personEntity);
@@ -214,9 +214,8 @@ public class PersonServiceImpl implements PersonService {
             LOGGER.debug(ERR_INVALID_INPUT + ex.getMessage(), ex);
             throw new PersonServiceException(ERR_INVALID_INPUT + ex.getMessage());
         } catch (Exception ex) {
-            Long personid = 0L;
-            personid = person.getId();
-            LOGGER.error("Exception during saving of image for person " + personid, ex);
+            final Long personid = person == null ? null : person.getId();
+            LOGGER.warn("Exception during saving of image for person " + personid, ex);
             throw new PersonServiceException("Person image for person " + personid + " could not be saved");
         }
     }

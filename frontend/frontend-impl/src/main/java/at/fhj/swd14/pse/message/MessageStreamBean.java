@@ -240,17 +240,6 @@ public class MessageStreamBean implements Serializable {
     }
 
     /**
-     * Creates a new Comment (called by Server)
-     *
-     * @param messageId The id of the message the comment belongs to
-     * @param text      the text for the new comment
-     */
-    public void createComment(Long messageId, String text) {
-        LOGGER.trace("MessageStreamBean::createComment(" + messageId + ", " + text + ")");
-        // TODO: Implement
-    }
-
-    /**
      * Likes a message (called by Server)
      *
      * @param id The id of the message to like

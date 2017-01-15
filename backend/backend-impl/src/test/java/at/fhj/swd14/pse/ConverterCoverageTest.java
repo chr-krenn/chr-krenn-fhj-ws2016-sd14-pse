@@ -4,6 +4,8 @@ import at.fhj.swd14.pse.department.DepartmentConverter;
 import at.fhj.swd14.pse.message.MessageConverter;
 import at.fhj.swd14.pse.person.*;
 import at.fhj.swd14.pse.tag.TagConverter;
+import at.fhj.swd14.pse.user.UserConverter;
+
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
@@ -30,5 +32,6 @@ public class ConverterCoverageTest {
         initantiate(PhonenumberConverter.class);
         initantiate(MessageConverter.class);
         initantiate(TagConverter.class);
+        initantiate(UserConverter.class);
     }
 }
